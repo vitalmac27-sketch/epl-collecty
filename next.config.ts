@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Standalone output для деплоя на TimeWeb Cloud Apps
-  output: "standalone",
-
   // Оптимизация изображений
   images: {
     formats: ["image/avif", "image/webp"],
