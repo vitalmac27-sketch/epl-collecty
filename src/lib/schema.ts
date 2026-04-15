@@ -17,7 +17,7 @@ export function buildLocalBusinessSchema(city: CityConfig) {
     url: city.siteUrl,
     image: `${city.siteUrl}/assets/og-apple-collection.jpg`,
     logo: `${city.siteUrl}/assets/logo.jpg`,
-    description: `Официальный магазин iPhone, iPad, MacBook, Apple Watch, Android и PlayStation ${city.namePre}. Гарантия до 1 года, рассрочка 0%, доставка в день заказа.`,
+    description: `Официальный магазин iPhone, iPad, MacBook, Apple Watch, Android и PlayStation ${city.namePre}. Гарантия 1 год, рассрочка 0%, доставка в день заказа.`,
     address: {
       "@type": "PostalAddress",
       streetAddress: city.address,
@@ -59,7 +59,7 @@ export function buildProductSchema({ model, city, reviews = [] }: ProductSchemaO
     "@context": "https://schema.org",
     "@type": "Product",
     name: model.name,
-    description: `Купить ${model.name} ${city.namePre}. ${model.subtitle}. Гарантия до 1 года, рассрочка 0%, Trade-in, бесплатная доставка.`,
+    description: `Купить ${model.name} ${city.namePre}. ${model.subtitle}. Гарантия 1 год, рассрочка 0%, Trade-in, бесплатная доставка.`,
     image: `${city.siteUrl}/assets/${model.image}.avif`,
     url,
     brand: { "@type": "Brand", name: "Apple" },

@@ -48,7 +48,7 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
           подделку, залоченный или краденый iPhone. В{" "}
           <strong className="text-foreground">ЭПЛ-КОЛЛЕКЦИЯ</strong> каждый iPhone
           проходит полную диагностику на 30+ пунктов. Вы получаете{" "}
-          <strong className="text-foreground">гарантию до 1 года</strong> — чего
+          <strong className="text-foreground">гарантию 1 год</strong> — чего
           ни один продавец на Авито предложить не может.
         </p>
 

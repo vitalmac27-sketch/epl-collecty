@@ -37,7 +37,7 @@ export const categories = {
     emoji: "📱",
     pageTitle: "Купить iPhone в Казани — все модели с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить iPhone в Казани выгодно. iPhone 13–17 новые и б/у, гарантия до 1 года, рассрочка 0%, Trade-in, бесплатная доставка в день заказа.",
+      "Купить iPhone в Казани выгодно. iPhone 13–17 новые и б/у, гарантия 1 год, рассрочка 0%, Trade-in, бесплатная доставка в день заказа.",
     h1: "Купить iPhone в Казани",
     order: 1,
     inMainNav: true,
@@ -48,7 +48,7 @@ export const categories = {
     emoji: "🖥️",
     pageTitle: "Купить iPad в Казани — все модели с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить iPad в Казани: iPad Air, iPad Pro, iPad mini с гарантией до 1 года. Рассрочка 0%, Trade-in, доставка в день заказа.",
+      "Купить iPad в Казани: iPad Air, iPad Pro, iPad mini с гарантией 1 год. Рассрочка 0%, Trade-in, доставка в день заказа.",
     h1: "Купить iPad в Казани",
     order: 2,
     inMainNav: true,
@@ -59,7 +59,7 @@ export const categories = {
     emoji: "💻",
     pageTitle: "Купить MacBook в Казани — Air и Pro с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить MacBook Air и MacBook Pro в Казани. Новые и б/у, гарантия до 1 года, рассрочка 0%, Trade-in.",
+      "Купить MacBook Air и MacBook Pro в Казани. Новые и б/у, гарантия 1 год, рассрочка 0%, Trade-in.",
     h1: "Купить MacBook в Казани",
     order: 3,
     inMainNav: true,

@@ -153,7 +153,7 @@ export default async function ModelPage({
             {/* Гарантии */}
             <ul className="grid grid-cols-2 gap-3 mb-7">
               {[
-                { icon: "🛡️", text: "Гарантия до 1 года" },
+                { icon: "🛡️", text: "Гарантия 1 год" },
                 { icon: "🚚", text: "Доставка в день заказа" },
                 { icon: "✅", text: "Проверка при получении" },
                 { icon: "🔄", text: "Trade-in до 70%" },
@@ -200,7 +200,7 @@ export default async function ModelPage({
               <strong className="text-foreground">Рассрочка 0% на 10 месяцев</strong> — платите всего {monthlyPayment(model.priceFrom)} в месяц без переплат и первоначального взноса. Оформление онлайн за 5 минут.
             </p>
             <p>
-              <strong className="text-foreground">Гарантия до 1 года</strong>, бесплатная доставка по всей {city.nameGen} в день заказа. Магазин: г. {city.name}, {city.address}. {city.hours}.
+              <strong className="text-foreground">Гарантия 1 год</strong>, бесплатная доставка по всей {city.nameGen} в день заказа. Магазин: г. {city.name}, {city.address}. {city.hours}.
             </p>
           </div>
         </section>

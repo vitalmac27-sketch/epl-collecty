@@ -151,7 +151,7 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
           <p className="text-xs font-medium text-muted-foreground mb-2">Что вы получаете:</p>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { Icon: Shield,     text: "Гарантия до 1 года" },
+              { Icon: Shield,     text: "Гарантия 1 год" },
               { Icon: Zap,        text: "Доставка в день заказа" },
               { Icon: CheckCircle2, text: "Проверка при получении" },
               { Icon: TrendingDown, text: "Аксессуары на 3 000 ₽" },

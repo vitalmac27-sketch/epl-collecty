@@ -2,7 +2,7 @@ import { Shield, Zap, CheckCircle, TrendingUp, BadgePercent } from "lucide-react
 import { Card } from "@/components/ui/card";
 
 const benefits = [
-  { Icon: Shield,       title: "Гарантия до 1 года",  desc: "Новые — 1 год, б/у — 60 дней" },
+  { Icon: Shield,       title: "Гарантия 1 год",  desc: "Новые — 1 год, б/у — 60 дней" },
   { Icon: Zap,          title: "Быстрая доставка",    desc: "В день заказа по всей Казани" },
   { Icon: CheckCircle,  title: "Проверка при получении", desc: "Убедитесь в качестве сами" },
   { Icon: TrendingUp,   title: "Trade-in",            desc: "Обменяйте старый на новый" },

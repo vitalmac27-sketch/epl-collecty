@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | ЭПЛ-КОЛЛЕКЦИЯ",
   },
   description:
-    "Купить iPhone в Казани выгодно в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией до 1 года, рассрочка 0% на 10 мес, Trade-in, бесплатная доставка по Казани в день заказа.",
+    "Купить iPhone в Казани выгодно в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, рассрочка 0% на 10 мес, Trade-in, бесплатная доставка по Казани в день заказа.",
   keywords: [
     "купить айфон",
     "купить айфон казань",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: "ЭПЛ-КОЛЛЕКЦИЯ — магазин iPhone в Казани",
     title: "Купить Айфон iPhone в Казани выгодно — ЭПЛ-КОЛЛЕКЦИЯ",
     description:
-      "iPhone 13–17 с гарантией до 1 года. Рассрочка 0%, Trade-in, бесплатная доставка по Казани.",
+      "iPhone 13–17 с гарантией 1 год. Рассрочка 0%, Trade-in, бесплатная доставка по Казани.",
     images: [
       {
         url: "/assets/og-apple-collection.jpg",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Купить Айфон iPhone в Казани — ЭПЛ-КОЛЛЕКЦИЯ",
-    description: "iPhone с гарантией до 1 года. Рассрочка 0%, доставка в день заказа.",
+    description: "iPhone с гарантией 1 год. Рассрочка 0%, доставка в день заказа.",
     images: ["/assets/og-apple-collection.jpg"],
   },
 

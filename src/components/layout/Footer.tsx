@@ -22,7 +22,7 @@ export default function Footer() {
             <h3 className="font-bold text-base mb-4">ЭПЛ-КОЛЛЕКЦИЯ</h3>
             <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
               Официальный магазин iPhone в Казани. Продаём оригинальные устройства
-              Apple с гарантией до 1 года по выгодным ценам.
+              Apple с гарантией 1 год по выгодным ценам.
             </p>
             {/* Социальные сети */}
             <div className="flex gap-3">
@@ -181,7 +181,7 @@ export default function Footer() {
         <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} ЭПЛ-КОЛЛЕКЦИЯ. Все права защищены.</p>
           <p>
-            Магазин iPhone в Казани — купить айфон выгодно с гарантией до 1 года
+            Магазин iPhone в Казани — купить айфон выгодно с гарантией 1 год
           </p>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default function HeroSection({ city }: HeroSectionProps) {
           </span>
         </h1>
         <p className="text-base font-light text-foreground/60 mb-6">
-          Подберите свой Айфон за 1 минуту — рассрочка 0%, гарантия до 1 года
+          Подберите свой Айфон за 1 минуту — рассрочка 0%, гарантия 1 год
         </p>
         <div className="flex justify-center">
           <Image
@@ -59,7 +59,7 @@ export default function HeroSection({ city }: HeroSectionProps) {
               </span>
             </h1>
             <p className="text-xl font-light text-foreground/60 mb-8">
-              Рассрочка 0% · Гарантия до 1 года · Доставка в день заказа
+              Рассрочка 0% · Гарантия 1 год · Доставка в день заказа
             </p>
             <div className="flex gap-4">
               <Link

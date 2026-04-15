@@ -52,7 +52,7 @@ const iPhoneModels: ProductModel[] = [
     image: "iphone-17-pro-max",
     seoTitle: "Купить iPhone 17 Pro Max в Казани недорого | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
-      "iPhone 17 Pro Max в Казани ✅ A19 Pro, камера 48MP, титан. Гарантия до 1 года, рассрочка 0%, Trade-in, бесплатная доставка!",
+      "iPhone 17 Pro Max в Казани ✅ A19 Pro, камера 48MP, титан. Гарантия 1 год, рассрочка 0%, Trade-in, бесплатная доставка!",
     subtitle: "Флагман 2025 года с A19 Pro",
     inNav: true,
   },
@@ -80,7 +80,7 @@ const iPhoneModels: ProductModel[] = [
     image: "iphone-17-air",
     seoTitle: "Купить iPhone 17 Air в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
-      "iPhone 17 Air в Казани ✅ Самый тонкий iPhone в истории. Рассрочка 0%, гарантия до 1 года.",
+      "iPhone 17 Air в Казани ✅ Самый тонкий iPhone в истории. Рассрочка 0%, гарантия 1 год.",
     subtitle: "Самый тонкий iPhone",
     inNav: true,
   },
@@ -94,7 +94,7 @@ const iPhoneModels: ProductModel[] = [
     image: "iphone-17",
     seoTitle: "Купить iPhone 17 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
-      "iPhone 17 в Казани ✅ Хит продаж 2025. Гарантия до 1 года, рассрочка 0%, доставка бесплатно.",
+      "iPhone 17 в Казани ✅ Хит продаж 2025. Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
     subtitle: "Хит продаж 2025",
     inNav: true,
   },
@@ -133,7 +133,7 @@ const iPhoneModels: ProductModel[] = [
     image: "iphone-16-plus",
     seoTitle: "Купить iPhone 16 Plus в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
-      "iPhone 16 Plus в Казани ✅ Большой экран, A18 chip. Гарантия до 1 года, рассрочка 0%.",
+      "iPhone 16 Plus в Казани ✅ Большой экран, A18 chip. Гарантия 1 год, рассрочка 0%.",
     subtitle: "Большой экран A18",
     inNav: true,
   },
@@ -146,7 +146,7 @@ const iPhoneModels: ProductModel[] = [
     image: "iphone-16",
     seoTitle: "Купить iPhone 16 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
-      "iPhone 16 в Казани ✅ Apple Intelligence, A18. Гарантия до 1 года, рассрочка 0%, доставка.",
+      "iPhone 16 в Казани ✅ Apple Intelligence, A18. Гарантия 1 год, рассрочка 0%, доставка.",
     subtitle: "Apple Intelligence A18",
     inNav: true,
   },

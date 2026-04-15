@@ -165,7 +165,7 @@ export default async function CategoryPage({
           <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
             <p>
               <strong className="text-foreground">Купить {cat.name} {city.namePre}</strong> выгодно можно в магазине ЭПЛ-КОЛЛЕКЦИЯ.
-              Все устройства — оригинальные, с полным комплектом документов и гарантией до 1 года.
+              Все устройства — оригинальные, с полным комплектом документов и гарантией 1 год.
             </p>
             <p>
               Мы предлагаем <strong className="text-foreground">рассрочку 0% на 10 месяцев</strong> без первоначального взноса и переплат.
