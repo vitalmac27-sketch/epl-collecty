@@ -73,7 +73,7 @@ export const cities = {
       "купить айфон рассрочка",
     ],
     geo: { lat: 55.8304, lng: 49.0661 },
-    siteUrl: "https://vitalmac27-sketch-epl-collecty-b816.twc1.net",
+    siteUrl: "https://xn----7sbabf5ahb9bfkc.xn--p1ai",
   } satisfies CityConfig,
 
   // ── Шаблон для будущих городов ──────────────────────────────────────────
