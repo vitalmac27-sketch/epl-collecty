@@ -83,43 +83,12 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
     }
     setSubmitting(true);
     try {
-      const BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN?.trim();
-      const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID?.trim();
-
-      if (!BOT_TOKEN || !CHAT_ID) throw new Error("Telegram не настроен");
-
-      const conditionLabel = data.condition === "new" ? "🆕 Новый" : "📦 Б/У";
-      const paymentLabel = data.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка 0%";
-      const timingMap: Record<string, string> = {
-        "today-tomorrow": "⚡ Сегодня-завтра",
-        "this-week": "📅 На этой неделе",
-        "this-month": "🗓 В течение месяца",
-      };
-
-      const text = [
-        "🔔 *Новая заявка с сайта!*",
-        "",
-        `👤 *Имя:* ${name}`,
-        `📱 *Контакт:* ${contact}`,
-        "",
-        `📱 *Модель:* ${data.model}`,
-        `💾 *Память:* ${data.storage}`,
-        `📦 *Состояние:* ${conditionLabel}`,
-        ...(data.condition === "used" && data.battery ? [`🔋 *Батарея:* ${data.battery}%`] : []),
-        `📶 *SIM:* ${data.simType}`,
-        `⏱ *Срок покупки:* ${timingMap[data.purchaseTiming] ?? data.purchaseTiming}`,
-        `💰 *Оплата:* ${paymentLabel}`,
-        "",
-        `🌐 *Источник:* эпл-коллекция.рф`,
-      ].join("\n");
-
-      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      const res = await fetch("/api/send-telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "Markdown" }),
+        body: JSON.stringify({ name, contact, ...data }),
       });
-
-      if (!res.ok) throw new Error("Telegram error");
+      if (!res.ok) throw new Error();
       setSubmitted(true);
       toast({ title: "Заявка отправлена!", description: "Мы свяжемся с вами в течение 5 минут" });
     } catch {
