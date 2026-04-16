@@ -104,16 +104,11 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
         "", `🌐 *Источник:* эпл-коллекция.рф`,
       ].join("\n");
 
-      // Отправка через n8n webhook (серверный прокси без CORS)
-      const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL || "https://n8n.epl-collecty.workers.dev/webhook";
-      const res = await fetch(webhookUrl, {
+      // Отправка через Supabase Edge Function (без CORS, российский CDN)
+      const res = await fetch("https://kepaooewfbztxvcknawo.supabase.co/functions/v1/send-telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token: process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN,
-          chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
-          text,
-        }),
+        body: JSON.stringify({ name, contact, ...data }),
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
