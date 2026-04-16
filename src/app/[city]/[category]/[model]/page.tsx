@@ -33,7 +33,7 @@ export async function generateMetadata({
   return {
     title: `Купить ${model.name} ${city.namePre} — цена, рассрочка 0% | ЭПЛ-КОЛЛЕКЦИЯ`,
     description: `${model.name} ${city.namePre} от ${formatPrice(model.priceFrom)}. Гарантия 1 год, рассрочка 0%, доставка в день заказа.`,
-    alternates: { canonical: `${city.siteUrl}/${citySlug}/${category}/${modelSlug}` },
+
   };
 }
 

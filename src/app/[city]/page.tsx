@@ -34,7 +34,7 @@ export async function generateMetadata({
     title: `Купить Айфон iPhone ${city.namePre} выгодно — рассрочка 0% | ЭПЛ-КОЛЛЕКЦИЯ`,
     description: `Купить iPhone ${city.namePre} в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, рассрочка 0% на 10 мес, Trade-in, бесплатная доставка.`,
     keywords: city.keywords,
-    alternates: { canonical: `${city.siteUrl}/${citySlug}` },
+
   };
 }
 
