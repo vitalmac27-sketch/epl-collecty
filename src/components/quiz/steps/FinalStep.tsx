@@ -83,8 +83,8 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
     }
     setSubmitting(true);
     try {
-      const BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-      const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
+      const BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN?.trim();
+      const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID?.trim();
 
       if (!BOT_TOKEN || !CHAT_ID) throw new Error("Telegram не настроен");
 
