@@ -83,10 +83,37 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/send-telegram", {
+      const conditionLabel = data.condition === "new" ? "🆕 Новый" : "📦 Б/У";
+      const paymentLabel = data.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка 0%";
+      const timingMap: Record<string, string> = {
+        "today-tomorrow": "⚡ Сегодня-завтра",
+        "this-week": "📅 На этой неделе",
+        "this-month": "🗓 В течение месяца",
+      };
+      const text = [
+        "🔔 *Новая заявка с сайта!*", "",
+        `👤 *Имя:* ${name}`,
+        `📱 *Контакт:* ${contact}`, "",
+        `📱 *Модель:* ${data.model}`,
+        `💾 *Память:* ${data.storage}`,
+        `📦 *Состояние:* ${conditionLabel}`,
+        ...(data.condition === "used" && data.battery ? [`🔋 *Батарея:* ${data.battery}%`] : []),
+        `📶 *SIM:* ${data.simType}`,
+        `⏱ *Срок:* ${timingMap[data.purchaseTiming] ?? data.purchaseTiming}`,
+        `💰 *Оплата:* ${paymentLabel}`,
+        "", `🌐 *Источник:* эпл-коллекция.рф`,
+      ].join("\n");
+
+      // Отправка через n8n webhook (серверный прокси без CORS)
+      const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL || "https://n8n.epl-collecty.workers.dev/webhook";
+      const res = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, contact, ...data }),
+        body: JSON.stringify({
+          token: process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN,
+          chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
+          text,
+        }),
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
