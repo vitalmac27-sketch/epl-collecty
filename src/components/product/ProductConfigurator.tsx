@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { type IPhoneConfig, getConfigPrice } from "@/lib/iphone-configs";
@@ -22,24 +22,39 @@ export default function ProductConfigurator({
   const [selectedColor,   setSelectedColor]   = useState(config.defaultColor);
   const [selectedStorage, setSelectedStorage] = useState(config.defaultStorage);
   const [selectedSim,     setSelectedSim]     = useState(config.defaultSim);
-  const [condition,       setCondition]       = useState<"new" | "used">("new");
 
   const currentColor = config.colors.find((c) => c.id === selectedColor) ?? config.colors[0];
-
-  const price = getConfigPrice(config, selectedStorage, selectedSim, condition);
   const storageLabel = config.storage.find((s) => s.gb === selectedStorage)?.label ?? "";
   const simLabel = config.sim.find((s) => s.id === selectedSim)?.label ?? "";
 
-  // Собираем полное название конфигурации для H1 / заголовка
-  const configTitle = `${modelName} ${storageLabel} ${currentColor.name} (${simLabel})`;
+  // Получаем цену для конкретной конфигурации (цвет + память + SIM)
+  const price = useMemo(
+    () => getConfigPrice(config, selectedStorage, selectedSim, selectedColor),
+    [config, selectedStorage, selectedSim, selectedColor]
+  );
 
-  const handleStorageChange = useCallback((gb: number) => {
-    setSelectedStorage(gb);
-    // если текущей цены нет — сбрасываем SIM на дефолт
-    if (!getConfigPrice(config, gb, selectedSim, condition)) {
-      setSelectedSim(config.defaultSim);
-    }
-  }, [config, selectedSim, condition]);
+  // Полное название конфигурации для H1 и alt
+  const configTitle = `${modelName} ${storageLabel} ${currentColor.name} ${simLabel}`;
+
+  // Подготовленное сообщение для Telegram (чтобы менеджер сразу видел что ищут)
+  const telegramQuery = encodeURIComponent(
+    `Здравствуйте! Интересует ${configTitle} — подскажите наличие и цену.`
+  );
+  const telegramUrl = `${telegramLink}?text=${telegramQuery}`;
+
+  // Проверяем доступность кнопок памяти: считаем что память доступна,
+  // если для выбранного цвета и SIM есть хотя бы одна цена
+  const isStorageAvailable = useCallback((gb: number) => {
+    return config.prices.some(
+      (p) => p.storageGb === gb && (p.colorId === selectedColor || p.simId === selectedSim)
+    );
+  }, [config, selectedColor, selectedSim]);
+
+  // Есть ли вообще цена для этой модели
+  const anyPriceForStorage = useMemo(
+    () => config.prices.some((p) => p.storageGb === selectedStorage),
+    [config, selectedStorage]
+  );
 
   return (
     <section className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start mb-16">
@@ -60,14 +75,16 @@ export default function ProductConfigurator({
 
       {/* ── Правая колонка: конфигуратор ── */}
       <div>
-        {/* Заголовок */}
+        {/* H1 — с полной конфигурацией для SEO */}
         <h1 className="text-2xl md:text-3xl font-bold mb-1 leading-tight">
-          {condition === "new" ? "Купить " : "Купить б/у "}
-          <span className="text-primary">{configTitle}</span>
+          Купить <span className="text-primary">{configTitle}</span>
           <span className="text-muted-foreground"> в {cityName}</span>
         </h1>
+        <p className="text-sm text-muted-foreground mb-4">
+          Оригинал · Гарантия 1 год · Рассрочка 0%
+        </p>
 
-        {/* Цена */}
+        {/* Цена или «уточняйте» */}
         <div className="bg-card border border-border rounded-2xl p-5 my-5">
           {price ? (
             <>
@@ -80,35 +97,15 @@ export default function ProductConfigurator({
               </p>
             </>
           ) : (
-            <p className="text-muted-foreground">Цену уточняйте у менеджера</p>
-          )}
-        </div>
-
-        {/* ── Новый / Б/у ── */}
-        <div className="mb-5">
-          <p className="text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wide">
-            Состояние
-          </p>
-          <div className="flex gap-2">
-            {(["new", "used"] as const).map((cond) => (
-              <button
-                key={cond}
-                onClick={() => setCondition(cond)}
-                className={cn(
-                  "flex-1 py-2.5 px-4 rounded-xl text-sm font-medium border-2 transition-all",
-                  condition === cond
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-card hover:border-primary/40"
-                )}
-              >
-                {cond === "new" ? "✨ Новый" : "♻️ Б/у"}
-              </button>
-            ))}
-          </div>
-          {condition === "used" && (
-            <p className="text-xs text-muted-foreground mt-2">
-              Б/у — гарантия 60 дней. Диагностика на 30+ пунктов перед продажей.
-            </p>
+            <>
+              <p className="text-sm text-muted-foreground mb-1">Цена</p>
+              <p className="text-2xl font-bold text-foreground mb-1">
+                Уточняйте у менеджера
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Напишите в Telegram — ответим с актуальной ценой в течение 5 минут
+              </p>
+            </>
           )}
         </div>
 
@@ -119,19 +116,18 @@ export default function ProductConfigurator({
           </p>
           <div className="flex flex-wrap gap-2">
             {config.storage.map((opt) => {
-              const available = getConfigPrice(config, opt.gb, selectedSim, condition) !== undefined;
+              const available = isStorageAvailable(opt.gb);
               return (
                 <button
                   key={opt.gb}
-                  onClick={() => available && handleStorageChange(opt.gb)}
-                  disabled={!available}
+                  onClick={() => setSelectedStorage(opt.gb)}
                   className={cn(
                     "py-2.5 px-5 rounded-xl text-sm font-medium border-2 transition-all",
-                    !available
-                      ? "border-border text-muted-foreground/40 cursor-not-allowed bg-muted/20"
-                      : selectedStorage === opt.gb
+                    selectedStorage === opt.gb
                       ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-card hover:border-primary/40"
+                      : available
+                      ? "border-border bg-card hover:border-primary/40"
+                      : "border-border bg-card text-muted-foreground hover:border-primary/40"
                   )}
                 >
                   {opt.label}
@@ -152,10 +148,11 @@ export default function ProductConfigurator({
                 key={color.id}
                 onClick={() => setSelectedColor(color.id)}
                 title={color.name}
+                aria-label={color.name}
                 className={cn(
-                  "w-9 h-9 rounded-full border-2 transition-all hover:scale-110",
+                  "w-10 h-10 rounded-full border-2 transition-all hover:scale-110 relative",
                   selectedColor === color.id
-                    ? "border-primary scale-110 shadow-lg"
+                    ? "border-primary scale-110 shadow-lg ring-2 ring-primary/20 ring-offset-2"
                     : "border-border/60"
                 )}
                 style={{ background: color.hex }}
@@ -165,38 +162,40 @@ export default function ProductConfigurator({
         </div>
 
         {/* ── Выбор SIM ── */}
-        <div className="mb-6">
-          <p className="text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wide">
-            Тип SIM
-          </p>
-          <div className="flex flex-col gap-2">
-            {config.sim.map((sim) => (
-              <button
-                key={sim.id}
-                onClick={() => setSelectedSim(sim.id)}
-                className={cn(
-                  "text-left p-3 rounded-xl border-2 transition-all",
-                  selectedSim === sim.id
-                    ? "border-primary bg-primary/5"
-                    : "border-border bg-card hover:border-primary/30"
-                )}
-              >
-                <p className={cn(
-                  "text-sm font-semibold",
-                  selectedSim === sim.id ? "text-primary" : "text-foreground"
-                )}>
-                  {sim.label}
-                </p>
-                <p className="text-xs text-muted-foreground mt-0.5">{sim.description}</p>
-              </button>
-            ))}
+        {config.sim.length > 1 && (
+          <div className="mb-6">
+            <p className="text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wide">
+              Тип SIM
+            </p>
+            <div className="flex flex-col gap-2">
+              {config.sim.map((sim) => (
+                <button
+                  key={sim.id}
+                  onClick={() => setSelectedSim(sim.id)}
+                  className={cn(
+                    "text-left p-3 rounded-xl border-2 transition-all",
+                    selectedSim === sim.id
+                      ? "border-primary bg-primary/5"
+                      : "border-border bg-card hover:border-primary/30"
+                  )}
+                >
+                  <p className={cn(
+                    "text-sm font-semibold",
+                    selectedSim === sim.id ? "text-primary" : "text-foreground"
+                  )}>
+                    {sim.label}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{sim.description}</p>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ── Гарантии ── */}
         <ul className="grid grid-cols-2 gap-2 mb-6 text-sm">
           {[
-            { icon: "🛡️", text: condition === "new" ? "Гарантия 1 год" : "Гарантия 60 дней" },
+            { icon: "🛡️", text: "Гарантия 1 год" },
             { icon: "🚚", text: "Доставка в день заказа" },
             { icon: "✅", text: "Проверка при получении" },
             { icon: "🔄", text: "Trade-in до 70%" },
@@ -211,12 +210,12 @@ export default function ProductConfigurator({
         {/* ── CTA ── */}
         <div className="flex flex-col sm:flex-row gap-3">
           <a
-            href={telegramLink}
+            href={telegramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
           >
-            ✈️ Написать в Telegram
+            ✈️ {price ? "Купить в Telegram" : "Узнать цену"}
           </a>
           <Link
             href="/#calculator-section"
@@ -225,6 +224,12 @@ export default function ProductConfigurator({
             🔄 Рассчитать с Trade-in
           </Link>
         </div>
+
+        {!price && anyPriceForStorage && (
+          <p className="text-xs text-muted-foreground mt-3 text-center">
+            💡 Для этой комбинации конфигурации уточняйте наличие у менеджера
+          </p>
+        )}
       </div>
     </section>
   );

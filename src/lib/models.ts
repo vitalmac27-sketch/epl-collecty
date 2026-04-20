@@ -48,7 +48,7 @@ const iPhoneModels: ProductModel[] = [
     category: "iphone",
     series: "17",
     badge: "NEW",
-    priceFrom: 101000,
+    priceFrom: 108900,
     image: "iphone-17-pro-max",
     seoTitle: "Купить iPhone 17 Pro Max в Казани недорого | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
@@ -62,7 +62,7 @@ const iPhoneModels: ProductModel[] = [
     category: "iphone",
     series: "17",
     badge: "NEW",
-    priceFrom: 88700,
+    priceFrom: 101300,
     image: "iphone-17-pro",
     seoTitle: "Купить iPhone 17 Pro в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
@@ -90,7 +90,7 @@ const iPhoneModels: ProductModel[] = [
     category: "iphone",
     series: "17",
     badge: "NEW",
-    priceFrom: 64500,
+    priceFrom: 66000,
     image: "iphone-17",
     seoTitle: "Купить iPhone 17 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
@@ -103,7 +103,7 @@ const iPhoneModels: ProductModel[] = [
     name: "iPhone 16 Pro Max",
     category: "iphone",
     series: "16",
-    priceFrom: 96800,
+    priceFrom: 94000,
     image: "iphone-16-pro-max",
     seoTitle: "Купить iPhone 16 Pro Max в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
@@ -129,7 +129,7 @@ const iPhoneModels: ProductModel[] = [
     name: "iPhone 16 Plus",
     category: "iphone",
     series: "16",
-    priceFrom: 72600,
+    priceFrom: 70000,
     image: "iphone-16-plus",
     seoTitle: "Купить iPhone 16 Plus в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
@@ -142,7 +142,7 @@ const iPhoneModels: ProductModel[] = [
     name: "iPhone 16",
     category: "iphone",
     series: "16",
-    priceFrom: 56400,
+    priceFrom: 57500,
     image: "iphone-16",
     seoTitle: "Купить iPhone 16 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
@@ -191,7 +191,7 @@ const iPhoneModels: ProductModel[] = [
     name: "iPhone 15",
     category: "iphone",
     series: "15",
-    priceFrom: 44900,
+    priceFrom: 52000,
     image: "iphone-15",
     seoTitle: "Купить iPhone 15 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription:
