@@ -23,7 +23,7 @@ export default function HeroSection({ city }: HeroSectionProps) {
         <div className="flex justify-center">
           <Image
             src="/assets/hero-iphones-collection.jpg"
-            alt={`Купить iPhone ${city.namePre} выгодно — iPhone 13, 14, 15, 16, 17 в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
+            alt={`Купить iPhone в ${city.namePre} выгодно — iPhone 13, 14, 15, 16, 17 в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
             width={320}
             height={240}
             className="rounded-2xl bg-white object-contain"
@@ -79,7 +79,7 @@ export default function HeroSection({ city }: HeroSectionProps) {
           <div className="flex-shrink-0">
             <Image
               src="/assets/hero-iphones-collection.jpg"
-              alt={`Купить iPhone ${city.namePre} выгодно — iPhone 13, 14, 15, 16, 17 в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
+              alt={`Купить iPhone в ${city.namePre} выгодно — iPhone 13, 14, 15, 16, 17 в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
               width={500}
               height={375}
               className="rounded-3xl bg-white object-contain"

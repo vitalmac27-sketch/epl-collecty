@@ -10,12 +10,12 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
   return (
     <section aria-label="Информация о магазине" className="max-w-4xl mx-auto space-y-6">
       <h2 className="text-3xl font-bold">
-        Где купить iPhone {city.namePre} недорого
+        Где купить iPhone в {city.namePre} недорого
       </h2>
 
       <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
         <p>
-          <strong className="text-foreground">Купить Айфон iPhone {city.namePre} выгодно</strong> — легко
+          <strong className="text-foreground">Купить Айфон iPhone в {city.namePre} выгодно</strong> — легко
           в магазине <strong className="text-foreground">ЭПЛ-КОЛЛЕКЦИЯ</strong>. Мы
           находимся в {city.district} по адресу:{" "}
           <strong className="text-foreground">{city.address}</strong> и работаем
@@ -25,7 +25,7 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
         <p>
           В нашем магазине вы можете{" "}
           <strong className="text-foreground">
-            купить iPhone {city.namePre} недорого
+            купить iPhone в {city.namePre} недорого
           </strong>{" "}
           — от проверенных временем iPhone 13, iPhone 14 Pro Max до последних
           новинок iPhone 17 Pro Max и iPhone 17 Air. Все устройства — оригинальные,
@@ -36,7 +36,7 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
           Каждый смартфон проходит тщательную диагностику перед продажей.{" "}
           <strong className="text-foreground">Гарантия на новые — 1 год</strong>,
           на б/у — 60 дней. Покупая у нас, вы получаете оригинальный iPhone с
-          гарантией по лучшей цене {city.namePre}.
+          гарантией по лучшей цене в {city.namePre}.
         </p>
 
         <h3 className="text-2xl font-bold text-foreground pt-4">
@@ -73,7 +73,7 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
       {/* Ссылки на страницы моделей */}
       <div className="p-6 rounded-xl border border-border/50 bg-card/50">
         <h3 className="text-lg font-semibold mb-4">
-          Популярные модели iPhone {city.namePre}
+          Популярные модели iPhone в {city.namePre}
         </h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
           {[
@@ -103,7 +103,7 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
           <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
           <p className="text-sm">
             <strong className="text-foreground">
-              Адрес магазина iPhone {city.namePre}:
+              Адрес магазина iPhone в {city.namePre}:
             </strong>{" "}
             г. {city.name}, {city.address}
           </p>

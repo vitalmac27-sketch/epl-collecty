@@ -54,7 +54,7 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalUrl,
-      images: [{ url: `/assets/${model.image}.avif`, width: 800, height: 800, alt: `Купить ${model.name} ${city.namePre}` }],
+      images: [{ url: `/assets/${model.image}.avif`, width: 800, height: 800, alt: `Купить ${model.name} в ${city.namePre}` }],
     },
   };
 }
@@ -122,7 +122,7 @@ export default async function ModelPage({
                 </span>
               )}
               <div className="bg-muted/20 rounded-3xl p-6 flex items-center justify-center aspect-square max-w-md mx-auto">
-                <Image src={`/assets/${model.image}.avif`} alt={`Купить ${model.name} ${city.namePre}`} width={500} height={500} className="object-contain" priority />
+                <Image src={`/assets/${model.image}.avif`} alt={`Купить ${model.name} в ${city.namePre}`} width={500} height={500} className="object-contain" priority />
               </div>
             </div>
             <div>

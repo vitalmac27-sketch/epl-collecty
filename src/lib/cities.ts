@@ -43,7 +43,7 @@ export const cities = {
     slug: "kazan",
     name: "Казань",
     nameGen: "Казани",
-    namePre: "в Казани",
+    namePre: "Казани",
     address: "ул. Сибгата Хакима, 40а, Офис 7",
     district: "Ново-Савиновский район",
     regionFull: "Республика Татарстан",

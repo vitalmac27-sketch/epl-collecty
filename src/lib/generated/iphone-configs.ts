@@ -23,7 +23,7 @@ const IPHONE_17_PRO_MAX_CONFIG: ProductConfig = {
     { id: "2048", label: "2 ТБ", available: true },
   ],
   sim: [
-    { id: "esim", label: "eSIM (США)", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
+    { id: "esim", label: "eSIM", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
     { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Европейская/РФ версия. Одна физическая SIM + одна eSIM." },
   ],
   prices: [
@@ -99,7 +99,7 @@ const IPHONE_17_PRO_MAX_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 17 Pro Max стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 17 Pro Max проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 17 Pro Max выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_17_PRO_CONFIG: ProductConfig = {
@@ -116,7 +116,7 @@ const IPHONE_17_PRO_CONFIG: ProductConfig = {
     { id: "1024", label: "1 ТБ", available: true },
   ],
   sim: [
-    { id: "esim", label: "eSIM (США)", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
+    { id: "esim", label: "eSIM", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
     { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Европейская/РФ версия. Одна физическая SIM + одна eSIM." },
   ],
   prices: [
@@ -178,7 +178,7 @@ const IPHONE_17_PRO_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 17 Pro стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 17 Pro проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 17 Pro выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_17_CONFIG: ProductConfig = {
@@ -197,7 +197,7 @@ const IPHONE_17_CONFIG: ProductConfig = {
     { id: "512", label: "512 ГБ", available: true },
   ],
   sim: [
-    { id: "esim", label: "eSIM (США)", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
+    { id: "esim", label: "eSIM", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
     { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Европейская/РФ версия. Одна физическая SIM + одна eSIM." },
   ],
   prices: [
@@ -257,7 +257,7 @@ const IPHONE_17_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 17 стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 17 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 17 выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_16_PRO_MAX_CONFIG: ProductConfig = {
@@ -314,7 +314,7 @@ const IPHONE_16_PRO_MAX_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 16 Pro Max стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 16 Pro Max проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 16 Pro Max выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_16_PLUS_CONFIG: ProductConfig = {
@@ -368,7 +368,7 @@ const IPHONE_16_PLUS_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 16 Plus стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 16 Plus проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 16 Plus выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_16_CONFIG: ProductConfig = {
@@ -431,7 +431,7 @@ const IPHONE_16_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 16 стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 16 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 16 выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_16E_CONFIG: ProductConfig = {
@@ -485,7 +485,7 @@ const IPHONE_16E_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 16e стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 16e проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 16e выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const IPHONE_15_CONFIG: ProductConfig = {
@@ -542,7 +542,7 @@ const IPHONE_15_CONFIG: ProductConfig = {
   seoH2Why: "Почему iPhone 15 стоит купить у нас?",
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 15 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
   seoH2Sim: "Какую версию iPhone 15 выбрать?",
-  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
 const configs: Record<string, ProductConfig> = {

@@ -68,12 +68,6 @@ export const metadata: Metadata = {
     images: ["/assets/og-apple-collection.jpg"],
   },
 
-  // Верификация (добавь свои ключи в .env)
-  // verification: {
-  //   google: process.env.GOOGLE_SITE_VERIFICATION,
-  //   yandex: process.env.YANDEX_VERIFICATION,
-  // },
-
   // Robots
   robots: {
     index: true,
@@ -85,6 +79,27 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+
+  // ── Верификация для Яндекс.Вебмастера и Google Search Console ──
+  verification: {
+    yandex: "72880077d2fe664a",
+    google: "RgqQ2tZ9Mie_viRI716Dot5bnz48JFC8jX_wPfIvlzI",
+  },
+
+  // ── Иконки (ЭПЛ-КОЛЛЕКЦИЯ логотип) ──
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+    ],
   },
 };
 
@@ -110,10 +125,6 @@ export default function RootLayout({
 
         {/* ── Preconnect для производительности ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-        {/* ── Favicon ── */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/assets/favicon.png" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
         {/* ── Sticky Navigation (Client Component) ── */}

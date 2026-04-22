@@ -109,7 +109,7 @@ export default async function CategoryPage({
                   <div className="aspect-square relative mb-3 flex items-center justify-center bg-muted/30 rounded-xl overflow-hidden">
                     <Image
                       src={`/assets/${model.image}.avif`}
-                      alt={`Купить ${model.name} ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`}
+                      alt={`Купить ${model.name} в ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`}
                       fill
                       sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 23vw"
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"

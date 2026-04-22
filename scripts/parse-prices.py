@@ -71,7 +71,7 @@ COLOR_MAP = {
 }
 
 SIM_MAP = {
-    'eSIM':     ('esim',     'eSIM (США)',       'Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора.'),
+    'eSIM':     ('esim',     'eSIM',             'Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора.'),
     'SIM+eSIM': ('sim-esim', 'Nano-SIM + eSIM',  'Европейская/РФ версия. Одна физическая SIM + одна eSIM.'),
     'wi-fi':    ('wifi',     'Wi-Fi',            'Только Wi-Fi, без сотовой связи.'),
     'LTE':      ('lte',      'Wi-Fi + Cellular', 'Wi-Fi и сотовая связь (LTE/5G) с eSIM.'),
@@ -1803,7 +1803,7 @@ def generate_category_ts(category, configs):
         lines.append(f'  seoTextWhy: {ts_str(why_text)},')
         if category == 'iphone':
             lines.append(f'  seoH2Sim: {ts_str(f"Какую версию {name} выбрать?")},')
-            lines.append(f'  seoTextSim: {ts_str("Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия eSIM (США) — только виртуальные SIM. Уточняйте у менеджера.")},')
+            lines.append(f'  seoTextSim: {ts_str("Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.")},')
         elif category == 'ipad' and any(s['id'] == 'lte' for s in cfg['sim']):
             lines.append(f'  seoH2Sim: {ts_str("Wi-Fi или Wi-Fi + Cellular?")},')
             lines.append(f'  seoTextSim: {ts_str("Wi-Fi — для дома/офиса. Cellular (LTE) — мобильный интернет в любом месте через eSIM.")},')

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   keywords: city.keywords,
   alternates: { canonical: city.siteUrl },
   openGraph: {
-    title: `Купить Айфон iPhone ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`,
+    title: `Купить Айфон iPhone в ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`,
     description: `iPhone 13–17 с гарантией 1 год. Рассрочка 0%, Trade-in, бесплатная доставка по ${city.nameGen}.`,
     url: city.siteUrl,
     images: [{ url: "/assets/og-apple-collection.jpg", width: 1200, height: 630 }],
@@ -39,11 +39,11 @@ export const metadata: Metadata = {
 // ─── FAQ данные ───────────────────────────────────────────────────────────────
 const faqItems = [
   {
-    question: `Как купить iPhone в рассрочку ${city.namePre}?`,
+    question: `Как купить iPhone в рассрочку в ${city.namePre}?`,
     answer: `В ЭПЛ-КОЛЛЕКЦИЯ вы можете оформить рассрочку 0% на 10 месяцев без первоначального взноса. Оформление занимает всего 5 минут онлайн, одобрение — в день обращения. Нужен только паспорт.`,
   },
   {
-    question: `Где находится магазин iPhone ${city.namePre}?`,
+    question: `Где находится магазин iPhone в ${city.namePre}?`,
     answer: `Наш магазин находится в ${city.district} по адресу: г. ${city.name}, ${city.address}. Работаем каждый день ${city.hours}. ${city.metroNote}. Также доступна бесплатная доставка по всей ${city.nameGen}.`,
   },
   {
@@ -117,7 +117,7 @@ export default function HomePage() {
 
           {/* ── Каталог iPhone ── */}
           <ModelCatalogSection
-            title={`Популярные модели iPhone ${city.namePre}`}
+            title={`Популярные модели iPhone в ${city.namePre}`}
             models={iphoneModels}
           />
 
