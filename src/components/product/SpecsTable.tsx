@@ -1,4 +1,4 @@
-import { type SpecRow } from "@/lib/iphone-configs";
+import { type SpecRow } from "@/lib/product-configs";
 
 interface Props {
   specs: SpecRow[];
@@ -6,22 +6,17 @@ interface Props {
 }
 
 export default function SpecsTable({ specs, modelName }: Props) {
+  if (!specs.length) return null;
   return (
     <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-5">
-        Характеристики {modelName}
-      </h2>
+      <h2 className="text-2xl font-bold mb-5">Характеристики {modelName}</h2>
       <div className="rounded-2xl border border-border overflow-hidden">
         {specs.map((row, i) => (
           <div
             key={row.label}
-            className={`flex gap-4 px-5 py-3.5 text-sm ${
-              i % 2 === 0 ? "bg-muted/30" : "bg-card"
-            }`}
+            className={`flex gap-4 px-5 py-3.5 text-sm ${i % 2 === 0 ? "bg-muted/30" : "bg-card"}`}
           >
-            <span className="text-muted-foreground min-w-[160px] shrink-0">
-              {row.label}
-            </span>
+            <span className="text-muted-foreground min-w-[160px] shrink-0">{row.label}</span>
             <span className="font-medium text-foreground">{row.value}</span>
           </div>
         ))}

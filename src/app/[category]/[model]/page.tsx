@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getCategoryConfig } from "@/lib/categories";
 import { getModelBySlug, ALL_MODEL_PARAMS, getModelUrl, getModelsByCategory } from "@/lib/models";
-import { getIPhoneConfig } from "@/lib/iphone-configs";
+import { getProductConfig } from "@/lib/generated";
 import { DEFAULT_CITY } from "@/lib/cities";
 import { buildProductSchema, buildBreadcrumbSchema } from "@/lib/schema";
 import { formatPrice, monthlyPayment } from "@/lib/utils";
@@ -28,7 +28,7 @@ export async function generateMetadata({
   const model = getModelBySlug(category, modelSlug);
   if (!model) return { title: "Страница не найдена" };
 
-  const cfg = getIPhoneConfig(modelSlug);
+  const cfg = getProductConfig(category, modelSlug);
   const canonicalUrl = `${city.siteUrl}/${category}/${modelSlug}`;
 
   const title = cfg
@@ -36,7 +36,7 @@ export async function generateMetadata({
     : model.seoTitle;
 
   const description = cfg
-    ? `Купить ${model.name} в ${city.nameGen} ✅ Выбор цвета, памяти и SIM. Цена от ${formatPrice(model.priceFrom)} 💳 Рассрочка 0% 🛡️ Гарантия 1 год 🚚 Доставка в день заказа`
+    ? `Купить ${model.name} в ${city.nameGen} ✅ Выбор цвета и конфигурации. Цена от ${formatPrice(model.priceFrom)} 💳 Рассрочка 0% 🛡️ Гарантия 1 год 🚚 Доставка в день заказа`
     : model.seoDescription;
 
   return {
@@ -72,7 +72,7 @@ export default async function ModelPage({
   const cat = getCategoryConfig(category);
   if (!cat) notFound();
 
-  const iphoneCfg = getIPhoneConfig(modelSlug);
+  const productCfg = getProductConfig(category, modelSlug);
 
   const relatedModels = getModelsByCategory(category)
     .filter((m) => m.slug !== modelSlug)
@@ -104,9 +104,9 @@ export default async function ModelPage({
         </nav>
 
         {/* Конфигуратор или базовая карточка */}
-        {iphoneCfg ? (
+        {productCfg ? (
           <ProductConfigurator
-            config={iphoneCfg}
+            config={productCfg}
             modelName={model.name}
             cityName={city.namePre}
             telegramLink={city.telegram}
@@ -139,55 +139,59 @@ export default async function ModelPage({
                 ))}
               </ul>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/#calculator-section" className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">Рассчитать стоимость</Link>
-                <a href={city.telegram} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-colors">Написать в Telegram</a>
+                <a href={city.telegram} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">✈️ Написать в Telegram</a>
+                <Link href="/#calculator-section" className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-colors">🔄 Калькулятор</Link>
               </div>
             </div>
           </section>
         )}
 
         {/* Характеристики */}
-        {iphoneCfg && <SpecsTable specs={iphoneCfg.specs} modelName={model.name} />}
+        {productCfg && <SpecsTable specs={productCfg.specs} modelName={model.name} />}
 
         {/* Сравнение */}
-        {iphoneCfg && <CompareTable currentName={model.name} previousName={iphoneCfg.compareTitle} rows={iphoneCfg.compare} />}
+        {productCfg && <CompareTable currentName={model.name} previousName={productCfg.compareTitle} rows={productCfg.compare} />}
 
         {/* Upsell */}
-        {iphoneCfg && <UpsellBlock items={iphoneCfg.upsell} telegramLink={city.telegram} />}
+        {productCfg && <UpsellBlock items={productCfg.upsell} telegramLink={city.telegram} />}
 
         {/* SEO-текст */}
         <section className="max-w-3xl mb-12">
-          {iphoneCfg ? (
+          {productCfg ? (
             <>
-              <h2 className="text-2xl font-bold mb-4">{iphoneCfg.seoH2}</h2>
+              <h2 className="text-2xl font-bold mb-4">{productCfg.seoH2}</h2>
               <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
-                {iphoneCfg.seoText.split("\n").filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>)}
+                {productCfg.seoText.split("\n").filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>)}
               </div>
 
-              <h2 className="text-2xl font-bold mt-8 mb-4">{iphoneCfg.seoH2Why}</h2>
+              <h2 className="text-2xl font-bold mt-8 mb-4">{productCfg.seoH2Why}</h2>
               <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
-                {iphoneCfg.seoTextWhy.split("\n").filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>)}
+                {productCfg.seoTextWhy.split("\n").filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>)}
               </div>
 
-              <h2 className="text-2xl font-bold mt-8 mb-4">{iphoneCfg.seoH2Sim}</h2>
-              <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
-                {iphoneCfg.seoTextSim.split("\n").filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>)}
-              </div>
+              {productCfg.seoH2Sim && productCfg.seoTextSim && (
+                <>
+                  <h2 className="text-2xl font-bold mt-8 mb-4">{productCfg.seoH2Sim}</h2>
+                  <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
+                    {productCfg.seoTextSim.split("\n").filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>)}
+                  </div>
+                </>
+              )}
 
               <h2 className="text-2xl font-bold mt-8 mb-4">Гарантия и сервис в ЭПЛ-КОЛЛЕКЦИЯ Казань</h2>
               <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
-                <p>Перед продажей каждый {model.name} проходит полную диагностику — проверяем серийный номер по базе Apple (не краденый, не залоченный), тестируем экран, камеры, динамики и аккумулятор.</p>
+                <p>Перед продажей каждый {model.name} проходит полную диагностику — проверяем серийный номер по базе Apple, тестируем все функции.</p>
                 <p>Новые устройства — гарантия 1 год, б/у — 60 дней. При любой проблеме бесплатно отремонтируем или заменим устройство.</p>
-                <p>При покупке активируем {model.name} прямо в магазине и поможем перенести данные со старого телефона.</p>
+                <p>При покупке активируем {model.name} прямо в магазине и поможем перенести данные со старого устройства.</p>
               </div>
             </>
           ) : (
             <>
               <h2 className="text-2xl font-bold mb-4">Купить {model.name} {city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ</h2>
               <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
-                <p><strong className="text-foreground">Купить {model.name} {city.namePre}</strong> можно в магазине ЭПЛ-КОЛЛЕКЦИЯ по лучшей цене — от <strong className="text-foreground">{formatPrice(model.priceFrom)}</strong>. {model.badge === "NEW" ? " Это новинка 2025 года с актуальными технологиями Apple." : " Это проверенная модель с отличным соотношением цены и качества."}</p>
+                <p><strong className="text-foreground">Купить {model.name} {city.namePre}</strong> можно в магазине ЭПЛ-КОЛЛЕКЦИЯ по лучшей цене — от <strong className="text-foreground">{formatPrice(model.priceFrom)}</strong>.</p>
                 <p><strong className="text-foreground">Рассрочка 0% на 10 месяцев</strong> — платите всего {monthlyPayment(model.priceFrom)} в месяц без переплат.</p>
-                <p><strong className="text-foreground">Гарантия 1 год</strong>, бесплатная доставка по всей {city.nameGen} в день заказа. Магазин: г. {city.name}, {city.address}. {city.hours}.</p>
+                <p><strong className="text-foreground">Гарантия 1 год</strong>, бесплатная доставка по всей {city.nameGen} в день заказа.</p>
               </div>
             </>
           )}

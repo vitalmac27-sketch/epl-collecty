@@ -1,18 +1,18 @@
-import { type UpsellItem } from "@/lib/iphone-configs";
+import { type UpsellItem } from "@/lib/product-configs";
 import { formatPrice } from "@/lib/utils";
 
 interface Props {
   items: UpsellItem[];
   telegramLink: string;
+  title?: string;
 }
 
-export default function UpsellBlock({ items, telegramLink }: Props) {
+export default function UpsellBlock({ items, telegramLink, title = "Популярные аксессуары" }: Props) {
+  if (!items.length) return null;
   return (
     <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-2">Собери полный комплект Apple</h2>
-      <p className="text-sm text-muted-foreground mb-5">
-        Популярные аксессуары — часто берут вместе с iPhone
-      </p>
+      <h2 className="text-2xl font-bold mb-2">{title}</h2>
+      <p className="text-sm text-muted-foreground mb-5">Часто берут вместе — соберите полный комплект</p>
       <div className="grid sm:grid-cols-2 gap-4">
         {items.map((item) => (
           <a
@@ -27,18 +27,14 @@ export default function UpsellBlock({ items, telegramLink }: Props) {
               <p className="font-semibold text-sm group-hover:text-primary transition-colors leading-tight mb-1">
                 {item.name}
               </p>
-              <p className="text-xs text-muted-foreground leading-relaxed mb-2">
-                {item.description}
-              </p>
-              <p className="text-sm font-bold text-primary">
-                {formatPrice(item.price)}
-              </p>
+              <p className="text-xs text-muted-foreground leading-relaxed mb-2">{item.description}</p>
+              <p className="text-sm font-bold text-primary">{formatPrice(item.price)}</p>
             </div>
           </a>
         ))}
       </div>
       <p className="text-xs text-muted-foreground mt-3">
-        Наличие и актуальные цены уточняйте у менеджера — напишите в Telegram
+        Актуальные цены и наличие уточняйте у менеджера в Telegram
       </p>
     </section>
   );
