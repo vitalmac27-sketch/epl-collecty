@@ -1,8 +1,8 @@
-/** macbook-configs.ts — АВТОГЕНЕРАЦИЯ (не редактировать вручную) */
+/** macbook-configs.ts — АВТОГЕНЕРАЦИЯ */
 import type { ProductConfig, UpsellItem } from "../product-configs";
 
 const UPSELL: UpsellItem[] = [
-  { id: "magic-mouse", name: "Magic Mouse", description: "Беспроводная мышь Apple. Жесты Multi-Touch.", price: 8990, emoji: "🖱️" },
+  { id: "magic-mouse", name: "Magic Mouse", description: "Беспроводная мышь Apple.", price: 8990, emoji: "🖱️" },
   { id: "magic-keyboard", name: "Magic Keyboard с Touch ID", description: "Беспроводная клавиатура с Touch ID.", price: 12990, emoji: "⌨️" },
   { id: "usb-c-hub", name: "USB-C Hub (HDMI + USB-A + SD)", description: "Расширение разъёмов для MacBook.", price: 3490, emoji: "🔌" },
   { id: "macbook-sleeve", name: "Чехол-конверт для MacBook", description: "Защита от царапин.", price: 2490, emoji: "💼" },
@@ -39,13 +39,12 @@ const MAC_MINI_M4_CONFIG: ProductConfig = {
   compareTitle: "Mac mini M2",
   compare: [
     { label: "Процессор", current: "M4", previous: "M2", better: true },
-    { label: "Размер", current: "12,7 см", previous: "19,7 см", better: true },
   ],
   upsell: UPSELL,
   seoH2: "Купить Mac mini M4 в Казани",
-  seoText: "Mac mini M4 — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 59 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "Mac mini M4 — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 59 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему Mac mini M4 стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый Mac mini M4 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый Mac mini M4 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_NEO_CONFIG: ProductConfig = {
@@ -78,7 +77,6 @@ const MACBOOK_NEO_CONFIG: ProductConfig = {
     { label: "Дисплей", value: "13\" Liquid Retina" },
     { label: "Батарея", value: "до 18 часов" },
     { label: "ОС", value: "Neo OS" },
-    { label: "Разъёмы", value: "USB-C, USB-A, HDMI" },
   ],
   compareTitle: "MacBook Air M2",
   compare: [
@@ -86,9 +84,9 @@ const MACBOOK_NEO_CONFIG: ProductConfig = {
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Neo в Казани",
-  seoText: "MacBook Neo — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 64 500 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Neo — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 64 500 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Neo стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Neo проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Neo проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_AIR_13_M2_CONFIG: ProductConfig = {
@@ -116,18 +114,16 @@ const MACBOOK_AIR_13_M2_CONFIG: ProductConfig = {
     { label: "Процессор", value: "Apple M2" },
     { label: "Дисплей", value: "13,6\" Liquid Retina" },
     { label: "MagSafe 3", value: "Да" },
-    { label: "Разъёмы", value: "2× Thunderbolt, MagSafe 3" },
   ],
   compareTitle: "MacBook Air 13 M1",
   compare: [
     { label: "Процессор", current: "M2", previous: "M1", better: true },
-    { label: "MagSafe 3", current: "Да", previous: "Нет", better: true },
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Air 13\" M2 в Казани",
-  seoText: "MacBook Air 13\" M2 — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 77 500 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Air 13\" M2 — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 77 500 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Air 13\" M2 стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 13\" M2 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 13\" M2 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_AIR_13_M5_CONFIG: ProductConfig = {
@@ -158,7 +154,6 @@ const MACBOOK_AIR_13_M5_CONFIG: ProductConfig = {
   specs: [
     { label: "Процессор", value: "Apple M5" },
     { label: "Дисплей", value: "13,6\" Liquid Retina" },
-    { label: "Батарея", value: "до 18 часов" },
     { label: "Apple Intelligence", value: "Да" },
   ],
   compareTitle: "MacBook Air 13 M4",
@@ -167,9 +162,9 @@ const MACBOOK_AIR_13_M5_CONFIG: ProductConfig = {
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Air 13\" M5 в Казани",
-  seoText: "MacBook Air 13\" M5 — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 100 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Air 13\" M5 — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 100 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Air 13\" M5 стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 13\" M5 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 13\" M5 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_AIR_15_M4_CONFIG: ProductConfig = {
@@ -206,9 +201,9 @@ const MACBOOK_AIR_15_M4_CONFIG: ProductConfig = {
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Air 15\" M4 в Казани",
-  seoText: "MacBook Air 15\" M4 — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 109 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Air 15\" M4 — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 109 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Air 15\" M4 стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 15\" M4 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 15\" M4 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_AIR_15_M5_CONFIG: ProductConfig = {
@@ -241,7 +236,6 @@ const MACBOOK_AIR_15_M5_CONFIG: ProductConfig = {
   specs: [
     { label: "Процессор", value: "Apple M5" },
     { label: "Дисплей", value: "15,3\" Liquid Retina" },
-    { label: "Apple Intelligence", value: "Да" },
   ],
   compareTitle: "MacBook Air 15 M4",
   compare: [
@@ -249,9 +243,9 @@ const MACBOOK_AIR_15_M5_CONFIG: ProductConfig = {
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Air 15\" M5 в Казани",
-  seoText: "MacBook Air 15\" M5 — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 116 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Air 15\" M5 — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 116 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Air 15\" M5 стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 15\" M5 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Air 15\" M5 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_PRO_14_M5_CONFIG: ProductConfig = {
@@ -286,9 +280,9 @@ const MACBOOK_PRO_14_M5_CONFIG: ProductConfig = {
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Pro 14\" M5 в Казани",
-  seoText: "MacBook Pro 14\" M5 — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 132 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Pro 14\" M5 — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 132 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Pro 14\" M5 стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Pro 14\" M5 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Pro 14\" M5 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const MACBOOK_PRO_14_M5_PRO_CONFIG: ProductConfig = {
@@ -320,13 +314,12 @@ const MACBOOK_PRO_14_M5_PRO_CONFIG: ProductConfig = {
   compareTitle: "MacBook Pro 14 M4 Pro",
   compare: [
     { label: "Процессор", current: "M5 Pro", previous: "M4 Pro", better: true },
-    { label: "Thunderbolt", current: "TB5", previous: "TB5", better: false },
   ],
   upsell: UPSELL,
   seoH2: "Купить MacBook Pro 14\" M5 Pro в Казани",
-  seoText: "MacBook Pro 14\" M5 Pro — популярный ноутбук Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 189 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoText: "MacBook Pro 14\" M5 Pro — популярный ноутбук в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 189 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
   seoH2Why: "Почему MacBook Pro 14\" M5 Pro стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Pro 14\" M5 Pro проходит проверку перед продажей: тестируем все функции, проверяем серийный номер по базе Apple, активируем и настраиваем устройство прямо в магазине.",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый MacBook Pro 14\" M5 Pro проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
 const configs: Record<string, ProductConfig> = {

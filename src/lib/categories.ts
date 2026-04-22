@@ -81,22 +81,44 @@ export const categories = {
     emoji: "🤖",
     pageTitle: "Купить Android смартфон в Казани — Samsung, Xiaomi | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить Android смартфон в Казани: Samsung Galaxy, Xiaomi, Google Pixel. Гарантия, рассрочка 0%.",
+      "Купить Android смартфон в Казани: Samsung Galaxy S26/S25, Xiaomi Redmi, Meizu. Гарантия 1 год, рассрочка 0%.",
     h1: "Купить Android смартфон в Казани",
     order: 5,
-    inMainNav: false,
+    inMainNav: true,
   },
-  playstation: {
-    slug: "playstation",
-    name: "PlayStation",
-    emoji: "🎮",
-    pageTitle: "Купить PlayStation в Казани — PS5 и PS4 | ЭПЛ-КОЛЛЕКЦИЯ",
+  airpods: {
+    slug: "airpods",
+    name: "Наушники",
+    emoji: "🎧",
+    pageTitle: "Купить AirPods и наушники в Казани — Apple, Samsung, Marshall | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить PlayStation 5 и PlayStation 4 в Казани. Новые и б/у приставки с гарантией, рассрочка 0%.",
-    h1: "Купить PlayStation в Казани",
+      "Купить AirPods Pro 3, AirPods Max, Galaxy Buds, Marshall в Казани. Оригинал, гарантия 1 год, рассрочка 0%.",
+    h1: "Купить наушники в Казани",
     order: 6,
     inMainNav: false,
   },
+  dyson: {
+    slug: "dyson",
+    name: "Dyson",
+    emoji: "💨",
+    pageTitle: "Купить технику Dyson в Казани — фены, стайлеры, пылесосы | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription:
+      "Купить технику Dyson в Казани: фены HD17/18, Airwrap, выпрямители, пылесосы V8-V16. Оригинал, гарантия.",
+    h1: "Купить технику Dyson в Казани",
+    order: 7,
+    inMainNav: false,
+  },
+  audio: {
+    slug: "audio",
+    name: "Аудио и гаджеты",
+    emoji: "🔊",
+    pageTitle: "Купить колонки и микрофоны в Казани — JBL, Яндекс, DJI | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription:
+      "Купить JBL Boombox, Яндекс Станцию, DJI Mic в Казани. Оригинал, гарантия 1 год, рассрочка 0%.",
+    h1: "Аудио техника и гаджеты",
+    order: 8,
+    inMainNav: false,
+  }
 } as const;
 
 export type CategorySlug = keyof typeof categories;
