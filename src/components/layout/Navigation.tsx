@@ -254,7 +254,7 @@ export default function Navigation() {
           <div className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-1">
 
-              <Link href="/" className={cn(
+              <Link href="/" onClick={() => setIsOpen(false)} className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors",
                 pathname === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted"
               )}>
@@ -287,6 +287,7 @@ export default function Navigation() {
                     <div className="ml-4 mt-1 mb-2 space-y-1">
                       <Link
                         href={`/${cat.slug}`}
+                        onClick={() => setIsOpen(false)}
                         className="block px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md"
                       >
                         Все {cat.name} →
@@ -295,8 +296,9 @@ export default function Navigation() {
                         <Link
                           key={model.slug}
                           href={getModelUrl(model)}
+                          onClick={() => setIsOpen(false)}
                           className={cn(
-                            "flex items-center justify-between px-4 py-2 text-sm rounded-md transition-colors",
+                            "flex items-center justify-between px-4 py-2.5 text-sm rounded-md transition-colors",
                             pathname === getModelUrl(model)
                               ? "bg-primary/10 text-primary"
                               : "hover:bg-muted text-foreground"
@@ -323,6 +325,7 @@ export default function Navigation() {
                 <Link
                   key={href}
                   href={href}
+                  onClick={() => setIsOpen(false)}
                   className={cn(
                     "flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors",
                     pathname === href ? "bg-primary/10 text-primary" : "hover:bg-muted"
