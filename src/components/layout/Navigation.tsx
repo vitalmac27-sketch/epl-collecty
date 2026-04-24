@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { MAIN_NAV_CATEGORIES, MORE_NAV_CATEGORIES } from "@/lib/categories";
 import { getNavModels, getModelUrl } from "@/lib/models";
@@ -12,19 +12,18 @@ import { cn } from "@/lib/utils";
 
 const city = DEFAULT_CITY;
 
-// ── Категориям иконки (эмодзи) → заменить SVG при желании ─────────────────
 const CATEGORY_ICONS: Record<string, string> = {
   iphone: "📱", ipad: "🖥️", macbook: "💻",
   watch: "⌚", android: "🤖", playstation: "🎮",
 };
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);         // мобильное меню
+  const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Закрывать дропдаун по клику вне
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -35,7 +34,6 @@ export default function Navigation() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Закрывать мобильное меню при смене роута
   useEffect(() => {
     setIsOpen(false);
     setActiveDropdown(null);
@@ -48,6 +46,13 @@ export default function Navigation() {
   const isActiveCategory = (slug: string) =>
     pathname === `/${slug}` || pathname.startsWith(`/${slug}/`);
 
+  // Навигация для мобильного — работает на iOS
+  const navigateTo = useCallback((href: string) => {
+    setIsOpen(false);
+    setActiveDropdown(null);
+    router.push(href);
+  }, [router]);
+
   return (
     <nav
       className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
@@ -56,7 +61,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
 
-          {/* ── Логотип ── */}
+          {/* Логотип */}
           <Link
             href="/"
             className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0"
@@ -73,10 +78,8 @@ export default function Navigation() {
             <span className="font-bold text-lg hidden sm:block">ЭПЛ-КОЛЛЕКЦИЯ</span>
           </Link>
 
-          {/* ── Desktop Navigation ── */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
-
-            {/* Главная */}
             <Link
               href="/"
               className={cn(
@@ -87,11 +90,10 @@ export default function Navigation() {
               Главная
             </Link>
 
-            {/* Основные категории с дропдауном */}
             {MAIN_NAV_CATEGORIES.map((cat) => {
               const navModels = getNavModels(cat.slug);
               const isActive = isActiveCategory(cat.slug);
-              const isOpen = activeDropdown === cat.slug;
+              const isOpenDrop = activeDropdown === cat.slug;
 
               return (
                 <div key={cat.slug} className="relative">
@@ -101,24 +103,16 @@ export default function Navigation() {
                       isActive ? "text-primary bg-primary/5" : "text-foreground"
                     )}
                     onClick={() => toggleDropdown(cat.slug)}
-                    aria-expanded={isOpen}
+                    aria-expanded={isOpenDrop}
                     aria-haspopup="true"
                   >
                     <span>{cat.emoji}</span>
                     {cat.name}
-                    <ChevronDown
-                      className={cn(
-                        "h-3.5 w-3.5 transition-transform duration-200",
-                        isOpen && "rotate-180"
-                      )}
-                    />
+                    <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", isOpenDrop && "rotate-180")} />
                   </button>
 
-                  {/* Дропдаун моделей */}
-                  {isOpen && (
+                  {isOpenDrop && (
                     <div className="absolute top-full left-0 mt-1 w-64 bg-popover border border-border rounded-xl shadow-xl py-2 z-50 animate-fade-in">
-
-                      {/* Ссылка на весь каталог категории */}
                       <Link
                         href={`/${cat.slug}`}
                         className="flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors border-b border-border mb-1"
@@ -126,8 +120,6 @@ export default function Navigation() {
                         Все {cat.name}
                         <span className="text-xs font-normal text-muted-foreground">→</span>
                       </Link>
-
-                      {/* Список моделей с inNav: true */}
                       {navModels.map((model) => (
                         <Link
                           key={model.slug}
@@ -156,39 +148,25 @@ export default function Navigation() {
               );
             })}
 
-            {/* ── "Ещё" — дропдаун для Android и PlayStation ── */}
             {MORE_NAV_CATEGORIES.length > 0 && (
               <div className="relative">
                 <button
                   className={cn(
                     "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-primary hover:bg-muted",
-                    MORE_NAV_CATEGORIES.some((c) => isActiveCategory(c.slug))
-                      ? "text-primary bg-primary/5"
-                      : "text-foreground"
+                    MORE_NAV_CATEGORIES.some((c) => isActiveCategory(c.slug)) ? "text-primary bg-primary/5" : "text-foreground"
                   )}
                   onClick={() => toggleDropdown("__more__")}
                   aria-expanded={activeDropdown === "__more__"}
-                  aria-haspopup="true"
                 >
                   Ещё
-                  <ChevronDown
-                    className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200",
-                      activeDropdown === "__more__" && "rotate-180"
-                    )}
-                  />
+                  <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", activeDropdown === "__more__" && "rotate-180")} />
                 </button>
 
                 {activeDropdown === "__more__" && (
                   <div className="absolute top-full left-0 mt-1 w-56 bg-popover border border-border rounded-xl shadow-xl py-2 z-50 animate-fade-in">
                     {MORE_NAV_CATEGORIES.map((cat) => (
-                      <Link
-                        key={cat.slug}
-                        href={`/${cat.slug}`}
-                        className={cn(
-                          "flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted transition-colors",
-                          isActiveCategory(cat.slug) && "text-primary bg-primary/5"
-                        )}
+                      <Link key={cat.slug} href={`/${cat.slug}`}
+                        className={cn("flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted transition-colors", isActiveCategory(cat.slug) && "text-primary bg-primary/5")}
                       >
                         <span className="text-base">{cat.emoji}</span>
                         {cat.name}
@@ -199,38 +177,25 @@ export default function Navigation() {
               </div>
             )}
 
-            {/* О магазине / Контакты */}
-            {[
-              { href: "/about", label: "О магазине" },
-              { href: "/contacts", label: "Контакты" },
-            ].map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-primary hover:bg-muted",
-                  pathname === href ? "text-primary bg-primary/5" : "text-foreground"
-                )}
+            {[{ href: "/about", label: "О магазине" }, { href: "/contacts", label: "Контакты" }].map(({ href, label }) => (
+              <Link key={href} href={href}
+                className={cn("px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-primary hover:bg-muted", pathname === href ? "text-primary bg-primary/5" : "text-foreground")}
               >
                 {label}
               </Link>
             ))}
           </div>
 
-          {/* ── Контакты Desktop ── */}
+          {/* Контакты Desktop */}
           <div className="hidden md:flex items-center gap-2 flex-shrink-0">
-            <a
-              href={`tel:${city.phone}`}
+            <a href={`tel:${city.phone}`}
               className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
               aria-label={`Позвонить: ${city.phoneFormatted}`}
             >
               <Phone className="h-4 w-4" />
               <span className="hidden xl:inline">{city.phoneFormatted}</span>
             </a>
-            <a
-              href={city.telegramChannel}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a href={city.telegramChannel} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0088cc] hover:bg-[#006699] text-white text-sm font-medium transition-colors"
             >
               <TelegramIcon className="h-4 w-4" />
@@ -238,33 +203,32 @@ export default function Navigation() {
             </a>
           </div>
 
-          {/* ── Mobile Menu Button ── */}
+          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
-            aria-expanded={isOpen}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* ── Mobile Navigation ── */}
+        {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-1">
 
-              <Link href="/" onClick={() => setIsOpen(false)} className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors",
-                pathname === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted"
-              )}>
+              {/* Главная */}
+              <button
+                className={cn("w-full flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors text-left", pathname === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted")}
+                onClick={() => navigateTo("/")}
+              >
                 🏠 Главная
-              </Link>
+              </button>
 
-              {/* Все категории в мобильном меню */}
+              {/* Категории */}
               {[...MAIN_NAV_CATEGORIES, ...MORE_NAV_CATEGORIES].map((cat) => (
                 <div key={cat.slug}>
-                  {/* Кнопка категории */}
                   <button
                     className={cn(
                       "w-full flex items-center justify-between px-4 py-3 rounded-md font-medium transition-colors",
@@ -276,41 +240,35 @@ export default function Navigation() {
                       <span>{cat.emoji}</span>
                       {cat.name}
                     </span>
-                    <ChevronDown className={cn(
-                      "h-4 w-4 transition-transform",
-                      activeDropdown === cat.slug + "_m" && "rotate-180"
-                    )} />
+                    <ChevronDown className={cn("h-4 w-4 transition-transform", activeDropdown === cat.slug + "_m" && "rotate-180")} />
                   </button>
 
-                  {/* Список моделей */}
                   {activeDropdown === cat.slug + "_m" && (
-                    <div className="ml-4 mt-1 mb-2 space-y-1">
-                      <Link
-                        href={`/${cat.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="block px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md"
+                    <div className="ml-4 mt-1 mb-2 space-y-0.5">
+                      {/* Все → */}
+                      <button
+                        className="w-full text-left px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md"
+                        onClick={() => navigateTo(`/${cat.slug}`)}
                       >
                         Все {cat.name} →
-                      </Link>
+                      </button>
+                      {/* Модели */}
                       {getNavModels(cat.slug).map((model) => (
-                        <Link
+                        <button
                           key={model.slug}
-                          href={getModelUrl(model)}
-                          onClick={() => setIsOpen(false)}
                           className={cn(
-                            "flex items-center justify-between px-4 py-2.5 text-sm rounded-md transition-colors",
-                            pathname === getModelUrl(model)
-                              ? "bg-primary/10 text-primary"
-                              : "hover:bg-muted text-foreground"
+                            "w-full text-left flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors",
+                            pathname === getModelUrl(model) ? "bg-primary/10 text-primary" : "hover:bg-muted text-foreground"
                           )}
+                          onClick={() => navigateTo(getModelUrl(model))}
                         >
-                          {model.name}
+                          <span>{model.name}</span>
                           {model.badge && (
                             <span className="text-[10px] bg-primary text-primary-foreground px-1.5 py-0.5 rounded font-semibold">
                               {model.badge}
                             </span>
                           )}
-                        </Link>
+                        </button>
                       ))}
                     </div>
                   )}
@@ -322,33 +280,27 @@ export default function Navigation() {
                 { href: "/about", label: "О магазине", emoji: "ℹ️" },
                 { href: "/contacts", label: "Контакты", emoji: "📞" },
               ].map(({ href, label, emoji }) => (
-                <Link
+                <button
                   key={href}
-                  href={href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors",
-                    pathname === href ? "bg-primary/10 text-primary" : "hover:bg-muted"
-                  )}
+                  className={cn("w-full text-left flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors", pathname === href ? "bg-primary/10 text-primary" : "hover:bg-muted")}
+                  onClick={() => navigateTo(href)}
                 >
                   <span>{emoji}</span>{label}
-                </Link>
+                </button>
               ))}
 
-              {/* Контакты в мобильном */}
+              {/* Контакты */}
               <div className="flex flex-col gap-2 mt-3 px-4 pt-3 border-t border-border">
-                <a
-                  href={`tel:${city.phone}`}
+                <a href={`tel:${city.phone}`}
                   className="flex items-center justify-center gap-2 py-3 rounded-lg bg-muted font-medium text-sm"
+                  onClick={() => setIsOpen(false)}
                 >
                   <Phone className="h-4 w-4" />
                   {city.phoneFormatted}
                 </a>
-                <a
-                  href={city.telegramChannel}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <a href={city.telegramChannel} target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#0088cc] text-white font-medium text-sm"
+                  onClick={() => setIsOpen(false)}
                 >
                   <TelegramIcon className="h-4 w-4" />
                   Telegram канал
