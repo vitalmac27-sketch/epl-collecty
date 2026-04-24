@@ -121,8 +121,8 @@ export default async function ModelPage({
                   {model.badge === "NEW" ? "Новинка" : model.badge}
                 </span>
               )}
-              <div className="rounded-3xl p-4 flex items-center justify-center aspect-square max-w-md mx-auto overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
-                <Image src={`/assets/${model.image}.avif`} alt={`Купить ${model.name} в ${city.namePre}`} width={500} height={500} className="object-contain mix-blend-multiply dark:mix-blend-normal scale-110" priority />
+              <div className="rounded-3xl p-6 flex items-center justify-center aspect-square max-w-md mx-auto overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+                <Image src={`/assets/${model.image}.avif`} alt={`Купить ${model.name} в ${city.namePre}`} width={500} height={500} className="object-contain w-full h-full mix-blend-multiply dark:mix-blend-normal" priority />
               </div>
             </div>
             <div>

@@ -50,13 +50,13 @@ export default function ProductConfigurator({
 
         {/* Фото */}
         <div className="relative">
-          <div className="rounded-3xl p-4 flex items-center justify-center aspect-square max-w-md mx-auto sticky top-24 overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+          <div className="rounded-3xl p-6 flex items-center justify-center aspect-square max-w-md mx-auto sticky top-24 overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
             <Image
               src={`/assets/${currentColor.image}.avif`}
               alt={`Купить ${configLabel} в ${cityName}`}
               width={500}
               height={500}
-              className="object-contain transition-all duration-300 mix-blend-multiply dark:mix-blend-normal scale-110"
+              className="object-contain w-full h-full mix-blend-multiply dark:mix-blend-normal transition-all duration-300"
               priority
             />
           </div>
