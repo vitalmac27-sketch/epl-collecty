@@ -121,8 +121,8 @@ export default async function ModelPage({
                   {model.badge === "NEW" ? "Новинка" : model.badge}
                 </span>
               )}
-              <div className="bg-muted/20 rounded-3xl p-6 flex items-center justify-center aspect-square max-w-md mx-auto">
-                <Image src={`/assets/${model.image}.avif`} alt={`Купить ${model.name} в ${city.namePre}`} width={500} height={500} className="object-contain" priority />
+              <div className="rounded-3xl p-4 flex items-center justify-center aspect-square max-w-md mx-auto overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+                <Image src={`/assets/${model.image}.avif`} alt={`Купить ${model.name} в ${city.namePre}`} width={500} height={500} className="object-contain mix-blend-multiply dark:mix-blend-normal scale-110" priority />
               </div>
             </div>
             <div>
@@ -205,7 +205,7 @@ export default async function ModelPage({
               {relatedModels.map((rel) => (
                 <Link key={rel.slug} href={getModelUrl(rel)} className="group bg-card border border-border rounded-2xl p-4 hover:border-primary/40 hover:shadow-md transition-all">
                   <div className="aspect-square relative mb-3 bg-muted/20 rounded-xl overflow-hidden">
-                    <Image src={`/assets/${rel.image}.avif`} alt={rel.name} fill sizes="25vw" className="object-contain p-2 group-hover:scale-105 transition-transform" />
+                    <Image src={`/assets/${rel.image}.avif`} alt={rel.name} fill sizes="25vw" className="object-contain p-2 group-hover:scale-105 transition-transform mix-blend-multiply dark:mix-blend-normal" />
                   </div>
                   <p className="text-sm font-semibold group-hover:text-primary transition-colors line-clamp-2">{rel.name}</p>
                   <p className="text-sm font-bold text-primary mt-1">от {formatPrice(rel.priceFrom)}</p>

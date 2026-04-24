@@ -106,7 +106,7 @@ export default async function CategoryPage({
                   )}
 
                   {/* Изображение */}
-                  <div className="aspect-square relative mb-3 flex items-center justify-center bg-muted/30 rounded-xl overflow-hidden">
+                  <div className="aspect-square relative mb-3 flex items-center justify-center bg-gradient-to-br from-muted/20 to-transparent rounded-xl overflow-hidden">
                     <Image
                       src={`/assets/${model.image}.avif`}
                       alt={`Купить ${model.name} в ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`}
