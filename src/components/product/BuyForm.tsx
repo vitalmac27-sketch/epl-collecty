@@ -14,7 +14,7 @@ interface BuyFormProps {
 }
 
 // Прокладка Supabase → Telegram (та же что для квиза)
-const SUPABASE_URL = "https://kepaooewfbztxvcknawo.supabase.co/functions/v1/send-telegram";
+import { PROXY_URL } from "@/lib/proxy";
 
 export default function BuyForm({
   isOpen,
@@ -102,7 +102,7 @@ export default function BuyForm({
     })();
 
     try {
-      const res = await fetch(SUPABASE_URL, {
+      const res = await fetch(PROXY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/toast";
 import { cn } from "@/lib/utils";
+import { PROXY_URL } from "@/lib/proxy";
 import type { QuizData } from "../QuizContainer";
 
 // Цены на новые iPhone 17
@@ -105,7 +106,7 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
       ].join("\n");
 
       // Отправка через Supabase Edge Function (без CORS, российский CDN)
-      const res = await fetch("https://kepaooewfbztxvcknawo.supabase.co/functions/v1/send-telegram", {
+      const res = await fetch(PROXY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, contact, ...data }),
