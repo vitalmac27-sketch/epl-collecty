@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { MAIN_NAV_CATEGORIES, MORE_NAV_CATEGORIES } from "@/lib/categories";
 import { getNavModels, getModelUrl } from "@/lib/models";
@@ -21,7 +21,6 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
-  const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,12 +45,13 @@ export default function Navigation() {
   const isActiveCategory = (slug: string) =>
     pathname === `/${slug}` || pathname.startsWith(`/${slug}/`);
 
-  // Навигация для мобильного — работает на iOS
+  // Навигация для мобильного — window.location гарантированно работает на iOS
   const navigateTo = useCallback((href: string) => {
     setIsOpen(false);
     setActiveDropdown(null);
-    router.push(href);
-  }, [router]);
+    // window.location надёжнее router.push на статическом Next.js + iOS Safari
+    window.location.href = href;
+  }, []);
 
   return (
     <nav
