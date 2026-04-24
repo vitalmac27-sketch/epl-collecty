@@ -123,6 +123,10 @@ export default function RootLayout({
           }}
         />
 
+        {/* ── Верификация поисковиков ── */}
+        <meta name="google-site-verification" content="RgqQ2tZ9Mie_viRI716Dot5bnz48JFC8jX_wPfIvlzI" />
+        <meta name="yandex-verification" content="72880077d2fe664a" />
+
         {/* ── Preconnect для производительности ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
       </head>
