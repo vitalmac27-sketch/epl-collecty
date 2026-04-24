@@ -213,14 +213,18 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation — вынесено как fixed overlay чтобы не конфликтовать с sticky nav */}
         {isOpen && (
-          <div className="lg:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-1">
+          <div
+            className="fixed inset-0 top-16 z-40 bg-background overflow-y-auto"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            <div className="px-4 py-4 flex flex-col gap-1">
 
               {/* Главная */}
               <button
-                className={cn("w-full flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors text-left", pathname === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted")}
+                className={cn("w-full flex items-center gap-3 px-4 py-4 rounded-md font-medium text-left text-base", pathname === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted")}
+                onTouchEnd={(e) => { e.preventDefault(); navigateTo("/"); }}
                 onClick={() => navigateTo("/")}
               >
                 🏠 Главная
@@ -231,7 +235,7 @@ export default function Navigation() {
                 <div key={cat.slug}>
                   <button
                     className={cn(
-                      "w-full flex items-center justify-between px-4 py-3 rounded-md font-medium transition-colors",
+                      "w-full flex items-center justify-between px-4 py-4 rounded-md font-medium text-base",
                       isActiveCategory(cat.slug) ? "bg-primary/10 text-primary" : "hover:bg-muted"
                     )}
                     onClick={() => toggleDropdown(cat.slug + "_m")}
@@ -240,31 +244,31 @@ export default function Navigation() {
                       <span>{cat.emoji}</span>
                       {cat.name}
                     </span>
-                    <ChevronDown className={cn("h-4 w-4 transition-transform", activeDropdown === cat.slug + "_m" && "rotate-180")} />
+                    <ChevronDown className={cn("h-5 w-5 transition-transform", activeDropdown === cat.slug + "_m" && "rotate-180")} />
                   </button>
 
                   {activeDropdown === cat.slug + "_m" && (
-                    <div className="ml-4 mt-1 mb-2 space-y-0.5">
-                      {/* Все → */}
+                    <div className="ml-4 mt-1 mb-2 space-y-0.5 border-l-2 border-primary/20 pl-2">
                       <button
-                        className="w-full text-left px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md"
+                        className="w-full text-left px-4 py-3 text-sm font-semibold text-primary rounded-md"
+                        onTouchEnd={(e) => { e.preventDefault(); navigateTo(`/${cat.slug}`); }}
                         onClick={() => navigateTo(`/${cat.slug}`)}
                       >
                         Все {cat.name} →
                       </button>
-                      {/* Модели */}
                       {getNavModels(cat.slug).map((model) => (
                         <button
                           key={model.slug}
                           className={cn(
-                            "w-full text-left flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors",
-                            pathname === getModelUrl(model) ? "bg-primary/10 text-primary" : "hover:bg-muted text-foreground"
+                            "w-full text-left flex items-center justify-between px-4 py-3 text-sm rounded-md",
+                            pathname === getModelUrl(model) ? "bg-primary/10 text-primary" : "text-foreground"
                           )}
+                          onTouchEnd={(e) => { e.preventDefault(); navigateTo(getModelUrl(model)); }}
                           onClick={() => navigateTo(getModelUrl(model))}
                         >
                           <span>{model.name}</span>
                           {model.badge && (
-                            <span className="text-[10px] bg-primary text-primary-foreground px-1.5 py-0.5 rounded font-semibold">
+                            <span className="text-[10px] bg-primary text-primary-foreground px-1.5 py-0.5 rounded font-semibold ml-2 shrink-0">
                               {model.badge}
                             </span>
                           )}
@@ -282,7 +286,8 @@ export default function Navigation() {
               ].map(({ href, label, emoji }) => (
                 <button
                   key={href}
-                  className={cn("w-full text-left flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-colors", pathname === href ? "bg-primary/10 text-primary" : "hover:bg-muted")}
+                  className={cn("w-full text-left flex items-center gap-3 px-4 py-4 rounded-md font-medium text-base", pathname === href ? "bg-primary/10 text-primary" : "hover:bg-muted")}
+                  onTouchEnd={(e) => { e.preventDefault(); navigateTo(href); }}
                   onClick={() => navigateTo(href)}
                 >
                   <span>{emoji}</span>{label}
@@ -290,16 +295,20 @@ export default function Navigation() {
               ))}
 
               {/* Контакты */}
-              <div className="flex flex-col gap-2 mt-3 px-4 pt-3 border-t border-border">
-                <a href={`tel:${city.phone}`}
-                  className="flex items-center justify-center gap-2 py-3 rounded-lg bg-muted font-medium text-sm"
+              <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-border">
+                <a
+                  href={`tel:${city.phone}`}
+                  className="flex items-center justify-center gap-2 py-4 rounded-lg bg-muted font-medium text-sm"
                   onClick={() => setIsOpen(false)}
                 >
                   <Phone className="h-4 w-4" />
                   {city.phoneFormatted}
                 </a>
-                <a href={city.telegramChannel} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#0088cc] text-white font-medium text-sm"
+                <a
+                  href={city.telegramChannel}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-4 rounded-lg bg-[#0088cc] text-white font-medium text-sm"
                   onClick={() => setIsOpen(false)}
                 >
                   <TelegramIcon className="h-4 w-4" />
