@@ -44,16 +44,12 @@ export default function Navigation() {
             {/* Логотип */}
             <a href="/" className="flex items-center gap-2 flex-shrink-0">
               <Image src="/assets/logo.jpg" alt="ЭПЛ-КОЛЛЕКЦИЯ" width={36} height={36} className="rounded-full object-cover" priority />
+              <span className="font-bold text-base xl:hidden block lg:hidden">ЭПЛ-КОЛЛЕКЦИЯ</span>
               <span className="font-bold text-base hidden xl:block">ЭПЛ-КОЛЛЕКЦИЯ</span>
             </a>
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
-              {/* Главная */}
-              <Link href="/" className={cn("px-2.5 py-2 rounded-md text-sm font-medium hover:text-primary hover:bg-muted whitespace-nowrap", pathname === "/" && "text-primary bg-primary/5")}>
-                Главная
-              </Link>
-
               {/* Основные категории */}
               {mainCats.map((cat) => (
                 <div key={cat.slug} className="relative group">

@@ -184,6 +184,35 @@ export default function Footer() {
             Магазин iPhone в Казани — купить айфон выгодно с гарантией 1 год
           </p>
         </div>
+
+        {/* ── Юридические оговорки ── */}
+        <div className="mt-6 pt-4 border-t border-border/50 space-y-2 text-[11px] text-muted-foreground/60 leading-relaxed">
+          <p>
+            Сайт носит сугубо информационный характер и не является публичной офертой,
+            определяемой Статьёй 437 (2) ГК РФ.
+          </p>
+          <p>
+            Apple, логотип Apple, iPhone, iPad, MacBook, Apple Watch, AirPods, App Store и другие
+            обозначения Apple являются зарегистрированными товарными знаками компании Apple Inc. в США
+            и других странах. ЭПЛ-КОЛЛЕКЦИЯ не является официальным дилером, дистрибьютором
+            или представителем Apple Inc.
+          </p>
+          <p>
+            Samsung и Galaxy являются зарегистрированными товарными знаками компании Samsung Electronics Co., Ltd.
+            Dyson является зарегистрированным товарным знаком Dyson Ltd.
+            DJI является зарегистрированным товарным знаком SZ DJI Technology Co., Ltd.
+            Xiaomi, Redmi являются зарегистрированными товарными знаками Xiaomi Inc.
+            JBL является зарегистрированным товарным знаком Harman International Industries.
+            Яндекс является зарегистрированным товарным знаком ООО «Яндекс».
+            Marshall является зарегистрированным товарным знаком Marshall Group AB.
+            Sony PlayStation является зарегистрированным товарным знаком Sony Interactive Entertainment LLC.
+            Meizu является зарегистрированным товарным знаком Meizu Technology Co., Ltd.
+            Все названия брендов и товарных знаков принадлежат их законным владельцам.
+          </p>
+          <p>
+            Instagram принадлежит компании Meta, признанной экстремистской организацией и запрещённой на территории РФ.
+          </p>
+        </div>
       </div>
     </footer>
   );
