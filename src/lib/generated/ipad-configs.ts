@@ -123,8 +123,8 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   category: "ipad",
   colors: [
     { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-m4" },
-    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "ipad-air-11-m4" },
-    { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "ipad-air-11-m4" },
+    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "ipad-air-11-m4-starlight" },
+    { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "ipad-air-11-m4-purple" },
   ],
   storage: [
     { id: "128", label: "128 ГБ", available: true },
