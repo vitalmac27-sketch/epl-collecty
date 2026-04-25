@@ -13,7 +13,7 @@ const IPHONE_17_PRO_MAX_CONFIG: ProductConfig = {
   category: "iphone",
   colors: [
     { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "iphone-17-pro-max-orange" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-max" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-max-blue" },
     { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "iphone-17-pro-max-silver" },
   ],
   storage: [
@@ -106,7 +106,7 @@ const IPHONE_17_PRO_CONFIG: ProductConfig = {
   slug: "iphone-17-pro",
   category: "iphone",
   colors: [
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-silver" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-blue" },
     { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "iphone-17-pro-max-orange" },
     { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "iphone-17-pro-silver" },
   ],

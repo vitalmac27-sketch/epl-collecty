@@ -79,7 +79,7 @@ const DYSON_HD16_CONFIG: ProductConfig = {
   slug: "dyson-hd16",
   category: "dyson",
   colors: [
-    { id: "prussian-blue", name: "Прусский синий", hex: "#1F3354", image: "dyson-hd16" },
+    { id: "prussian-blue", name: "Прусский синий", hex: "#1F3354", image: "dyson-hd16-blue" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
