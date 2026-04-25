@@ -1121,6 +1121,13 @@ const audioModels: ProductModel[] = [
 // ─────────────────────────────────────────────────────────────────────────────
 // Единый реестр
 // ─────────────────────────────────────────────────────────────────────────────
+// ─── PlayStation ──────────────────────────────────────────────────────────────
+const playstationModels: ProductModel[] = [
+  { slug: "playstation-5-pro", name: "PlayStation 5 Pro", category: "playstation", series: "PS5", badge: "NEW", priceFrom: 89000, image: "playstation-5-pro", seoTitle: "Купить PlayStation 5 Pro в Казани | ЭПЛ-КОЛЛЕКЦИЯ", seoDescription: "PS5 Pro в Казани ✅ 45 ТФЛОПС GPU, 2 ТБ SSD. Гарантия 1 год, рассрочка 0%.", subtitle: "Самая мощная PS5", inNav: true },
+  { slug: "playstation-5-slim", name: "PlayStation 5 Slim", category: "playstation", series: "PS5", priceFrom: 54000, image: "playstation-5-slim", seoTitle: "Купить PlayStation 5 Slim в Казани | ЭПЛ-КОЛЛЕКЦИЯ", seoDescription: "PS5 Slim в Казани ✅ Компактный дизайн, 1 ТБ SSD. Гарантия 1 год, рассрочка 0%.", subtitle: "Компактная с дисководом", inNav: true },
+  { slug: "playstation-5-slim-digital", name: "PlayStation 5 Slim Digital", category: "playstation", series: "PS5", priceFrom: 48000, image: "playstation-5-slim-digital", seoTitle: "Купить PlayStation 5 Slim Digital в Казани | ЭПЛ-КОЛЛЕКЦИЯ", seoDescription: "PS5 Slim Digital Edition в Казани ✅ Без дисковода, 1 ТБ SSD. Гарантия 1 год.", subtitle: "Без дисковода", inNav: true },
+];
+
 export const allModels: ProductModel[] = [
   ...iPhoneModels,
   ...iPadModels,
@@ -1130,6 +1137,7 @@ export const allModels: ProductModel[] = [
   ...androidModels,
   ...dysonModels,
   ...audioModels,
+  ...playstationModels,
 ];
 
 // ─── Хелперы ─────────────────────────────────────────────────────────────────

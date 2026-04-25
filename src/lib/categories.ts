@@ -118,6 +118,16 @@ export const categories = {
     h1: "Аудио техника и гаджеты",
     order: 8,
     inMainNav: false,
+  },
+  playstation: {
+    slug: "playstation",
+    name: "PlayStation",
+    emoji: "🎮",
+    pageTitle: "Купить PlayStation 5 в Казани — PS5 Pro, Slim | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription: "Купить PlayStation 5 Pro, PS5 Slim, PS5 Digital в Казани. Оригинал, гарантия 1 год, рассрочка 0%.",
+    h1: "Купить PlayStation 5 в Казани",
+    order: 9,
+    inMainNav: false,
   }
 } as const;
 
