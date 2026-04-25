@@ -185,7 +185,7 @@ const IPHONE_17_CONFIG: ProductConfig = {
   slug: "iphone-17",
   category: "iphone",
   colors: [
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-black" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-blue" },
     { id: "sage", name: "Шалфей", hex: "#A8B19E", image: "iphone-17-black" },
     { id: "lavender", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17-lavender" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17-black" },
@@ -545,6 +545,56 @@ const IPHONE_15_CONFIG: ProductConfig = {
   seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
+
+const IPHONE_17_AIR_CONFIG: ProductConfig = {
+  slug: "iphone-17-air",
+  category: "iphone",
+  colors: [
+    { id: "white", name: "Облачно-белый", hex: "#F2F1ED", image: "iphone-17-air-white" },
+    { id: "skyblue", name: "Небесно-голубой", hex: "#BDD3E0", image: "iphone-17-air-skyblue" },
+    { id: "gold", name: "Светлое золото", hex: "#E8D5B0", image: "iphone-17-air-gold" },
+  ],
+  storage: [
+    { id: "128", label: "128 ГБ", available: true },
+    { id: "256", label: "256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Европейская/РФ версия." },
+    { id: "esim", label: "eSIM", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
+  ],
+  prices: [],
+  defaultStorage: "128",
+  defaultColor: "white",
+  defaultSim: "sim-esim",
+  priceFrom: 80700,
+  storageLabel: "Объём памяти",
+  showSim: true,
+  specs: [
+    { label: "Процессор", value: "Apple A18 (3 нм)" },
+    { label: "Дисплей", value: "6,1 дюйм Super Retina XDR OLED, 60 Гц" },
+    { label: "Корпус", value: "Алюминий (тончайший iPhone, 5,5 мм)" },
+    { label: "Основная камера", value: "48 МП Fusion + 12 МП ультраширокая" },
+    { label: "Батарея", value: "до 22 часов видео" },
+    { label: "Разъём", value: "USB-C" },
+    { label: "MagSafe", value: "До 25 Вт" },
+    { label: "Защита", value: "IP68" },
+  ],
+  compareTitle: "iPhone 16",
+  compare: [
+    { label: "Корпус", current: "Алюминий 5,5 мм", previous: "Алюминий 7,8 мм", better: true },
+    { label: "Вес", current: "145 г", previous: "170 г", better: true },
+    { label: "Дисплей", current: "6,1 дюйм 60 Гц", previous: "6,1 дюйм 60 Гц", better: false },
+    { label: "Процессор", current: "A18", previous: "A18", better: false },
+  ],
+  upsell: UPSELL,
+  seoH2: "Купить iPhone 17 Air в Казани",
+  seoText: "iPhone 17 Air — самый тонкий iPhone в истории Apple (5,5 мм). Доступен в ЭПЛ-КОЛЛЕКЦИЯ в Казани. Уточняйте цену у менеджера.",
+  seoH2Why: "Чем iPhone 17 Air отличается от iPhone 17?",
+  seoTextWhy: "Air на 30% тоньше и легче (145 г против 170 г). Идеален если важна компактность. Функционально идентичен iPhone 17.",
+  seoH2Sim: "Какую версию iPhone 17 Air выбрать?",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. eSIM — только виртуальная SIM-карта.",
+};
+
 const configs: Record<string, ProductConfig> = {
   "iphone-17-pro-max": IPHONE_17_PRO_MAX_CONFIG,
   "iphone-17-pro": IPHONE_17_PRO_CONFIG,
@@ -554,6 +604,7 @@ const configs: Record<string, ProductConfig> = {
   "iphone-16": IPHONE_16_CONFIG,
   "iphone-16e": IPHONE_16E_CONFIG,
   "iphone-15": IPHONE_15_CONFIG,
+  "iphone-17-air": IPHONE_17_AIR_CONFIG,
 };
 
 export function getIphoneConfig(slug: string): ProductConfig | undefined {
