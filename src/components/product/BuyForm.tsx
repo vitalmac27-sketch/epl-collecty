@@ -221,7 +221,7 @@ export default function BuyForm({
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Иван"
+                  placeholder="Ваше имя"
                   className="w-full px-3 py-2.5 border border-border rounded-xl bg-background focus:outline-none focus:border-primary"
                 />
               </div>

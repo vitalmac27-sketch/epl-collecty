@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   // Шаблон: "iPhone 17 Pro Max в Казани | ЭПЛ-КОЛЛЕКЦИЯ"
   title: {
     default:
-      "Купить Айфон iPhone в Казани выгодно — ЭПЛ-КОЛЛЕКЦИЯ | Рассрочка 0%",
+      "Купить iPhone в Казани выгодно — ЭПЛ-КОЛЛЕКЦИЯ | Рассрочка 0%",
     template: "%s | ЭПЛ-КОЛЛЕКЦИЯ",
   },
   description:
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     url: DEFAULT_CITY.siteUrl,
     siteName: "ЭПЛ-КОЛЛЕКЦИЯ — магазин iPhone в Казани",
-    title: "Купить Айфон iPhone в Казани выгодно — ЭПЛ-КОЛЛЕКЦИЯ",
+    title: "Купить iPhone в Казани выгодно — ЭПЛ-КОЛЛЕКЦИЯ",
     description:
       "iPhone 13–17 с гарантией 1 год. Рассрочка 0%, Trade-in, бесплатная доставка по Казани.",
     images: [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   // Twitter / X cards
   twitter: {
     card: "summary_large_image",
-    title: "Купить Айфон iPhone в Казани — ЭПЛ-КОЛЛЕКЦИЯ",
+    title: "Купить iPhone в Казани — ЭПЛ-КОЛЛЕКЦИЯ",
     description: "iPhone с гарантией 1 год. Рассрочка 0%, доставка в день заказа.",
     images: ["/assets/og-apple-collection.jpg"],
   },

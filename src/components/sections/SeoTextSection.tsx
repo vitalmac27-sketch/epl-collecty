@@ -15,7 +15,7 @@ export default function SeoTextSection({ city }: SeoTextSectionProps) {
 
       <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
         <p>
-          <strong className="text-foreground">Купить Айфон iPhone в {city.namePre} выгодно</strong> — легко
+          <strong className="text-foreground">Купить iPhone в {city.namePre} выгодно</strong> — легко
           в магазине <strong className="text-foreground">ЭПЛ-КОЛЛЕКЦИЯ</strong>. Мы
           находимся в {city.district} по адресу:{" "}
           <strong className="text-foreground">{city.address}</strong> и работаем

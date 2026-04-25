@@ -24,12 +24,12 @@ const city = DEFAULT_CITY;
 
 // ─── Metadata (SSR) ───────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: `Купить Айфон iPhone в ${city.nameGen} выгодно — рассрочка 0% | ЭПЛ-КОЛЛЕКЦИЯ`,
+  title: `Купить iPhone в ${city.nameGen} выгодно — рассрочка 0% | ЭПЛ-КОЛЛЕКЦИЯ`,
   description: `Купить iPhone в ${city.nameGen} в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, рассрочка 0% на 10 мес, Trade-in, бесплатная доставка по ${city.nameGen} в день заказа.`,
   keywords: city.keywords,
   alternates: { canonical: city.siteUrl },
   openGraph: {
-    title: `Купить Айфон iPhone в ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`,
+    title: `Купить iPhone в ${city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ`,
     description: `iPhone 13–17 с гарантией 1 год. Рассрочка 0%, Trade-in, бесплатная доставка по ${city.nameGen}.`,
     url: city.siteUrl,
     images: [{ url: "/assets/og-apple-collection.jpg", width: 1200, height: 630 }],
@@ -86,7 +86,7 @@ export default function HomePage() {
 
       <div className="min-h-screen">
 
-        {/* ── Hero: H1 "Купить Айфон iPhone Казань выгодно" ── */}
+        {/* ── Hero: H1 "Купить iPhone Казань выгодно" ── */}
         <HeroSection city={city} />
 
         <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
