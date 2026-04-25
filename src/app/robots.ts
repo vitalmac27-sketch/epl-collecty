@@ -1,10 +1,23 @@
 import type { MetadataRoute } from "next";
-import { DEFAULT_CITY } from "@/lib/cities";
+
 export const dynamic = "force-static";
+
+const BASE = "https://xn----jtbjgbccazg9frdtb.xn--p1ai";
+
 export default function robots(): MetadataRoute.Robots {
-  const base = DEFAULT_CITY.siteUrl;
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/api/", "/_next/"] }],
-    sitemap: `${base}/sitemap.xml`,
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: [
+          "/api/",
+          "/_next/",
+          "/admin/",
+        ],
+      },
+    ],
+    sitemap: `${BASE}/sitemap.xml`,
+    host: BASE,
   };
 }

@@ -5,18 +5,37 @@ import { allModels } from "@/lib/models";
 
 export const dynamic = "force-static";
 
+const BASE = "https://xn----jtbjgbccazg9frdtb.xn--p1ai";
+const now = new Date();
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = DEFAULT_CITY.siteUrl;
-  const now = new Date();
   return [
-    { url: base, lastModified: now, changeFrequency: "daily", priority: 1 },
-    { url: `${base}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/contacts`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    ...ALL_CATEGORY_SLUGS.map(slug => ({
-      url: `${base}/${slug}/`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8,
+    // ── Главные страницы ──────────────────────────────────────────
+    { url: `${BASE}/`,         lastModified: now, changeFrequency: "daily",   priority: 1.0 },
+    { url: `${BASE}/about`,    lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/contacts`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/offer`,    lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${BASE}/privacy`,  lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${BASE}/legal`,    lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+
+    // ── Будущие страницы ──────────────────────────────────────────
+    { url: `${BASE}/buyout`,   lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
+    { url: `${BASE}/blog`,     lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
+
+    // ── Категории ─────────────────────────────────────────────────
+    ...ALL_CATEGORY_SLUGS.map((slug) => ({
+      url: `${BASE}/${slug}/`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
     })),
-    ...allModels.map(m => ({
-      url: `${base}/${m.category}/${m.slug}/`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
+
+    // ── Карточки товаров ──────────────────────────────────────────
+    ...allModels.map((m) => ({
+      url: `${BASE}/${m.category}/${m.slug}/`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
     })),
   ];
 }
