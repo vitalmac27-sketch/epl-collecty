@@ -12,11 +12,11 @@ const AIRPODS_MAX_CONFIG: ProductConfig = {
   slug: "airpods-max",
   category: "airpods",
   colors: [
-    { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "airpods-max" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "airpods-max" },
-    { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "airpods-max" },
-    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "airpods-max" },
-    { id: "midnight", name: "Тёмная Ночь", hex: "#2C2D30", image: "airpods-max" },
+    { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "airpods-max-purple" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "airpods-max-blue" },
+    { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "airpods-max-orange" },
+    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "airpods-max-starlight" },
+    { id: "midnight", name: "Тёмная Ночь", hex: "#2C2D30", image: "airpods-max-midnight" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },

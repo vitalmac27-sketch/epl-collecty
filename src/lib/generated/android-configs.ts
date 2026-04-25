@@ -14,7 +14,7 @@ const SAMSUNG_GALAXY_S26_ULTRA_CONFIG: ProductConfig = {
   colors: [
     { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "samsung-galaxy-s26-ultra" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-s26-ultra" },
-    { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-s26-ultra" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-s26-ultra-white" },
     { id: "skyblue", name: "Небесно-голубой", hex: "#BDD3E0", image: "samsung-galaxy-s26-ultra" },
   ],
   storage: [
@@ -161,7 +161,7 @@ const SAMSUNG_GALAXY_S25_ULTRA_CONFIG: ProductConfig = {
   colors: [
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-s25-ultra" },
     { id: "silverblue", name: "Серебристо-голубой", hex: "#B5C5D8", image: "samsung-galaxy-s25-ultra" },
-    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "samsung-galaxy-s25-ultra" },
+    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "samsung-galaxy-s25-ultra-gray" },
     { id: "jetblack", name: "Чёрный (Jet Black)", hex: "#0E0E10", image: "samsung-galaxy-s25-ultra" },
     { id: "whitesilver", name: "Бело-серебристый", hex: "#E8E8EA", image: "samsung-galaxy-s25-ultra" },
   ],
