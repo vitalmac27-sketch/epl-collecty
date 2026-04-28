@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Будущие страницы ──────────────────────────────────────────
     { url: `${BASE}/buyout`,   lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
     { url: `${BASE}/blog`,     lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
+    { url: `${BASE}/blog/kak-proverit-bu-iphone-pered-pokupkoy`, lastModified: new Date("2026-04-25"), changeFrequency: "monthly" as const, priority: 0.8 },
 
     // ── Категории ─────────────────────────────────────────────────
     ...ALL_CATEGORY_SLUGS.map((slug) => ({
