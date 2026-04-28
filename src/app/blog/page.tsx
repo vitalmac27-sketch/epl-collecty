@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Блог о технике Apple — советы, обзоры, новости | ЭПЛ-КОЛЛЕКЦИЯ Казань",
   description: "Полезные статьи о технике Apple от экспертов ЭПЛ-КОЛЛЕКЦИЯ в Казани. Как проверить б/у iPhone, обзоры новых моделей, советы по уходу за техникой.",

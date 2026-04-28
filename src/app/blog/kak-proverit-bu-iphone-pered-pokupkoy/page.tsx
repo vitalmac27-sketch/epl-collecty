@@ -11,6 +11,8 @@ const ARTICLE = {
   author: { name: "Александр Романов", role: "Инженер сервисного центра ЭПЛ-КОЛЛЕКЦИЯ, Казань", checked: "2 000+" },
 };
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: `${ARTICLE.title} | ЭПЛ-КОЛЛЕКЦИЯ Казань`,
   description: ARTICLE.description,
