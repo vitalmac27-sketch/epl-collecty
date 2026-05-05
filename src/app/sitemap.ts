@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/buyout`,  lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
     { url: `${BASE}/blog`,    lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
     { url: `${BASE}/blog/kak-proverit-bu-iphone-pered-pokupkoy`, lastModified: new Date("2026-04-25"), changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${BASE}/blog/kak-nastroit-kameru-iphone`, lastModified: new Date("2026-05-01"), changeFrequency: "monthly" as const, priority: 0.8 },
     ...ALL_CATEGORY_SLUGS.map((slug) => ({
       url: `${BASE}/${slug}/`,
       lastModified: now,

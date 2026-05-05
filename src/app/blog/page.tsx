@@ -12,6 +12,17 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    slug: "kak-nastroit-kameru-iphone",
+    title: "Как настроить камеру iPhone для лучших фото и видео: гайд по моделям",
+    description: "Пошаговая настройка камеры iPhone 15, 16, 17 Pro. Форматы, стили, HDR, ProRes, iOS 26 — что включить для максимального качества.",
+    image: "/assets/iphone-17-pro-max-orange.avif",
+    imageAlt: "Настройка камеры iPhone 17 Pro Max — гайд по всем моделям",
+    date: "2026-05-01",
+    readTime: "10 мин",
+    author: "Александр Романов",
+    tag: "Советы и гайды",
+  },
+  {
     slug: "kak-proverit-bu-iphone-pered-pokupkoy",
     title: "Как проверить б/у iPhone перед покупкой: чек-лист из 9 шагов",
     description: "Пошаговая проверка б/у iPhone от инженера сервисного центра. Аккумулятор, iCloud, Face ID, IMEI, экран — ничего не пропустите.",
