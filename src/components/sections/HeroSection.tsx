@@ -12,13 +12,13 @@ export default function HeroSection({ city }: HeroSectionProps) {
       {/* Mobile */}
       <div className="md:hidden px-4 pt-6 pb-8 text-center">
         <h1 className="font-display text-3xl font-light tracking-tight mb-3">
-          <span className="block text-foreground/90 mb-1">Купить iPhone </span>
+          <span className="block text-foreground/90 mb-1">Купить Айфон в Казани</span>
           <span className="block bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-normal">
-            в {city.nameGen} выгодно
+            выгодно, в рассрочку
           </span>
         </h1>
         <p className="text-base font-light text-foreground/60 mb-6">
-          Подберите свой Айфон за 1 минуту — рассрочка 0%, гарантия 1 год
+          Рассрочка 0% на 12 мес · Гарантия 1 год · Доставка в день заказа
         </p>
         <div className="flex justify-center">
           <Image
@@ -53,13 +53,13 @@ export default function HeroSection({ city }: HeroSectionProps) {
         <div className="max-w-6xl mx-auto px-6 py-12 flex items-center justify-between gap-12">
           <div className="flex-1">
             <h1 className="font-display text-5xl lg:text-6xl font-light tracking-tight mb-6">
-              <span className="block text-foreground/90 mb-2">Купить iPhone </span>
+              <span className="block text-foreground/90 mb-2">Купить Айфон в Казани</span>
               <span className="block bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-normal">
-                в {city.nameGen} выгодно
+                выгодно, в рассрочку
               </span>
             </h1>
             <p className="text-xl font-light text-foreground/60 mb-8">
-              Рассрочка 0% · Гарантия 1 год · Доставка в день заказа
+              Рассрочка 0% на 12 мес · Гарантия 1 год · Доставка в день заказа
             </p>
             <div className="flex gap-4">
               <Link

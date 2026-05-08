@@ -24,8 +24,8 @@ const city = DEFAULT_CITY;
 
 // ─── Metadata (SSR) ───────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: `Купить iPhone в ${city.nameGen} выгодно — рассрочка 0% | ЭПЛ-КОЛЛЕКЦИЯ`,
-  description: `Купить iPhone в ${city.nameGen} в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, рассрочка 0% на 10 мес, Trade-in, бесплатная доставка по ${city.nameGen} в день заказа.`,
+  title: `Купить Айфон в Казани выгодно — в рассрочку 0% | ЭПЛ-КОЛЛЕКЦИЯ`,
+  description: `Купить Айфон в Казани в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, в рассрочку 0% на 12 мес, Trade-in, бесплатная доставка по Казани в день заказа.`,
   keywords: city.keywords,
   alternates: { canonical: city.siteUrl },
   openGraph: {
