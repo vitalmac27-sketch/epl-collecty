@@ -18,7 +18,7 @@ const MAIN_CATS = ["iphone", "ipad", "macbook", "watch", "android"];
 const MORE_CATS = ["airpods", "dyson", "audio", "playstation"];
 // Доп. страницы
 const EXTRA_PAGES = [
-  { href: "/buyout", label: "Выкуп iPhone", emoji: "💰" },
+  { href: "/skupka-iphone", label: "Выкуп iPhone", emoji: "💰" },
   { href: "/blog", label: "Блог", emoji: "📝" },
 ];
 
