@@ -6,7 +6,7 @@ from collections import defaultdict, OrderedDict
 from pathlib import Path
 import re
 
-XLSX = '/mnt/user-data/uploads/прайс_apple_collecty.xlsx'
+XLSX = '/home/claude/прайс_updated.xlsx'
 OUT_DIR = '/home/claude/epl-collecty/src/lib/generated'
 
 # ─── Цвета ────────────────────────────────────────────────────────────────
@@ -124,9 +124,9 @@ def parse_iphone():
     for row in ws.iter_rows(min_row=4, values_only=True):
         if not row[0] or not row[6]: continue
         mem = parse_memory_gb(row[3]); price = row[6]
-        if mem == 256 and section == 'iphone-17-pro-max' and price < 108000:
+        if mem == 256 and section == 'iphone-17-pro-max' and price < 101000:
             section = 'iphone-17-pro'
-        if mem == 256 and section == 'iphone-17-pro' and price < 90000:
+        if mem == 256 and section == 'iphone-17-pro' and price < 83000:
             section = 'iphone-17'
         data[section].append({
             'storage_id': str(mem), 'storage_label': memory_label_gb(mem),
