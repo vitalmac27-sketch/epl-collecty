@@ -12,6 +12,17 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    slug: "optimizaciya-akkumulyatora-iphone-ios-26",
+    title: "Как оптимизировать аккумулятор Айфона на iOS 26–27: полный гайд",
+    description: "Adaptive Power, лимит зарядки, 10 настроек которые реально работают. Таблица по моделям iPhone 15, 16, 17. Что делать если быстро разряжается.",
+    image: "/assets/iphone-17-pro-max-silver.avif",
+    imageAlt: "Оптимизация аккумулятора iPhone на iOS 26",
+    date: "2026-05-20",
+    readTime: "12 мин",
+    author: "Александр Романов",
+    tag: "Советы и гайды",
+  },
+  {
     slug: "kak-nastroit-kameru-iphone",
     title: "Как настроить камеру iPhone для лучших фото и видео: гайд по моделям",
     description: "Пошаговая настройка камеры iPhone 15, 16, 17 Pro. Форматы, стили, HDR, ProRes, iOS 26 — что включить для максимального качества.",
