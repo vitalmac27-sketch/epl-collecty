@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import axios from 'axios';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 import fs from 'fs';
 import path from 'path';
 
@@ -13,6 +15,7 @@ const PROXY_HOST = process.env.PROXY_HOST;
 const PROXY_PORT = process.env.PROXY_PORT;
 const PROXY_USER = process.env.PROXY_USER;
 const PROXY_PASS = process.env.PROXY_PASS;
+const PROXY_URL = PROXY_HOST ? `http://${PROXY_USER}:${PROXY_PASS}@${PROXY_HOST}:${PROXY_PORT}` : null;
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
@@ -63,9 +66,25 @@ export async function parseAndDownload(url, listingId) {
     }
 
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
-
     await new Promise(r => setTimeout(r, 3000 + Math.random() * 2000));
-    await page.evaluate(() => window.scrollBy(0, 300));
+
+    // Скроллим вниз постепенно — все картинки прогрузятся
+    await page.evaluate(async () => {
+      await new Promise(resolve => {
+        let total = 0;
+        const distance = 300;
+        const timer = setInterval(() => {
+          window.scrollBy(0, distance);
+          total += distance;
+          if (total >= document.body.scrollHeight - window.innerHeight) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, 150);
+      });
+    });
+    await new Promise(r => setTimeout(r, 1500));
+    await page.evaluate(() => window.scrollTo(0, 0));
     await new Promise(r => setTimeout(r, 1000));
 
     const blockStatus = await page.evaluate(() => {
@@ -89,63 +108,73 @@ export async function parseAndDownload(url, listingId) {
 
     await page.waitForSelector('h1', { timeout: 15000 });
 
-    console.log('[parser] Открываем галерею...');
-    const bigPhotos = [];
-    try {
-      const galleryBtn = await page.$('[data-marker="image-frame/image-wrapper"]');
-      if (galleryBtn) {
-        await galleryBtn.click();
-        await new Promise(r => setTimeout(r, 2000));
+    // === Извлекаем фото по naturalWidth/Height ===
+    console.log('[parser] Анализируем фото на странице...');
+    const photoData = await page.evaluate(() => {
+      const imgs = Array.from(document.querySelectorAll('img'));
+      const debug = [];
+      const candidates = [];
 
-        for (let i = 0; i < 10; i++) {
-          const currentPhoto = await page.evaluate(() => {
-            const imgs = Array.from(document.querySelectorAll('img'));
-            const big = imgs
-              .filter(img => img.src && img.src.includes('avito.st') &&
-                !img.src.includes('logo') && !img.src.includes('avatar'))
-              .map(img => ({
-                src: img.src,
-                area: (img.naturalWidth || img.width) * (img.naturalHeight || img.height)
-              }))
-              .sort((a, b) => b.area - a.area);
-            return big[0]?.src || null;
-          });
+      imgs.forEach(img => {
+        const src = img.src || img.currentSrc;
+        if (!src || !src.includes('avito.st')) return;
+        if (src.includes('logo') || src.includes('avatar') || src.includes('stub')) return;
 
-          if (currentPhoto && !bigPhotos.includes(currentPhoto)) {
-            bigPhotos.push(currentPhoto);
-            console.log(`[parser] Фото ${bigPhotos.length}: ${currentPhoto.slice(0, 80)}`);
-          }
+        const nw = img.naturalWidth || 0;
+        const nh = img.naturalHeight || 0;
+        const area = nw * nh;
+        debug.push({ src: src.slice(0, 90), nw, nh, area });
 
-          if (bigPhotos.length >= 6) break;
+        if (area > 20000) candidates.push({ src, area });
+      });
 
-          await page.keyboard.press('ArrowRight');
-          await new Promise(r => setTimeout(r, 800));
+      // Группируем по хешу
+      const map = new Map();
+      candidates.forEach(({ src, area }) => {
+        const m = src.match(/\/image\/\d+\/\d+\.([A-Za-z0-9_-]+)\./);
+        const hash = m ? m[1] : src;
+        if (!map.has(hash) || map.get(hash).area < area) {
+          map.set(hash, { src, area });
         }
-        await page.keyboard.press('Escape');
-        await new Promise(r => setTimeout(r, 500));
-      }
-    } catch (e) {
-      console.error('[parser] Ошибка галереи:', e.message);
-    }
+      });
 
-    console.log(`[parser] Собрано ${bigPhotos.length} больших фото`);
+      const photos = Array.from(map.values())
+        .sort((a, b) => b.area - a.area)
+        .slice(0, 6);
 
+      return { photos, debug: debug.slice(0, 30) };
+    });
+
+    console.log(`[parser] DEBUG: ${photoData.debug.length} avito.st img на странице`);
+    photoData.debug.slice(0, 10).forEach((d, i) => {
+      console.log(`  ${i+1}. ${d.nw}x${d.nh} (${d.area}px²)`);
+    });
+    console.log(`[parser] Выбрано ${photoData.photos.length} больших фото для загрузки`);
+
+    // === Скачиваем фото через axios с прокси ===
     const localPaths = [];
-    if (bigPhotos.length > 0) {
+    if (photoData.photos.length > 0) {
       const dir = path.join(PHOTOS_PATH, String(listingId));
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-      for (let i = 0; i < bigPhotos.length; i++) {
-        try {
-          const photoUrl = bigPhotos[i];
-          const buffer = await page.evaluate(async (u) => {
-            const res = await fetch(u, { credentials: 'include' });
-            const blob = await res.blob();
-            const arr = await blob.arrayBuffer();
-            return Array.from(new Uint8Array(arr));
-          }, photoUrl);
+      const axiosConfig = {
+        responseType: 'arraybuffer', timeout: 30000,
+        headers: {
+          'User-Agent': UA, 'Referer': 'https://www.avito.ru/',
+          'Accept': 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+          'Accept-Language': 'ru-RU,ru;q=0.9',
+        },
+      };
+      if (PROXY_URL) {
+        axiosConfig.httpsAgent = new HttpsProxyAgent(PROXY_URL);
+        axiosConfig.httpAgent = new HttpsProxyAgent(PROXY_URL);
+      }
 
-          const data = Buffer.from(buffer);
+      for (let i = 0; i < photoData.photos.length; i++) {
+        const photoUrl = photoData.photos[i].src;
+        try {
+          const response = await axios.get(photoUrl, axiosConfig);
+          const data = Buffer.from(response.data);
           if (data.length < 10000) {
             console.warn(`[parser] Фото ${i+1} мало (${data.length}b)`);
             continue;
@@ -154,14 +183,14 @@ export async function parseAndDownload(url, listingId) {
           localPaths.push(`/photos/${listingId}/${i+1}.jpg`);
           console.log(`[parser] Фото ${i+1}: ${(data.length/1024).toFixed(1)} КБ`);
         } catch (e) {
-          console.error(`[parser] Фото ${i+1} ошибка:`, e.message);
+          console.error(`[parser] Фото ${i+1}: ${e.message}`);
         }
       }
     }
 
+    // === Текстовые данные ===
     const data = await page.evaluate(() => {
       const title = document.querySelector('h1')?.innerText?.trim() || '';
-
       let price = 0;
       const priceEl = document.querySelector('[itemprop="price"]') ||
         document.querySelector('[data-marker="item-view/item-price"]');
@@ -169,23 +198,19 @@ export async function parseAndDownload(url, listingId) {
         const t = priceEl.getAttribute('content') || priceEl.innerText || '';
         price = parseInt(t.replace(/\D/g, '')) || 0;
       }
-
       const description =
         document.querySelector('[data-marker="item-view/item-description"]')?.innerText?.trim() || '';
-
       const params = {};
       document.querySelectorAll('[data-marker="item-view/item-params"] li, [class*="params"] li').forEach((li) => {
         const text = li.innerText || '';
         const [key, ...rest] = text.split(':');
         if (key && rest.length) params[key.trim()] = rest.join(':').trim();
       });
-
       const avitoId = location.pathname.match(/_(\d+)$/)?.[1] || '';
       return { title, price, description, params, avitoId };
     });
 
     const fullText = `${data.title} ${data.description}`.toLowerCase();
-
     let model = '';
     const mm = fullText.match(/iphone\s*(\d{1,2})\s*(pro\s*max|pro|plus|mini|air|e)?/i);
     if (mm) {
@@ -193,15 +218,12 @@ export async function parseAndDownload(url, listingId) {
       const variant = mm[2]?.trim().replace(/\s+/g, ' ') || '';
       model = `iPhone ${num}${variant ? ' ' + variant.replace(/\b\w/g, c => c.toUpperCase()) : ''}`;
     }
-
     let storage = '';
     const sm = fullText.match(/(\d{2,4})\s*(гб|gb|тб|tb)/i);
     if (sm) storage = sm[2].toLowerCase().includes('т') ? `${sm[1]} ТБ` : `${sm[1]} ГБ`;
-
     let battery = null;
     const bm = fullText.match(/(?:акб|аккумулятор|battery|емкост)\D*(\d{2,3})\s*%/i);
     if (bm) battery = parseInt(bm[1]);
-
     const color = data.params['Цвет'] || data.params['Цвет корпуса'] || '';
     let condition = data.params['Состояние'] || '';
     if (!condition) {
