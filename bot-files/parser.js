@@ -68,25 +68,6 @@ export async function parseAndDownload(url, listingId) {
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
     await new Promise(r => setTimeout(r, 3000 + Math.random() * 2000));
 
-    // Скроллим вниз постепенно — все картинки прогрузятся
-    await page.evaluate(async () => {
-      await new Promise(resolve => {
-        let total = 0;
-        const distance = 300;
-        const timer = setInterval(() => {
-          window.scrollBy(0, distance);
-          total += distance;
-          if (total >= document.body.scrollHeight - window.innerHeight) {
-            clearInterval(timer);
-            resolve();
-          }
-        }, 150);
-      });
-    });
-    await new Promise(r => setTimeout(r, 1500));
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await new Promise(r => setTimeout(r, 1000));
-
     const blockStatus = await page.evaluate(() => {
       const text = document.body.innerText.toLowerCase();
       if (text.includes('сайт временно недоступен')) return 'TEMPORARILY_UNAVAILABLE';
@@ -108,52 +89,96 @@ export async function parseAndDownload(url, listingId) {
 
     await page.waitForSelector('h1', { timeout: 15000 });
 
-    // === Извлекаем фото по naturalWidth/Height ===
-    console.log('[parser] Анализируем фото на странице...');
-    const photoData = await page.evaluate(() => {
-      const imgs = Array.from(document.querySelectorAll('img'));
-      const debug = [];
-      const candidates = [];
+    // === Кликаем по каждой миниатюре фото и собираем большие версии ===
+    console.log('[parser] Ищу миниатюры для перебора...');
 
-      imgs.forEach(img => {
-        const src = img.src || img.currentSrc;
-        if (!src || !src.includes('avito.st')) return;
-        if (src.includes('logo') || src.includes('avatar') || src.includes('stub')) return;
+    const collectedPhotos = await page.evaluate(async () => {
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-        const nw = img.naturalWidth || 0;
-        const nh = img.naturalHeight || 0;
-        const area = nw * nh;
-        debug.push({ src: src.slice(0, 90), nw, nh, area });
+      // Функция: найти все миниатюры (маленькие <img> 75×55 или похожие)
+      const findThumbnails = () => {
+        return Array.from(document.querySelectorAll('img'))
+          .filter(img => {
+            const src = img.src || '';
+            if (!src.includes('avito.st')) return false;
+            if (src.includes('logo') || src.includes('avatar') || src.includes('stub')) return false;
+            const nw = img.naturalWidth || 0;
+            // Миниатюры обычно меньше 200px по любой стороне
+            return nw > 0 && nw < 200;
+          });
+      };
 
-        if (area > 20000) candidates.push({ src, area });
-      });
+      // Функция: найти текущее большое фото на странице
+      const findMainPhoto = () => {
+        return Array.from(document.querySelectorAll('img'))
+          .filter(img => {
+            const src = img.src || '';
+            if (!src.includes('avito.st')) return false;
+            if (src.includes('logo') || src.includes('avatar') || src.includes('stub')) return false;
+            return (img.naturalWidth || 0) >= 200;
+          })
+          .sort((a, b) => (b.naturalWidth * b.naturalHeight) - (a.naturalWidth * a.naturalHeight))[0];
+      };
 
-      // Группируем по хешу
-      const map = new Map();
-      candidates.forEach(({ src, area }) => {
-        const m = src.match(/\/image\/\d+\/\d+\.([A-Za-z0-9_-]+)\./);
-        const hash = m ? m[1] : src;
-        if (!map.has(hash) || map.get(hash).area < area) {
-          map.set(hash, { src, area });
+      const thumbnails = findThumbnails();
+      const collected = [];
+      const seenHashes = new Set();
+
+      console.log(`Найдено ${thumbnails.length} миниатюр`);
+
+      // Берём первое большое фото без клика
+      const initialMain = findMainPhoto();
+      if (initialMain) {
+        const m = initialMain.src.match(/\/image\/\d+\/\d+\.([A-Za-z0-9_-]+)\./);
+        if (m) {
+          seenHashes.add(m[1]);
+          collected.push({ src: initialMain.src, area: initialMain.naturalWidth * initialMain.naturalHeight });
         }
-      });
+      }
 
-      const photos = Array.from(map.values())
-        .sort((a, b) => b.area - a.area)
-        .slice(0, 6);
+      // Кликаем по каждой миниатюре (макс 7 раз, чтобы получить до 8 фото)
+      for (let i = 0; i < Math.min(thumbnails.length, 7); i++) {
+        try {
+          // Скроллим миниатюру в зону видимости и кликаем
+          thumbnails[i].scrollIntoView({ behavior: 'instant', block: 'center' });
+          await sleep(200);
 
-      return { photos, debug: debug.slice(0, 30) };
+          // Кликаем на родительский элемент миниатюры (часто там кликабельная зона)
+          const clickTarget = thumbnails[i].closest('button') ||
+                              thumbnails[i].closest('[role="button"]') ||
+                              thumbnails[i].closest('a') ||
+                              thumbnails[i].parentElement ||
+                              thumbnails[i];
+          clickTarget.click();
+
+          // Ждём загрузку большого фото
+          await sleep(800);
+
+          // Берём текущее большое фото
+          const main = findMainPhoto();
+          if (main) {
+            const m = main.src.match(/\/image\/\d+\/\d+\.([A-Za-z0-9_-]+)\./);
+            if (m && !seenHashes.has(m[1])) {
+              seenHashes.add(m[1]);
+              collected.push({ src: main.src, area: main.naturalWidth * main.naturalHeight });
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      return collected.slice(0, 6);
     });
 
-    console.log(`[parser] DEBUG: ${photoData.debug.length} avito.st img на странице`);
-    photoData.debug.slice(0, 10).forEach((d, i) => {
-      console.log(`  ${i+1}. ${d.nw}x${d.nh} (${d.area}px²)`);
+    console.log(`[parser] Собрано ${collectedPhotos.length} уникальных больших фото:`);
+    collectedPhotos.forEach((p, i) => {
+      console.log(`  ${i+1}. ${p.area}px²  ${p.src.slice(0, 80)}`);
     });
-    console.log(`[parser] Выбрано ${photoData.photos.length} больших фото для загрузки`);
 
     // === Скачиваем фото через axios с прокси ===
     const localPaths = [];
-    if (photoData.photos.length > 0) {
+    if (collectedPhotos.length > 0) {
       const dir = path.join(PHOTOS_PATH, String(listingId));
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
@@ -170,8 +195,8 @@ export async function parseAndDownload(url, listingId) {
         axiosConfig.httpAgent = new HttpsProxyAgent(PROXY_URL);
       }
 
-      for (let i = 0; i < photoData.photos.length; i++) {
-        const photoUrl = photoData.photos[i].src;
+      for (let i = 0; i < collectedPhotos.length; i++) {
+        const photoUrl = collectedPhotos[i].src;
         try {
           const response = await axios.get(photoUrl, axiosConfig);
           const data = Buffer.from(response.data);
