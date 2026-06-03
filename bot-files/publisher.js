@@ -44,7 +44,7 @@ export function formatCard(listing, { withSiteLink = true, withSoldMark = false 
 
   if (withSiteLink && listing.slug && !withSoldMark) {
     lines.push('');
-    lines.push(`🛒 Купить: ${SITE_URL}/bu-iphone/${listing.slug}`);
+    lines.push(`🛒 Купить: ${SITE_URL}/bu-iphone/item?slug=${listing.slug}`);
   }
 
   if (!withSoldMark) {

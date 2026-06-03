@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/privacy`, lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
     { url: `${BASE}/legal`,   lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
     { url: `${BASE}/skupka-iphone`, lastModified: now, changeFrequency: "weekly" as const,  priority: 0.9 },
+    { url: `${BASE}/bu-iphone`,    lastModified: now, changeFrequency: "daily" as const,   priority: 0.9 },
     { url: `${BASE}/buyout`,  lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
     { url: `${BASE}/blog`,    lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
     { url: `${BASE}/blog/kak-proverit-bu-iphone-pered-pokupkoy`, lastModified: new Date("2026-04-25"), changeFrequency: "monthly" as const, priority: 0.8 },
