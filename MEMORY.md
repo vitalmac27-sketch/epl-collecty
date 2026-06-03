@@ -1,246 +1,332 @@
-# ЭПЛ-КОЛЛЕКЦИЯ — Memory.md
+# MEMORY: ЭПЛ-КОЛЛЕКЦИЯ — Apple-магазин в Казани
 
-## Проект
-Сайт магазина Apple техники в Казани — **ЭПЛ-КОЛЛЕКЦИЯ**
-Next.js 15 + TypeScript + Tailwind CSS + shadcn/ui
+> **Конспект для продолжения в новом чате. Прочитай полностью прежде чем что-то делать.**
 
 ---
 
-## GitHub
-- **Репозиторий:** `vitalmac27-sketch/epl-collecty`
-- **Ветка:** `main`
-- **GitHub Token:** `ghp_XXXX_ХРАНИТЕ_В_БЕЗОПАСНОМ_МЕСТЕ`
-- **Клонировать:** `git clone https://TOKEN@github.com/vitalmac27-sketch/epl-collecty.git`
+## 🏗️ Инфраструктура
+
+### Сайт
+- **Домен:** `эпл-коллекция.рф` (Punycode: `xn----jtbjgbccazg9frdtb.xn--p1ai`)
+- **Хостинг:** Timeweb App Platform → `Daring Amalthea` (ID 179693, МСК)
+- **NS:** Бегет (вернули с Timeweb из-за SSL-проблем)
+- **A-запись:** `92.246.76.92` (Timeweb МСК) — в DNS Бегета
+- **GitHub:** `vitalmac27-sketch/epl-collecty` ветка `main`
+- **Token:** в `~/.git-credentials` пользователя или попросить заново
+- **Команда сборки на Timeweb:** `npm run build` (вводить вручную)
+- **Директория сборки:** `/out`
+- **Последний коммит:** `a70913b` — каталог /bu-iphone
+
+### VPS (бот для б/у)
+- **IP:** `186.246.7.71` (Timeweb Cloud MSK 50)
+- **ОС:** Ubuntu 24.04, 4 ГБ RAM, 50 ГБ диск
+- **На VPS живёт:** n8n (~1 ГБ RAM, чужой процесс — не трогать)
+- **Установлено:** Node.js 20, npm 10, PM2 7, nginx 1.24, SQLite 3.45
+- **⚠️ SSH-пароль и токен бота были засвечены в чате — пользователь сменил**
+
+### Telegram-бот
+- **Username:** `@AppleCollectBU_bot`
+- **Папка:** `/opt/bu-bot/`
+- **PM2:** имя `bu-bot`, online, ~20 МБ RAM
+- **Доступ:** только Telegram ID `5549559991`
+
+### Telegram-канал
+- **Username:** `@applecollectkazan`
+- **Channel ID:** `-1003862359021`
+- Бот добавлен админом (публиковать/редактировать/удалять)
+
+### ВКонтакте
+- **Группа:** `vk.com/apple_collecty`
+- VK_TOKEN и VK_GROUP_ID — в `/opt/bu-bot/.env`
+
+### Cloudflare Worker (для форм с сайта в Telegram)
+- **URL:** `https://black-tree-eb8a.vitalmac27.workers.dev`
+- Account ID: `3f9cc490e275adb8bbd0c71c70dc9733`
 
 ---
 
-## Хостинг — TimeWeb Cloud App Platform
-- **Панель:** https://timeweb.cloud/my/apps/179693
-- **Приложение:** Daring Amalthea (ID: 179693)
-- **Аккаунт:** vm665249
-- **Временный домен:** `vitalmac27-sketch-epl-collecty-b816.twc1.net`
-- **IP приложения:** `92.246.76.92`
-- **⚠️ Проблема:** Поле «Команда сборки» не сохраняется — вводить `npm run build` вручную перед каждым деплоем
+## 📦 Бот на VPS — что сейчас работает
 
----
-
-## Домены
-- **Основной:** `https://эпл-коллекция.рф` (xn----jtbjgbccazg9frdtb.xn--p1ai)
-- **Старый сайт:** `apple-collecty.ru` — 301 редирект на новый (сделан)
-- **Регистратор:** Бегет
-- **DNS:** NS-серверы TimeWeb (перенесены с Бегета)
-- **SSL:** куплен на Бегете, работает
-
----
-
-## Деплой
-- **Фреймворк:** Next.js 15
-- **Версия Node:** 20
-- **Режим:** `output: export` (статика — TimeWeb не поддерживает SSR в App Platform)
-- **Команда сборки:** `npm run build` (вводить вручную в настройках TimeWeb)
-
----
-
-## Переменные окружения в TimeWeb
+### Файлы /opt/bu-bot/
 ```
-NEXT_PUBLIC_SITE_URL = https://xn----jtbjgbccazg9frdtb.xn--p1ai
-NEXT_PUBLIC_TELEGRAM_BOT_TOKEN = BOT_TOKEN_В_TIMEWEB_ENV
-NEXT_PUBLIC_TELEGRAM_CHAT_ID = 5549559991
+bot.js              ← Telegraf бот
+text-parser.js      ← Распознавание iPhone из текста
+publisher.js        ← Публикация в ТГ-канал + ВК
+.env (chmod 600)    ← Все токены
+photos/{id}/N.jpg   ← Скачанные фото (~100 КБ каждое)
+db/database.sqlite  ← Таблица listings
+```
+
+### .env содержит:
+```
+TELEGRAM_BOT_TOKEN=*** (46 символов)
+ALLOWED_USER_ID=5549559991
+API_PORT=3001
+PHOTOS_PATH=/opt/bu-bot/photos
+DB_PATH=/opt/bu-bot/db/database.sqlite
+TG_CHANNEL_ID=-1003862359021
+SITE_URL=https://xn----jtbjgbccazg9frdtb.xn--p1ai
+VK_TOKEN=***
+VK_GROUP_ID=***
+# Прокси (можно удалить — не используются):
+PROXY_HOST=fhh5sv727n.cn.fxdx.in
+PROXY_PORT=13819
+PROXY_USER=boundlessmarble013926
+PROXY_PASS=1D9kV7aMf4xF
+```
+
+### БД listings
+```sql
+CREATE TABLE listings (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  avito_id TEXT UNIQUE,           -- "manual_TIMESTAMP" (Авито больше не парсим)
+  avito_url TEXT,                 -- не используется
+  slug TEXT UNIQUE,
+  title TEXT NOT NULL,
+  model TEXT, storage TEXT, color TEXT,
+  sim_type TEXT,
+  battery INTEGER, cycles INTEGER,
+  condition TEXT,
+  price INTEGER NOT NULL,
+  description TEXT,
+  photos TEXT,                    -- JSON массив /photos/{id}/N.jpg
+  status TEXT DEFAULT 'pending',  -- pending/active/reserved/sold/deleted
+  tg_message_id INTEGER,
+  vk_post_id INTEGER,
+  created_at, updated_at
+);
+```
+
+### Команды бота
+- `/start`, `/help` — справка
+- **`/add`** — добавить (фото+текст с подписью)
+- `/list` — все 🟢🟡🔴
+- `/reserve <id>` — пометить 🟡 «Бронь»
+- `/sold <id>` — продано: редактирует посты в ТГ и ВК, дописывая «🔴 ПРОДАНО»
+- `/delete <id>` — удалить везде
+
+### Логика /add
+1. Менеджер: `/add` → бот ждёт фото
+2. Менеджер шлёт 1-6 фото альбомом с подписью к первому:
+   ```
+   iPhone 17 Pro 512 Orange Sim+eSim
+   АКБ 100%, 35 циклов
+   Идеал
+   101900
+   В комплекте коробка и кабель
+   ```
+3. `text-parser.js` распознаёт характеристики
+4. Фото скачиваются из Telegram API (~100 КБ каждое)
+5. Превью + 4 кнопки:
+   - 🟢 Только сайт
+   - 📢 Сайт + Telegram
+   - 🌐 Везде (Сайт + ТГ + ВК)
+   - ✏️ Изменить цену / ❌ Отмена
+
+### API (на 127.0.0.1:3001 — ВНУТРЕННИЙ, наружу не торчит!)
+- `GET /api/bu-iphone` — список active+reserved
+- `GET /api/bu-iphone/:slug` — одно объявление
+- `GET /photos/{id}/{n}.jpg` — статика фото
+
+---
+
+## 🌐 Сайт (Next.js 15 + TypeScript + Tailwind + shadcn/ui)
+
+### Структура
+- `output: export` — статика
+- ~120 страниц: главная, 9 категорий, 84+ карточки моделей, блог, about, contacts
+- 9 категорий: iphone, ipad, macbook, watch, airpods, android, dyson, audio, playstation
+- 3 статьи блога: проверка б/у, настройка камеры, оптимизация АКБ iOS 26
+
+### Главная (SEO)
+- **Title (61):** `Купить Айфон в Казани выгодно — в рассрочку 0% | ЭПЛ-КОЛЛЕКЦИЯ`
+- **Description (159):** `Купить Айфон в Казани в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, в рассрочку 0% на 12 мес, Trade-in, бесплатная доставка по Казани в день заказа.`
+- **H1:** `Купить Айфон в Казани выгодно, в рассрочку`
+
+### Цены (после -7000 Pro / -5000 обычные)
+| Модель | Цена от |
+|--------|---------|
+| iPhone 17 Pro Max | 101 900 ₽ |
+| iPhone 17 Pro | 94 300 ₽ |
+| iPhone 17 | 61 000 ₽ |
+| iPhone 16 Pro Max | 87 000 ₽ |
+| iPhone 16 | 52 500 ₽ |
+| iPhone 16e | 42 000 ₽ |
+| iPhone 15 | 47 000 ₽ |
+| iPad 11 (2025) | 31 000 ₽ |
+| MacBook Air 13 M5 | 95 000 ₽ |
+| Mac mini M4 | 54 000 ₽ |
+
+### Страницы каталога б/у (НОВЫЕ — добавлены в этом чате)
+- **`/bu-iphone`** — каталог с фильтрами модель/состояние
+- **`/bu-iphone/item?slug=xxx`** — карточка устройства (используется query-параметр т.к. сайт статика)
+- Данные подгружаются с VPS через `https://api.эпл-коллекция.рф`
+
+### Ключевые файлы сайта
+- `src/lib/bu-api.ts` — клиент API на VPS
+- `src/lib/proxy.ts` — Cloudflare Worker URL
+- `src/lib/cities.ts` — `namePre: "Казани"` (БЕЗ "в", добавлять явно)
+- `src/lib/models.ts` — `priceFrom` (синхронизировать руками!)
+- `src/lib/generated/*-configs.ts` — генерируется парсером прайса
+- `src/components/bu-iphone/BuCard.tsx`
+- `src/components/bu-iphone/BuCatalog.tsx`
+- `src/app/bu-iphone/page.tsx`
+- `src/app/bu-iphone/item/page.tsx`
+- `src/components/layout/Navigation.tsx` — «Б/У iPhone 🔄» в Ещё-меню
+- `src/app/sitemap.ts` — /bu-iphone priority 0.9, daily
+
+### Переменные окружения на Timeweb
+```
+NEXT_PUBLIC_SITE_URL=https://xn----jtbjgbccazg9frdtb.xn--p1ai
+NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=*** (это бот ФОРМ сайта, не путать с ботом б/у!)
+NEXT_PUBLIC_TELEGRAM_CHAT_ID=5549559991
+NEXT_PUBLIC_PROXY_URL=https://black-tree-eb8a.vitalmac27.workers.dev
 ```
 
 ---
 
-## Telegram (заявки → Telegram)
-- **Бот токен:** `BOT_TOKEN_В_TIMEWEB_ENV`
-- **Chat ID:** `5549559991`
-- **Прокси:** Cloudflare Worker (НЕ Supabase — он заморожен!)
-- **Worker URL:** `https://black-tree-eb8a.vitalmac27.workers.dev`
-- **Cloudflare аккаунт:** vitalmac27 (Account ID: 3f9cc490e275adb8bbd0c71c70dc9733)
-- **Worker имя:** `black-tree-eb8a`
-- **Файл воркера:** `cloudflare-worker/worker.js` в репозитории
-- **Конфиг прокси в коде:** `src/lib/proxy.ts` — PROXY_URL
+## ✅ Что РАБОТАЕТ
 
-### Почему Cloudflare, не Supabase:
-- Старый Supabase (`kepaooewfbztxvcknawo`) принадлежит Lovable-аккаунту — доступа нет
-- Free tier Supabase замерзает через 7 дней неактивности
-- Cloudflare Workers бесплатный, не замерзает, работает в РФ
+- ✅ Бот @AppleCollectBU_bot отвечает в Telegram
+- ✅ `/add` принимает фото + текст
+- ✅ Парсер распознаёт модель/память/цвет/sim/АКБ/циклы/состояние/цену
+- ✅ 6 фото скачиваются с Telegram (~100 КБ каждое)
+- ✅ API на 127.0.0.1:3001 работает локально
+- ✅ Тестовый листинг: #8, iPhone 16 Pro Max 512 Black, 80 900 ₽
 
----
+## ⏳ ЧТО НЕ ДОДЕЛАНО (СРОЧНО ЭТО ПЕРВЫМ ДЕЛОМ)
 
-## Данные магазина
-- **Название:** ЭПЛ-КОЛЛЕКЦИЯ
-- **Город:** Казань
-- **Адрес:** ул. Сибгата Хакима, 40а, Офис 7
-- **Район:** Ново-Савиновский
-- **Телефон:** +7 (999) 267-39-33
-- **Режим работы:** Пн–Вс 13:00–20:00
-- **Telegram:** https://t.me/ac_care
-- **Telegram канал:** https://t.me/apple_collecty
-- **VK:** https://vk.com/apple_collecty
-- **Avito:** https://www.avito.ru/brands/i141094380
-- **Метро:** 15 мин пешком от м. Козья слобода
+### 🔴 nginx + SSL для API
 
----
+**Проблема:** API на VPS работает только на `127.0.0.1:3001`. Сайт не может его читать.
 
-## Технологии
-- **Next.js 15** + TypeScript + Tailwind CSS + shadcn/ui
-- **output: export** — статическая генерация
-- **101 страница** (главная + категории + модели)
+**Шаги:**
 
----
+1. **Пользователь:** Добавляет в DNS Бегета A-запись:
+   - Тип: A
+   - Имя: `api`
+   - Значение: `186.246.7.71`
+   - TTL: 300
+   
+   Проверка: `nslookup api.xn----jtbjgbccazg9frdtb.xn--p1ai` → должен вернуть `186.246.7.71`
 
-## Структура сайта
+2. **Через SSH:** Настроить nginx + Let's Encrypt (готовый скрипт):
+   ```bash
+   apt install -y certbot python3-certbot-nginx
+   
+   cat > /etc/nginx/sites-available/bu-api << 'EOF'
+   server {
+     listen 80;
+     server_name api.xn----jtbjgbccazg9frdtb.xn--p1ai;
+   
+     location /api/ {
+       proxy_pass http://127.0.0.1:3001;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $remote_addr;
+       add_header Access-Control-Allow-Origin "https://xn----jtbjgbccazg9frdtb.xn--p1ai" always;
+       add_header Access-Control-Allow-Methods "GET, OPTIONS" always;
+     }
+     location /photos/ {
+       proxy_pass http://127.0.0.1:3001;
+       add_header Access-Control-Allow-Origin "*" always;
+       expires 7d;
+     }
+   }
+   EOF
+   
+   ln -sf /etc/nginx/sites-available/bu-api /etc/nginx/sites-enabled/
+   nginx -t && systemctl reload nginx
+   
+   certbot --nginx -d api.xn----jtbjgbccazg9frdtb.xn--p1ai \
+     --non-interactive --agree-tos \
+     --email YOUR_EMAIL --redirect
+   ```
 
-### Категории
-| Slug | Название | Моделей |
-|------|----------|---------|
-| `/iphone/` | iPhone | 19 |
-| `/ipad/` | iPad | 5 |
-| `/macbook/` | MacBook | 8 |
-| `/watch/` | Apple Watch | 9 |
-| `/airpods/` | Наушники | 6 |
-| `/android/` | Android | 17 |
-| `/dyson/` | Dyson | 15 |
-| `/audio/` | Аудио и гаджеты | 5 |
+3. **Проверить:** `curl https://api.xn----jtbjgbccazg9frdtb.xn--p1ai/api/bu-iphone` → должен вернуть JSON с iPhone 16 Pro Max.
 
-### Ключевые страницы
-| URL | Описание |
-|-----|----------|
-| `/` | Главная — квиз + каталог + SEO |
-| `/[category]/` | Каталог категории |
-| `/[category]/[model]/` | Карточка товара с конфигуратором |
-| `/about/` | О магазине |
-| `/contacts/` | Контакты с Яндекс картой |
-| `/offer/` | Публичная оферта |
-| `/privacy/` | Политика конфиденциальности |
-| `/sitemap.xml` | Sitemap |
-| `/robots.txt` | Robots |
+4. **На сайте:** Передеплоить через Timeweb (`npm run build`). После этого `/bu-iphone` начнёт показывать карточки.
 
----
+### 🟡 Опциональные улучшения
 
-## Прайс и конфигурации товаров
-
-### Файл прайса
-`прайс_apple_collecty.xlsx` — актуальный прайс с моделями, цветами, памятью, ценами
-
-### Как обновить цены
-1. Обновить `прайс_apple_collecty.xlsx`
-2. Запустить `python3 scripts/parse-prices.py`
-3. Коммит + пуш → автодеплой
-
-### Сгенерированные конфиги
-`src/lib/generated/` — автогенерируется из прайса (не редактировать вручную):
-- `iphone-configs.ts` — 8 моделей с ценами из прайса
-- `ipad-configs.ts` — 5 моделей
-- `macbook-configs.ts` — 8 моделей
-- `watch-configs.ts` — 9 моделей
-- `airpods-configs.ts` — 6 моделей
-- `android-configs.ts` — 17 моделей
-- `dyson-configs.ts` — 15 моделей
-- `audio-configs.ts` — 5 моделей
-- `index.ts` — единый экспорт `getProductConfig(category, slug)`
-
-### Карточка товара (ProductConfigurator)
-- Выбор цвета (кружки), памяти, SIM — цена меняется динамически
-- Кнопка **«🛒 Купить»** — открывает модальную форму заказа
-- Кнопка **«🔄 Рассчитать с Trade-in»** — открывает форму Trade-in с полями (модель, память, АКБ)
-- Если конфигурации нет в прайсе — «Уточняйте у менеджера»
-- Telegram-сообщение формируется автоматически из выбранной конфигурации
-- Компоненты: `src/components/product/ProductConfigurator.tsx`, `BuyForm.tsx`, `SpecsTable.tsx`, `CompareTable.tsx`, `UpsellBlock.tsx`
+- Блок «Б/У iPhone с гарантией» на главной — топ-3 карточки
+- Команда `/edit <id> <field> <value>` — изменить цену/АКБ/описание после публикации
+- Описание чистить от мусорных строк ("📱 Оригинальный" и т.п.) — в text-parser.js
+- Schema.org Product на странице карточки б/у
+- При нажатии «Купить» на карточке — отправлять в Telegram через прокси с пометкой `🔄 Б/У #N`
 
 ---
 
-## SEO
+## 📋 Workflow обновления цен (когда менеджер пришлёт новый прайс)
 
-### Верификация
-- **Яндекс.Вебмастер:** `72880077d2fe664a` (в metadata.verification)
-- **Google Search Console:** `RgqQ2tZ9Mie_viRI716Dot5bnz48JFC8jX_wPfIvlzI`
-- HTML-файлы для резервной верификации в `/public/`
+1. Сохранить xlsx в `/home/claude/прайс_updated.xlsx`
+2. `cd /home/claude/epl-collecty && python3 scripts/parse-prices.py`
+3. Синхронизировать `src/lib/models.ts` `priceFrom` с `generated/*-configs.ts`
+4. Коммит + push
+5. Передеплой через Timeweb
 
-### Schema.org разметки
-- `LocalBusiness` — адрес, телефон, часы
-- `FAQPage` — FAQ на главной
-- `ItemList` + `Product` — каталог и карточки
-- `BreadcrumbList` — хлебные крошки
-
-### Title/Description
-Автогенерируются для каждой конфигурации: `generateMetadata()` в `[model]/page.tsx`
+**Пороги iPhone 17 в парсере:** `< 101000` (Pro Max→Pro), `< 83000` (Pro→17)
 
 ---
 
-## Favicon / Иконки
-Сгенерированы из `public/assets/logo.jpg`:
-- `public/favicon.ico` (16/32/48px multi-size)
-- `public/favicon-16x16.png`, `public/favicon-32x32.png`
-- `public/apple-touch-icon.png` (180px)
-- `public/icon-192.png`, `public/icon-512.png`
-Подключены через `metadata.icons` в `layout.tsx`
+## 🚨 КРИТИЧЕСКИ ВАЖНО
+
+1. **n8n на VPS НЕ ТРОГАТЬ** — это рабочий процесс пользователя
+2. **При больших файлах в SSH** — НЕ через heredoc (ломается). Положить в `bot-files/` в GitHub → `curl` на VPS
+3. **Токены/пароли** — никогда не просить в открытом чате. Класть в .env через SSH самому пользователю
+4. **При правке `text-parser.js`** — прогонять тесты в конце файла: `node text-parser.js`
+5. **bot-files/ в репо** — временно, для удобной заливки на VPS. Можно удалить после стабилизации
 
 ---
 
-## Важные нюансы
+## 📂 GitHub bot-files/ (свежие файлы для VPS)
 
-### namePre
-`cities.ts` → `namePre: "Казани"` (БЕЗ "в "). В шаблонах всегда добавлять "в " явно: `в ${city.namePre}`. Иначе будет "в в Казани".
+Эти файлы лежат в репозитории сайта в папке `bot-files/`:
+- `bot-files/bot.js`
+- `bot-files/text-parser.js`
+- `bot-files/publisher.js`
 
-### SIM варианты
-- `eSIM` — без "(США)", просто "eSIM"
-- `Nano-SIM + eSIM` — европейская/РФ версия
-- `2 Nano-SIM` — гонконгская версия (популярна в Казани)
-
-### Добавление новой категории
-1. Добавить лист в `прайс_apple_collecty.xlsx`
-2. Добавить парсер в `scripts/parse-prices.py`
-3. Добавить категорию в `src/lib/categories.ts`
-4. Добавить модели в `src/lib/models.ts`
-5. Добавить в `src/lib/generated/index.ts`
-6. Запустить `python3 scripts/parse-prices.py`
-
-### Добавление нового города
-- Структура: `/[city]/`, `/[city]/[category]/`, `/[city]/[category]/[model]/`
-- Файлы были в `src/app/[city]/` (удалены, восстановить при необходимости)
-- При добавлении настроить canonical
+**Команды для обновления на VPS:**
+```bash
+cd /opt/bu-bot
+curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/text-parser.js -o text-parser.js
+curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/publisher.js -o publisher.js
+curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/bot.js -o bot.js
+pm2 restart bu-bot
+pm2 logs bu-bot --lines 15 --nostream
+```
 
 ---
 
-## Связанные репозитории
-- **Старый SPA сайт:** `vitalmac27-sketch/iphone-collector-quiz` (Vite + React, apple-collecty.ru)
-- **Supabase старый:** проект `kepaooewfbztxvcknawo` — НЕ ИСПОЛЬЗОВАТЬ (заморожен, принадлежит Lovable)
+## 📍 Точка входа в новый чат
+
+1. **Прочитай этот файл целиком**
+2. **Спроси пользователя:**
+   - Добавил ли A-запись `api` → `186.246.7.71` в DNS Бегета?
+   - Запустил ли передеплой сайта на Timeweb после последнего коммита?
+3. **Если DNS готов** — даёшь команды для nginx + certbot (см. выше)
+4. **Если нет** — напоминаешь добавить, пока работаешь над опциональными улучшениями
+5. **Проверка готовности всей системы:**
+   ```bash
+   # Bot status
+   pm2 list
+   # API локально
+   curl -s http://127.0.0.1:3001/api/bu-iphone | head -c 500
+   # DNS
+   nslookup api.xn----jtbjgbccazg9frdtb.xn--p1ai
+   # API наружу (после nginx)
+   curl https://api.xn----jtbjgbccazg9frdtb.xn--p1ai/api/bu-iphone
+   ```
 
 ---
 
-## Что сделано ✅
-- [x] Проект создан и задеплоен на GitHub + TimeWeb
-- [x] Домен эпл-коллекция.рф подключён, NS перенесены на TimeWeb
-- [x] SSL сертификат (с Бегета)
-- [x] 101 страница с SEO метатегами
-- [x] Конфигуратор товаров (цвет/память/SIM) для всех категорий
-- [x] Форма «Купить» с отправкой в Telegram через Cloudflare Worker
-- [x] Форма «Trade-in» с полями (модель/память/АКБ)
-- [x] Cloudflare Worker прокси (не замерзает, работает в РФ)
-- [x] Таблицы характеристик и сравнения с предыдущим поколением
-- [x] Блок «С этим берут» (upsell) для каждой категории
-- [x] Все картинки iPhone добавлены в public/assets
-- [x] Квиз отправляет заявки через Cloudflare Worker
-- [x] Гарантия везде "1 год"
-- [x] Страница /about с полным SEO
-- [x] Страница /contacts с Яндекс картой и мессенджерами
-- [x] 301 редирект с apple-collecty.ru на эпл-коллекция.рф
-- [x] Favicon из логотипа магазина
-- [x] Яндекс.Вебмастер и Google Search Console верификация
-- [x] Исправлено "в в Казани" → "в Казани"
-- [x] Убрано "США" из SIM вариантов
-- [x] Автогенерация конфигов из Excel прайса (`scripts/parse-prices.py`)
-- [x] 8 категорий, 72 модели с конфигураторами
-- [x] SEO H1 генерируется динамически из выбранной конфигурации
+## История чата (краткая хронология)
 
-## Что осталось сделать
-- [ ] Добавить картинки iPad, MacBook, Watch, AirPods, Android, Dyson, Audio в `/public/assets/`
-- [ ] Добавить сайт в Яндекс.Вебмастер (подтвердить верификацию)
-- [ ] Добавить в Google Search Console
-- [ ] Подать sitemap в Яндекс и Google
-- [ ] Зарегистрировать в Яндекс.Бизнес (адрес Казани)
-- [ ] Зарегистрировать в 2ГИС
-- [ ] Собрать первые отзывы (Яндекс.Карты, Авито)
-- [ ] Добавить второй город и городские страницы /[city]/
-- [ ] Дополнить прайс моделями iPhone 14/13 серии (для конфигуратора)
+1. ✅ Добавили статью «Настройка камеры iPhone» в блог
+2. ✅ Создали страницу `/skupka-iphone` с формой + SEO-контентом
+3. ✅ Поменяли ссылку «Выкуп iPhone» в навигации
+4. ✅ Снизили цены: -7000 Pro / -5000 обычные iPhone, -5000 iPad/MacBook
+5. ✅ Добавили статью «Оптимизация аккумулятора iPhone на iOS 26»
+6. ❌ Пробовали парсер Авито через Puppeteer + iProxy — отказались (фото плохие, капчи)
+7. ✅ Переключились на ручной ввод через бот: текст+фото → распознавание → публикация ТГ/ВК/сайт
+8. ✅ Создали страницы `/bu-iphone` и `/bu-iphone/item?slug=...` на сайте
+9. ⏳ **ОСТАНОВИЛИСЬ ЗДЕСЬ:** нужно nginx+SSL для API, тогда система заработает целиком
