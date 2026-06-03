@@ -172,6 +172,7 @@ export default function Navigation() {
             {/* Доп. страницы */}
             <div className="border-t border-border mt-2 pt-2">
               {[
+                { href: "/bu-iphone", label: "Б/У iPhone", emoji: "🔄" },
                 { href: "/skupka-iphone", label: "Выкуп iPhone", emoji: "💰" },
                 { href: "/blog",   label: "Блог",         emoji: "📝" },
                 { href: "/about",  label: "О магазине",   emoji: "ℹ️" },
