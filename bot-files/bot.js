@@ -14,6 +14,7 @@ import {
   formatCard,
   publishToTelegram, markTelegramSold, deleteTelegramPost,
   publishToVK, markVKSold, deleteVKPost,
+  editTelegramCaption, editVKPost,
 } from './publisher.js';
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -75,6 +76,14 @@ function formatPreview(parsed) {
   return lines.join('\n');
 }
 
+// === Обновление уже опубликованных постов (после правки цены/описания) ===
+async function refreshPosts(id) {
+  const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) return;
+  if (row.tg_message_id) await editTelegramCaption(row.tg_message_id, row);
+  if (row.vk_post_id) await editVKPost(row.vk_post_id, row);
+}
+
 // === Скачивание фото из Telegram ===
 async function downloadTelegramPhoto(fileId, savePath) {
   // Получаем file_path
@@ -99,6 +108,7 @@ bot.start((ctx) => ctx.reply(
   '/add — добавить новое объявление\n' +
   '   (отправьте фото + текст с характеристиками)\n\n' +
   '/list — все объявления\n' +
+  '/edit <id> — изменить цену или описание\n' +
   '/reserve <id> — пометить «Бронь»\n' +
   '/sold <id> — продано\n' +
   '/delete <id> — удалить\n' +
@@ -111,6 +121,8 @@ bot.help((ctx) => ctx.reply(
   '2. Затем фото (1-10 шт) с подписью:\n\n' +
   '```\niPhone 17 Pro 512 Orange Sim+eSim\nАКБ 100%, 35 циклов\nИдеал\n101900\nВ комплекте коробка и кабель\n```\n\n' +
   'Бот разберёт текст и предложит опубликовать.\n\n' +
+  'Управление: /list — список, /edit <id> — правка цены/описания,\n' +
+  '/reserve <id>, /sold <id>, /delete <id>\n\n' +
   '🟢 Активно · 🟡 Резерв · 🔴 Продано',
   { parse_mode: 'Markdown' }
 ));
@@ -152,11 +164,13 @@ bot.on('photo', async (ctx) => {
   }
 });
 
-bot.on('text', async (ctx) => {
-  // Пропускаем команды
-  if (ctx.message.text.startsWith('/')) return;
+bot.on('text', async (ctx, next) => {
+  // Пропускаем команды — отдаём управление обработчикам команд ниже
+  if (ctx.message.text.startsWith('/')) return next();
 
   const state = userState[ctx.from.id];
+
+  // Изменение цены при создании (кнопка ✏️ на превью)
   if (state && state.mode === 'edit_price' && state.listingId) {
     const newPrice = parseInt(ctx.message.text.replace(/\D/g, ''));
     if (!newPrice || newPrice < 10000 || newPrice > 500000) {
@@ -167,6 +181,35 @@ bot.on('text', async (ctx) => {
     ctx.reply(`✅ Цена изменена на ${newPrice.toLocaleString('ru-RU')} ₽`);
     return;
   }
+
+  // Редактирование цены существующего объявления (/edit → 💰 Цена)
+  if (state && state.mode === 'editing_price' && state.listingId) {
+    const id = state.listingId;
+    const newPrice = parseInt(ctx.message.text.replace(/\D/g, ''));
+    if (!newPrice || newPrice < 10000 || newPrice > 500000) {
+      return ctx.reply('❌ Введите цену числом (например: 95000)');
+    }
+    db.prepare('UPDATE listings SET price = ? WHERE id = ?').run(newPrice, id);
+    delete userState[ctx.from.id];
+    await ctx.reply(`✅ Цена #${id} изменена на ${newPrice.toLocaleString('ru-RU')} ₽. Обновляю посты…`);
+    await refreshPosts(id);
+    return ctx.reply('🔄 Посты в Telegram и ВК обновлены (если были опубликованы).');
+  }
+
+  // Редактирование описания существующего объявления (/edit → 📝 Описание)
+  if (state && state.mode === 'editing_desc' && state.listingId) {
+    const id = state.listingId;
+    const newDesc = ctx.message.text.trim();
+    if (newDesc.length < 3) {
+      return ctx.reply('❌ Слишком короткое описание. Отправьте текст ещё раз.');
+    }
+    db.prepare('UPDATE listings SET description = ? WHERE id = ?').run(newDesc, id);
+    delete userState[ctx.from.id];
+    await ctx.reply(`✅ Описание #${id} обновлено. Обновляю посты…`);
+    await refreshPosts(id);
+    return ctx.reply('🔄 Посты в Telegram и ВК обновлены (если были опубликованы).');
+  }
+
   // Если просто текст без контекста — игнорируем
 });
 
@@ -352,6 +395,42 @@ bot.command('list', (ctx) => {
   ctx.reply(`📋 Всего: ${rows.length}\n\n${lines.join('\n')}`);
 });
 
+// === Редактирование цены/описания существующего объявления ===
+bot.command('edit', (ctx) => {
+  const id = parseInt(ctx.message.text.replace('/edit', '').trim());
+  if (!id) return ctx.reply('Укажите ID: /edit 5');
+  const row = db.prepare('SELECT id, title, price FROM listings WHERE id = ?').get(id);
+  if (!row) return ctx.reply(`❌ #${id} не найден`);
+  ctx.reply(
+    `✏️ Что изменить у #${id}?\n${row.title} — ${row.price.toLocaleString('ru-RU')} ₽`,
+    Markup.inlineKeyboard([
+      [Markup.button.callback('💰 Цена', `edit_price_${id}`)],
+      [Markup.button.callback('📝 Описание', `edit_desc_${id}`)],
+      [Markup.button.callback('❌ Отмена', `edit_cancel_${id}`)],
+    ])
+  );
+});
+
+bot.action(/^edit_price_(\d+)$/, (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  userState[ctx.from.id] = { mode: 'editing_price', listingId: id };
+  ctx.answerCbQuery();
+  ctx.reply(`Введите новую цену для #${id} (только число, например: 95000):`);
+});
+
+bot.action(/^edit_desc_(\d+)$/, (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  userState[ctx.from.id] = { mode: 'editing_desc', listingId: id };
+  ctx.answerCbQuery();
+  ctx.reply(`Отправьте новое описание для #${id} одним сообщением (можно в несколько строк):`);
+});
+
+bot.action(/^edit_cancel_(\d+)$/, async (ctx) => {
+  delete userState[ctx.from.id];
+  await ctx.answerCbQuery('Отменено');
+  await ctx.editMessageText('❌ Редактирование отменено');
+});
+
 bot.command('reserve', (ctx) => {
   const id = parseInt(ctx.message.text.replace('/reserve', '').trim());
   if (!id) return ctx.reply('Укажите ID: /reserve 5');
@@ -422,6 +501,8 @@ app.listen(API_PORT, '127.0.0.1', () => {
   console.log(`[api] Listening on http://127.0.0.1:${API_PORT}`);
 });
 
-bot.launch().then(() => console.log('[bot] Started'));
+bot.launch()
+  .then(() => console.log('[bot] Started'))
+  .catch((e) => { console.error('[bot] launch failed:', e.message); process.exit(1); });
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));

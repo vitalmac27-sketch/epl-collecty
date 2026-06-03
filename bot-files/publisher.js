@@ -11,6 +11,14 @@ const VK_GROUP_ID = process.env.VK_GROUP_ID;
 const VK_API_VERSION = '5.199';
 const SITE_URL = process.env.SITE_URL || 'https://xn----jtbjgbccazg9frdtb.xn--p1ai';
 
+/** Русское склонение существительного по числу: (1 цикл, 2 цикла, 5 циклов) */
+function plural(n, one, few, many) {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
+  return many;
+}
+
 /**
  * Формирует красивый текст карточки для публикации
  */
@@ -24,18 +32,20 @@ export function formatCard(listing, { withSiteLink = true, withSoldMark = false 
   if (listing.storage) titleParts.push(listing.storage);
   if (listing.color) titleParts.push(listing.color);
   lines.push('📱 ' + titleParts.join(' • '));
-  lines.push('');
+
+  // Характеристики — сразу под заголовком
+  if (listing.simType) lines.push(`📶 ${listing.simType}`);
+  if (listing.battery) {
+    const cyc = listing.cycles ? `, ${listing.cycles} ${plural(listing.cycles, 'цикл', 'цикла', 'циклов')}` : '';
+    lines.push(`🔋 АКБ ${listing.battery}%${cyc}`);
+  }
+  if (listing.condition) lines.push(`✨ Состояние: ${listing.condition}`);
 
   // Цена
   if (listing.price && !withSoldMark) {
-    lines.push(`💰 ${listing.price.toLocaleString('ru-RU')} ₽`);
     lines.push('');
+    lines.push(`💰 ${listing.price.toLocaleString('ru-RU')} ₽`);
   }
-
-  // Характеристики
-  if (listing.simType) lines.push(`📶 ${listing.simType}`);
-  if (listing.battery) lines.push(`🔋 АКБ ${listing.battery}%${listing.cycles ? `, ${listing.cycles} циклов` : ''}`);
-  if (listing.condition) lines.push(`✨ Состояние: ${listing.condition}`);
 
   if (listing.description) {
     lines.push('');
@@ -63,7 +73,8 @@ export async function publishToTelegram(listing, photoPaths) {
   if (!TG_CHANNEL_ID) throw new Error('TG_CHANNEL_ID не указан в .env');
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
-  const caption = formatCard(listing);
+  // В Telegram-канал ссылку на сайт не добавляем (только ВК)
+  const caption = formatCard(listing, { withSiteLink: false });
 
   // Если 1 фото — отправляем как sendPhoto
   if (photoPaths.length === 1) {
@@ -105,6 +116,45 @@ export async function publishToTelegram(listing, photoPaths) {
   if (!res.data.ok) throw new Error(`TG: ${res.data.description}`);
   // sendMediaGroup возвращает массив — берём первый message_id
   return { message_id: res.data.result[0].message_id, chat_id: res.data.result[0].chat.id };
+}
+
+/**
+ * Обновить подпись поста в Telegram (после правки цены/описания)
+ */
+export async function editTelegramCaption(messageId, listing) {
+  if (!TG_CHANNEL_ID) return;
+  const caption = formatCard(listing, { withSiteLink: false });
+  try {
+    await axios.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/editMessageCaption`, {
+      chat_id: TG_CHANNEL_ID,
+      message_id: messageId,
+      caption,
+    });
+  } catch (e) {
+    console.error('[publisher] editTelegramCaption error:', e.response?.data?.description || e.message);
+  }
+}
+
+/**
+ * Обновить текст поста ВК (после правки цены/описания)
+ */
+export async function editVKPost(postId, listing) {
+  if (!VK_TOKEN || !VK_GROUP_ID) return;
+  const message = formatCard(listing, { withSiteLink: true });
+  try {
+    await axios.post('https://api.vk.com/method/wall.edit', null, {
+      params: {
+        owner_id: `-${VK_GROUP_ID}`,
+        post_id: postId,
+        message,
+        access_token: VK_TOKEN,
+        v: VK_API_VERSION,
+      },
+      timeout: 30000,
+    });
+  } catch (e) {
+    console.error('[publisher] editVKPost error:', e.message);
+  }
 }
 
 /**

@@ -52,7 +52,7 @@ export function parseListingText(text) {
   let storage = null;
   let storageMatchText = null;
   // Сначала ищем с явным указанием единиц
-  const storageMatch = text.match(/(\d{2,4})\s*(гб|gb|тб|tb)\b/i);
+  const storageMatch = text.match(/(\d{2,4})\s*(гб|gb|тб|tb)(?![а-яёa-z0-9])/i);
   if (storageMatch) {
     const num = parseInt(storageMatch[1]);
     const isTB = /т/i.test(storageMatch[2]) || /tb/i.test(storageMatch[2]);
@@ -176,22 +176,24 @@ export function parseListingText(text) {
 
   // Удаляем распознанные блоки
   if (modelMatchText) description = description.replace(new RegExp(modelMatchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '');
-  description = description.replace(/\d{2,4}\s*(гб|gb|тб|tb)\b/gi, '');
+  if (storageMatchText) description = description.replace(new RegExp(`\\b${storageMatchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi'), '');
+  description = description.replace(/\d{2,4}\s*(?:гб|gb|тб|tb)(?![а-яёa-z0-9])/gi, '');
   description = description.replace(/(?:акб|аккумулятор|battery|емкост[ьи]|батаре[яи])\D{0,15}\d{2,3}\s*%/gi, '');
   description = description.replace(/\b\d{2,3}\s*%/g, '');
-  description = description.replace(/\d{1,4}\s*цикл\w*/gi, '');
+  description = description.replace(/(?:всего\s+)?\d{1,4}\s*цикл[а-яё]*/gi, '');
   description = description.replace(/sim\s*\+\s*esim|dual\s*sim|\besim\b|\bsim\b/gi, '');
-  description = description.replace(/идеальн\w*|идеал|отличн\w*|хорош\w*/gi, '');
+  // Слово состояния вырезаем ТОЛЬКО если оно стоит отдельной строкой
+  // (формат /add). В связном предложении ("Состояние идеальное, ...") — оставляем.
+  description = description.replace(/^[\s🔥]*(?:идеальн[а-яё]*|идеал|отличн[а-яё]*|хорош[а-яё]*)[\s.,!]*$/gim, '');
   description = description.replace(/цена[:\s]*/gi, '');
-  description = description.replace(/без\s+царапин\s+и\s+дефектов?/gi, '');
 
   if (price) {
     const p = String(price);
-    // Удаляем число с пробелом или без
-    description = description.replace(new RegExp(`\\b${p}\\b\\s*(?:₽|руб|р\\.)?`, 'gi'), '');
+    // Удаляем число с пробелом или без (не трогая переносы строк)
+    description = description.replace(new RegExp(`\\b${p}\\b[ \\t]*(?:₽|руб|р\\.)?`, 'gi'), '');
     if (p.length >= 5) {
-      const withSpace = `${p.slice(0, p.length - 3)}\\s*${p.slice(p.length - 3)}`;
-      description = description.replace(new RegExp(`\\b${withSpace}\\b\\s*(?:₽|руб|р\\.)?`, 'gi'), '');
+      const withSpace = `${p.slice(0, p.length - 3)}[ \\t]*${p.slice(p.length - 3)}`;
+      description = description.replace(new RegExp(`\\b${withSpace}\\b[ \\t]*(?:₽|руб|р\\.)?`, 'gi'), '');
     }
   }
 
@@ -203,20 +205,37 @@ export function parseListingText(text) {
   description = description.replace(/\(\s*\)/g, '');
   description = description.replace(/\[\s*\]/g, '');
 
-  // Построчная чистка
-  description = description
-    .split('\n')
-    .map(line => line.trim())
-    // Убираем строки которые состоят почти полностью из знаков препинания / эмодзи / огрызков
-    .filter(line => {
-      if (line.length < 5) return false;
-      // Если после удаления знаков препинания и эмодзи осталось меньше 3 букв — отбрасываем
-      const lettersOnly = line.replace(/[^\p{L}\p{N}]/gu, '');
-      if (lettersOnly.length < 3) return false;
-      return true;
-    })
-    .join('\n')
-    .trim();
+  // Чистим артефакты после вырезания распознанных блоков (в пределах строки)
+  description = description.replace(/[ \t]{2,}/g, ' ');           // двойные пробелы → один
+  description = description.replace(/[ \t]+([,.;:!?])/g, '$1');    // пробел перед знаком
+  description = description.replace(/(?:[ \t]*[,.;:][ \t]*){2,}/g, '. '); // слипшиеся знаки → '. '
+
+  // Построчная чистка с сохранением абзацев (пустые строки = разделители)
+  const _kept = [];
+  for (const raw of description.split('\n')) {
+    let line = raw.trim();
+    // Срезаем висячие запятые/точки с запятой/двоеточия в конце строки
+    line = line.replace(/[\s,;]+$/u, '');
+    if (line === '') {
+      // пустую строку держим как разделитель абзаца, но не дублируем
+      if (_kept.length && _kept[_kept.length - 1] !== '') _kept.push('');
+      continue;
+    }
+    // Отбрасываем строки-огрызки из знаков препинания / эмодзи (мало букв)
+    const lettersOnly = line.replace(/[^\p{L}\p{N}]/gu, '');
+    if (lettersOnly.length < 3) continue;
+    // Строка ровно из одного слова-состояния — отбрасываем
+    if (/^[\s🔥]*(?:идеальн[а-яё]*|идеал|отличн[а-яё]*|хорош[а-яё]*)[\s.,!]*$/iu.test(line)) continue;
+    // Строка-огрызок «📱 Оригинальный» (модель/память/цвет уже вырезаны) — отбрасываем
+    if (/^[\s📱🔋✨]*оригинальн[а-яё]*[\s.,!]*$/iu.test(line)) continue;
+    // Лишний заголовок «Характеристики:» (реальные характеристики уже в полях карточки)
+    if (/^[\s📋]*характеристик[аи][\s.:!]*$/iu.test(line)) continue;
+    _kept.push(line);
+  }
+  // Убираем пустые строки по краям
+  while (_kept.length && _kept[0] === '') _kept.shift();
+  while (_kept.length && _kept[_kept.length - 1] === '') _kept.pop();
+  description = _kept.join('\n');
 
   return {
     model,
@@ -255,6 +274,17 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 АКБ 88%
 Хорошее, есть небольшие потёртости на углах
 75000 руб`,
+
+    `📱 Оригинальный iPhone 16 Pro Max 512GB Black (Sim+eSim)
+Цена 80900₽
+ Гарантия, рассрочка +6% (заявку можно подать удаленно, период до 36 месяцев)
+Активирован: май 2025.
+ 🔥 Состояние идеальное, без царапин и дефектов. Всё оригинальное, не разбирался и не ремонтировался.
+ 🔋 Батарея: 100%, 58 цикл
+📦 Комплект: коробка, кабель, чек
+🔓 Отвязан от всех аккаунтов
+🛡️ Гарантия: 60 дней
+⚙️ Любые проверки приветствуются`,
   ];
 
   for (const t of tests) {
