@@ -1,6 +1,7 @@
 # MEMORY: ЭПЛ-КОЛЛЕКЦИЯ — Apple-магазин в Казани
 
 > **Конспект для продолжения в новом чате. Прочитай полностью прежде чем что-то делать.**
+> **СТАТУС: система работает целиком — бот → сайт + Telegram + ВК. Доводка по мелочам.**
 
 ---
 
@@ -9,324 +10,181 @@
 ### Сайт
 - **Домен:** `эпл-коллекция.рф` (Punycode: `xn----jtbjgbccazg9frdtb.xn--p1ai`)
 - **Хостинг:** Timeweb App Platform → `Daring Amalthea` (ID 179693, МСК)
-- **NS:** Бегет (вернули с Timeweb из-за SSL-проблем)
-- **A-запись:** `92.246.76.92` (Timeweb МСК) — в DNS Бегета
-- **GitHub:** `vitalmac27-sketch/epl-collecty` ветка `main`
-- **Token:** в `~/.git-credentials` пользователя или попросить заново
-- **Команда сборки на Timeweb:** `npm run build` (вводить вручную)
-- **Директория сборки:** `/out`
-- **Последний коммит:** `a70913b` — каталог /bu-iphone
+- **NS:** Бегет. **A-запись сайта:** `92.246.76.92` (Timeweb МСК)
+- **GitHub:** `vitalmac27-sketch/epl-collecty` ветка `main` (репо ПУБЛИЧНЫЙ — raw читается без токена)
+- **Сборка на Timeweb:** `npm run build` (вручную). Директория `/out`
+
+### 🆕 API-поддомен (НАСТРОЕНО — nginx + SSL)
+- **`api.эпл-коллекция.рф`** → A-запись `186.246.7.71` (в DNS Бегета)
+- nginx + Let's Encrypt (certbot) настроены, работают. Сертификат до 2026-09-01, автопродление. Email: apple.collecty@gmail.com
+- Конфиг: `/etc/nginx/sites-available/bu-api` → proxy на `127.0.0.1:3001`
+- **CORS:** nginx CORS-заголовки УБРАНЫ. Их ставит Express `cors()` в bot.js = `Access-Control-Allow-Origin: *`. (Если nginx тоже добавит — будет дубль, браузер заблокирует.)
+- Проверка: `curl https://api.эпл-коллекция.рф/api/bu-iphone` → JSON
 
 ### VPS (бот для б/у)
-- **IP:** `186.246.7.71` (Timeweb Cloud MSK 50)
-- **ОС:** Ubuntu 24.04, 4 ГБ RAM, 50 ГБ диск
-- **На VPS живёт:** n8n (~1 ГБ RAM, чужой процесс — не трогать)
-- **Установлено:** Node.js 20, npm 10, PM2 7, nginx 1.24, SQLite 3.45
-- **⚠️ SSH-пароль и токен бота были засвечены в чате — пользователь сменил**
+- **IP:** `186.246.7.71` (Timeweb Cloud, Ubuntu 24.04, 4 ГБ RAM, 50 ГБ диск)
+- **На VPS живут (НЕ ТРОГАТЬ):** n8n (Docker, порт 5678) + **комбайн** `/opt/content-machine/` + `gost`-прокси (см. раздел gost)
+- **Установлено:** Node 20, PM2, nginx, SQLite
+- 🆕 **Безопасность:** установлен `fail2ban` (бан перебора SSH), добавлен swap 2 ГБ (`/swapfile`)
+- ⚠️ **Telegram по IPv4 БЛОКИРУЕТ провайдер** (РФ). Бот ходит в Telegram по **IPv6** (в bot.js `dns.setDefaultResultOrder('ipv6first')`). ВК и прочее — по IPv4 норм. Проверка: `curl -6 ... api.telegram.org` = 302, `curl -4 ... api.telegram.org` = таймаут.
 
 ### Telegram-бот
-- **Username:** `@AppleCollectBU_bot`
-- **Папка:** `/opt/bu-bot/`
-- **PM2:** имя `bu-bot`, online, ~20 МБ RAM
-- **Доступ:** только Telegram ID `5549559991`
+- `@AppleCollectBU_bot`, папка `/opt/bu-bot/`, PM2 имя `bu-bot`
+- Доступ только Telegram ID `5549559991`
 
 ### Telegram-канал
-- **Username:** `@applecollectkazan`
-- **Channel ID:** `-1003862359021`
-- Бот добавлен админом (публиковать/редактировать/удалять)
+- `@applecollectkazan`, Channel ID `-1003862359021`, бот админ
 
-### ВКонтакте
-- **Группа:** `vk.com/apple_collecty`
-- VK_TOKEN и VK_GROUP_ID — в `/opt/bu-bot/.env`
-
-### Cloudflare Worker (для форм с сайта в Telegram)
-- **URL:** `https://black-tree-eb8a.vitalmac27.workers.dev`
-- Account ID: `3f9cc490e275adb8bbd0c71c70dc9733`
+### 🆕 ВКонтакте — ВАЖНО ПРО ТОКЕН
+- Группа `vk.com/apple_collecty`
+- **VK_TOKEN в .env ДОЛЖЕН быть ПОЛЬЗОВАТЕЛЬСКИМ, НЕ групповым!**
+  - Групповой токен НЕ умеет `photos.getWallUploadServer` → ошибка «Group authorization failed» → фото не грузятся.
+  - Пользовательский: аккаунт **Максим (id 302524623, `gold_elabuga`)** — админ группы. Выпущен через Kate Mobile: `https://oauth.vk.com/authorize?client_id=2685278&scope=photos,wall,groups,offline&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1&v=5.199` → токен из `blank.html#access_token=vk1.a...` (бессрочный).
+  - **Проверка типа:** `node -e "import('dotenv/config').then(async()=>{const t=process.env.VK_TOKEN;const h=await import('https');h.get('https://api.vk.com/method/account.getProfileInfo?access_token='+t+'&v=5.199',r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>console.log(d))})})"` → профиль = пользовательский, «group auth» = групповой.
 
 ---
 
-## 📦 Бот на VPS — что сейчас работает
-
-### Файлы /opt/bu-bot/
+## 📦 Бот /opt/bu-bot/
 ```
-bot.js              ← Telegraf бот
+bot.js              ← Telegraf бот (JS, не Python!)
 text-parser.js      ← Распознавание iPhone из текста
 publisher.js        ← Публикация в ТГ-канал + ВК
-.env (chmod 600)    ← Все токены
-photos/{id}/N.jpg   ← Скачанные фото (~100 КБ каждое)
-db/database.sqlite  ← Таблица listings
+.env (chmod 600)    ← Токены
+photos/{id}/N.jpg   ← Фото
+db/database.sqlite  ← listings
 ```
 
-### .env содержит:
+### .env
 ```
-TELEGRAM_BOT_TOKEN=*** (46 символов)
+TELEGRAM_BOT_TOKEN=*** (46 симв)
 ALLOWED_USER_ID=5549559991
 API_PORT=3001
 PHOTOS_PATH=/opt/bu-bot/photos
 DB_PATH=/opt/bu-bot/db/database.sqlite
 TG_CHANNEL_ID=-1003862359021
 SITE_URL=https://xn----jtbjgbccazg9frdtb.xn--p1ai
-VK_TOKEN=***
+VK_TOKEN=***   ← ПОЛЬЗОВАТЕЛЬСКИЙ (vk1.a...), см. раздел ВК
 VK_GROUP_ID=***
-# Прокси (можно удалить — не используются):
-PROXY_HOST=fhh5sv727n.cn.fxdx.in
-PROXY_PORT=13819
-PROXY_USER=boundlessmarble013926
-PROXY_PASS=1D9kV7aMf4xF
-```
-
-### БД listings
-```sql
-CREATE TABLE listings (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  avito_id TEXT UNIQUE,           -- "manual_TIMESTAMP" (Авито больше не парсим)
-  avito_url TEXT,                 -- не используется
-  slug TEXT UNIQUE,
-  title TEXT NOT NULL,
-  model TEXT, storage TEXT, color TEXT,
-  sim_type TEXT,
-  battery INTEGER, cycles INTEGER,
-  condition TEXT,
-  price INTEGER NOT NULL,
-  description TEXT,
-  photos TEXT,                    -- JSON массив /photos/{id}/N.jpg
-  status TEXT DEFAULT 'pending',  -- pending/active/reserved/sold/deleted
-  tg_message_id INTEGER,
-  vk_post_id INTEGER,
-  created_at, updated_at
-);
 ```
 
 ### Команды бота
 - `/start`, `/help` — справка
-- **`/add`** — добавить (фото+текст с подписью)
+- **`/add`** — добавить (фото 1-10 + текст с подписью)
 - `/list` — все 🟢🟡🔴
-- `/reserve <id>` — пометить 🟡 «Бронь»
-- `/sold <id>` — продано: редактирует посты в ТГ и ВК, дописывая «🔴 ПРОДАНО»
+- 🆕 **`/edit <id>`** — изменить цену или описание (кнопки 💰 Цена / 📝 Описание); **обновляет уже опубликованные посты в ТГ и ВК** (editTelegramCaption/editVKPost)
+- `/reserve <id>` — 🟡 бронь
+- `/sold <id>` — продано (правит посты ТГ/ВК: «🔴 ПРОДАНО», убирает с сайта)
 - `/delete <id>` — удалить везде
 
-### Логика /add
-1. Менеджер: `/add` → бот ждёт фото
-2. Менеджер шлёт 1-6 фото альбомом с подписью к первому:
-   ```
-   iPhone 17 Pro 512 Orange Sim+eSim
-   АКБ 100%, 35 циклов
-   Идеал
-   101900
-   В комплекте коробка и кабель
-   ```
-3. `text-parser.js` распознаёт характеристики
-4. Фото скачиваются из Telegram API (~100 КБ каждое)
-5. Превью + 4 кнопки:
-   - 🟢 Только сайт
-   - 📢 Сайт + Telegram
-   - 🌐 Везде (Сайт + ТГ + ВК)
-   - ✏️ Изменить цену / ❌ Отмена
-
-### API (на 127.0.0.1:3001 — ВНУТРЕННИЙ, наружу не торчит!)
-- `GET /api/bu-iphone` — список active+reserved
-- `GET /api/bu-iphone/:slug` — одно объявление
-- `GET /photos/{id}/{n}.jpg` — статика фото
-
----
-
-## 🌐 Сайт (Next.js 15 + TypeScript + Tailwind + shadcn/ui)
-
-### Структура
-- `output: export` — статика
-- ~120 страниц: главная, 9 категорий, 84+ карточки моделей, блог, about, contacts
-- 9 категорий: iphone, ipad, macbook, watch, airpods, android, dyson, audio, playstation
-- 3 статьи блога: проверка б/у, настройка камеры, оптимизация АКБ iOS 26
-
-### Главная (SEO)
-- **Title (61):** `Купить Айфон в Казани выгодно — в рассрочку 0% | ЭПЛ-КОЛЛЕКЦИЯ`
-- **Description (159):** `Купить Айфон в Казани в магазине ЭПЛ-КОЛЛЕКЦИЯ. iPhone 13–17 с гарантией 1 год, в рассрочку 0% на 12 мес, Trade-in, бесплатная доставка по Казани в день заказа.`
-- **H1:** `Купить Айфон в Казани выгодно, в рассрочку`
-
-### Цены (после -7000 Pro / -5000 обычные)
-| Модель | Цена от |
-|--------|---------|
-| iPhone 17 Pro Max | 101 900 ₽ |
-| iPhone 17 Pro | 94 300 ₽ |
-| iPhone 17 | 61 000 ₽ |
-| iPhone 16 Pro Max | 87 000 ₽ |
-| iPhone 16 | 52 500 ₽ |
-| iPhone 16e | 42 000 ₽ |
-| iPhone 15 | 47 000 ₽ |
-| iPad 11 (2025) | 31 000 ₽ |
-| MacBook Air 13 M5 | 95 000 ₽ |
-| Mac mini M4 | 54 000 ₽ |
-
-### Страницы каталога б/у (НОВЫЕ — добавлены в этом чате)
-- **`/bu-iphone`** — каталог с фильтрами модель/состояние
-- **`/bu-iphone/item?slug=xxx`** — карточка устройства (используется query-параметр т.к. сайт статика)
-- Данные подгружаются с VPS через `https://api.эпл-коллекция.рф`
-
-### Ключевые файлы сайта
-- `src/lib/bu-api.ts` — клиент API на VPS
-- `src/lib/proxy.ts` — Cloudflare Worker URL
-- `src/lib/cities.ts` — `namePre: "Казани"` (БЕЗ "в", добавлять явно)
-- `src/lib/models.ts` — `priceFrom` (синхронизировать руками!)
-- `src/lib/generated/*-configs.ts` — генерируется парсером прайса
-- `src/components/bu-iphone/BuCard.tsx`
-- `src/components/bu-iphone/BuCatalog.tsx`
-- `src/app/bu-iphone/page.tsx`
-- `src/app/bu-iphone/item/page.tsx`
-- `src/components/layout/Navigation.tsx` — «Б/У iPhone 🔄» в Ещё-меню
-- `src/app/sitemap.ts` — /bu-iphone priority 0.9, daily
-
-### Переменные окружения на Timeweb
+### 🆕 Формат постов (publisher.js — настроен под эталон)
+Шапка одним блоком, потом описание с «воздухом»:
 ```
-NEXT_PUBLIC_SITE_URL=https://xn----jtbjgbccazg9frdtb.xn--p1ai
-NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=*** (это бот ФОРМ сайта, не путать с ботом б/у!)
-NEXT_PUBLIC_TELEGRAM_CHAT_ID=5549559991
-NEXT_PUBLIC_PROXY_URL=https://black-tree-eb8a.vitalmac27.workers.dev
+📱 Модель • Память • Цвет
+🔋 АКБ N%, M циклов
+✨ Состояние: ...
+💰 ЦЕНА ₽
+
+[вводный текст вместе]
+
+🔥 [длинное предложение — отдельно]
+
+📦 короткий пункт
+🔓 короткий пункт
+🛡️ короткий пункт
+
+💬 ЭПЛ-КОЛЛЕКЦИЯ Казань · @ac_care
 ```
+- `prettifyDescription`: пустая строка перед эмодзи-пунктом, если предыдущая строка — текст ИЛИ длинное предложение (>45 симв). Короткие пункты-чеклист идут вместе.
+- **ТГ — БЕЗ ссылки «🛒 Купить»** (`withSiteLink:false`). **ВК — СО ссылкой.**
+- Склонение: 1 цикл / 2 цикла / 5 циклов.
+
+### API (127.0.0.1:3001 — внутренний, наружу через nginx)
+- `GET /api/bu-iphone` (active+reserved), `GET /api/bu-iphone/:slug`, `GET /photos/...`
 
 ---
 
-## ✅ Что РАБОТАЕТ
-
-- ✅ Бот @AppleCollectBU_bot отвечает в Telegram
-- ✅ `/add` принимает фото + текст
-- ✅ Парсер распознаёт модель/память/цвет/sim/АКБ/циклы/состояние/цену
-- ✅ 6 фото скачиваются с Telegram (~100 КБ каждое)
-- ✅ API на 127.0.0.1:3001 работает локально
-- ✅ Тестовый листинг: #8, iPhone 16 Pro Max 512 Black, 80 900 ₽
-
-## ⏳ ЧТО НЕ ДОДЕЛАНО (СРОЧНО ЭТО ПЕРВЫМ ДЕЛОМ)
-
-### 🔴 nginx + SSL для API
-
-**Проблема:** API на VPS работает только на `127.0.0.1:3001`. Сайт не может его читать.
-
-**Шаги:**
-
-1. **Пользователь:** Добавляет в DNS Бегета A-запись:
-   - Тип: A
-   - Имя: `api`
-   - Значение: `186.246.7.71`
-   - TTL: 300
-   
-   Проверка: `nslookup api.xn----jtbjgbccazg9frdtb.xn--p1ai` → должен вернуть `186.246.7.71`
-
-2. **Через SSH:** Настроить nginx + Let's Encrypt (готовый скрипт):
-   ```bash
-   apt install -y certbot python3-certbot-nginx
-   
-   cat > /etc/nginx/sites-available/bu-api << 'EOF'
-   server {
-     listen 80;
-     server_name api.xn----jtbjgbccazg9frdtb.xn--p1ai;
-   
-     location /api/ {
-       proxy_pass http://127.0.0.1:3001;
-       proxy_set_header Host $host;
-       proxy_set_header X-Real-IP $remote_addr;
-       add_header Access-Control-Allow-Origin "https://xn----jtbjgbccazg9frdtb.xn--p1ai" always;
-       add_header Access-Control-Allow-Methods "GET, OPTIONS" always;
-     }
-     location /photos/ {
-       proxy_pass http://127.0.0.1:3001;
-       add_header Access-Control-Allow-Origin "*" always;
-       expires 7d;
-     }
-   }
-   EOF
-   
-   ln -sf /etc/nginx/sites-available/bu-api /etc/nginx/sites-enabled/
-   nginx -t && systemctl reload nginx
-   
-   certbot --nginx -d api.xn----jtbjgbccazg9frdtb.xn--p1ai \
-     --non-interactive --agree-tos \
-     --email YOUR_EMAIL --redirect
-   ```
-
-3. **Проверить:** `curl https://api.xn----jtbjgbccazg9frdtb.xn--p1ai/api/bu-iphone` → должен вернуть JSON с iPhone 16 Pro Max.
-
-4. **На сайте:** Передеплоить через Timeweb (`npm run build`). После этого `/bu-iphone` начнёт показывать карточки.
-
-### 🟡 Опциональные улучшения
-
-- Блок «Б/У iPhone с гарантией» на главной — топ-3 карточки
-- Команда `/edit <id> <field> <value>` — изменить цену/АКБ/описание после публикации
-- Описание чистить от мусорных строк ("📱 Оригинальный" и т.п.) — в text-parser.js
-- Schema.org Product на странице карточки б/у
-- При нажатии «Купить» на карточке — отправлять в Telegram через прокси с пометкой `🔄 Б/У #N`
+## 🌐 Сайт (Next.js 15, output: export — статика)
+- Каталог б/у: `/bu-iphone` и `/bu-iphone/item?slug=xxx` — тянут данные с `https://api.эпл-коллекция.рф` (клиентский fetch, не при сборке)
+- 🆕 **Мобильное меню:** добавлена вкладка **🔄 Б/У iPhone** в `src/components/layout/Navigation.tsx` (в списке «Доп. страницы» бургер-меню, ~строка 175). На десктопе была в меню «Ещё».
+- `src/lib/models.ts` — `priceFrom` (синхронизировать руками с `generated/*-configs.ts`)
+- `src/lib/cities.ts` — `namePre: "Казани"` (без «в»)
 
 ---
 
-## 📋 Workflow обновления цен (когда менеджер пришлёт новый прайс)
+## ✅ Что РАБОТАЕТ (вся система)
+- ✅ Бот стабилен, Telegram по IPv6, при сбоях не падает в цикл
+- ✅ `/add`, `/list`, `/edit`, `/reserve`, `/sold`, `/delete`
+- ✅ Парсер: модель/память/цвет/sim/АКБ/циклы/состояние/цена + чистое описание
+- ✅ API наружу по HTTPS (nginx+SSL)
+- ✅ Сайт `/bu-iphone` показывает карточки
+- ✅ Публикация **🌐 Везде**: Telegram ✓ (IPv6) + ВК ✓ (IPv4, пользовательский токен) + сайт ✓
+- ✅ Формат постов как в эталоне, «Доступ запрещён» в канал больше НЕ летит
 
-1. Сохранить xlsx в `/home/claude/прайс_updated.xlsx`
-2. `cd /home/claude/epl-collecty && python3 scripts/parse-prices.py`
-3. Синхронизировать `src/lib/models.ts` `priceFrom` с `generated/*-configs.ts`
-4. Коммит + push
-5. Передеплой через Timeweb
+## ✅ ЗАКРЫТО сегодня (бывшее «не доделано»)
+- ✅ nginx + SSL для API
+- ✅ `/edit` (цена + описание, с обновлением постов)
+- ✅ Чистка описания от мусора («📱 Оригинальный», «Характеристики:», «ГБ», «всего 1 цикл»)
+- ✅ Кириллический баг парсера (`\w*` → `[а-яё]*`): «Состояние идеальное» больше не режется
+- ✅ Роутинг команд (текст-обработчик не глотал `/list` и др.)
 
-**Пороги iPhone 17 в парсере:** `< 101000` (Pro Max→Pro), `< 83000` (Pro→17)
+## 🟡 Осталось опционально
+- Блок «Б/У iPhone с гарантией» на главной (топ-3)
+- Schema.org Product на карточке б/у
+- Кнопка «Купить» → Telegram с пометкой `🔄 Б/У #N`
 
 ---
 
 ## 🚨 КРИТИЧЕСКИ ВАЖНО
+1. **n8n + комбайн (`/opt/content-machine`) + gost на VPS — НЕ ТРОГАТЬ** (рабочие процессы)
+2. **Большие файлы на VPS — через GitHub `bot-files/` + `curl`.** base64-вставка длинной строки в SSH **ЗАВИСАЕТ** — не использовать. heredoc тоже ломается.
+3. **Токены/пароли — не просить в открытом чате.** Класть в .env через SSH самому пользователю
+4. **text-parser.js** — прогонять `node text-parser.js` (тесты в конце)
+5. **PM2 кэширует окружение:** dotenv НЕ перезаписывает уже заданные переменные. После правки .env (особенно VK_TOKEN) → `unset VK_TOKEN && pm2 delete bu-bot && pm2 start bot.js --name bu-bot && pm2 save` (НЕ просто restart)
+6. **НЕ включать Timeweb-фаервол (allow-list) на весь сервер** — он рубит исходящий IPv4 → ломает бота и ВК. Пробовали (группа «Wise Corvus») — отвязали. Блок Telegram-IPv4 — это провайдер, не фаервол.
+7. **bot.launch() не должен делать `process.exit` при сбоях** — был crash-loop. Только логировать (`.catch(e => console.error(...))`). IPv6-приоритет обязателен.
 
-1. **n8n на VPS НЕ ТРОГАТЬ** — это рабочий процесс пользователя
-2. **При больших файлах в SSH** — НЕ через heredoc (ломается). Положить в `bot-files/` в GitHub → `curl` на VPS
-3. **Токены/пароли** — никогда не просить в открытом чате. Класть в .env через SSH самому пользователю
-4. **При правке `text-parser.js`** — прогонять тесты в конце файла: `node text-parser.js`
-5. **bot-files/ в репо** — временно, для удобной заливки на VPS. Можно удалить после стабилизации
+## 🔒 gost / комбайн — security (чинить в ЧАТЕ КОМБАЙНА, не здесь)
+- На VPS `gost` (systemd `/opt/gost.service`): `gost -L http://0.0.0.0:8080 -F socks5://...@90.156.145.246:62317` — HTTP-прокси, открыт ВСЕМУ интернету без авторизации → чужие гоняют через него трафик (всплески, CPU, расход внешнего SOCKS5). **Это часть комбайна, НЕ взлом.**
+- `python /opt/content-machine/tg_image.py` — порт 8888.
+- **Фикс (в чате комбайна):** привязать gost к `127.0.0.1` + docker-шлюз (не `0.0.0.0`), не сломав n8n (он в Docker, ему нужен доступ к gost изнутри).
 
 ---
 
-## 📂 GitHub bot-files/ (свежие файлы для VPS)
-
-Эти файлы лежат в репозитории сайта в папке `bot-files/`:
-- `bot-files/bot.js`
-- `bot-files/text-parser.js`
-- `bot-files/publisher.js`
-
-**Команды для обновления на VPS:**
+## 📂 Deploy bot-files (свежие файлы для VPS)
+В репо в папке `bot-files/`: `bot.js`, `text-parser.js`, `publisher.js`. Обновление на VPS:
 ```bash
 cd /opt/bu-bot
-curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/text-parser.js -o text-parser.js
-curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/publisher.js -o publisher.js
 curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/bot.js -o bot.js
-pm2 restart bu-bot
-pm2 logs bu-bot --lines 15 --nostream
+curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/publisher.js -o publisher.js
+curl -fsSL https://raw.githubusercontent.com/vitalmac27-sketch/epl-collecty/main/bot-files/text-parser.js -o text-parser.js
+node --check bot.js && node --check publisher.js && echo OK
+pm2 restart bu-bot && pm2 logs bu-bot --lines 8 --nostream
 ```
 
 ---
 
 ## 📍 Точка входа в новый чат
-
-1. **Прочитай этот файл целиком**
-2. **Спроси пользователя:**
-   - Добавил ли A-запись `api` → `186.246.7.71` в DNS Бегета?
-   - Запустил ли передеплой сайта на Timeweb после последнего коммита?
-3. **Если DNS готов** — даёшь команды для nginx + certbot (см. выше)
-4. **Если нет** — напоминаешь добавить, пока работаешь над опциональными улучшениями
-5. **Проверка готовности всей системы:**
+1. **Прочитай файл целиком.** Система РАБОТАЕТ.
+2. **Проверка готовности:**
    ```bash
-   # Bot status
-   pm2 list
-   # API локально
-   curl -s http://127.0.0.1:3001/api/bu-iphone | head -c 500
-   # DNS
-   nslookup api.xn----jtbjgbccazg9frdtb.xn--p1ai
-   # API наружу (после nginx)
-   curl https://api.xn----jtbjgbccazg9frdtb.xn--p1ai/api/bu-iphone
+   pm2 list                                            # bu-bot online, ↺ не растёт
+   curl -s http://127.0.0.1:3001/api/bu-iphone | head -c 300
+   curl https://api.эпл-коллекция.рф/api/bu-iphone     # JSON наружу
    ```
+   В боте `/list` — отвечает.
+3. **Если бот «не отвечает» / crash-loop:** проверь IPv6 к Telegram (`curl -6 -m8 -o/dev/null -w "%{http_code}" https://api.telegram.org/` = 302); в bot.js должно быть `dns.setDefaultResultOrder('ipv6first')` и launch без `process.exit`.
+4. **Если ВК не публикует фото:** VK_TOKEN должен быть ПОЛЬЗОВАТЕЛЬСКИМ (раздел ВК — проверка через account.getProfileInfo).
+5. **Если «Доступ запрещён» летит в канал:** в bot.js middleware должно пропускать не-личные чаты (`if (ctx.chat?.type && ctx.chat.type !== 'private') return;`).
 
 ---
 
-## История чата (краткая хронология)
-
-1. ✅ Добавили статью «Настройка камеры iPhone» в блог
-2. ✅ Создали страницу `/skupka-iphone` с формой + SEO-контентом
-3. ✅ Поменяли ссылку «Выкуп iPhone» в навигации
-4. ✅ Снизили цены: -7000 Pro / -5000 обычные iPhone, -5000 iPad/MacBook
-5. ✅ Добавили статью «Оптимизация аккумулятора iPhone на iOS 26»
-6. ❌ Пробовали парсер Авито через Puppeteer + iProxy — отказались (фото плохие, капчи)
-7. ✅ Переключились на ручной ввод через бот: текст+фото → распознавание → публикация ТГ/ВК/сайт
-8. ✅ Создали страницы `/bu-iphone` и `/bu-iphone/item?slug=...` на сайте
-9. ⏳ **ОСТАНОВИЛИСЬ ЗДЕСЬ:** нужно nginx+SSL для API, тогда система заработает целиком
+## История чата
+1-9. (ранее) Блог, /skupka-iphone, цены, отказ от парсера Авито, ручной ввод через бот, страницы /bu-iphone.
+10. ✅ nginx + Let's Encrypt SSL для `api.эпл-коллекция.рф`, исправлен CORS (убран дубль).
+11. ✅ Парсер: фикс кириллицы, чистка описания, склонение циклов, абзацы.
+12. ✅ publisher: формат постов (шапка+цена, prettifyDescription), ТГ без ссылки/ВК со ссылкой, editTelegram/VK для /edit.
+13. ✅ bot.js: фикс роутинга команд, `/edit`, IPv6-first, без crash-loop, middleware не отвечает в каналы.
+14. ✅ ВК: разобрались — нужен ПОЛЬЗОВАТЕЛЬСКИЙ токен (Kate Mobile), групповой не грузит фото. Выпустили, заработало.
+15. ✅ Сайт: мобильное меню — вкладка Б/У iPhone.
+16. ✅ Сервер: fail2ban + swap. Пробовали Timeweb-фаервол — сломал IPv4, отвязали.
+17. ⏳ gost-прокси (8080) открыт наружу — чинить в чате комбайна (привязать к localhost/docker).
