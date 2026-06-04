@@ -33,7 +33,10 @@ function prettifyDescription(desc) {
       if (out.length && out[out.length - 1] !== '') out.push('');
       continue;
     }
-    if (startsWithEmoji(line) && out.length && out[out.length - 1] !== '') {
+    const prev = out.length ? out[out.length - 1] : '';
+    // Пустую строку ставим перед эмодзи-пунктом, если предыдущая строка — текст (не эмодзи)
+    // или это длинное предложение (>45 симв). Короткие пункты-чеклист идут вместе.
+    if (startsWithEmoji(line) && prev !== '' && (!startsWithEmoji(prev) || prev.length > 45)) {
       out.push('');
     }
     out.push(line);
@@ -64,9 +67,8 @@ export function formatCard(listing, { withSiteLink = true, withSoldMark = false 
   }
   if (listing.condition) lines.push(`✨ Состояние: ${listing.condition}`);
 
-  // Цена
+  // Цена — сразу под характеристиками (в одном блоке с шапкой)
   if (listing.price && !withSoldMark) {
-    lines.push('');
     lines.push(`💰 ${listing.price.toLocaleString('ru-RU')} ₽`);
   }
 
