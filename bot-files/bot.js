@@ -509,6 +509,6 @@ app.listen(API_PORT, '127.0.0.1', () => {
 
 bot.launch()
   .then(() => console.log('[bot] Started'))
-  .catch((e) => { console.error('[bot] launch failed:', e.message); process.exit(1); });
+  .catch((e) => console.error('[bot] launch error (продолжаем работу):', e.message));
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
