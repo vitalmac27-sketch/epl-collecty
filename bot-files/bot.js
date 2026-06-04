@@ -43,6 +43,8 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // Только разрешённый пользователь
 bot.use((ctx, next) => {
+  // На посты в каналах/группах не реагируем — отвечаем только в личке
+  if (ctx.chat?.type && ctx.chat.type !== 'private') return;
   if (ctx.from?.id !== ALLOWED_USER_ID) {
     console.log(`[bot] Доступ запрещён: ${ctx.from?.id}`);
     return ctx.reply('🚫 Доступ запрещён');
