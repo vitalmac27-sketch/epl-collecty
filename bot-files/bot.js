@@ -17,6 +17,10 @@ import {
   editTelegramCaption, editVKPost,
 } from './publisher.js';
 
+import dns from 'node:dns';
+// Telegram по IPv4 в РФ часто заблокирован провайдером — резолвим с приоритетом IPv6 (он работает)
+dns.setDefaultResultOrder('ipv6first');
+
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const ALLOWED_USER_ID = parseInt(process.env.ALLOWED_USER_ID);
 const API_PORT = parseInt(process.env.API_PORT || 3001);
