@@ -20,6 +20,29 @@ function plural(n, one, few, many) {
 }
 
 /**
+ * Добавляет «воздух» в описание: пустая строка перед каждым пунктом с эмодзи,
+ * вводные текстовые строки остаются вместе. Схлопывает лишние пустые строки.
+ */
+function prettifyDescription(desc) {
+  if (!desc) return desc;
+  const startsWithEmoji = (s) => /^\p{Extended_Pictographic}/u.test(s.trim());
+  const out = [];
+  for (const raw of desc.split('\n')) {
+    const line = raw.trim();
+    if (line === '') {
+      if (out.length && out[out.length - 1] !== '') out.push('');
+      continue;
+    }
+    if (startsWithEmoji(line) && out.length && out[out.length - 1] !== '') {
+      out.push('');
+    }
+    out.push(line);
+  }
+  while (out.length && out[out.length - 1] === '') out.pop();
+  return out.join('\n');
+}
+
+/**
  * Формирует красивый текст карточки для публикации
  */
 export function formatCard(listing, { withSiteLink = true, withSoldMark = false } = {}) {
@@ -49,7 +72,7 @@ export function formatCard(listing, { withSiteLink = true, withSoldMark = false 
 
   if (listing.description) {
     lines.push('');
-    lines.push(listing.description);
+    lines.push(prettifyDescription(listing.description));
   }
 
   if (withSiteLink && listing.slug && !withSoldMark) {
