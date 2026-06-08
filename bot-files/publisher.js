@@ -90,6 +90,21 @@ export function formatCard(listing, { withSiteLink = true, withSoldMark = false 
   return lines.join('\n');
 }
 
+/** Повтор с паузой: до attempts попыток, между ними delayMs */
+async function withRetry(fn, attempts = 3, delayMs = 3000) {
+  let lastErr;
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      console.error(`[publisher] попытка ${i}/${attempts} не удалась: ${e.message}`);
+      if (i < attempts) await new Promise(r => setTimeout(r, delayMs));
+    }
+  }
+  throw lastErr;
+}
+
 /**
  * Публикует в Telegram-канал (фото + подпись)
  * @returns {Promise<{message_id: number, chat_id: number}>}
@@ -103,16 +118,18 @@ export async function publishToTelegram(listing, photoPaths) {
 
   // Если 1 фото — отправляем как sendPhoto
   if (photoPaths.length === 1) {
-    const form = new FormData();
-    form.append('chat_id', TG_CHANNEL_ID);
-    form.append('caption', caption);
-    form.append('photo', fs.createReadStream(photoPaths[0]));
-
-    const res = await axios.post(
-      `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendPhoto`,
-      form,
-      { headers: form.getHeaders(), timeout: 30000, maxContentLength: Infinity, maxBodyLength: Infinity }
-    );
+    // Форму пересобираем на каждой попытке: стримы одноразовые
+    const res = await withRetry(() => {
+      const form = new FormData();
+      form.append('chat_id', TG_CHANNEL_ID);
+      form.append('caption', caption);
+      form.append('photo', fs.createReadStream(photoPaths[0]));
+      return axios.post(
+        `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendPhoto`,
+        form,
+        { headers: form.getHeaders(), timeout: 120000, maxContentLength: Infinity, maxBodyLength: Infinity }
+      );
+    });
 
     if (!res.data.ok) throw new Error(`TG: ${res.data.description}`);
     return { message_id: res.data.result.message_id, chat_id: res.data.result.chat.id };
@@ -125,18 +142,19 @@ export async function publishToTelegram(listing, photoPaths) {
     ...(i === 0 ? { caption } : {}),
   }));
 
-  const form = new FormData();
-  form.append('chat_id', TG_CHANNEL_ID);
-  form.append('media', JSON.stringify(media));
-  photoPaths.forEach((p, i) => {
-    form.append(`photo${i}`, fs.createReadStream(p));
+  const res = await withRetry(() => {
+    const form = new FormData();
+    form.append('chat_id', TG_CHANNEL_ID);
+    form.append('media', JSON.stringify(media));
+    photoPaths.forEach((p, i) => {
+      form.append(`photo${i}`, fs.createReadStream(p));
+    });
+    return axios.post(
+      `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMediaGroup`,
+      form,
+      { headers: form.getHeaders(), timeout: 180000, maxContentLength: Infinity, maxBodyLength: Infinity }
+    );
   });
-
-  const res = await axios.post(
-    `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMediaGroup`,
-    form,
-    { headers: form.getHeaders(), timeout: 60000, maxContentLength: Infinity, maxBodyLength: Infinity }
-  );
 
   if (!res.data.ok) throw new Error(`TG: ${res.data.description}`);
   // sendMediaGroup возвращает массив — берём первый message_id
