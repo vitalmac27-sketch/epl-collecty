@@ -280,11 +280,11 @@ export async function publishToVK(listing, photoPaths) {
   if (!VK_TOKEN || !VK_GROUP_ID) throw new Error('VK_TOKEN или VK_GROUP_ID не указан');
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
-  // Загружаем все фото на ВК
+  // Загружаем все фото на ВК (с повторами — VK иногда отдаёт разовые 504)
   const attachments = [];
   for (const path of photoPaths.slice(0, 10)) { // ВК максимум 10 attachments
     try {
-      const att = await uploadPhotoToVK(path);
+      const att = await withRetry(() => uploadPhotoToVK(path), 3, 2000);
       attachments.push(att);
     } catch (e) {
       console.error('[publisher] VK upload photo error:', e.message);
