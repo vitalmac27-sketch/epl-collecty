@@ -14,6 +14,7 @@ import CategoryGrid from "@/components/sections/CategoryGrid";
 import QuizContainer from "@/components/quiz/QuizContainer";
 import OrderSummary from "@/components/quiz/OrderSummary";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import BuIphoneHomeSection from "@/components/sections/BuIphoneHomeSection";
 import BenefitsSection from "@/components/sections/BenefitsSection";
 import SeoTextSection from "@/components/sections/SeoTextSection";
 import FaqSection from "@/components/sections/FaqSection";
@@ -111,6 +112,9 @@ export default function HomePage() {
               </aside>
             </div>
           </section>
+
+          {/* ── Б/У iPhone с гарантией ── */}
+          <BuIphoneHomeSection />
 
           {/* ── Отзывы ── */}
           <TestimonialsSection />
