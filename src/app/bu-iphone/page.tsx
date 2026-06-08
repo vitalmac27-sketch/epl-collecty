@@ -53,8 +53,7 @@ export default function BuIphonePage() {
             Б/У iPhone в Казани с гарантией
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Проверенные iPhone 13–17 с пробегом. Гарантия 60 дней, отвязаны от Apple ID,
-            ремонт/замена при необходимости.
+            Проверенные iPhone 13–17 Max. Гарантия 60 дней, отвязаны от Apple ID.
           </p>
         </div>
 
