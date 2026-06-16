@@ -415,7 +415,7 @@ async function makeInstagramCover(srcPath, listing, outPath) {
   const batt = listing.battery ? `АКБ ${escapeXml(String(listing.battery))}%` : '';
   const battY = H - pad;
   const titleY = battY - subSize - gap;
-  const scrimTop = Math.round(H * 0.5);
+  const scrimTop = titleY - titleSize - Math.round(H * 0.04); // градиент только под текстом
   const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
     <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="black" stop-opacity="0"/>
@@ -423,7 +423,7 @@ async function makeInstagramCover(srcPath, listing, outPath) {
     </linearGradient></defs>
     <rect x="0" y="${scrimTop}" width="${W}" height="${H - scrimTop}" fill="url(#g)"/>
     <text x="${pad}" y="${titleY}" font-family="DejaVu Sans" font-size="${titleSize}" font-weight="bold" fill="#ffffff">${model}</text>
-    ${batt ? `<text x="${pad}" y="${battY}" font-family="DejaVu Sans" font-size="${subSize}" font-weight="bold" fill="#c8f000">${batt}</text>` : ''}
+    ${batt ? `<text x="${pad}" y="${battY}" font-family="DejaVu Sans" font-size="${subSize}" font-weight="bold" fill="#ededed">${batt}</text>` : ''}
   </svg>`;
   await base.composite([{ input: Buffer.from(svg), top: 0, left: 0 }]).jpeg({ quality: 90 }).toFile(outPath);
 }
