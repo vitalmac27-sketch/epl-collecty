@@ -4,6 +4,7 @@ import axios from 'axios';
 import fs from 'fs';
 import FormData from 'form-data';
 import { HttpsProxyAgent } from 'https-proxy-agent';
+import sharp from 'sharp';
 
 const TG_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TG_CHANNEL_ID = process.env.TG_CHANNEL_ID; // -1003862359021
@@ -397,12 +398,54 @@ async function uploadToZernio(filePath, contentType) {
  * Публикует в Instagram (лента, до 10 фото каруселью) через Zernio
  * @returns {Promise<{post_id: string}>}
  */
+function escapeXml(s) {
+  return String(s).replace(/[<>&'"]/g, c => ({ '<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;' }[c]));
+}
+
+/** Рисует обложку для Instagram: модель · память крупно + АКБ зелёным, тёмная подложка снизу */
+async function makeInstagramCover(srcPath, listing, outPath) {
+  const base = sharp(srcPath);
+  const meta = await base.metadata();
+  const W = meta.width, H = meta.height;
+  const pad = Math.round(W * 0.055);
+  const titleSize = Math.round(W * 0.075);
+  const subSize = Math.round(W * 0.05);
+  const gap = Math.round(W * 0.03);
+  const model = escapeXml([listing.model, listing.storage].filter(Boolean).join(' · '));
+  const batt = listing.battery ? `АКБ ${escapeXml(String(listing.battery))}%` : '';
+  const battY = H - pad;
+  const titleY = battY - subSize - gap;
+  const scrimTop = Math.round(H * 0.5);
+  const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="black" stop-opacity="0"/>
+      <stop offset="1" stop-color="black" stop-opacity="0.82"/>
+    </linearGradient></defs>
+    <rect x="0" y="${scrimTop}" width="${W}" height="${H - scrimTop}" fill="url(#g)"/>
+    <text x="${pad}" y="${titleY}" font-family="DejaVu Sans" font-size="${titleSize}" font-weight="bold" fill="#ffffff">${model}</text>
+    ${batt ? `<text x="${pad}" y="${battY}" font-family="DejaVu Sans" font-size="${subSize}" font-weight="bold" fill="#c8f000">${batt}</text>` : ''}
+  </svg>`;
+  await base.composite([{ input: Buffer.from(svg), top: 0, left: 0 }]).jpeg({ quality: 90 }).toFile(outPath);
+}
+
 export async function publishToInstagram(listing, photoPaths) {
   if (!ZERNIO_API_KEY || !ZERNIO_ACCOUNT_ID) throw new Error('ZERNIO_API_KEY или ZERNIO_ACCOUNT_ID не указан в .env');
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
+  // Первое фото → обложка с моделью/памятью/АКБ (как в постах-новостях)
+  const uploadPaths = photoPaths.slice(0, 10);
+  let coverPath = null;
+  try {
+    coverPath = uploadPaths[0] + '.ig-cover.jpg';
+    await makeInstagramCover(uploadPaths[0], listing, coverPath);
+    uploadPaths[0] = coverPath;
+  } catch (e) {
+    console.error('[publisher] cover error:', e.message);
+    coverPath = null;
+  }
+
   const mediaItems = [];
-  for (const p of photoPaths.slice(0, 10)) { // Instagram карусель — максимум 10
+  for (const p of uploadPaths) {
     try {
       const url = await withRetry(() => uploadToZernio(p, 'image/jpeg'), 3, 2000);
       mediaItems.push({ type: 'image', url });
@@ -410,6 +453,7 @@ export async function publishToInstagram(listing, photoPaths) {
       console.error('[publisher] Zernio upload error:', e.message);
     }
   }
+  if (coverPath) { try { fs.unlinkSync(coverPath); } catch {} }
   if (mediaItems.length === 0) throw new Error('Не удалось загрузить ни одного фото в Zernio');
 
   // В Instagram ссылки в подписи не кликабельны — без ссылки на сайт; режем до 2200
