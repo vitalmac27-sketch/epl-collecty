@@ -303,8 +303,10 @@ async function processNewListing(ctx, userId) {
     `\n\n📸 Фото: ${localPaths.length} шт\n🔗 URL: /bu-iphone/${slug}`,
     Markup.inlineKeyboard([
       [Markup.button.callback('🟢 Только сайт', `pub_site_${listingId}`)],
-      [Markup.button.callback('📢 Сайт + Telegram', `pub_tg_${listingId}`)],
-      [Markup.button.callback('🌐 Везде (Сайт + ТГ + ВК + IG)', `pub_all_${listingId}`)],
+      [Markup.button.callback('✈️ Сайт + ТГ', `pub_tg_${listingId}`),
+       Markup.button.callback('🅥 Сайт + ВК', `pub_vk_${listingId}`),
+       Markup.button.callback('📸 Сайт + IG', `pub_ig_${listingId}`)],
+      [Markup.button.callback('🌐 Везде (ТГ + ВК + IG)', `pub_all_${listingId}`)],
       [Markup.button.callback('✏️ Изменить цену', `editprice_${listingId}`),
        Markup.button.callback('❌ Отмена', `cancel_${listingId}`)],
     ])
@@ -338,6 +340,40 @@ bot.action(/^pub_tg_(\d+)$/, async (ctx) => {
     await ctx.editMessageText(`⚠️ #${id} на сайте, но в Telegram ошибка:\n${e.message}`);
   }
 
+  delete userState[ctx.from.id];
+});
+
+bot.action(/^pub_vk_(\d+)$/, async (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  await ctx.answerCbQuery('Публикую во ВКонтакте...');
+  const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  row.photos = JSON.parse(row.photos || '[]');
+  const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
+  try {
+    const vk = await publishToVK(row, localPaths);
+    db.prepare("UPDATE listings SET status = 'active', vk_post_id = ? WHERE id = ?").run(vk.post_id, id);
+    await ctx.editMessageText(`✅ #${id} опубликован:\n• Сайт ✓\n• ВКонтакте ✓`);
+  } catch (e) {
+    db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
+    await ctx.editMessageText(`⚠️ #${id} на сайте, но во ВКонтакте ошибка:\n${e.message}`);
+  }
+  delete userState[ctx.from.id];
+});
+
+bot.action(/^pub_ig_(\d+)$/, async (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  await ctx.answerCbQuery('Публикую в Instagram...');
+  const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  row.photos = JSON.parse(row.photos || '[]');
+  const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
+  try {
+    const ig = await publishToInstagram(row, localPaths);
+    db.prepare("UPDATE listings SET status = 'active', ig_post_id = ? WHERE id = ?").run(ig.post_id, id);
+    await ctx.editMessageText(`✅ #${id} опубликован:\n• Сайт ✓\n• Instagram ✓`);
+  } catch (e) {
+    db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
+    await ctx.editMessageText(`⚠️ #${id} на сайте, но в Instagram ошибка:\n${e.message}`);
+  }
   delete userState[ctx.from.id];
 });
 

@@ -11,6 +11,7 @@ const VK_TOKEN = process.env.VK_TOKEN;
 const VK_GROUP_ID = process.env.VK_GROUP_ID;
 const VK_API_VERSION = '5.199';
 const SITE_URL = process.env.SITE_URL || 'https://xn----jtbjgbccazg9frdtb.xn--p1ai';
+const SITE_URL_HUMAN = process.env.SITE_URL_HUMAN || 'https://эпл-коллекция.рф'; // кириллица для ссылок в постах
 
 // Telegram через локальный gost-прокси (прямого маршрута с VPS нет)
 const TG_PROXY = process.env.TG_PROXY || 'http://127.0.0.1:8080';
@@ -85,7 +86,7 @@ export function formatCard(listing, { withSiteLink = true, withSoldMark = false 
 
   if (withSiteLink && listing.slug && !withSoldMark) {
     lines.push('');
-    lines.push(`🛒 Купить: ${SITE_URL}/bu-iphone/item?slug=${listing.slug}`);
+    lines.push(`🛒 Купить: ${SITE_URL_HUMAN}/bu-iphone/item?slug=${listing.slug}`);
   }
 
   if (!withSoldMark) {
