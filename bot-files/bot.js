@@ -9,6 +9,7 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 import { parseListingText } from './text-parser.js';
 import {
   formatCard,
@@ -20,7 +21,12 @@ import {
 
 import dns from 'node:dns';
 // Telegram по IPv4 в РФ часто заблокирован провайдером — резолвим с приоритетом IPv6 (он работает)
-dns.setDefaultResultOrder('ipv6first');
+dns.setDefaultResultOrder('ipv4first'); // IPv6 на VPS пропал — резолвим по IPv4
+
+// Telegram напрямую недоступен (нет IPv6, IPv4 режут) — ходим через локальный gost-прокси
+const TG_PROXY = process.env.TG_PROXY || 'http://127.0.0.1:8080';
+const tgAgent = TG_PROXY ? new HttpsProxyAgent(TG_PROXY) : undefined;
+const tg = axios.create(tgAgent ? { httpsAgent: tgAgent, proxy: false } : {});
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const ALLOWED_USER_IDS = (process.env.ALLOWED_USER_IDS || process.env.ALLOWED_USER_ID || '')
@@ -46,7 +52,7 @@ ensureColumn('tg_message_id', 'INTEGER');
 ensureColumn('vk_post_id', 'INTEGER');
 ensureColumn('ig_post_id', 'TEXT');
 
-const bot = new Telegraf(BOT_TOKEN);
+const bot = new Telegraf(BOT_TOKEN, tgAgent ? { telegram: { agent: tgAgent } } : undefined);
 
 // Только разрешённый пользователь
 bot.use((ctx, next) => {
@@ -96,7 +102,7 @@ async function refreshPosts(id) {
 // === Скачивание фото из Telegram ===
 async function downloadTelegramPhoto(fileId, savePath) {
   // Получаем file_path
-  const fileRes = await axios.get(
+  const fileRes = await tg.get(
     `https://api.telegram.org/bot${BOT_TOKEN}/getFile`,
     { params: { file_id: fileId }, timeout: 15000 }
   );
@@ -105,7 +111,7 @@ async function downloadTelegramPhoto(fileId, savePath) {
 
   // Скачиваем
   const fileUrl = `https://api.telegram.org/file/bot${BOT_TOKEN}/${filePath}`;
-  const resp = await axios.get(fileUrl, { responseType: 'arraybuffer', timeout: 30000 });
+  const resp = await tg.get(fileUrl, { responseType: 'arraybuffer', timeout: 30000 });
   fs.writeFileSync(savePath, Buffer.from(resp.data));
   return savePath;
 }

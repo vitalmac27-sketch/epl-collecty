@@ -3,6 +3,7 @@ import 'dotenv/config';
 import axios from 'axios';
 import fs from 'fs';
 import FormData from 'form-data';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 const TG_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TG_CHANNEL_ID = process.env.TG_CHANNEL_ID; // -1003862359021
@@ -10,6 +11,11 @@ const VK_TOKEN = process.env.VK_TOKEN;
 const VK_GROUP_ID = process.env.VK_GROUP_ID;
 const VK_API_VERSION = '5.199';
 const SITE_URL = process.env.SITE_URL || 'https://xn----jtbjgbccazg9frdtb.xn--p1ai';
+
+// Telegram через локальный gost-прокси (прямого маршрута с VPS нет)
+const TG_PROXY = process.env.TG_PROXY || 'http://127.0.0.1:8080';
+const tgAgent = TG_PROXY ? new HttpsProxyAgent(TG_PROXY) : undefined;
+const tg = axios.create(tgAgent ? { httpsAgent: tgAgent, proxy: false } : {});
 
 /** Русское склонение существительного по числу: (1 цикл, 2 цикла, 5 циклов) */
 function plural(n, one, few, many) {
@@ -124,7 +130,7 @@ export async function publishToTelegram(listing, photoPaths) {
       form.append('chat_id', TG_CHANNEL_ID);
       form.append('caption', caption);
       form.append('photo', fs.createReadStream(photoPaths[0]));
-      return axios.post(
+      return tg.post(
         `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendPhoto`,
         form,
         { headers: form.getHeaders(), timeout: 120000, maxContentLength: Infinity, maxBodyLength: Infinity }
@@ -149,7 +155,7 @@ export async function publishToTelegram(listing, photoPaths) {
     photoPaths.forEach((p, i) => {
       form.append(`photo${i}`, fs.createReadStream(p));
     });
-    return axios.post(
+    return tg.post(
       `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMediaGroup`,
       form,
       { headers: form.getHeaders(), timeout: 180000, maxContentLength: Infinity, maxBodyLength: Infinity }
@@ -168,7 +174,7 @@ export async function editTelegramCaption(messageId, listing) {
   if (!TG_CHANNEL_ID) return;
   const caption = formatCard(listing, { withSiteLink: false });
   try {
-    await axios.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/editMessageCaption`, {
+    await tg.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/editMessageCaption`, {
       chat_id: TG_CHANNEL_ID,
       message_id: messageId,
       caption,
@@ -208,7 +214,7 @@ export async function markTelegramSold(messageId, listing) {
   const caption = formatCard(listing, { withSoldMark: true });
 
   try {
-    await axios.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/editMessageCaption`, {
+    await tg.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/editMessageCaption`, {
       chat_id: TG_CHANNEL_ID,
       message_id: messageId,
       caption,
@@ -224,7 +230,7 @@ export async function markTelegramSold(messageId, listing) {
 export async function deleteTelegramPost(messageId) {
   if (!TG_CHANNEL_ID) return;
   try {
-    await axios.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/deleteMessage`, {
+    await tg.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/deleteMessage`, {
       chat_id: TG_CHANNEL_ID,
       message_id: messageId,
     });
