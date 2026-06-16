@@ -14,6 +14,7 @@ import {
   formatCard,
   publishToTelegram, markTelegramSold, deleteTelegramPost,
   publishToVK, markVKSold, deleteVKPost,
+  publishToInstagram,
   editTelegramCaption, editVKPost,
 } from './publisher.js';
 
@@ -22,7 +23,8 @@ import dns from 'node:dns';
 dns.setDefaultResultOrder('ipv6first');
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const ALLOWED_USER_ID = parseInt(process.env.ALLOWED_USER_ID);
+const ALLOWED_USER_IDS = (process.env.ALLOWED_USER_IDS || process.env.ALLOWED_USER_ID || '')
+  .split(',').map(s => parseInt(s.trim(), 10)).filter(Boolean);
 const API_PORT = parseInt(process.env.API_PORT || 3001);
 const DB_PATH = process.env.DB_PATH || '/opt/bu-bot/db/database.sqlite';
 const PHOTOS_PATH = process.env.PHOTOS_PATH || '/opt/bu-bot/photos';
@@ -42,6 +44,7 @@ ensureColumn('sim_type', 'TEXT');
 ensureColumn('cycles', 'INTEGER');
 ensureColumn('tg_message_id', 'INTEGER');
 ensureColumn('vk_post_id', 'INTEGER');
+ensureColumn('ig_post_id', 'TEXT');
 
 const bot = new Telegraf(BOT_TOKEN);
 
@@ -49,7 +52,7 @@ const bot = new Telegraf(BOT_TOKEN);
 bot.use((ctx, next) => {
   // На посты в каналах/группах не реагируем — отвечаем только в личке
   if (ctx.chat?.type && ctx.chat.type !== 'private') return;
-  if (ctx.from?.id !== ALLOWED_USER_ID) {
+  if (!ALLOWED_USER_IDS.includes(ctx.from?.id)) {
     console.log(`[bot] Доступ запрещён: ${ctx.from?.id}`);
     return ctx.reply('🚫 Доступ запрещён');
   }
@@ -295,7 +298,7 @@ async function processNewListing(ctx, userId) {
     Markup.inlineKeyboard([
       [Markup.button.callback('🟢 Только сайт', `pub_site_${listingId}`)],
       [Markup.button.callback('📢 Сайт + Telegram', `pub_tg_${listingId}`)],
-      [Markup.button.callback('🌐 Везде (Сайт + ТГ + ВК)', `pub_all_${listingId}`)],
+      [Markup.button.callback('🌐 Везде (Сайт + ТГ + ВК + IG)', `pub_all_${listingId}`)],
       [Markup.button.callback('✏️ Изменить цену', `editprice_${listingId}`),
        Markup.button.callback('❌ Отмена', `cancel_${listingId}`)],
     ])
@@ -358,6 +361,15 @@ bot.action(/^pub_all_(\d+)$/, async (ctx) => {
     results.push('• ВКонтакте ✓');
   } catch (e) {
     results.push(`• ВКонтакте ✗ (${e.message})`);
+  }
+
+  // Instagram (через Zernio)
+  try {
+    const ig = await publishToInstagram(row, localPaths);
+    db.prepare('UPDATE listings SET ig_post_id = ? WHERE id = ?').run(ig.post_id, id);
+    results.push('• Instagram ✓');
+  } catch (e) {
+    results.push(`• Instagram ✗ (${e.message})`);
   }
 
   db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);

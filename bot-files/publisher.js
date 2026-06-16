@@ -353,3 +353,72 @@ export async function deleteVKPost(postId) {
     console.error('[publisher] VK delete error:', e.message);
   }
 }
+
+// ============================================================
+// === Instagram через Zernio (zernio.com) ===
+// ============================================================
+const ZERNIO_API_KEY = process.env.ZERNIO_API_KEY;
+const ZERNIO_ACCOUNT_ID = process.env.ZERNIO_ACCOUNT_ID;
+const ZERNIO_BASE = 'https://zernio.com/api/v1';
+
+/** Обрезает подпись до лимита по границе слова */
+function trimToLimit(text, limit) {
+  if (!text || text.length <= limit) return text;
+  const cut = text.slice(0, limit);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > limit * 0.6 ? cut.slice(0, lastSpace) : cut).trimEnd() + '…';
+}
+
+/** Заливает локальный файл в хранилище Zernio → возвращает публичный URL */
+async function uploadToZernio(filePath, contentType) {
+  const filename = filePath.split('/').pop() || 'media.jpg';
+  const presign = await axios.post(`${ZERNIO_BASE}/media/presign`,
+    { filename, contentType },
+    { headers: { Authorization: `Bearer ${ZERNIO_API_KEY}`, 'Content-Type': 'application/json' }, timeout: 30000 });
+  const { uploadUrl, publicUrl } = presign.data || {};
+  if (!uploadUrl || !publicUrl) throw new Error('Zernio presign: пустой ответ');
+
+  const bytes = fs.readFileSync(filePath);
+  await axios.put(uploadUrl, bytes, {
+    headers: { 'Content-Type': contentType },
+    timeout: 120000, maxContentLength: Infinity, maxBodyLength: Infinity,
+  });
+  return publicUrl;
+}
+
+/**
+ * Публикует в Instagram (лента, до 10 фото каруселью) через Zernio
+ * @returns {Promise<{post_id: string}>}
+ */
+export async function publishToInstagram(listing, photoPaths) {
+  if (!ZERNIO_API_KEY || !ZERNIO_ACCOUNT_ID) throw new Error('ZERNIO_API_KEY или ZERNIO_ACCOUNT_ID не указан в .env');
+  if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
+
+  const mediaItems = [];
+  for (const p of photoPaths.slice(0, 10)) { // Instagram карусель — максимум 10
+    try {
+      const url = await withRetry(() => uploadToZernio(p, 'image/jpeg'), 3, 2000);
+      mediaItems.push({ type: 'image', url });
+    } catch (e) {
+      console.error('[publisher] Zernio upload error:', e.message);
+    }
+  }
+  if (mediaItems.length === 0) throw new Error('Не удалось загрузить ни одного фото в Zernio');
+
+  // В Instagram ссылки в подписи не кликабельны — без ссылки на сайт; режем до 2200
+  const caption = trimToLimit(formatCard(listing, { withSiteLink: false }), 2200);
+
+  const postRes = await withRetry(() => axios.post(`${ZERNIO_BASE}/posts`,
+    {
+      content: caption,
+      publishNow: true,
+      mediaItems,
+      platforms: [{ platform: 'instagram', accountId: ZERNIO_ACCOUNT_ID }],
+    },
+    { headers: { Authorization: `Bearer ${ZERNIO_API_KEY}`, 'Content-Type': 'application/json' }, timeout: 60000 }
+  ), 3, 3000);
+
+  const data = postRes.data || {};
+  const postId = data.id || data.postId || (data.post && data.post.id) || 'ok';
+  return { post_id: String(postId) };
+}
