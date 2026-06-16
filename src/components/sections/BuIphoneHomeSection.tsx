@@ -7,7 +7,7 @@ import BuCard from "@/components/bu-iphone/BuCard";
 
 /**
  * Секция «Б/У iPhone с гарантией» на главной.
- * Показывает 3 самых свежих объявления + кнопку в каталог.
+ * Показывает свежие объявления (4 на мобильной 2×2, 3 на десктопе) + кнопку в каталог.
  * Если объявлений нет (или API недоступен) — секция не рендерится вовсе.
  */
 export default function BuIphoneHomeSection() {
@@ -16,7 +16,7 @@ export default function BuIphoneHomeSection() {
 
   useEffect(() => {
     fetchBuListings().then((data) => {
-      setListings(data.slice(0, 3)); // API отдаёт свежие первыми
+      setListings(data.slice(0, 4)); // 4 для моб. сетки 2×2; на десктопе 4-я скрыта
       setLoading(false);
     });
   }, []);
@@ -43,7 +43,7 @@ export default function BuIphoneHomeSection() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:[&>*:nth-child(4)]:hidden">
         {listings.map((listing) => (
           <BuCard key={listing.id} listing={listing} />
         ))}
