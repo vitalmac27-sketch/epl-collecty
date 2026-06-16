@@ -52,7 +52,10 @@ ensureColumn('tg_message_id', 'INTEGER');
 ensureColumn('vk_post_id', 'INTEGER');
 ensureColumn('ig_post_id', 'TEXT');
 
-const bot = new Telegraf(BOT_TOKEN, tgAgent ? { telegram: { agent: tgAgent } } : undefined);
+const bot = new Telegraf(BOT_TOKEN, {
+  handlerTimeout: 600000, // 10 мин: публикация с фото в ТГ+ВК+IG может идти дольше 90с
+  ...(tgAgent ? { telegram: { agent: tgAgent } } : {}),
+});
 
 // Только разрешённый пользователь
 bot.use((ctx, next) => {
