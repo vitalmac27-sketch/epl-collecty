@@ -1,7 +1,12 @@
 // API клиент для каталога б/у iPhone
 // Данные подгружаются с нашего VPS через https://api.эпл-коллекция.рф
 
+import { PROXY_URL } from "./proxy";
+
+// Прямой адрес VPS (резерв/отладка). Из-под VPN прямой путь к РФ-IP рвёт DPI.
 export const BU_API_URL = "https://api.xn----jtbjgbccazg9frdtb.xn--p1ai";
+// Рабочий адрес — через Cloudflare Worker: доступен и из-под VPN.
+const API_BASE = PROXY_URL;
 
 export type BuStatus = "active" | "reserved" | "sold";
 
@@ -32,13 +37,13 @@ export type BuListingsResponse = {
 export function buPhotoUrl(relativePath: string): string {
   if (!relativePath) return "";
   if (relativePath.startsWith("http")) return relativePath;
-  return `${BU_API_URL}${relativePath}`;
+  return `${API_BASE}${relativePath}`;
 }
 
 /** Получить все активные/резерв объявления */
 export async function fetchBuListings(): Promise<BuListing[]> {
   try {
-    const res = await fetch(`${BU_API_URL}/api/bu-iphone`, {
+    const res = await fetch(`${API_BASE}/api/bu-iphone`, {
       cache: "no-store",
     });
     if (!res.ok) return [];
@@ -53,7 +58,7 @@ export async function fetchBuListings(): Promise<BuListing[]> {
 /** Получить одно объявление по slug */
 export async function fetchBuListing(slug: string): Promise<BuListing | null> {
   try {
-    const res = await fetch(`${BU_API_URL}/api/bu-iphone/${slug}`, {
+    const res = await fetch(`${API_BASE}/api/bu-iphone/${slug}`, {
       cache: "no-store",
     });
     if (!res.ok) return null;

@@ -1,8 +1,13 @@
-// Cloudflare Worker — прокси для отправки заявок в Telegram
+// Cloudflare Worker — прокси заявок в Telegram + прокси API/фото с VPS
 // Деплой: https://workers.cloudflare.com
+// API/фото проксируются, чтобы каталог открывался в т.ч. из-под VPN
+// (прямой путь к российскому IP VPS рвётся DPI, а Cloudflare доступен отовсюду).
 
 const BOT_TOKEN = "8264534520:AAGO0VhrB51vWxf1329wmzeRw_kW2Ud29yw";
 const CHAT_ID   = "5549559991";
+
+// Источник API на VPS (punycode)
+const ORIGIN = "https://api.xn----jtbjgbccazg9frdtb.xn--p1ai";
 
 // Разрешённые источники (CORS)
 const ALLOWED_ORIGINS = [
@@ -15,13 +20,34 @@ const ALLOWED_ORIGINS = [
 export default {
   async fetch(request) {
     const origin = request.headers.get("Origin") || "";
+    const url = new URL(request.url);
 
     // CORS preflight
     if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: corsHeaders(origin),
-      });
+      return new Response(null, { status: 204, headers: corsHeaders(origin) });
+    }
+
+    // ─── Прокси API и фото с VPS (GET) ──────────────────────────────
+    if (request.method === "GET" &&
+        (url.pathname.startsWith("/api/bu-iphone") || url.pathname.startsWith("/photos/"))) {
+      try {
+        const upstream = await fetch(ORIGIN + url.pathname + url.search, {
+          method: "GET",
+          headers: { Accept: request.headers.get("Accept") || "*/*" },
+        });
+        const headers = new Headers(upstream.headers);
+        headers.set("Access-Control-Allow-Origin", "*");
+        headers.set(
+          "Cache-Control",
+          url.pathname.startsWith("/photos/") ? "public, max-age=86400" : "no-store"
+        );
+        return new Response(upstream.body, { status: upstream.status, headers });
+      } catch (e) {
+        return new Response(JSON.stringify({ error: "upstream", detail: String(e) }), {
+          status: 502,
+          headers: { ...corsHeaders(origin), "Content-Type": "application/json" },
+        });
+      }
     }
 
     if (request.method !== "POST") {
@@ -38,10 +64,8 @@ export default {
       });
     }
 
-    // Формируем сообщение в зависимости от типа заявки
     const text = buildMessage(body);
 
-    // Отправляем в Telegram
     const tgRes = await fetch(
       `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
       {
@@ -76,7 +100,6 @@ export default {
 function buildMessage(d) {
   const lines = [];
 
-  // Тип заявки
   const isTradeIn  = d.model?.includes("Trade-in") || d.simType === "Trade-in";
   const isQuiz     = d.purchaseTiming && !d.model?.includes("Trade-in") && !d._formType;
 
@@ -99,7 +122,6 @@ function buildMessage(d) {
     lines.push(`⏱ *Когда:* ${timingLabel(d.purchaseTiming)}`);
     lines.push(`💳 *Оплата:* ${d.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка 0%"}`);
   } else {
-    // Заявка с карточки товара
     lines.push("🛒 *Новая заявка с карточки товара!*", "");
     lines.push(`📱 *Модель:* ${clean(d.model)}`);
     if (d.storage && d.storage !== d.model) lines.push(`⚙️ *Конфигурация:* ${clean(d.storage)}`);
@@ -121,7 +143,7 @@ function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
     "Access-Control-Allow-Origin":  allowed,
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
 }
