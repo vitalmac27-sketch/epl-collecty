@@ -408,22 +408,37 @@ async function makeInstagramCover(srcPath, listing, outPath) {
   const meta = await base.metadata();
   const W = meta.width, H = meta.height;
   const pad = Math.round(W * 0.055);
-  const titleSize = Math.round(W * 0.075);
-  const subSize = Math.round(W * 0.05);
-  const gap = Math.round(W * 0.03);
-  const model = escapeXml([listing.model, listing.storage].filter(Boolean).join(' · '));
-  const batt = listing.battery ? `АКБ ${escapeXml(String(listing.battery))}%` : '';
-  const battY = H - pad;
-  const titleY = battY - subSize - gap;
-  const scrimTop = titleY - titleSize - Math.round(H * 0.04); // градиент только под текстом
+  const availW = W - pad * 2;
+  // авто-подбор размера, чтобы строка влезала по ширине
+  const fit = (text, desired) => {
+    const est = (text || '').length * 0.58 * desired;
+    return est <= availW ? desired : Math.max(Math.floor(availW / ((text || 'x').length * 0.58)), Math.round(W * 0.038));
+  };
+  const titleSize = Math.round(W * 0.07);
+  const subSize = Math.round(W * 0.046);
+  // строки: модель / память / АКБ
+  const lines = [];
+  lines.push({ t: escapeXml(listing.model || ''), s: fit(listing.model, titleSize), c: '#ffffff' });
+  if (listing.storage) lines.push({ t: escapeXml(listing.storage), s: fit(listing.storage, titleSize), c: '#ffffff' });
+  if (listing.battery) lines.push({ t: `АКБ ${escapeXml(String(listing.battery))}%`, s: subSize, c: '#ededed' });
+  // baseline снизу вверх
+  let y = H - pad;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    lines[i].y = y;
+    if (i > 0) y -= Math.round(lines[i - 1].s * 1.18);
+  }
+  const topY = lines[0].y - lines[0].s;
+  const scrimTop = Math.max(0, topY - Math.round(H * 0.05));
+  const texts = lines
+    .map(l => `<text x="${pad}" y="${l.y}" font-family="DejaVu Sans" font-size="${l.s}" font-weight="bold" fill="${l.c}">${l.t}</text>`)
+    .join('\n    ');
   const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
     <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="black" stop-opacity="0"/>
       <stop offset="1" stop-color="black" stop-opacity="0.82"/>
     </linearGradient></defs>
     <rect x="0" y="${scrimTop}" width="${W}" height="${H - scrimTop}" fill="url(#g)"/>
-    <text x="${pad}" y="${titleY}" font-family="DejaVu Sans" font-size="${titleSize}" font-weight="bold" fill="#ffffff">${model}</text>
-    ${batt ? `<text x="${pad}" y="${battY}" font-family="DejaVu Sans" font-size="${subSize}" font-weight="bold" fill="#ededed">${batt}</text>` : ''}
+    ${texts}
   </svg>`;
   await base.composite([{ input: Buffer.from(svg), top: 0, left: 0 }]).jpeg({ quality: 90 }).toFile(outPath);
 }
