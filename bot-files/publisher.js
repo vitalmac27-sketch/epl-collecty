@@ -422,7 +422,7 @@ async function makeInstagramCover(srcPath, listing, outPath) {
   if (listing.storage) lines.push({ t: escapeXml(listing.storage), s: fit(listing.storage, titleSize), c: '#ffffff' });
   if (listing.battery) lines.push({ t: `АКБ ${escapeXml(String(listing.battery))}%`, s: subSize, c: '#ededed' });
   // baseline снизу вверх
-  let y = H - pad;
+  let y = H - Math.round(H * 0.14); // запас снизу под UI инстаграма (глазик/кнопки)
   for (let i = lines.length - 1; i >= 0; i--) {
     lines[i].y = y;
     if (i > 0) y -= Math.round(lines[i - 1].s * 1.18);
