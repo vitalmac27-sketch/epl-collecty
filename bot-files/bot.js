@@ -309,6 +309,8 @@ async function processNewListing(ctx, userId) {
       [Markup.button.callback('✈️ Сайт + ТГ', `pub_tg_${listingId}`),
        Markup.button.callback('🅥 Сайт + ВК', `pub_vk_${listingId}`),
        Markup.button.callback('📸 Сайт + IG', `pub_ig_${listingId}`)],
+      [Markup.button.callback('✈️ Только ТГ', `pub_tgonly_${listingId}`),
+       Markup.button.callback('📸 Только IG', `pub_igonly_${listingId}`)],
       [Markup.button.callback('🌐 Везде (ТГ + ВК + IG)', `pub_all_${listingId}`)],
       [Markup.button.callback('✏️ Изменить цену', `editprice_${listingId}`),
        Markup.button.callback('❌ Отмена', `cancel_${listingId}`)],
@@ -376,6 +378,38 @@ bot.action(/^pub_ig_(\d+)$/, async (ctx) => {
   } catch (e) {
     db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
     await ctx.editMessageText(`⚠️ #${id} на сайте, но в Instagram ошибка:\n${e.message}`);
+  }
+  delete userState[ctx.from.id];
+});
+
+bot.action(/^pub_tgonly_(\d+)$/, async (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  await ctx.answerCbQuery('Публикую только в Telegram...');
+  const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  row.photos = JSON.parse(row.photos || '[]');
+  const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
+  try {
+    const tg = await publishToTelegram(row, localPaths);
+    db.prepare('UPDATE listings SET tg_message_id = ? WHERE id = ?').run(tg.message_id, id);
+    await ctx.editMessageText(`✅ #${id} — только Telegram ✓ (msg ${tg.message_id})\n(на сайт не добавлен)`);
+  } catch (e) {
+    await ctx.editMessageText(`❌ #${id} — ошибка Telegram:\n${e.message}`);
+  }
+  delete userState[ctx.from.id];
+});
+
+bot.action(/^pub_igonly_(\d+)$/, async (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  await ctx.answerCbQuery('Публикую только в Instagram...');
+  const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  row.photos = JSON.parse(row.photos || '[]');
+  const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
+  try {
+    const ig = await publishToInstagram(row, localPaths);
+    db.prepare('UPDATE listings SET ig_post_id = ? WHERE id = ?').run(ig.post_id, id);
+    await ctx.editMessageText(`✅ #${id} — только Instagram ✓\n(на сайт не добавлен)`);
+  } catch (e) {
+    await ctx.editMessageText(`❌ #${id} — ошибка Instagram:\n${e.message}`);
   }
   delete userState[ctx.from.id];
 });
