@@ -10,6 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import { HttpsProxyAgent } from 'https-proxy-agent';
+import sharp from 'sharp';
 import { parseListingText } from './text-parser.js';
 import {
   formatCard,
@@ -574,7 +575,28 @@ bot.command('delete', async (ctx) => {
 
 const app = express();
 app.use(cors());
-app.use('/photos', express.static(PHOTOS_PATH));
+// Фото: отдаём сжатую версию (макс. ширина 1080, качество 78), кэшируем на диск
+app.get('/photos/:id/:file', async (req, res) => {
+  const { id, file } = req.params;
+  if (!/^\d+$/.test(id) || !/^\d+\.jpg$/i.test(file)) return res.status(400).end();
+  const orig = path.join(PHOTOS_PATH, id, file);
+  if (!fs.existsSync(orig)) return res.status(404).end();
+  const opt = orig.replace(/\.jpg$/i, '.opt.jpg');
+  try {
+    if (!fs.existsSync(opt)) {
+      await sharp(orig).rotate().resize({ width: 1080, withoutEnlargement: true })
+        .jpeg({ quality: 78, progressive: true, mozjpeg: true }).toFile(opt);
+    }
+    res.set('Cache-Control', 'public, max-age=86400');
+    res.type('jpeg');
+    fs.createReadStream(opt).pipe(res);
+  } catch (e) {
+    console.error('[api] photo optimize error:', e.message);
+    res.set('Cache-Control', 'public, max-age=86400');
+    res.type('jpeg');
+    fs.createReadStream(orig).pipe(res);
+  }
+});
 
 app.get('/api/bu-iphone', (req, res) => {
   const rows = db.prepare(
