@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DEFAULT_CITY } from "@/lib/cities";
-import { buildLocalBusinessSchema } from "@/lib/schema";
 import { MapPin, Phone, Clock, MessageCircle, Send, Instagram, Youtube } from "lucide-react";
 
 const city = DEFAULT_CITY;
@@ -25,15 +24,10 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = buildLocalBusinessSchema(city);
 
 export default function ContactsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
       <div className="min-h-screen">
 
         {/* Hero */}

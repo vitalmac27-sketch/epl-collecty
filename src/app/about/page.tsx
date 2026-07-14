@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DEFAULT_CITY } from "@/lib/cities";
-import { buildLocalBusinessSchema } from "@/lib/schema";
 import {
   Shield, Star, Truck, CreditCard, Users, Award,
   CheckCircle, MapPin, Phone, Clock, MessageCircle,
@@ -27,7 +26,6 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = buildLocalBusinessSchema(city);
 
 const advantages = [
   {
@@ -72,10 +70,6 @@ const steps = [
 export default function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
       <div className="min-h-screen">
         {/* Hero */}
         <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 px-4">
