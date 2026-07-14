@@ -68,8 +68,7 @@ async function fetchWithFallback(path: string): Promise<Response | null> {
 export function buPhotoUrl(relativePath: string): string {
   if (!relativePath) return "";
   if (relativePath.startsWith("http")) return relativePath;
-  // фото всегда через воркер (Cloudflare): грузятся и под VPN, и сжимаются на его стороне
-  return `${PROXY_URL}${relativePath}`;
+  return `${activeBase}${relativePath}`;
 }
 
 /** Получить все активные/резерв объявления */
