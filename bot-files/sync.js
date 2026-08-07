@@ -54,10 +54,24 @@ export async function fetchSellerListings() {
 // 2) Детали новых объявлений по id (листинг-скрапер принимает и голые id)
 export async function fetchListingDetails(ids) {
   if (!ids || !ids.length) return [];
-  const items = await runActor(LISTINGS_ACTOR, {
-    listingUrls: ids.map(String),
-    includeDetails: true,
-  });
+  let items = [];
+  try {
+    items = await runActor(LISTINGS_ACTOR, { listingUrls: ids.map(String), includeDetails: true });
+  } catch (e) {
+    console.error('[sync] батч деталей упал:', e.message);
+  }
+  const have = new Set(items.map(d => String(d.id)));
+  const missing = ids.map(String).filter(id => !have.has(id));
+  if (missing.length) {
+    console.log(`[sync] добираю поштучно: ${missing.length}`);
+    for (const id of missing) {
+      try {
+        const one = await runActor(LISTINGS_ACTOR, { listingUrls: [id], includeDetails: true });
+        if (one[0]) items.push(one[0]);
+      } catch (e) { console.error('[sync] деталь', id, e.message); }
+    }
+  }
+  console.log(`[sync] деталей итого: ${items.length}/${ids.length}`);
   return items;
 }
 

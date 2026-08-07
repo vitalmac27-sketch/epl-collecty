@@ -550,7 +550,14 @@ bot.command('sync', async (ctx) => {
         (m.condition ? `✨ ${m.condition}\n` : '') +
         (m.price ? `💰 ${Number(m.price).toLocaleString('ru-RU')} ₽\n` : '') +
         `📸 Фото: ${rel.length}\n🔗 /bu-iphone/${slug}`;
-      await ctx.reply(preview, listingButtons(listingId));
+      if (rel.length) {
+        await ctx.replyWithPhoto(
+          { source: path.join(PHOTOS_PATH, rel[0].replace('/photos/', '')) },
+          { caption: preview, ...listingButtons(listingId) }
+        );
+      } else {
+        await ctx.reply(preview, listingButtons(listingId));
+      }
     } catch (e) {
       console.error('[sync] объявление', item.id, e.message);
       await ctx.reply(`⚠️ Объявление ${item.id} не удалось обработать: ${e.message}`);
