@@ -308,17 +308,7 @@ async function processNewListing(ctx, userId) {
   await ctx.reply(
     '📋 Карточка готова:\n\n' + formatPreview({ ...parsed, slug }) +
     `\n\n📸 Фото: ${localPaths.length} шт\n🔗 URL: /bu-iphone/${slug}`,
-    Markup.inlineKeyboard([
-      [Markup.button.callback('🟢 Только сайт', `pub_site_${listingId}`)],
-      [Markup.button.callback('✈️ Сайт + ТГ', `pub_tg_${listingId}`),
-       Markup.button.callback('🅥 Сайт + ВК', `pub_vk_${listingId}`),
-       Markup.button.callback('📸 Сайт + IG', `pub_ig_${listingId}`)],
-      [Markup.button.callback('✈️ Только ТГ', `pub_tgonly_${listingId}`),
-       Markup.button.callback('📸 Только IG', `pub_igonly_${listingId}`)],
-      [Markup.button.callback('🌐 Везде (ТГ + ВК + IG)', `pub_all_${listingId}`)],
-      [Markup.button.callback('✏️ Изменить цену', `editprice_${listingId}`),
-       Markup.button.callback('❌ Отмена', `cancel_${listingId}`)],
-    ])
+    listingButtons(listingId)
   );
 }
 
@@ -328,7 +318,7 @@ bot.action(/^pub_site_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
   db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
   delete userState[ctx.from.id];
-  await ctx.editMessageText(`✅ #${id} опубликован на сайте`);
+  await editCardResult(ctx, `✅ #${id} опубликован на сайте`);
   ctx.answerCbQuery('На сайте!');
 });
 
@@ -343,10 +333,10 @@ bot.action(/^pub_tg_(\d+)$/, async (ctx) => {
   try {
     const tg = await publishToTelegram(row, localPaths);
     db.prepare("UPDATE listings SET status = 'active', tg_message_id = ? WHERE id = ?").run(tg.message_id, id);
-    await ctx.editMessageText(`✅ #${id} опубликован:\n• Сайт ✓\n• Telegram ✓ (msg ${tg.message_id})`);
+    await editCardResult(ctx, `✅ #${id} опубликован:\n• Сайт ✓\n• Telegram ✓ (msg ${tg.message_id})`);
   } catch (e) {
     db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
-    await ctx.editMessageText(`⚠️ #${id} на сайте, но в Telegram ошибка:\n${e.message}`);
+    await editCardResult(ctx, `⚠️ #${id} на сайте, но в Telegram ошибка:\n${e.message}`);
   }
 
   delete userState[ctx.from.id];
@@ -361,10 +351,10 @@ bot.action(/^pub_vk_(\d+)$/, async (ctx) => {
   try {
     const vk = await publishToVK(row, localPaths);
     db.prepare("UPDATE listings SET status = 'active', vk_post_id = ? WHERE id = ?").run(vk.post_id, id);
-    await ctx.editMessageText(`✅ #${id} опубликован:\n• Сайт ✓\n• ВКонтакте ✓`);
+    await editCardResult(ctx, `✅ #${id} опубликован:\n• Сайт ✓\n• ВКонтакте ✓`);
   } catch (e) {
     db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
-    await ctx.editMessageText(`⚠️ #${id} на сайте, но во ВКонтакте ошибка:\n${e.message}`);
+    await editCardResult(ctx, `⚠️ #${id} на сайте, но во ВКонтакте ошибка:\n${e.message}`);
   }
   delete userState[ctx.from.id];
 });
@@ -378,10 +368,10 @@ bot.action(/^pub_ig_(\d+)$/, async (ctx) => {
   try {
     const ig = await publishToInstagram(row, localPaths);
     db.prepare("UPDATE listings SET status = 'active', ig_post_id = ? WHERE id = ?").run(ig.post_id, id);
-    await ctx.editMessageText(`✅ #${id} опубликован:\n• Сайт ✓\n• Instagram ✓`);
+    await editCardResult(ctx, `✅ #${id} опубликован:\n• Сайт ✓\n• Instagram ✓`);
   } catch (e) {
     db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
-    await ctx.editMessageText(`⚠️ #${id} на сайте, но в Instagram ошибка:\n${e.message}`);
+    await editCardResult(ctx, `⚠️ #${id} на сайте, но в Instagram ошибка:\n${e.message}`);
   }
   delete userState[ctx.from.id];
 });
@@ -395,9 +385,9 @@ bot.action(/^pub_tgonly_(\d+)$/, async (ctx) => {
   try {
     const tg = await publishToTelegram(row, localPaths);
     db.prepare('UPDATE listings SET tg_message_id = ? WHERE id = ?').run(tg.message_id, id);
-    await ctx.editMessageText(`✅ #${id} — только Telegram ✓ (msg ${tg.message_id})\n(на сайт не добавлен)`);
+    await editCardResult(ctx, `✅ #${id} — только Telegram ✓ (msg ${tg.message_id})\n(на сайт не добавлен)`);
   } catch (e) {
-    await ctx.editMessageText(`❌ #${id} — ошибка Telegram:\n${e.message}`);
+    await editCardResult(ctx, `❌ #${id} — ошибка Telegram:\n${e.message}`);
   }
   delete userState[ctx.from.id];
 });
@@ -411,9 +401,9 @@ bot.action(/^pub_igonly_(\d+)$/, async (ctx) => {
   try {
     const ig = await publishToInstagram(row, localPaths);
     db.prepare('UPDATE listings SET ig_post_id = ? WHERE id = ?').run(ig.post_id, id);
-    await ctx.editMessageText(`✅ #${id} — только Instagram ✓\n(на сайт не добавлен)`);
+    await editCardResult(ctx, `✅ #${id} — только Instagram ✓\n(на сайт не добавлен)`);
   } catch (e) {
-    await ctx.editMessageText(`❌ #${id} — ошибка Instagram:\n${e.message}`);
+    await editCardResult(ctx, `❌ #${id} — ошибка Instagram:\n${e.message}`);
   }
   delete userState[ctx.from.id];
 });
@@ -456,7 +446,7 @@ bot.action(/^pub_all_(\d+)$/, async (ctx) => {
   }
 
   db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
-  await ctx.editMessageText(`✅ #${id} опубликован:\n• Сайт ✓\n${results.join('\n')}`);
+  await editCardResult(ctx, `✅ #${id} опубликован:\n• Сайт ✓\n${results.join('\n')}`);
   delete userState[ctx.from.id];
 });
 
@@ -467,7 +457,7 @@ bot.action(/^cancel_(\d+)$/, async (ctx) => {
   const dir = path.join(PHOTOS_PATH, String(id));
   if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
   delete userState[ctx.from.id];
-  await ctx.editMessageText(`❌ #${id} отменён, фото удалены`);
+  await editCardResult(ctx, `❌ #${id} отменён, фото удалены`);
   ctx.answerCbQuery();
 });
 
@@ -481,15 +471,24 @@ bot.action(/^editprice_(\d+)$/, (ctx) => {
 // === Управление существующими ===
 
 // Общие кнопки публикации карточки
+
+// Показывает результат на карточке: подпись (фото) или текст (обычное), иначе новым сообщением
+async function editCardResult(ctx, text) {
+  try { await ctx.editMessageCaption(text); return; } catch {}
+  try { await ctx.editMessageText(text); return; } catch {}
+  try { await ctx.reply(text); } catch {}
+}
+
 function listingButtons(listingId) {
   return Markup.inlineKeyboard([
     [Markup.button.callback('🟢 Только сайт', `pub_site_${listingId}`)],
-    [Markup.button.callback('✈️ Сайт + ТГ', `pub_tg_${listingId}`),
-     Markup.button.callback('🅥 Сайт + ВК', `pub_vk_${listingId}`),
-     Markup.button.callback('📸 Сайт + IG', `pub_ig_${listingId}`)],
-    [Markup.button.callback('✈️ Только ТГ', `pub_tgonly_${listingId}`),
-     Markup.button.callback('📸 Только IG', `pub_igonly_${listingId}`)],
-    [Markup.button.callback('🌐 Везде (ТГ + ВК + IG)', `pub_all_${listingId}`)],
+    [Markup.button.callback('✈️ Только Telegram', `pub_tgonly_${listingId}`)],
+    [Markup.button.callback('🅥 Только ВКонтакте', `pub_vkonly_${listingId}`)],
+    [Markup.button.callback('📸 Только Instagram', `pub_igonly_${listingId}`)],
+    [Markup.button.callback('📸 Сайт + IG', `pub_ig_${listingId}`)],
+    [Markup.button.callback('🅥 Сайт + ВК', `pub_vk_${listingId}`)],
+    [Markup.button.callback('✈️ Сайт + ТГ', `pub_tg_${listingId}`)],
+    [Markup.button.callback('🌐 Опубликовать везде', `pub_all_${listingId}`)],
     [Markup.button.callback('✏️ Изменить цену', `editprice_${listingId}`),
      Markup.button.callback('❌ Отмена', `cancel_${listingId}`)],
   ]);
@@ -616,7 +615,7 @@ bot.action(/^edit_desc_(\d+)$/, (ctx) => {
 bot.action(/^edit_cancel_(\d+)$/, async (ctx) => {
   delete userState[ctx.from.id];
   await ctx.answerCbQuery('Отменено');
-  await ctx.editMessageText('❌ Редактирование отменено');
+  await editCardResult(ctx, '❌ Редактирование отменено');
 });
 
 bot.command('reserve', (ctx) => {
