@@ -83,8 +83,25 @@ function param(details, needle) {
 }
 
 // Маппинг: профиль-элемент + детали → поля нашей карточки
+// Чистка подменённых Авито символов (латиница↔кириллица внутри слов)
+const L2C = { A:'А',B:'В',C:'С',E:'Е',H:'Н',K:'К',M:'М',O:'О',P:'Р',T:'Т',X:'Х',Y:'У',a:'а',c:'с',e:'е',o:'о',p:'р',x:'х',y:'у' };
+const C2L = {}; for (const [l, c] of Object.entries(L2C)) C2L[c] = l;
+export function fixHomoglyphs(text) {
+  if (!text) return text;
+  return String(text).replace(/[A-Za-zА-Яа-яЁё]+/g, (word) => {
+    let cyr = 0, lat = 0;
+    for (const ch of word) {
+      if (/[А-Яа-яЁё]/.test(ch)) cyr++;
+      else if (/[A-Za-z]/.test(ch)) lat++;
+    }
+    return cyr >= lat
+      ? word.replace(/[A-Za-z]/g, ch => L2C[ch] || ch)   // русское слово → латинские двойники в кириллицу
+      : word.replace(/[А-Яа-яЁё]/g, ch => C2L[ch] || ch); // латинское слово → кириллические двойники в латиницу
+  });
+}
+
 export function mapAvitoListing(listItem, details = {}) {
-  const title = listItem.title || details.title || '';
+  const title = fixHomoglyphs(listItem.title || details.title || '');
   const parts = title.split(',').map(s => s.trim());
   const model = parts[0] || title;
   const storagePart = parts.find(p => /\d+\s*(ГБ|ТБ|GB|TB)/i.test(p));
@@ -108,7 +125,7 @@ export function mapAvitoListing(listItem, details = {}) {
     battery,
     cycles: null, // Авито отдельным полем не даёт; при желании — из описания
     price: listItem.price || details.price || null,
-    description: details.description || '',
+    description: fixHomoglyphs(details.description || ''),
     images: Array.isArray(details.images) ? details.images : (listItem.image ? [listItem.image] : []),
   };
 }

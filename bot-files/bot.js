@@ -549,7 +549,8 @@ bot.command('sync', async (ctx) => {
         (m.battery ? `🔋 АКБ ${m.battery}%\n` : '') +
         (m.condition ? `✨ ${m.condition}\n` : '') +
         (m.price ? `💰 ${Number(m.price).toLocaleString('ru-RU')} ₽\n` : '') +
-        `📸 Фото: ${rel.length}\n🔗 /bu-iphone/${slug}`;
+        `📸 Фото: ${rel.length}\n🔗 /bu-iphone/${slug}` +
+        (m.description ? `\n\n📝 ${m.description.slice(0, 350)}${m.description.length > 350 ? '…' : ''}` : '');
       if (rel.length) {
         await ctx.replyWithPhoto(
           { source: path.join(PHOTOS_PATH, rel[0].replace('/photos/', '')) },
