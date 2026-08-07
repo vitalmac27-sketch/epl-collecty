@@ -18,6 +18,7 @@ import {
   publishToInstagram,
   editTelegramCaption, editVKPost,
 } from './publisher.js';
+import { fetchSellerListings, fetchListingDetails, mapAvitoListing, downloadAvitoPhotos } from './sync.js';
 
 import dns from 'node:dns';
 // Telegram по IPv4 в РФ часто заблокирован провайдером — резолвим с приоритетом IPv6 (он работает)
@@ -51,6 +52,9 @@ ensureColumn('cycles', 'INTEGER');
 ensureColumn('tg_message_id', 'INTEGER');
 ensureColumn('vk_post_id', 'INTEGER');
 ensureColumn('ig_post_id', 'TEXT');
+ensureColumn('avito_status', 'TEXT');
+ensureColumn('missing_count', 'INTEGER');
+ensureColumn('avito_url', 'TEXT');
 
 const bot = new Telegraf(BOT_TOKEN, {
   handlerTimeout: 600000, // 10 мин: публикация с фото в ТГ+ВК+IG может идти дольше 90с
@@ -475,6 +479,85 @@ bot.action(/^editprice_(\d+)$/, (ctx) => {
 });
 
 // === Управление существующими ===
+
+// Общие кнопки публикации карточки
+function listingButtons(listingId) {
+  return Markup.inlineKeyboard([
+    [Markup.button.callback('🟢 Только сайт', `pub_site_${listingId}`)],
+    [Markup.button.callback('✈️ Сайт + ТГ', `pub_tg_${listingId}`),
+     Markup.button.callback('🅥 Сайт + ВК', `pub_vk_${listingId}`),
+     Markup.button.callback('📸 Сайт + IG', `pub_ig_${listingId}`)],
+    [Markup.button.callback('✈️ Только ТГ', `pub_tgonly_${listingId}`),
+     Markup.button.callback('📸 Только IG', `pub_igonly_${listingId}`)],
+    [Markup.button.callback('🌐 Везде (ТГ + ВК + IG)', `pub_all_${listingId}`)],
+    [Markup.button.callback('✏️ Изменить цену', `editprice_${listingId}`),
+     Markup.button.callback('❌ Отмена', `cancel_${listingId}`)],
+  ]);
+}
+
+// /sync — синхронизация с Авито: новые объявления → карточки с кнопками
+bot.command('sync', async (ctx) => {
+  await ctx.reply('⏳ Синхронизирую с Авито…');
+  let data;
+  try {
+    data = await fetchSellerListings();
+  } catch (e) {
+    console.error('[sync] ошибка:', e.message);
+    return ctx.reply(`❌ Ошибка синхронизации:\n${e.message}`);
+  }
+  const active = data.active || [];
+  const existing = new Set(
+    db.prepare("SELECT avito_id FROM listings WHERE avito_id IS NOT NULL").all().map(r => String(r.avito_id))
+  );
+  const fresh = active.filter(l => !existing.has(String(l.id)));
+
+  await ctx.reply(
+    `📊 На Авито активных айфонов: ${active.length}\n` +
+    `🆕 Новых (нет в базе): ${fresh.length}` +
+    (fresh.length ? '\n⏳ Загружаю детали и фото…' : '\n✅ Всё уже в базе.')
+  );
+  if (!fresh.length) return;
+
+  let details = [];
+  try {
+    details = await fetchListingDetails(fresh.map(l => l.id));
+  } catch (e) {
+    console.error('[sync] детали:', e.message);
+    return ctx.reply(`❌ Не удалось получить детали объявлений:\n${e.message}`);
+  }
+  const detById = new Map(details.map(d => [String(d.id), d]));
+
+  for (const item of fresh) {
+    try {
+      const m = mapAvitoListing(item, detById.get(String(item.id)) || {});
+      const stmt = db.prepare(`INSERT INTO listings
+        (avito_id, avito_url, avito_status, missing_count, title, model, storage, color, sim_type, battery, cycles, condition, price, description, status)
+        VALUES (?, ?, 'active', 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')`);
+      const res = stmt.run(m.avito_id, m.avito_url, m.title, m.model, m.storage, m.color,
+        m.sim_type, m.battery, m.cycles, m.condition, m.price, m.description);
+      const listingId = res.lastInsertRowid;
+      const slug = slugify(m.title) + `-${listingId}`;
+      db.prepare('UPDATE listings SET slug = ? WHERE id = ?').run(slug, listingId);
+
+      const rel = await downloadAvitoPhotos(listingId, m.images);
+      db.prepare('UPDATE listings SET photos = ? WHERE id = ?').run(JSON.stringify(rel), listingId);
+
+      const preview =
+        `🆕 С Авито #${listingId}\n\n` +
+        `📱 ${m.model}${m.storage ? ' · ' + m.storage : ''}${m.color ? ' · ' + m.color : ''}\n` +
+        (m.sim_type ? `📶 ${m.sim_type}\n` : '') +
+        (m.battery ? `🔋 АКБ ${m.battery}%\n` : '') +
+        (m.condition ? `✨ ${m.condition}\n` : '') +
+        (m.price ? `💰 ${Number(m.price).toLocaleString('ru-RU')} ₽\n` : '') +
+        `📸 Фото: ${rel.length}\n🔗 /bu-iphone/${slug}`;
+      await ctx.reply(preview, listingButtons(listingId));
+    } catch (e) {
+      console.error('[sync] объявление', item.id, e.message);
+      await ctx.reply(`⚠️ Объявление ${item.id} не удалось обработать: ${e.message}`);
+    }
+  }
+  await ctx.reply('✅ Готово. Проверьте карточки выше и опубликуйте кнопками.');
+});
 
 bot.command('list', (ctx) => {
   const rows = db.prepare(
