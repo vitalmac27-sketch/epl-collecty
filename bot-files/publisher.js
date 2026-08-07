@@ -122,7 +122,7 @@ export async function publishToTelegram(listing, photoPaths) {
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
   // В Telegram-канал ссылку на сайт не добавляем (только ВК)
-  const caption = formatCard(listing, { withSiteLink: false });
+  const caption = trimToLimit(formatCard(listing, { withSiteLink: false }), 1024);
 
   // Если 1 фото — отправляем как sendPhoto
   if (photoPaths.length === 1) {
@@ -174,7 +174,7 @@ export async function publishToTelegram(listing, photoPaths) {
  */
 export async function editTelegramCaption(messageId, listing) {
   if (!TG_CHANNEL_ID) return;
-  const caption = formatCard(listing, { withSiteLink: false });
+  const caption = trimToLimit(formatCard(listing, { withSiteLink: false }), 1024);
   try {
     await tg.post(`https://api.telegram.org/bot${TG_BOT_TOKEN}/editMessageCaption`, {
       chat_id: TG_CHANNEL_ID,

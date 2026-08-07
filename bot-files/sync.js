@@ -88,15 +88,22 @@ const L2C = { A:'А',B:'В',C:'С',E:'Е',H:'Н',K:'К',M:'М',O:'О',P:'Р',T:'
 const C2L = {}; for (const [l, c] of Object.entries(L2C)) C2L[c] = l;
 export function fixHomoglyphs(text) {
   if (!text) return text;
+  const LAT_HOMO = 'ABCEHKMOPTXYaceopxy';
+  const CYR_HOMO = 'АВСЕНКМОРТХУасеорху';
   return String(text).replace(/[A-Za-zА-Яа-яЁё]+/g, (word) => {
-    let cyr = 0, lat = 0;
+    let strongLat = false, strongCyr = false, cyr = 0, lat = 0;
     for (const ch of word) {
-      if (/[А-Яа-яЁё]/.test(ch)) cyr++;
-      else if (/[A-Za-z]/.test(ch)) lat++;
+      const isLat = /[A-Za-z]/.test(ch), isCyr = /[А-Яа-яЁё]/.test(ch);
+      if (isLat) { lat++; if (!LAT_HOMO.includes(ch)) strongLat = true; }
+      else if (isCyr) { cyr++; if (!CYR_HOMO.includes(ch)) strongCyr = true; }
     }
-    return cyr >= lat
-      ? word.replace(/[A-Za-z]/g, ch => L2C[ch] || ch)   // русское слово → латинские двойники в кириллицу
-      : word.replace(/[А-Яа-яЁё]/g, ch => C2L[ch] || ch); // латинское слово → кириллические двойники в латиницу
+    let toCyr;
+    if (strongCyr && !strongLat) toCyr = true;        // есть буквы только-кириллица → русское слово
+    else if (strongLat && !strongCyr) toCyr = false;  // есть буквы только-латиница → латинское слово
+    else toCyr = cyr >= lat;                          // иначе — по большинству
+    return toCyr
+      ? word.replace(/[A-Za-z]/g, ch => L2C[ch] || ch)
+      : word.replace(/[А-Яа-яЁё]/g, ch => C2L[ch] || ch);
   });
 }
 

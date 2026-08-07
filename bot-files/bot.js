@@ -474,8 +474,7 @@ bot.action(/^editprice_(\d+)$/, (ctx) => {
 
 // Показывает результат на карточке: подпись (фото) или текст (обычное), иначе новым сообщением
 async function editCardResult(ctx, text) {
-  try { await ctx.editMessageCaption(text); return; } catch {}
-  try { await ctx.editMessageText(text); return; } catch {}
+  // результат отдельным сообщением — карточка с кнопками остаётся (можно постить в несколько каналов)
   try { await ctx.reply(text); } catch {}
 }
 
