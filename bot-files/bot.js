@@ -327,6 +327,7 @@ bot.action(/^pub_tg_(\d+)$/, async (ctx) => {
   await ctx.answerCbQuery('Публикую в Telegram-канал...');
 
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
   const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
 
@@ -346,6 +347,7 @@ bot.action(/^pub_vk_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
   await ctx.answerCbQuery('Публикую во ВКонтакте...');
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
   const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
   try {
@@ -363,6 +365,7 @@ bot.action(/^pub_ig_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
   await ctx.answerCbQuery('Публикую в Instagram...');
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
   const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
   try {
@@ -380,6 +383,7 @@ bot.action(/^pub_tgonly_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
   await ctx.answerCbQuery('Публикую только в Telegram...');
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
   const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
   try {
@@ -396,6 +400,7 @@ bot.action(/^pub_igonly_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
   await ctx.answerCbQuery('Публикую только в Instagram...');
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
   const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
   try {
@@ -413,6 +418,7 @@ bot.action(/^pub_all_(\d+)$/, async (ctx) => {
   await ctx.answerCbQuery('Публикую везде...');
 
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
   const localPaths = row.photos.map(p => path.join(PHOTOS_PATH, p.replace('/photos/', '')));
 
