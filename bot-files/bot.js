@@ -571,6 +571,87 @@ bot.command('sync', async (ctx) => {
   await ctx.reply('✅ Готово. Проверьте карточки выше и опубликуйте кнопками.');
 });
 
+// === Этап 2: актуализация — что пропало с Авито → пометить проданным ===
+
+// Находит опубликованные объявления, которых больше нет в активных на Авито
+async function findSoldCandidates() {
+  const { active, closed } = await fetchSellerListings();
+  const activeIds = new Set(active.map(l => String(l.id)));
+  const closedIds = new Set(closed.map(l => String(l.id)));
+  const ours = db.prepare(
+    "SELECT * FROM listings WHERE avito_id IS NOT NULL AND avito_id NOT LIKE 'manual_%' AND status IN ('active','reserved')"
+  ).all();
+  const candidates = [];
+  for (const row of ours) {
+    const aid = String(row.avito_id);
+    if (closedIds.has(aid)) candidates.push({ row, reason: 'снято с Авито (closed)' });
+    else if (!activeIds.has(aid)) candidates.push({ row, reason: 'пропало из выдачи' });
+  }
+  return candidates;
+}
+
+// Помечает объявление проданным: статус + «❌ ПРОДАНО» в ТГ/ВК (IG не трогаем)
+async function markListingSold(id) {
+  const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
+  if (!row) return false;
+  db.prepare("UPDATE listings SET status = 'sold' WHERE id = ?").run(id);
+  try { if (row.tg_message_id) await markTelegramSold(row.tg_message_id, row); }
+  catch (e) { console.error('[actualize] ТГ:', e.message); }
+  try { if (row.vk_post_id) await markVKSold(row.vk_post_id, row); }
+  catch (e) { console.error('[actualize] ВК:', e.message); }
+  return true;
+}
+
+bot.command('actualize', async (ctx) => {
+  await ctx.reply('⏳ Проверяю, что пропало с Авито…');
+  let candidates;
+  try { candidates = await findSoldCandidates(); }
+  catch (e) { console.error('[actualize]', e.message); return ctx.reply(`❌ Ошибка: ${e.message}`); }
+  if (!candidates.length) return ctx.reply('✅ Все опубликованные объявления ещё активны на Авито.');
+
+  await ctx.reply(`🔍 Пропали с Авито: ${candidates.length}. Отметь по каждому:`);
+  for (const c of candidates) {
+    const r = c.row;
+    const where = [r.tg_message_id && 'ТГ', r.vk_post_id && 'ВК', r.ig_post_id && 'IG'].filter(Boolean);
+    where.push('сайт');
+    const price = r.price ? ` — ${Number(r.price).toLocaleString('ru-RU')} ₽` : '';
+    await ctx.reply(
+      `🔴 #${r.id} ${r.model}${r.storage ? ' · ' + r.storage : ''}${price}\n` +
+      `Причина: ${c.reason}\nОпубликовано: ${where.join(', ')}`,
+      Markup.inlineKeyboard([[
+        Markup.button.callback('✅ Продано', `asold_${r.id}`),
+        Markup.button.callback('⏭ Пропустить', `askip_${r.id}`),
+      ]])
+    );
+  }
+  await ctx.reply('Или одним нажатием всё сразу:', Markup.inlineKeyboard([
+    [Markup.button.callback('✅ Пометить всё проданным', 'asoldall')],
+  ]));
+});
+
+bot.action(/^asold_(\d+)$/, async (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  await ctx.answerCbQuery('Помечаю проданным…');
+  const ok = await markListingSold(id);
+  await editCardResult(ctx, ok ? `🔴 #${id} — продано: убрано с сайта, «❌ ПРОДАНО» в ТГ/ВК` : `⚠️ #${id} не найден`);
+});
+
+bot.action(/^askip_(\d+)$/, async (ctx) => {
+  const id = parseInt(ctx.match[1]);
+  await ctx.answerCbQuery('Пропущено');
+  await editCardResult(ctx, `⏭ #${id} — оставлено как есть`);
+});
+
+bot.action(/^asoldall$/, async (ctx) => {
+  await ctx.answerCbQuery('Помечаю все…');
+  let candidates;
+  try { candidates = await findSoldCandidates(); }
+  catch (e) { return ctx.reply(`❌ Ошибка: ${e.message}`); }
+  let n = 0;
+  for (const c of candidates) { if (await markListingSold(c.row.id)) n++; }
+  await ctx.reply(`✅ Помечено проданными: ${n}`);
+});
+
 bot.command('list', (ctx) => {
   const rows = db.prepare(
     `SELECT id, title, price, status FROM listings
