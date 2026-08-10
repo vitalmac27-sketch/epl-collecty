@@ -319,12 +319,12 @@ bot.action(/^pub_site_(\d+)$/, async (ctx) => {
   db.prepare("UPDATE listings SET status = 'active' WHERE id = ?").run(id);
   delete userState[ctx.from.id];
   await editCardResult(ctx, `✅ #${id} опубликован на сайте`);
-  ctx.answerCbQuery('На сайте!');
+  ctx.answerCbQuery('На сайте!').catch(() => {});
 });
 
 bot.action(/^pub_tg_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Публикую в Telegram-канал...');
+  await ctx.answerCbQuery('Публикую в Telegram-канал...').catch(() => {});
 
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
   if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
@@ -345,7 +345,7 @@ bot.action(/^pub_tg_(\d+)$/, async (ctx) => {
 
 bot.action(/^pub_vk_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Публикую во ВКонтакте...');
+  await ctx.answerCbQuery('Публикую во ВКонтакте...').catch(() => {});
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
   if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
@@ -363,7 +363,7 @@ bot.action(/^pub_vk_(\d+)$/, async (ctx) => {
 
 bot.action(/^pub_ig_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Публикую в Instagram...');
+  await ctx.answerCbQuery('Публикую в Instagram...').catch(() => {});
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
   if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
@@ -381,7 +381,7 @@ bot.action(/^pub_ig_(\d+)$/, async (ctx) => {
 
 bot.action(/^pub_tgonly_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Публикую только в Telegram...');
+  await ctx.answerCbQuery('Публикую только в Telegram...').catch(() => {});
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
   if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
@@ -398,7 +398,7 @@ bot.action(/^pub_tgonly_(\d+)$/, async (ctx) => {
 
 bot.action(/^pub_igonly_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Публикую только в Instagram...');
+  await ctx.answerCbQuery('Публикую только в Instagram...').catch(() => {});
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
   if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
   row.photos = JSON.parse(row.photos || '[]');
@@ -415,7 +415,7 @@ bot.action(/^pub_igonly_(\d+)$/, async (ctx) => {
 
 bot.action(/^pub_all_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Публикую везде...');
+  await ctx.answerCbQuery('Публикую везде...').catch(() => {});
 
   const row = db.prepare('SELECT * FROM listings WHERE id = ?').get(id);
   if (!row) { await editCardResult(ctx, '⚠️ Объявление не найдено (возможно удалено). Сделайте /sync заново.'); return; }
@@ -464,13 +464,13 @@ bot.action(/^cancel_(\d+)$/, async (ctx) => {
   if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
   delete userState[ctx.from.id];
   await editCardResult(ctx, `❌ #${id} отменён, фото удалены`);
-  ctx.answerCbQuery();
+  ctx.answerCbQuery().catch(() => {});
 });
 
 bot.action(/^editprice_(\d+)$/, (ctx) => {
   const id = parseInt(ctx.match[1]);
   userState[ctx.from.id] = { mode: 'edit_price', listingId: id };
-  ctx.answerCbQuery();
+  ctx.answerCbQuery().catch(() => {});
   ctx.reply(`Введите новую цену для #${id} (только число, например: 95000)`);
 });
 
@@ -631,19 +631,19 @@ bot.command('actualize', async (ctx) => {
 
 bot.action(/^asold_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Помечаю проданным…');
+  await ctx.answerCbQuery('Помечаю проданным…').catch(() => {});
   const ok = await markListingSold(id);
   await editCardResult(ctx, ok ? `🔴 #${id} — продано: убрано с сайта, «❌ ПРОДАНО» в ТГ/ВК` : `⚠️ #${id} не найден`);
 });
 
 bot.action(/^askip_(\d+)$/, async (ctx) => {
   const id = parseInt(ctx.match[1]);
-  await ctx.answerCbQuery('Пропущено');
+  await ctx.answerCbQuery('Пропущено').catch(() => {});
   await editCardResult(ctx, `⏭ #${id} — оставлено как есть`);
 });
 
 bot.action(/^asoldall$/, async (ctx) => {
-  await ctx.answerCbQuery('Помечаю все…');
+  await ctx.answerCbQuery('Помечаю все…').catch(() => {});
   let candidates;
   try { candidates = await findSoldCandidates(); }
   catch (e) { return ctx.reply(`❌ Ошибка: ${e.message}`); }
@@ -687,20 +687,20 @@ bot.command('edit', (ctx) => {
 bot.action(/^edit_price_(\d+)$/, (ctx) => {
   const id = parseInt(ctx.match[1]);
   userState[ctx.from.id] = { mode: 'editing_price', listingId: id };
-  ctx.answerCbQuery();
+  ctx.answerCbQuery().catch(() => {});
   ctx.reply(`Введите новую цену для #${id} (только число, например: 95000):`);
 });
 
 bot.action(/^edit_desc_(\d+)$/, (ctx) => {
   const id = parseInt(ctx.match[1]);
   userState[ctx.from.id] = { mode: 'editing_desc', listingId: id };
-  ctx.answerCbQuery();
+  ctx.answerCbQuery().catch(() => {});
   ctx.reply(`Отправьте новое описание для #${id} одним сообщением (можно в несколько строк):`);
 });
 
 bot.action(/^edit_cancel_(\d+)$/, async (ctx) => {
   delete userState[ctx.from.id];
-  await ctx.answerCbQuery('Отменено');
+  await ctx.answerCbQuery('Отменено').catch(() => {});
   await editCardResult(ctx, '❌ Редактирование отменено');
 });
 

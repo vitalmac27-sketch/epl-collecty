@@ -117,7 +117,7 @@ async function withRetry(fn, attempts = 3, delayMs = 3000) {
  * Публикует в Telegram-канал (фото + подпись)
  * @returns {Promise<{message_id: number, chat_id: number}>}
  */
-export async function publishToTelegram(listing, photoPaths) {
+async function _publishToTelegram(listing, photoPaths) {
   if (!TG_CHANNEL_ID) throw new Error('TG_CHANNEL_ID не указан в .env');
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
@@ -284,7 +284,7 @@ async function uploadPhotoToVK(photoPath) {
  * Публикует в ВК на стену группы
  * @returns {Promise<{post_id: number}>}
  */
-export async function publishToVK(listing, photoPaths) {
+async function _publishToVK(listing, photoPaths) {
   if (!VK_TOKEN || !VK_GROUP_ID) throw new Error('VK_TOKEN или VK_GROUP_ID не указан');
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
@@ -369,6 +369,19 @@ const ZERNIO_API_KEY = process.env.ZERNIO_API_KEY;
 const ZERNIO_ACCOUNT_ID = process.env.ZERNIO_ACCOUNT_ID;
 const ZERNIO_BASE = 'https://zernio.com/api/v1';
 
+// Очередь публикаций: не больше одной отправки в соцсети одновременно (клики идут по очереди)
+let _pubLock = Promise.resolve();
+function withPubLock(fn) {
+  const result = _pubLock.then(fn, fn);
+  _pubLock = result.then(() => {}, () => {});
+  return result;
+}
+// Обёртки: реальные функции ниже переименованы в _publish*, наружу отдаём версии через очередь
+export const publishToTelegram = (l, p) => withPubLock(() => _publishToTelegram(l, p));
+export const publishToVK = (l, p) => withPubLock(() => _publishToVK(l, p));
+export const publishToInstagram = (l, p) => withPubLock(() => _publishToInstagram(l, p));
+
+
 /** Обрезает подпись до лимита по границе слова */
 function trimToLimit(text, limit) {
   if (!text || text.length <= limit) return text;
@@ -443,7 +456,7 @@ async function makeInstagramCover(srcPath, listing, outPath) {
   await base.composite([{ input: Buffer.from(svg), top: 0, left: 0 }]).jpeg({ quality: 90 }).toFile(outPath);
 }
 
-export async function publishToInstagram(listing, photoPaths) {
+async function _publishToInstagram(listing, photoPaths) {
   if (!ZERNIO_API_KEY || !ZERNIO_ACCOUNT_ID) throw new Error('ZERNIO_API_KEY или ZERNIO_ACCOUNT_ID не указан в .env');
   if (!photoPaths || photoPaths.length === 0) throw new Error('Нет фото для публикации');
 
