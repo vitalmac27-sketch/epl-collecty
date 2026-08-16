@@ -99,6 +99,15 @@ export default function HomePage() {
           {/* ── Категории товаров ── */}
           <CategoryGrid categories={ALL_CATEGORIES} />
 
+          {/* ── Популярные модели iPhone ── */}
+          <ModelCatalogSection
+            title={`Популярные модели iPhone в ${city.namePre}`}
+            models={iphoneModels}
+          />
+
+          {/* ── Б/У iPhone с гарантией ── */}
+          <BuIphoneHomeSection />
+
           {/* ── Квиз + Сайдбар ── */}
           <section id="calculator-section" aria-label="Подбор iPhone">
             <div className="grid lg:grid-cols-3 gap-6 items-start">
@@ -113,17 +122,8 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* ── Б/У iPhone с гарантией ── */}
-          <BuIphoneHomeSection />
-
           {/* ── Отзывы ── */}
           <TestimonialsSection />
-
-          {/* ── Каталог iPhone ── */}
-          <ModelCatalogSection
-            title={`Популярные модели iPhone в ${city.namePre}`}
-            models={iphoneModels}
-          />
 
           {/* ── Преимущества ── */}
           <BenefitsSection />
