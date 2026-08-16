@@ -1,3 +1,4 @@
+import { getProductConfig } from "./generated";
 /**
  * models.ts — центральный реестр всех моделей по категориям
  *
@@ -1163,6 +1164,15 @@ export function getNavModels(category: string): ProductModel[] {
 /** Полный URL модели: /iphone/iphone-17-pro-max */
 export function getModelUrl(model: ProductModel): string {
   return `/${model.category}/${model.slug}`;
+}
+
+/** Минимальная память модели (storage с самой низкой ценой) — для подписи "от" */
+export function getModelMinStorage(model: ProductModel): string | null {
+  const cfg = getProductConfig(model.category, model.slug);
+  if (!cfg?.prices?.length || !cfg?.storage?.length) return null;
+  const cheapest = cfg.prices.reduce((a, b) => (b.price < a.price ? b : a));
+  const st = cfg.storage.find((s) => s.id === cheapest.storageId);
+  return st?.label ?? null;
 }
 
 /** Все пары [category, slug] для generateStaticParams */
