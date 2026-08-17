@@ -773,8 +773,49 @@ app.listen(API_PORT, '127.0.0.1', () => {
   console.log(`[api] Listening on http://127.0.0.1:${API_PORT}`);
 });
 
+// === Этап 3: ежедневная автопроверка актуализации (10:00 МСК), только уведомление ===
+async function runAutoActualize() {
+  let candidates;
+  try { candidates = await findSoldCandidates(); }
+  catch (e) { console.error('[auto-actualize] ошибка:', e.message); return; }
+  if (!candidates.length) { console.log('[auto-actualize] всё активно, молчим'); return; }
+  const ownerId = ALLOWED_USER_IDS[0];
+  if (!ownerId) return;
+  await bot.telegram.sendMessage(ownerId, `🔔 Ежедневная проверка: пропали с Авито — ${candidates.length}. Отметь по каждому:`);
+  for (const c of candidates) {
+    const r = c.row;
+    const where = [r.tg_message_id && 'ТГ', r.vk_post_id && 'ВК', r.ig_post_id && 'IG'].filter(Boolean);
+    where.push('сайт');
+    const price = r.price ? ` — ${Number(r.price).toLocaleString('ru-RU')} ₽` : '';
+    await bot.telegram.sendMessage(ownerId,
+      `🔴 #${r.id} ${r.model}${r.storage ? ' · ' + r.storage : ''}${price}\nПричина: ${c.reason}\nОпубликовано: ${where.join(', ')}`,
+      Markup.inlineKeyboard([[
+        Markup.button.callback('✅ Продано', `asold_${r.id}`),
+        Markup.button.callback('⏭ Пропустить', `askip_${r.id}`),
+      ]])
+    );
+  }
+  await bot.telegram.sendMessage(ownerId, 'Или всё сразу:', Markup.inlineKeyboard([
+    [Markup.button.callback('✅ Пометить всё проданным', 'asoldall')],
+  ]));
+}
+
+// Планировщик: ежедневно в 10:00 МСК (= 07:00 UTC), без node-cron
+function scheduleDailyActualize() {
+  const now = new Date();
+  const next = new Date();
+  next.setUTCHours(7, 0, 0, 0); // 10:00 МСК
+  if (next <= now) next.setUTCDate(next.getUTCDate() + 1);
+  const ms = next - now;
+  setTimeout(async () => {
+    try { await runAutoActualize(); } catch (e) { console.error('[auto-actualize]', e.message); }
+    scheduleDailyActualize();
+  }, ms);
+  console.log('[auto-actualize] следующая проверка:', next.toISOString());
+}
+
 bot.launch()
-  .then(() => console.log('[bot] Started'))
+  .then(() => { console.log('[bot] Started'); scheduleDailyActualize(); })
   .catch((e) => console.error('[bot] launch error (продолжаем работу):', e.message));
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
