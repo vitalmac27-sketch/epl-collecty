@@ -61,6 +61,17 @@ const bot = new Telegraf(BOT_TOKEN, {
   ...(tgAgent ? { telegram: { agent: tgAgent } } : {}),
 });
 
+
+// Приём постов из каналов (прайс-канал) — ДО фильтра приватных чатов
+const PRICE_CHANNEL_ID = process.env.PRICE_CHANNEL_ID || '';
+bot.on('channel_post', async (ctx) => {
+  const chatId = String(ctx.chat?.id || '');
+  const title = ctx.chat?.title || '';
+  const text = ctx.channelPost?.text || ctx.channelPost?.caption || '';
+  console.log(`[channel] пост из канала: id=${chatId} title="${title}" длина=${text.length}`);
+  // Позже: если chatId === PRICE_CHANNEL_ID и текст похож на прайс → обновить цены
+});
+
 // Только разрешённый пользователь
 bot.use((ctx, next) => {
   // На посты в каналах/группах не реагируем — отвечаем только в личке
