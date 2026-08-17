@@ -19,6 +19,7 @@ import {
   editTelegramCaption, editVKPost,
 } from './publisher.js';
 import { fetchSellerListings, fetchListingDetails, mapAvitoListing, downloadAvitoPhotos } from './sync.js';
+import { runPriceUpdate } from './prices.js';
 
 import dns from 'node:dns';
 // Telegram по IPv4 в РФ часто заблокирован провайдером — резолвим с приоритетом IPv6 (он работает)
@@ -66,10 +67,32 @@ const bot = new Telegraf(BOT_TOKEN, {
 const PRICE_CHANNEL_ID = process.env.PRICE_CHANNEL_ID || '';
 bot.on('channel_post', async (ctx) => {
   const chatId = String(ctx.chat?.id || '');
-  const title = ctx.chat?.title || '';
+  const username = ctx.chat?.username || '';
   const text = ctx.channelPost?.text || ctx.channelPost?.caption || '';
-  console.log(`[channel] пост из канала: id=${chatId} title="${title}" длина=${text.length}`);
-  // Позже: если chatId === PRICE_CHANNEL_ID и текст похож на прайс → обновить цены
+  console.log(`[channel] пост: id=${chatId} @${username} длина=${text.length}`);
+  // Реагируем только на прайс-канал
+  const isPriceChannel = (PRICE_CHANNEL_ID && chatId === PRICE_CHANNEL_ID) || username === 'applecollectkazan';
+  if (!isPriceChannel) return;
+  // Похоже на прайс? (есть модели iPhone и объёмы памяти)
+  if (!/📱\s*iPhone/i.test(text) || !/\d+\s*(GB|TB)/i.test(text)) return;
+  const ownerId = ALLOWED_USER_IDS[0];
+  try {
+    const report = await runPriceUpdate(text);
+    if (!report) return; // не прайс
+    if (ownerId) {
+      if (report.nochange) {
+        await bot.telegram.sendMessage(ownerId, '💰 Прайс получен — цены уже актуальны, менять нечего.');
+      } else {
+        const models = Object.entries(report.models).map(([m, p]) => `• ${m}: от ${Number(p).toLocaleString('ru-RU')} ₽`).join('\n');
+        const unmatched = report.unmatched.length ? `\n\n⚠️ Не сопоставлено (${report.unmatched.length}):\n${report.unmatched.slice(0, 15).join('\n')}` : '';
+        await bot.telegram.sendMessage(ownerId,
+          `✅ Цены обновлены из прайса (${report.updated} шт). Сайт пересоберётся автоматически.\n\n${models}${unmatched}`);
+      }
+    }
+  } catch (e) {
+    console.error('[prices] ошибка:', e.message);
+    if (ownerId) await bot.telegram.sendMessage(ownerId, `❌ Ошибка обновления цен: ${e.message}`).catch(() => {});
+  }
 });
 
 // Только разрешённый пользователь
