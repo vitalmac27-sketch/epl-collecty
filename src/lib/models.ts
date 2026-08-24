@@ -100,6 +100,20 @@ const iPhoneModels: ProductModel[] = [
     inNav: true,
   },
   {
+    slug: "iphone-17e",
+    name: "iPhone 17e",
+    category: "iphone",
+    series: "17",
+    badge: "NEW",
+    priceFrom: 57500,
+    image: "iphone-17",
+    seoTitle: "Купить iPhone 17e в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    seoDescription:
+      "iPhone 17e в Казани ✅ Самый доступный iPhone 17-й серии. Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
+    subtitle: "Доступный iPhone 17-й серии",
+    inNav: true,
+  },
+  {
     slug: "iphone-16-pro-max",
     name: "iPhone 16 Pro Max",
     category: "iphone",
