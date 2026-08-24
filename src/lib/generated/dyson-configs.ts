@@ -79,6 +79,7 @@ const DYSON_HD16_CONFIG: ProductConfig = {
   slug: "dyson-hd16",
   category: "dyson",
   colors: [
+    { id: "ceramic-pink", name: "Ceramic-pink", hex: "#888888", image: "dyson-hd16" },
     { id: "prussian-blue", name: "Прусский синий", hex: "#1F3354", image: "dyson-hd16" },
   ],
   storage: [
@@ -88,12 +89,13 @@ const DYSON_HD16_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 31000 },
     { storageId: "std", colorId: "prussian-blue", simId: "none", price: 34000 },
   ],
   defaultStorage: "std",
   defaultColor: "prussian-blue",
   defaultSim: "none",
-  priceFrom: 34000,
+  priceFrom: 31000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -126,15 +128,15 @@ const DYSON_AIRWRAP_HS09_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "amber-silk", simId: "none", price: 50000 },
-    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 55000 },
+    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 45000 },
     { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 50000 },
     { storageId: "std", colorId: "jasper-plum", simId: "none", price: 50000 },
-    { storageId: "std", colorId: "red-velvet", simId: "none", price: 54000 },
+    { storageId: "std", colorId: "red-velvet", simId: "none", price: 47000 },
   ],
   defaultStorage: "std",
   defaultColor: "apricot-topaz",
   defaultSim: "none",
-  priceFrom: 50000,
+  priceFrom: 45000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -153,6 +155,8 @@ const DYSON_AIRWRAP_HS08_CONFIG: ProductConfig = {
   slug: "dyson-airwrap-hs08",
   category: "dyson",
   colors: [
+    { id: "apricot-topaz", name: "Apricot-topaz", hex: "#888888", image: "dyson-airwrap-hs08" },
+    { id: "ceramic-patina", name: "Ceramic-patina", hex: "#888888", image: "dyson-airwrap-hs08" },
     { id: "ceramic-pink", name: "Керамический розовый", hex: "#E8B5A8", image: "dyson-airwrap-hs08" },
     { id: "vinca-blue", name: "Тёмно-синий", hex: "#3D5A82", image: "dyson-airwrap-hs08" },
     { id: "amber-silk", name: "Янтарный шёлк", hex: "#C49862", image: "dyson-airwrap-hs08" },
@@ -165,6 +169,8 @@ const DYSON_AIRWRAP_HS08_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 40000 },
+    { storageId: "std", colorId: "ceramic-patina", simId: "none", price: 40000 },
     { storageId: "std", colorId: "amber-silk", simId: "none", price: 38000 },
     { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 38000 },
     { storageId: "std", colorId: "prussian-blue", simId: "none", price: 39500 },
@@ -201,12 +207,12 @@ const DYSON_AIRWRAP_HS05_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "nickel-cooper", simId: "none", price: 31000 },
+    { storageId: "std", colorId: "nickel-cooper", simId: "none", price: 37000 },
   ],
   defaultStorage: "std",
   defaultColor: "nickel-cooper",
   defaultSim: "none",
-  priceFrom: 31000,
+  priceFrom: 37000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -241,15 +247,15 @@ const DYSON_AIRSTRAIT_HT01_CONFIG: ProductConfig = {
   prices: [
     { storageId: "std", colorId: "amber-silk", simId: "none", price: 36000 },
     { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 35000 },
-    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 35000 },
+    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 32000 },
     { storageId: "std", colorId: "nickel-cooper", simId: "none", price: 35000 },
-    { storageId: "std", colorId: "prussian-blue", simId: "none", price: 33500 },
-    { storageId: "std", colorId: "strawberry-bronze", simId: "none", price: 38000 },
+    { storageId: "std", colorId: "prussian-blue", simId: "none", price: 32000 },
+    { storageId: "std", colorId: "strawberry-bronze", simId: "none", price: 36000 },
   ],
   defaultStorage: "std",
   defaultColor: "nickel-cooper",
   defaultSim: "none",
-  priceFrom: 33500,
+  priceFrom: 32000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -442,12 +448,12 @@ const DYSON_V12S_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 47000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 47500 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 47000,
+  priceFrom: 47500,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -475,12 +481,12 @@ const DYSON_V12_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 40000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 44000 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 40000,
+  priceFrom: 44000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
