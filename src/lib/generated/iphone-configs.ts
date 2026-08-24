@@ -615,10 +615,63 @@ const IPHONE_17_AIR_CONFIG: ProductConfig = {
   seoTextSim: "iPhone 17 Air выпускается только с eSIM — физического слота нет. Нужна поддержка eSIM у вашего оператора. Поможем с настройкой при покупке.",
 };
 
+const IPHONE_17E_CONFIG: ProductConfig = {
+  slug: "iphone-17e",
+  category: "iphone",
+  colors: [
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17" },
+    { id: "pink", name: "Розовый", hex: "#F4C9D4", image: "iphone-17" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17" },
+  ],
+  storage: [
+    { id: "256", label: "256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "esim", label: "eSIM", description: "Только eSIM, без физической SIM. Нужна поддержка eSIM у оператора." },
+    { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Европейская/РФ версия. Одна физическая SIM + одна eSIM." },
+  ],
+  prices: [
+    { storageId: "256", colorId: "white", simId: "esim", price: 57500 },
+    { storageId: "256", colorId: "white", simId: "sim-esim", price: 57500 },
+    { storageId: "256", colorId: "pink", simId: "esim", price: 57500 },
+    { storageId: "256", colorId: "pink", simId: "sim-esim", price: 57500 },
+    { storageId: "256", colorId: "black", simId: "esim", price: 60000 },
+    { storageId: "256", colorId: "black", simId: "sim-esim", price: 60000 },
+  ],
+  defaultStorage: "256",
+  defaultColor: "white",
+  defaultSim: "esim",
+  priceFrom: 57500,
+  storageLabel: "Объём памяти",
+  showSim: true,
+  specs: [
+    { label: "Процессор", value: "Apple A19" },
+    { label: "Дисплей", value: "6,1\" Super Retina XDR OLED" },
+    { label: "Основная камера", value: "48 МП Fusion" },
+    { label: "Разъём", value: "USB-C" },
+    { label: "Защита", value: "IP68" },
+    { label: "Apple Intelligence", value: "Да" },
+  ],
+  compareTitle: "iPhone 16e",
+  compare: [
+    { label: "Процессор", current: "A19", previous: "A18", better: true },
+    { label: "Камера", current: "48 МП Fusion", previous: "48 МП", better: true },
+    { label: "Цена от", current: "от 57 500 ₽", previous: "дешевле", better: false },
+  ],
+  upsell: UPSELL,
+  seoH2: "Купить iPhone 17e в Казани",
+  seoText: "iPhone 17e — самый доступный смартфон 17-й серии в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 57 500 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoH2Why: "Почему iPhone 17e стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPhone 17e проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
+  seoH2Sim: "Какую версию iPhone 17e выбрать?",
+  seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
+};
+
 const configs: Record<string, ProductConfig> = {
   "iphone-17-pro-max": IPHONE_17_PRO_MAX_CONFIG,
   "iphone-17-pro": IPHONE_17_PRO_CONFIG,
   "iphone-17-air": IPHONE_17_AIR_CONFIG,
+  "iphone-17e": IPHONE_17E_CONFIG,
   "iphone-17": IPHONE_17_CONFIG,
   "iphone-16-pro-max": IPHONE_16_PRO_MAX_CONFIG,
   "iphone-16-plus": IPHONE_16_PLUS_CONFIG,
