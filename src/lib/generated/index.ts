@@ -8,6 +8,8 @@ import { getAirpodsConfig } from "./airpods-configs";
 import { getAndroidConfig } from "./android-configs";
 import { getDysonConfig }   from "./dyson-configs";
 import { getAudioConfig }   from "./audio-configs";
+import { getGlassesConfig } from "./glasses-configs";
+import { getCamerasConfig } from "./cameras-configs";
 
 export { IPHONE_CONFIG_SLUGS }  from "./iphone-configs";
 export { IPAD_CONFIG_SLUGS }    from "./ipad-configs";
@@ -17,6 +19,8 @@ export { AIRPODS_CONFIG_SLUGS } from "./airpods-configs";
 export { ANDROID_CONFIG_SLUGS } from "./android-configs";
 export { DYSON_CONFIG_SLUGS }   from "./dyson-configs";
 export { AUDIO_CONFIG_SLUGS }   from "./audio-configs";
+export { GLASSES_CONFIG_SLUGS } from "./glasses-configs";
+export { CAMERAS_CONFIG_SLUGS } from "./cameras-configs";
 
 export function getProductConfig(category: string, slug: string): ProductConfig | undefined {
   if (category === "iphone")  return getIphoneConfig(slug);
@@ -27,5 +31,7 @@ export function getProductConfig(category: string, slug: string): ProductConfig 
   if (category === "android") return getAndroidConfig(slug);
   if (category === "dyson")   return getDysonConfig(slug);
   if (category === "audio")   return getAudioConfig(slug);
+  if (category === "glasses") return getGlassesConfig(slug);
+  if (category === "cameras") return getCamerasConfig(slug);
   return undefined;
 }
