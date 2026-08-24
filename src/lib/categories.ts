@@ -31,6 +31,26 @@ export interface CategoryConfig {
 }
 
 export const categories = {
+  glasses: {
+    slug: "glasses",
+    name: "Очки",
+    emoji: "👓",
+    pageTitle: "Купить очки Ray-Ban и Meta в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription: "Очки Ray-Ban и умные очки Meta Glasses в Казани. Оригинал, гарантия 1 год, рассрочка 0%, доставка в день заказа.",
+    h1: "Купить очки в Казани",
+    order: 20,
+    inMainNav: false,
+  },
+  cameras: {
+    slug: "cameras",
+    name: "Камеры",
+    emoji: "📷",
+    pageTitle: "Купить камеры и стабилизаторы в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription: "GoPro, Insta360, DJI Osmo, Canon в Казани. Гарантия 1 год, рассрочка 0%, доставка в день заказа.",
+    h1: "Купить камеры в Казани",
+    order: 21,
+    inMainNav: false,
+  },
   iphone: {
     slug: "iphone",
     name: "iPhone",
