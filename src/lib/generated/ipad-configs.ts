@@ -274,7 +274,61 @@ const IPAD_PRO_13_CONFIG: ProductConfig = {
   seoTextSim: "Wi-Fi — для дома/офиса. Cellular (LTE) — мобильный интернет в любом месте через eSIM.",
 };
 
+const IPAD_MINI_7_CONFIG: ProductConfig = {
+  slug: "ipad-mini-7",
+  category: "ipad",
+  colors: [
+    { id: "gray", name: "Серый космос", hex: "#7D7E80", image: "ipad-11-2025" },
+    { id: "purple", name: "Фиолетовый", hex: "#B9AFE0", image: "ipad-11-2025" },
+    { id: "blue", name: "Синий", hex: "#8FB6D9", image: "ipad-11-2025" },
+  ],
+  storage: [
+    { id: "128", label: "128 ГБ", available: true },
+    { id: "256", label: "256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "wifi", label: "Wi-Fi", description: "Только Wi-Fi, без сотовой связи." },
+  ],
+  prices: [
+    { storageId: "128", colorId: "gray", simId: "wifi", price: 53000 },
+    { storageId: "128", colorId: "purple", simId: "wifi", price: 53000 },
+    { storageId: "128", colorId: "blue", simId: "wifi", price: 51500 },
+    { storageId: "256", colorId: "gray", simId: "wifi", price: 61500 },
+    { storageId: "256", colorId: "purple", simId: "wifi", price: 61500 },
+    { storageId: "256", colorId: "blue", simId: "wifi", price: 61500 },
+  ],
+  defaultStorage: "128",
+  defaultColor: "blue",
+  defaultSim: "wifi",
+  priceFrom: 51500,
+  storageLabel: "Объём памяти",
+  showSim: false,
+  specs: [
+    { label: "Процессор", value: "Apple A17 Pro" },
+    { label: "Дисплей", value: "8,3\" Liquid Retina" },
+    { label: "Камера", value: "12 МП" },
+    { label: "Разъём", value: "USB-C" },
+    { label: "Apple Pencil", value: "Pro / USB-C" },
+    { label: "Apple Intelligence", value: "Да" },
+  ],
+  compareTitle: "iPad 11 (2025)",
+  compare: [
+    { label: "Размер", current: "8,3\" компактный", previous: "11\"", better: true },
+    { label: "Процессор", current: "A17 Pro", previous: "A16 Bionic", better: true },
+    { label: "Apple Pencil Pro", current: "Да", previous: "Нет", better: true },
+    { label: "Цена от", current: "от 51 500 ₽", previous: "от 43 500 ₽", better: false },
+  ],
+  upsell: UPSELL,
+  seoH2: "Купить iPad mini 7 в Казани",
+  seoText: "iPad mini 7 — самый компактный iPad с чипом A17 Pro в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 51 500 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
+  seoH2Why: "Почему iPad mini 7 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый iPad mini 7 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
+  seoH2Sim: "Какой iPad mini 7 выбрать?",
+  seoTextSim: "Wi-Fi версия подходит для дома и офиса. 128 ГБ хватает для повседневных задач, 256 ГБ — для игр и большого объёма файлов.",
+};
+
 const configs: Record<string, ProductConfig> = {
+  "ipad-mini-7": IPAD_MINI_7_CONFIG,
   "ipad-11-2025": IPAD_11_2025_CONFIG,
   "ipad-air-11-m3": IPAD_AIR_11_M3_CONFIG,
   "ipad-air-11-m4": IPAD_AIR_11_M4_CONFIG,
