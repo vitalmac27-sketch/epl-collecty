@@ -355,6 +355,18 @@ const iPadModels: ProductModel[] = [
     inNav: true,
   },
   {
+    slug: "ipad-mini-7",
+    name: "iPad mini 7",
+    category: "ipad",
+    series: "mini",
+    priceFrom: 51500,
+    image: "ipad-11-2025",
+    seoTitle: "Купить iPad mini 7 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    seoDescription: "iPad mini 7 в Казани ✅ Компактный 8,3\" с чипом A17 Pro. Гарантия, рассрочка 0%, доставка.",
+    subtitle: "Компактный с A17 Pro",
+    inNav: true,
+  },
+  {
     slug: "ipad-11-2025",
     name: "iPad 11 (2025)",
     category: "ipad",
