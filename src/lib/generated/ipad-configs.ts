@@ -122,6 +122,7 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   slug: "ipad-air-11-m4",
   category: "ipad",
   colors: [
+    { id: "коробка", name: "Коробка", hex: "#888888", image: "ipad-air-11-m4" },
     { id: "blue", name: "Синий", hex: "#888888", image: "ipad-air-11-m4" },
     { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-m4" },
     { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "ipad-air-11-m4" },
@@ -135,9 +136,10 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
     { id: "wifi", label: "Wi-Fi", description: "Только Wi-Fi, без сотовой связи." },
   ],
   prices: [
+    { storageId: "128", colorId: "коробка", simId: "lte", price: 75000 },
     { storageId: "256", colorId: "blue", simId: "wifi", price: 80000 },
     { storageId: "128", colorId: "blue", simId: "wifi", price: 65000 },
-    { storageId: "128", colorId: "starlight", simId: "lte", price: 84000 },
+    { storageId: "128", colorId: "starlight", simId: "lte", price: 80000 },
     { storageId: "128", colorId: "gray", simId: "wifi", price: 67000 },
     { storageId: "128", colorId: "purple", simId: "wifi", price: 67000 },
     { storageId: "128", colorId: "starlight", simId: "wifi", price: 68000 },
