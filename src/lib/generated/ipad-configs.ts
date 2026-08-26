@@ -26,7 +26,7 @@ const IPAD_11_2025_CONFIG: ProductConfig = {
   prices: [
     { storageId: "128", colorId: "blue", simId: "wifi", price: 43500 },
     { storageId: "128", colorId: "pink", simId: "wifi", price: 43500 },
-    { storageId: "128", colorId: "silver", simId: "wifi", price: 43500 },
+    { storageId: "128", colorId: "silver", simId: "wifi", price: 44500 },
     { storageId: "256", colorId: "blue", simId: "wifi", price: 51500 },
     { storageId: "256", colorId: "pink", simId: "wifi", price: 54000 },
     { storageId: "256", colorId: "silver", simId: "wifi", price: 53500 },
@@ -137,14 +137,14 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "128", colorId: "коробка", simId: "lte", price: 75000 },
-    { storageId: "256", colorId: "blue", simId: "wifi", price: 80000 },
+    { storageId: "256", colorId: "blue", simId: "wifi", price: 80500 },
     { storageId: "128", colorId: "blue", simId: "wifi", price: 65000 },
     { storageId: "128", colorId: "starlight", simId: "lte", price: 80000 },
     { storageId: "128", colorId: "gray", simId: "wifi", price: 67000 },
     { storageId: "128", colorId: "purple", simId: "wifi", price: 67000 },
     { storageId: "128", colorId: "starlight", simId: "wifi", price: 68000 },
-    { storageId: "256", colorId: "gray", simId: "wifi", price: 80000 },
-    { storageId: "256", colorId: "starlight", simId: "wifi", price: 80000 },
+    { storageId: "256", colorId: "gray", simId: "wifi", price: 80500 },
+    { storageId: "256", colorId: "starlight", simId: "wifi", price: 80500 },
   ],
   defaultStorage: "128",
   defaultColor: "gray",
@@ -234,6 +234,7 @@ const IPAD_PRO_13_CONFIG: ProductConfig = {
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "ipad-pro-13" },
   ],
   storage: [
+    { id: "512", label: "512 ГБ", available: true },
     { id: "256", label: "256 ГБ", available: true },
     { id: "2048", label: "2 ТБ", available: true },
   ],
@@ -241,6 +242,7 @@ const IPAD_PRO_13_CONFIG: ProductConfig = {
     { id: "lte", label: "Wi-Fi + Cellular", description: "Wi-Fi и сотовая связь (LTE/5G) с eSIM." },
   ],
   prices: [
+    { storageId: "512", colorId: "black", simId: "lte", price: 134000 },
     { storageId: "256", colorId: "black", simId: "lte", price: 116000 },
     { storageId: "2048", colorId: "black", simId: "lte", price: 152000 },
   ],
