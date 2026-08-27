@@ -46,6 +46,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
   slug: "ray-ban-wayfarer",
   category: "glasses",
   colors: [
+    { id: "matte-black-clear-l", name: "Matte-black-clear-l", hex: "#888888", image: "airpods-max" },
     { id: "shiny-black-15-green-m", name: "Shiny Black / G15 Green (M)", hex: "#888888", image: "airpods-max" },
     { id: "shiny-black-transitions-graph-green-m", name: "Shiny Black / Transitions Graph Green (M)", hex: "#888888", image: "airpods-max" },
     { id: "shiny-cosmic-blue-transitions-sapphire-m", name: "Cosmic Blue / Transitions Sapphire (M)", hex: "#888888", image: "airpods-max" },
@@ -58,6 +59,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "matte-black-clear-l", simId: "none", price: 37500 },
     { storageId: "std", colorId: "shiny-black-15-green-m", simId: "none", price: 37000 },
     { storageId: "std", colorId: "shiny-black-transitions-graph-green-m", simId: "none", price: 40000 },
     { storageId: "std", colorId: "shiny-cosmic-blue-transitions-sapphire-m", simId: "none", price: 38000 },
