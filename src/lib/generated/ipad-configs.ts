@@ -24,9 +24,9 @@ const IPAD_11_2025_CONFIG: ProductConfig = {
     { id: "wifi", label: "Wi-Fi", description: "Только Wi-Fi, без сотовой связи." },
   ],
   prices: [
-    { storageId: "128", colorId: "blue", simId: "wifi", price: 44500 },
-    { storageId: "128", colorId: "pink", simId: "wifi", price: 45000 },
-    { storageId: "128", colorId: "silver", simId: "wifi", price: 44500 },
+    { storageId: "128", colorId: "blue", simId: "wifi", price: 45000 },
+    { storageId: "128", colorId: "pink", simId: "wifi", price: 45500 },
+    { storageId: "128", colorId: "silver", simId: "wifi", price: 45000 },
     { storageId: "256", colorId: "blue", simId: "wifi", price: 52500 },
     { storageId: "256", colorId: "pink", simId: "wifi", price: 55000 },
     { storageId: "256", colorId: "silver", simId: "wifi", price: 55000 },
@@ -34,7 +34,7 @@ const IPAD_11_2025_CONFIG: ProductConfig = {
   defaultStorage: "128",
   defaultColor: "pink",
   defaultSim: "wifi",
-  priceFrom: 44500,
+  priceFrom: 45000,
   storageLabel: "Объём памяти",
   showSim: false,
   specs: [
@@ -137,7 +137,7 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "128", colorId: "коробка", simId: "lte", price: 75000 },
-    { storageId: "256", colorId: "blue", simId: "wifi", price: 80500 },
+    { storageId: "256", colorId: "blue", simId: "wifi", price: 78500 },
     { storageId: "128", colorId: "blue", simId: "wifi", price: 67000 },
     { storageId: "128", colorId: "starlight", simId: "lte", price: 80000 },
     { storageId: "128", colorId: "gray", simId: "wifi", price: 67000 },
@@ -244,7 +244,7 @@ const IPAD_PRO_13_CONFIG: ProductConfig = {
     { id: "lte", label: "Wi-Fi + Cellular", description: "Wi-Fi и сотовая связь (LTE/5G) с eSIM." },
   ],
   prices: [
-    { storageId: "512", colorId: "black", simId: "lte", price: 136000 },
+    { storageId: "512", colorId: "black", simId: "lte", price: 137000 },
     { storageId: "256", colorId: "black", simId: "lte", price: 118000 },
     { storageId: "2048", colorId: "black", simId: "lte", price: 152000 },
   ],
