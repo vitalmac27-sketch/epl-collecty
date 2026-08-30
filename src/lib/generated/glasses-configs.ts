@@ -46,6 +46,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
   slug: "ray-ban-wayfarer",
   category: "glasses",
   colors: [
+    { id: "transparent-grey|clear-sapphire-transitions-m", name: "Transparent-grey|clear-sapphire-transitions-m", hex: "#888888", image: "airpods-max" },
     { id: "matte-black-polar-gradient-graphite-m", name: "Matte-black-polar-gradient-graphite-m", hex: "#888888", image: "airpods-max" },
     { id: "matte-black-polar-gradient-graphite-l", name: "Matte-black-polar-gradient-graphite-l", hex: "#888888", image: "airpods-max" },
     { id: "matte-black-clear-m", name: "Matte-black-clear-m", hex: "#888888", image: "airpods-max" },
@@ -63,6 +64,8 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "transparent-grey|clear-sapphire-transitions-l", simId: "none", price: 41500 },
+    { storageId: "std", colorId: "transparent-grey|clear-sapphire-transitions-m", simId: "none", price: 41500 },
     { storageId: "std", colorId: "matte-black-polar-gradient-graphite-m", simId: "none", price: 37500 },
     { storageId: "std", colorId: "matte-black-polar-gradient-graphite-l", simId: "none", price: 37500 },
     { storageId: "std", colorId: "matte-black-clear-m", simId: "none", price: 37000 },
