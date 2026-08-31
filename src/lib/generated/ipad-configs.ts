@@ -141,7 +141,7 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
     { storageId: "128", colorId: "blue", simId: "wifi", price: 67000 },
     { storageId: "128", colorId: "starlight", simId: "lte", price: 83000 },
     { storageId: "128", colorId: "gray", simId: "wifi", price: 67000 },
-    { storageId: "128", colorId: "purple", simId: "wifi", price: 67000 },
+    { storageId: "128", colorId: "purple", simId: "wifi", price: 68000 },
     { storageId: "128", colorId: "starlight", simId: "wifi", price: 68000 },
     { storageId: "256", colorId: "gray", simId: "wifi", price: 81500 },
     { storageId: "256", colorId: "starlight", simId: "wifi", price: 81500 },
