@@ -66,7 +66,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
   prices: [
     { storageId: "std", colorId: "transparent-grey|clear-sapphire-transitions-l", simId: "none", price: 41500 },
     { storageId: "std", colorId: "transparent-grey|clear-sapphire-transitions-m", simId: "none", price: 41500 },
-    { storageId: "std", colorId: "matte-black-polar-gradient-graphite-m", simId: "none", price: 37500 },
+    { storageId: "std", colorId: "matte-black-polar-gradient-graphite-m", simId: "none", price: 38500 },
     { storageId: "std", colorId: "matte-black-polar-gradient-graphite-l", simId: "none", price: 37500 },
     { storageId: "std", colorId: "matte-black-clear-m", simId: "none", price: 37000 },
     { storageId: "std", colorId: "shiny-black-transitions-graph-green-l", simId: "none", price: 40000 },
