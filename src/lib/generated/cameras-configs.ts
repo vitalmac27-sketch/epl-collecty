@@ -92,12 +92,12 @@ const INSTA360_X5_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 39500 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 37500 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 39500,
+  priceFrom: 37500,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
