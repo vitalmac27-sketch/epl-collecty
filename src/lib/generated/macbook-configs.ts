@@ -173,7 +173,7 @@ const MACBOOK_AIR_13_M5_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "16-512", colorId: "midnight", simId: "none", price: 128000 },
-    { storageId: "16-512", colorId: "silver", simId: "none", price: 136000 },
+    { storageId: "16-512", colorId: "silver", simId: "none", price: 135000 },
     { storageId: "16-512", colorId: "skyblue", simId: "none", price: 128000 },
     { storageId: "16-512", colorId: "starlight", simId: "none", price: 128000 },
   ],
