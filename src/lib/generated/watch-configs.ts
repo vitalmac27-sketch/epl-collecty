@@ -221,7 +221,7 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "40mm", colorId: "midnight", simId: "none", price: 23500 },
-    { storageId: "40mm", colorId: "starlight", simId: "none", price: 24500 },
+    { storageId: "40mm", colorId: "starlight", simId: "none", price: 25000 },
     { storageId: "44mm", colorId: "midnight", simId: "none", price: 26500 },
     { storageId: "44mm", colorId: "starlight", simId: "none", price: 27000 },
   ],
