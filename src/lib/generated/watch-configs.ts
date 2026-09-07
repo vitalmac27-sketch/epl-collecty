@@ -23,7 +23,7 @@ const APPLE_WATCH_ULTRA_3_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "black", simId: "none", price: 64000 },
-    { storageId: "std", colorId: "natural", simId: "none", price: 78500 },
+    { storageId: "std", colorId: "natural", simId: "none", price: 66000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
