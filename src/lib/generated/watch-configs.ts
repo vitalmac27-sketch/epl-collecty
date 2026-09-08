@@ -22,13 +22,13 @@ const APPLE_WATCH_ULTRA_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 64000 },
-    { storageId: "std", colorId: "natural", simId: "none", price: 66000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 63500 },
+    { storageId: "std", colorId: "natural", simId: "none", price: 65000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 64000,
+  priceFrom: 63500,
   storageLabel: "Размер корпуса",
   showSim: false,
   specs: [
@@ -124,7 +124,7 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
   prices: [
     { storageId: "42mm", colorId: "black", simId: "none", price: 33500 },
     { storageId: "42mm", colorId: "rose", simId: "none", price: 33500 },
-    { storageId: "42mm", colorId: "silver", simId: "none", price: 35000 },
+    { storageId: "42mm", colorId: "silver", simId: "none", price: 35500 },
     { storageId: "42mm", colorId: "space", simId: "none", price: 33500 },
     { storageId: "46mm", colorId: "black", simId: "none", price: 36000 },
     { storageId: "46mm", colorId: "rose", simId: "none", price: 36000 },
