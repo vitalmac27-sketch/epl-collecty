@@ -16,12 +16,12 @@ const GOPRO_HERO_13_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 31000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 34000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 31000,
+  priceFrom: 34000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -54,12 +54,12 @@ const GOPRO_HERO_12_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 27000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 30000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 27000,
+  priceFrom: 30000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -130,12 +130,12 @@ const DJI_OSMO_MOBILE_8_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 13000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 16000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 13000,
+  priceFrom: 16000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -169,12 +169,12 @@ const DJI_OSMO_MOBILE_8P_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 16000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 19000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 16000,
+  priceFrom: 19000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -207,12 +207,12 @@ const DJI_OSMO_POCKET_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "creator-combo", simId: "none", price: 38000 },
+    { storageId: "std", colorId: "creator-combo", simId: "none", price: 40000 },
   ],
   defaultStorage: "std",
   defaultColor: "creator-combo",
   defaultSim: "none",
-  priceFrom: 38000,
+  priceFrom: 40000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -248,13 +248,13 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 57000 },
-    { storageId: "std", colorId: "standard", simId: "none", price: 43000 },
-    { storageId: "std", colorId: "creator-combo", simId: "none", price: 51000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 45000 },
+    { storageId: "std", colorId: "creator-combo", simId: "none", price: 53000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 43000,
+  priceFrom: 45000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -325,12 +325,12 @@ const KODAK_CHARMERA_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 5500 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 6500 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 5500,
+  priceFrom: 6500,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
