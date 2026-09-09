@@ -90,12 +90,12 @@ const DJI_MIC_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 23500 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 26500 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 23500,
+  priceFrom: 26500,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -123,12 +123,12 @@ const DJI_MIC_2_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 20000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 23000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 20000,
+  priceFrom: 23000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
