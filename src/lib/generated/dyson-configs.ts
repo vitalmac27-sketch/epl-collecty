@@ -448,12 +448,12 @@ const DYSON_V12S_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 47000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 49000 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 47000,
+  priceFrom: 49000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
