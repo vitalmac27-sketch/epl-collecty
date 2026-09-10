@@ -287,12 +287,12 @@ const CANON_G7X_MARK_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 101500 },
+    { storageId: "std", colorId: "black", simId: "none", price: 108000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 101500,
+  priceFrom: 108000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
