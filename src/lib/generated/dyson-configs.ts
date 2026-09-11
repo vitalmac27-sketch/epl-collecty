@@ -54,7 +54,7 @@ const DYSON_HD17_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 35000 },
+    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 37000 },
     { storageId: "std", colorId: "jusper-plum", simId: "none", price: 34000 },
   ],
   defaultStorage: "std",
@@ -89,13 +89,13 @@ const DYSON_HD16_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 31000 },
+    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 33500 },
     { storageId: "std", colorId: "prussian-blue", simId: "none", price: 34000 },
   ],
   defaultStorage: "std",
   defaultColor: "prussian-blue",
   defaultSim: "none",
-  priceFrom: 31000,
+  priceFrom: 33500,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -382,12 +382,12 @@ const DYSON_V15S_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 56000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 60500 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 56000,
+  priceFrom: 60500,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -415,12 +415,12 @@ const DYSON_V15_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 51000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 58000 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 51000,
+  priceFrom: 58000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -481,12 +481,12 @@ const DYSON_V12_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 44000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 46000 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 44000,
+  priceFrom: 46000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
