@@ -245,13 +245,13 @@ const IPAD_PRO_13_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "512", colorId: "black", simId: "lte", price: 142000 },
-    { storageId: "256", colorId: "black", simId: "lte", price: 122000 },
+    { storageId: "256", colorId: "black", simId: "lte", price: 124000 },
     { storageId: "2048", colorId: "black", simId: "lte", price: 152000 },
   ],
   defaultStorage: "2048",
   defaultColor: "black",
   defaultSim: "lte",
-  priceFrom: 122000,
+  priceFrom: 124000,
   storageLabel: "Объём памяти",
   showSim: false,
   specs: [
