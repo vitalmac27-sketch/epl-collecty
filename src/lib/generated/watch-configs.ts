@@ -123,8 +123,8 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "42mm", colorId: "black", simId: "none", price: 34000 },
-    { storageId: "42mm", colorId: "rose", simId: "none", price: 34000 },
-    { storageId: "42mm", colorId: "silver", simId: "none", price: 34500 },
+    { storageId: "42mm", colorId: "rose", simId: "none", price: 33500 },
+    { storageId: "42mm", colorId: "silver", simId: "none", price: 35500 },
     { storageId: "42mm", colorId: "space", simId: "none", price: 33500 },
     { storageId: "46mm", colorId: "black", simId: "none", price: 36500 },
     { storageId: "46mm", colorId: "rose", simId: "none", price: 36500 },
@@ -221,7 +221,7 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "40mm", colorId: "midnight", simId: "none", price: 26500 },
-    { storageId: "40mm", colorId: "starlight", simId: "none", price: 27500 },
+    { storageId: "40mm", colorId: "starlight", simId: "none", price: 27000 },
     { storageId: "44mm", colorId: "midnight", simId: "none", price: 28500 },
     { storageId: "44mm", colorId: "starlight", simId: "none", price: 29500 },
   ],
