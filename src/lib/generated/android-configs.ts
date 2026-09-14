@@ -30,7 +30,7 @@ const SAMSUNG_GALAXY_S26_ULTRA_CONFIG: ProductConfig = {
     { storageId: "16-1tb", colorId: "violet", simId: "none", price: 116000 },
     { storageId: "16-1tb", colorId: "skyblue", simId: "none", price: 122000 },
     { storageId: "16-1tb", colorId: "silver", simId: "none", price: 121000 },
-    { storageId: "16-1tb", colorId: "black", simId: "none", price: 122000 },
+    { storageId: "16-1tb", colorId: "black", simId: "none", price: 121000 },
     { storageId: "12-256", colorId: "black", simId: "none", price: 80000 },
     { storageId: "12-256", colorId: "skyblue", simId: "none", price: 81000 },
     { storageId: "12-256", colorId: "violet", simId: "none", price: 81000 },
@@ -92,7 +92,7 @@ const SAMSUNG_GALAXY_S26_PLUS_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "12-256", colorId: "black", simId: "none", price: 74000 },
+    { storageId: "12-256", colorId: "black", simId: "none", price: 75500 },
     { storageId: "12-256", colorId: "violet", simId: "none", price: 72500 },
     { storageId: "12-256", colorId: "white", simId: "none", price: 74000 },
     { storageId: "12-512", colorId: "skyblue", simId: "none", price: 83500 },
