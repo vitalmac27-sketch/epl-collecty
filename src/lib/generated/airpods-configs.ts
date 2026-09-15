@@ -124,12 +124,12 @@ const AIRPODS_PRO_2_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 17500 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 20000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 17500,
+  priceFrom: 20000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
