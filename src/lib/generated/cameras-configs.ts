@@ -207,12 +207,12 @@ const DJI_OSMO_POCKET_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "creator-combo", simId: "none", price: 40000 },
+    { storageId: "std", colorId: "creator-combo", simId: "none", price: 44000 },
   ],
   defaultStorage: "std",
   defaultColor: "creator-combo",
   defaultSim: "none",
-  priceFrom: 40000,
+  priceFrom: 44000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -236,6 +236,7 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
   slug: "dji-osmo-pocket-4",
   category: "cameras",
   colors: [
+    { id: "bundle-standard-combo", name: "Bundle-standard-combo", hex: "#888888", image: "dji-mic-3" },
     { id: "p-standard-combo", name: "P-standard-combo", hex: "#888888", image: "dji-mic-3" },
     { id: "standard", name: "Стандарт", hex: "#888888", image: "dji-mic-3" },
     { id: "creator-combo", name: "Creator Combo", hex: "#888888", image: "dji-mic-3" },
@@ -247,14 +248,15 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "bundle-standard-combo", simId: "none", price: 42000 },
     { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 57000 },
     { storageId: "std", colorId: "standard", simId: "none", price: 45000 },
-    { storageId: "std", colorId: "creator-combo", simId: "none", price: 53500 },
+    { storageId: "std", colorId: "creator-combo", simId: "none", price: 51500 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 45000,
+  priceFrom: 42000,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
