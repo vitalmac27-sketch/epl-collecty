@@ -645,6 +645,7 @@ const XIAOMI_REDMI_NOTE_15_PRO_CONFIG: ProductConfig = {
   slug: "xiaomi-redmi-note-15-pro",
   category: "android",
   colors: [
+    { id: "xiaomi-black", name: "Xiaomi-black", hex: "#888888", image: "xiaomi-redmi-note-15-pro" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-redmi-note-15-pro" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-redmi-note-15-pro" },
   ],
@@ -656,6 +657,7 @@ const XIAOMI_REDMI_NOTE_15_PRO_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "8-256", colorId: "xiaomi-black", simId: "none", price: 27500 },
     { storageId: "12-512", colorId: "black", simId: "none", price: 29500 },
     { storageId: "12-512", colorId: "blue", simId: "none", price: 29500 },
     { storageId: "8-256", colorId: "black", simId: "none", price: 24500 },
@@ -692,6 +694,9 @@ const XIAOMI_REDMI_NOTE_15_CONFIG: ProductConfig = {
   slug: "xiaomi-redmi-note-15",
   category: "android",
   colors: [
+    { id: "xiaomi-purple", name: "Xiaomi-purple", hex: "#888888", image: "xiaomi-redmi-note-15" },
+    { id: "xiaomi-blue", name: "Xiaomi-blue", hex: "#888888", image: "xiaomi-redmi-note-15" },
+    { id: "xiaomi-black", name: "Xiaomi-black", hex: "#888888", image: "xiaomi-redmi-note-15" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-redmi-note-15" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-redmi-note-15" },
     { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "xiaomi-redmi-note-15" },
@@ -704,6 +709,11 @@ const XIAOMI_REDMI_NOTE_15_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "6-128", colorId: "xiaomi-blue", simId: "none", price: 20500 },
+    { storageId: "6-128", colorId: "xiaomi-purple", simId: "none", price: 20500 },
+    { storageId: "6-128", colorId: "xiaomi-black", simId: "none", price: 20500 },
+    { storageId: "8-256", colorId: "xiaomi-blue", simId: "none", price: 22500 },
+    { storageId: "8-256", colorId: "xiaomi-black", simId: "none", price: 22500 },
     { storageId: "6-128", colorId: "black", simId: "none", price: 18000 },
     { storageId: "6-128", colorId: "blue", simId: "none", price: 18000 },
     { storageId: "6-128", colorId: "purple", simId: "none", price: 18000 },
