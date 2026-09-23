@@ -114,6 +114,8 @@ const DYSON_AIRWRAP_HS09_CONFIG: ProductConfig = {
   slug: "dyson-airwrap-hs09",
   category: "dyson",
   colors: [
+    { id: "jusper-plum-re", name: "Jusper-plum-re", hex: "#888888", image: "dyson-airwrap-hs09" },
+    { id: "ceramic-pink-re", name: "Ceramic-pink-re", hex: "#888888", image: "dyson-airwrap-hs09" },
     { id: "apricot-topaz", name: "Абрикосовый топаз", hex: "#D4A88A", image: "dyson-airwrap-hs09" },
     { id: "red-velvet", name: "Красный бархат", hex: "#86323A", image: "dyson-airwrap-hs09" },
     { id: "amber-silk", name: "Янтарный шёлк", hex: "#C49862", image: "dyson-airwrap-hs09" },
@@ -127,8 +129,10 @@ const DYSON_AIRWRAP_HS09_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "jusper-plum-re", simId: "none", price: 49500 },
+    { storageId: "std", colorId: "ceramic-pink-re", simId: "none", price: 51000 },
     { storageId: "std", colorId: "amber-silk", simId: "none", price: 50000 },
-    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 45500 },
+    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 49000 },
     { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 48000 },
     { storageId: "std", colorId: "jasper-plum", simId: "none", price: 47000 },
     { storageId: "std", colorId: "red-velvet", simId: "none", price: 47000 },
@@ -136,7 +140,7 @@ const DYSON_AIRWRAP_HS09_CONFIG: ProductConfig = {
   defaultStorage: "std",
   defaultColor: "apricot-topaz",
   defaultSim: "none",
-  priceFrom: 45500,
+  priceFrom: 47000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -448,12 +452,12 @@ const DYSON_V12S_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 49000 },
+    { storageId: "std", colorId: "yellow-nickel", simId: "none", price: 48000 },
   ],
   defaultStorage: "std",
   defaultColor: "yellow-nickel",
   defaultSim: "none",
-  priceFrom: 49000,
+  priceFrom: 48000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
