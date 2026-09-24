@@ -29,7 +29,7 @@ const AIRPODS_MAX_CONFIG: ProductConfig = {
     { storageId: "std", colorId: "midnight", simId: "none", price: 47000 },
     { storageId: "std", colorId: "orange", simId: "none", price: 45000 },
     { storageId: "std", colorId: "purple", simId: "none", price: 45000 },
-    { storageId: "std", colorId: "starlight", simId: "none", price: 45500 },
+    { storageId: "std", colorId: "starlight", simId: "none", price: 45000 },
   ],
   defaultStorage: "std",
   defaultColor: "purple",
@@ -124,12 +124,12 @@ const AIRPODS_PRO_2_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 19000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 20000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 19000,
+  priceFrom: 20000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
