@@ -60,7 +60,7 @@ export default function Navigation() {
                     <ChevronDown className="h-3 w-3 opacity-60" />
                   </Link>
                   {/* Дропдаун при hover */}
-                  <div className="absolute top-full left-0 mt-1 w-56 bg-popover border border-border rounded-xl shadow-xl py-2 z-50 hidden group-hover:block">
+                  <div className="absolute top-full left-0 mt-1 w-56 before:content-[''] before:absolute before:-top-2 before:left-0 before:right-0 before:h-2 bg-popover border border-border rounded-xl shadow-xl py-2 z-50 hidden group-hover:block">
                     {getNavModels(cat.slug).map((m) => (
                       <Link key={m.slug} href={getModelUrl(m)}
                         className={cn("flex items-center justify-between px-4 py-2 text-sm hover:bg-muted", pathname === getModelUrl(m) && "text-primary")}>
