@@ -44,6 +44,22 @@ export interface ProductModel {
 // ─────────────────────────────────────────────────────────────────────────────
 const iPhoneModels: ProductModel[] = [
   {
+    slug: "iphone-18-pro-max", name: "iPhone 18 Pro Max", category: "iphone", series: "18",
+    badge: "NEW",
+    priceFrom: 208000, image: "iphone-17-pro-max",
+    seoTitle: "Купить iPhone 18 Pro Max в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    seoDescription: "iPhone 18 Pro Max в Казани ✅ Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
+    subtitle: "Новый флагман Apple", inNav: true,
+  },
+  {
+    slug: "iphone-18-pro", name: "iPhone 18 Pro", category: "iphone", series: "18",
+    badge: "NEW",
+    priceFrom: 174000, image: "iphone-17-pro-max",
+    seoTitle: "Купить iPhone 18 Pro в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    seoDescription: "iPhone 18 Pro в Казани ✅ Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
+    subtitle: "Новинка 18-й серии", inNav: true,
+  },
+  {
     slug: "iphone-17-pro-max",
     name: "iPhone 17 Pro Max",
     category: "iphone",
@@ -200,6 +216,13 @@ const iPhoneModels: ProductModel[] = [
     seoDescription:
       "iPhone 15 Plus в Казани ✅ Большой экран, Dynamic Island. Гарантия, рассрочка 0%.",
     subtitle: "Dynamic Island, большой экран",
+  },
+  {
+    slug: "iphone-14", name: "iPhone 14", category: "iphone", series: "14",
+    priceFrom: 42500, image: "iphone-15",
+    seoTitle: "Купить iPhone 14 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
+    seoDescription: "iPhone 14 в Казани ✅ Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
+    subtitle: "Классика по доступной цене", inNav: true,
   },
   {
     slug: "iphone-15",
