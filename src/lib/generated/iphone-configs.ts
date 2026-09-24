@@ -667,7 +667,90 @@ const IPHONE_17E_CONFIG: ProductConfig = {
   seoTextSim: "Nano-SIM + eSIM (Европа/РФ) подходит для большинства операторов. Версия только eSIM — для тех, чей оператор поддерживает eSIM. Уточняйте у менеджера.",
 };
 
+const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
+  slug: "iphone-18-pro-max", category: "iphone",
+  colors: [
+    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-17-pro-max" },
+  ],
+  storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
+  sim: [
+    { id: "esim", label: "eSIM", description: "Только eSIM. Нужна поддержка eSIM у оператора." },
+    { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Одна физическая SIM + одна eSIM." },
+  ],
+  prices: [
+    { storageId: "512", colorId: "burgundy", simId: "esim", price: 208000 },
+  ],
+  defaultStorage: "512", defaultColor: "burgundy", defaultSim: "esim",
+  priceFrom: 208000, storageLabel: "Объём памяти", showSim: true,
+  specs: [ { label: "Процессор", value: "Apple A20 Pro" }, { label: "Дисплей", value: "6,9" Super Retina XDR, 120 Гц" }, { label: "Разъём", value: "USB-C" }, { label: "Защита", value: "IP68" }, { label: "Apple Intelligence", value: "Да" } ],
+  compareTitle: "iPhone 17 Pro Max",
+  compare: [ { label: "Поколение", current: "iPhone 18 Pro Max", previous: "iPhone 17", better: true } ],
+  upsell: UPSELL,
+  seoH2: "Купить iPhone 18 Pro Max в Казани",
+  seoText: "iPhone 18 Pro Max — новинка Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 208 000 ₽. Оригинал с гарантией 1 год, рассрочка 0%, доставка в день заказа.",
+  seoH2Why: "Почему iPhone 18 Pro Max стоит купить у нас?",
+  seoTextWhy: "Каждый iPhone 18 Pro Max проходит проверку перед продажей: тестируем, проверяем серийный номер, активируем при вас.",
+  seoH2Sim: "Какую версию выбрать?",
+  seoTextSim: "eSIM — при поддержке оператором. Nano-SIM + eSIM — универсальный вариант для РФ.",
+};
+
+const IPHONE_18_PRO_CONFIG: ProductConfig = {
+  slug: "iphone-18-pro", category: "iphone",
+  colors: [
+    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-17-pro-max" },
+  ],
+  storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
+  sim: [
+    { id: "esim", label: "eSIM", description: "Только eSIM. Нужна поддержка eSIM у оператора." },
+    { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Одна физическая SIM + одна eSIM." },
+  ],
+  prices: [
+    { storageId: "512", colorId: "burgundy", simId: "esim", price: 174000 },
+  ],
+  defaultStorage: "512", defaultColor: "burgundy", defaultSim: "esim",
+  priceFrom: 174000, storageLabel: "Объём памяти", showSim: true,
+  specs: [ { label: "Процессор", value: "Apple A20 Pro" }, { label: "Дисплей", value: "6,3" Super Retina XDR, 120 Гц" }, { label: "Разъём", value: "USB-C" }, { label: "Защита", value: "IP68" }, { label: "Apple Intelligence", value: "Да" } ],
+  compareTitle: "iPhone 17 Pro Max",
+  compare: [ { label: "Поколение", current: "iPhone 18 Pro", previous: "iPhone 17", better: true } ],
+  upsell: UPSELL,
+  seoH2: "Купить iPhone 18 Pro в Казани",
+  seoText: "iPhone 18 Pro — новинка Apple в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 174 000 ₽. Оригинал с гарантией 1 год, рассрочка 0%, доставка в день заказа.",
+  seoH2Why: "Почему iPhone 18 Pro стоит купить у нас?",
+  seoTextWhy: "Каждый iPhone 18 Pro проходит проверку перед продажей: тестируем, проверяем серийный номер, активируем при вас.",
+  seoH2Sim: "Какую версию выбрать?",
+  seoTextSim: "eSIM — при поддержке оператором. Nano-SIM + eSIM — универсальный вариант для РФ.",
+};
+
+const IPHONE_14_CONFIG: ProductConfig = {
+  slug: "iphone-14", category: "iphone",
+  colors: [ { id: "midnight", name: "Тёмная ночь", hex: "#1C1C25", image: "iphone-15" } ],
+  storage: [ { id: "128", label: "128 ГБ", available: true }, { id: "256", label: "256 ГБ", available: true } ],
+  sim: [
+    { id: "esim", label: "eSIM", description: "Только eSIM." },
+    { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Одна физическая SIM + одна eSIM." },
+  ],
+  prices: [
+    { storageId: "256", colorId: "midnight", simId: "esim", price: 42500 },
+    { storageId: "256", colorId: "midnight", simId: "sim-esim", price: 42500 },
+  ],
+  defaultStorage: "256", defaultColor: "midnight", defaultSim: "sim-esim",
+  priceFrom: 42500, storageLabel: "Объём памяти", showSim: true,
+  specs: [ { label: "Процессор", value: "Apple A15 Bionic" }, { label: "Дисплей", value: "6,1\" Super Retina XDR" }, { label: "Камера", value: "12 МП двойная" }, { label: "Защита", value: "IP68" } ],
+  compareTitle: "iPhone 15",
+  compare: [ { label: "Цена от", current: "42 500 ₽", previous: "дороже", better: true }, { label: "Разъём", current: "Lightning", previous: "USB-C", better: false } ],
+  upsell: UPSELL,
+  seoH2: "Купить iPhone 14 в Казани",
+  seoText: "iPhone 14 — проверенная классика по доступной цене в ЭПЛ-КОЛЛЕКЦИЯ в Казани. От 42 500 ₽, гарантия 1 год, рассрочка 0%.",
+  seoH2Why: "Почему iPhone 14 стоит купить у нас?",
+  seoTextWhy: "Каждый iPhone 14 проходит проверку перед продажей: тестируем все функции, активируем при вас.",
+  seoH2Sim: "Какую версию выбрать?",
+  seoTextSim: "Nano-SIM + eSIM — универсальный вариант для РФ.",
+};
+
 const configs: Record<string, ProductConfig> = {
+  "iphone-18-pro-max": IPHONE_18_PRO_MAX_CONFIG,
+  "iphone-18-pro": IPHONE_18_PRO_CONFIG,
+  "iphone-14": IPHONE_14_CONFIG,
   "iphone-17-pro-max": IPHONE_17_PRO_MAX_CONFIG,
   "iphone-17-pro": IPHONE_17_PRO_CONFIG,
   "iphone-17-air": IPHONE_17_AIR_CONFIG,
