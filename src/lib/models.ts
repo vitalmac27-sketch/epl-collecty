@@ -46,7 +46,7 @@ const iPhoneModels: ProductModel[] = [
   {
     slug: "iphone-18-pro-max", name: "iPhone 18 Pro Max", category: "iphone", series: "18",
     badge: "NEW",
-    priceFrom: 208000, image: "iphone-17-pro-max",
+    priceFrom: 208000, image: "iphone-18-pro-max",
     seoTitle: "Купить iPhone 18 Pro Max в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription: "iPhone 18 Pro Max в Казани ✅ Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
     subtitle: "Новый флагман Apple", inNav: true,
@@ -54,7 +54,7 @@ const iPhoneModels: ProductModel[] = [
   {
     slug: "iphone-18-pro", name: "iPhone 18 Pro", category: "iphone", series: "18",
     badge: "NEW",
-    priceFrom: 174000, image: "iphone-17-pro-max",
+    priceFrom: 174000, image: "iphone-18-pro",
     seoTitle: "Купить iPhone 18 Pro в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription: "iPhone 18 Pro в Казани ✅ Гарантия 1 год, рассрочка 0%, доставка бесплатно.",
     subtitle: "Новинка 18-й серии", inNav: true,
