@@ -670,7 +670,7 @@ const IPHONE_17E_CONFIG: ProductConfig = {
 const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
   slug: "iphone-18-pro-max", category: "iphone",
   colors: [
-    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-17-pro-max" },
+    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
   ],
   storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
   sim: [
@@ -697,7 +697,7 @@ const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
 const IPHONE_18_PRO_CONFIG: ProductConfig = {
   slug: "iphone-18-pro", category: "iphone",
   colors: [
-    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-17-pro-max" },
+    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro" },
   ],
   storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
   sim: [
