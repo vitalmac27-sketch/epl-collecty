@@ -26,7 +26,7 @@ const IPAD_11_2025_CONFIG: ProductConfig = {
   prices: [
     { storageId: "128", colorId: "blue", simId: "wifi", price: 45000 },
     { storageId: "128", colorId: "pink", simId: "wifi", price: 46000 },
-    { storageId: "128", colorId: "silver", simId: "wifi", price: 47000 },
+    { storageId: "128", colorId: "silver", simId: "wifi", price: 46500 },
     { storageId: "256", colorId: "blue", simId: "wifi", price: 56000 },
     { storageId: "256", colorId: "pink", simId: "wifi", price: 57000 },
     { storageId: "256", colorId: "silver", simId: "wifi", price: 56000 },
