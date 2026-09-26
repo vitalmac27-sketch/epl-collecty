@@ -22,13 +22,13 @@ const APPLE_WATCH_ULTRA_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 63000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 64000 },
     { storageId: "std", colorId: "natural", simId: "none", price: 64000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 63000,
+  priceFrom: 64000,
   storageLabel: "Размер корпуса",
   showSim: false,
   specs: [
@@ -73,7 +73,7 @@ const APPLE_WATCH_ULTRA_2_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "025", simId: "none", price: 32000 },
-    { storageId: "std", colorId: "black", simId: "none", price: 61000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 59000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
@@ -122,7 +122,7 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "42mm", colorId: "black", simId: "none", price: 34500 },
+    { storageId: "42mm", colorId: "black", simId: "none", price: 34000 },
     { storageId: "42mm", colorId: "rose", simId: "none", price: 34000 },
     { storageId: "42mm", colorId: "silver", simId: "none", price: 34000 },
     { storageId: "42mm", colorId: "space", simId: "none", price: 33500 },
@@ -222,8 +222,8 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
   prices: [
     { storageId: "40mm", colorId: "midnight", simId: "none", price: 26000 },
     { storageId: "40mm", colorId: "starlight", simId: "none", price: 26500 },
-    { storageId: "44mm", colorId: "midnight", simId: "none", price: 28000 },
-    { storageId: "44mm", colorId: "starlight", simId: "none", price: 29500 },
+    { storageId: "44mm", colorId: "midnight", simId: "none", price: 27500 },
+    { storageId: "44mm", colorId: "starlight", simId: "none", price: 30000 },
   ],
   defaultStorage: "44mm",
   defaultColor: "starlight",
