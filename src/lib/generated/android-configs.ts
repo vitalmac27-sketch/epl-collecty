@@ -205,7 +205,7 @@ const SAMSUNG_GALAXY_S25_ULTRA_CONFIG: ProductConfig = {
     { storageId: "12-1tb", colorId: "black", simId: "none", price: 85500 },
     { storageId: "12-1tb", colorId: "jetblack", simId: "none", price: 86500 },
     { storageId: "12-512", colorId: "whitesilver", simId: "none", price: 77000 },
-    { storageId: "12-1tb", colorId: "whitesilver", simId: "none", price: 85500 },
+    { storageId: "12-1tb", colorId: "whitesilver", simId: "none", price: 86500 },
     { storageId: "12-1tb", colorId: "silverblue", simId: "none", price: 85500 },
     { storageId: "12-1tb", colorId: "gray", simId: "none", price: 85500 },
     { storageId: "12-256", colorId: "black", simId: "none", price: 71000 },
