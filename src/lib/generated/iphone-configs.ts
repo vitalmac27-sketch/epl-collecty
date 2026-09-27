@@ -124,7 +124,7 @@ const IPHONE_17_PRO_CONFIG: ProductConfig = {
     { storageId: "1024", colorId: "blue", simId: "sim-esim", price: 149000 },
     { storageId: "1024", colorId: "orange", simId: "esim", price: 125000 },
     { storageId: "1024", colorId: "orange", simId: "sim-esim", price: 142000 },
-    { storageId: "1024", colorId: "silver", simId: "esim", price: 140000 },
+    { storageId: "1024", colorId: "silver", simId: "esim", price: 138000 },
     { storageId: "1024", colorId: "silver", simId: "sim-esim", price: 150000 },
     { storageId: "256", colorId: "blue", simId: "esim", price: 103000 },
     { storageId: "256", colorId: "blue", simId: "sim-esim", price: 107500 },
