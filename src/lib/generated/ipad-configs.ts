@@ -192,6 +192,7 @@ const IPAD_PRO_11_CONFIG: ProductConfig = {
     { id: "wifi", label: "Wi-Fi", description: "Только Wi-Fi, без сотовой связи." },
   ],
   prices: [
+    { storageId: "256", colorId: "black", simId: "lte", price: 111000 },
     { storageId: "512", colorId: "black", simId: "wifi", price: 99000 },
     { storageId: "256", colorId: "silver", simId: "wifi", price: 103000 },
     { storageId: "256", colorId: "black", simId: "wifi", price: 103000 },
@@ -245,7 +246,7 @@ const IPAD_PRO_13_CONFIG: ProductConfig = {
     { id: "lte", label: "Wi-Fi + Cellular", description: "Wi-Fi и сотовая связь (LTE/5G) с eSIM." },
   ],
   prices: [
-    { storageId: "512", colorId: "black", simId: "lte", price: 143000 },
+    { storageId: "512", colorId: "black", simId: "lte", price: 146000 },
     { storageId: "256", colorId: "black", simId: "lte", price: 121000 },
     { storageId: "2048", colorId: "black", simId: "lte", price: 152000 },
   ],
