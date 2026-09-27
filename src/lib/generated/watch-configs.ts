@@ -22,13 +22,13 @@ const APPLE_WATCH_ULTRA_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 64000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 63000 },
     { storageId: "std", colorId: "natural", simId: "none", price: 64000 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 64000,
+  priceFrom: 63000,
   storageLabel: "Размер корпуса",
   showSim: false,
   specs: [
