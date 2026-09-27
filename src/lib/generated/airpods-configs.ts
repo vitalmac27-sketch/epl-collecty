@@ -27,14 +27,14 @@ const AIRPODS_MAX_CONFIG: ProductConfig = {
   prices: [
     { storageId: "std", colorId: "blue", simId: "none", price: 45500 },
     { storageId: "std", colorId: "midnight", simId: "none", price: 47000 },
-    { storageId: "std", colorId: "orange", simId: "none", price: 45000 },
-    { storageId: "std", colorId: "purple", simId: "none", price: 45000 },
-    { storageId: "std", colorId: "starlight", simId: "none", price: 45000 },
+    { storageId: "std", colorId: "orange", simId: "none", price: 46000 },
+    { storageId: "std", colorId: "purple", simId: "none", price: 46000 },
+    { storageId: "std", colorId: "starlight", simId: "none", price: 45500 },
   ],
   defaultStorage: "std",
   defaultColor: "purple",
   defaultSim: "none",
-  priceFrom: 45000,
+  priceFrom: 45500,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
