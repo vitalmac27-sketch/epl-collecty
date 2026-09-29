@@ -253,7 +253,7 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
     { storageId: "std", colorId: "p", simId: "none", price: 56500 },
     { storageId: "std", colorId: "p-vlog-combo", simId: "none", price: 66500 },
     { storageId: "std", colorId: "bundle-standard-combo", simId: "none", price: 42000 },
-    { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 57000 },
+    { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 56500 },
     { storageId: "std", colorId: "standard", simId: "none", price: 45000 },
     { storageId: "std", colorId: "creator-combo", simId: "none", price: 51500 },
   ],
