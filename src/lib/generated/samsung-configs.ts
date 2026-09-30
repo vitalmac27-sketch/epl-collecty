@@ -604,7 +604,282 @@ const SAMSUNG_GALAXY_A07_CONFIG: ProductConfig = {
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый Samsung Galaxy A07 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
+const SAMSUNG_GALAXY_Z_FOLD_8_ULTRA_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-z-fold-8-ultra",
+  category: "samsung",
+  colors: [
+    { id: "graphite", name: "Графит", hex: "#3A3B3D", image: "samsung-fold" },
+    { id: "cream", name: "Кремовый", hex: "#EFE5D2", image: "samsung-fold" },
+  ],
+  storage: [
+    { id: "12-256", label: "12 ГБ / 256 ГБ", available: true },
+    { id: "12-512", label: "12 ГБ / 512 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "12-256", colorId: "graphite", simId: "none", price: 134000 },
+    { storageId: "12-256", colorId: "cream", simId: "none", price: 134000 },
+    { storageId: "12-512", colorId: "cream", simId: "none", price: 142000 },
+  ],
+  defaultStorage: "12-256",
+  defaultColor: "graphite",
+  defaultSim: "none",
+  priceFrom: 134000,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "12 ГБ / 256 ГБ, 12 ГБ / 512 ГБ" },
+    { label: "Варианты", value: "Графит, Кремовый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Z Fold 8 Ultra в Казани",
+  seoText: "Samsung Galaxy Z Fold 8 Ultra в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Z Fold 8 Ultra стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const SAMSUNG_GALAXY_Z_FOLD_8_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-z-fold-8",
+  category: "samsung",
+  colors: [
+    { id: "cream", name: "Кремовый", hex: "#EFE5D2", image: "samsung-fold" },
+  ],
+  storage: [
+    { id: "12-256", label: "12 ГБ / 256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "12-256", colorId: "cream", simId: "none", price: 122500 },
+  ],
+  defaultStorage: "12-256",
+  defaultColor: "cream",
+  defaultSim: "none",
+  priceFrom: 122500,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "12 ГБ / 256 ГБ" },
+    { label: "Варианты", value: "Кремовый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Z Fold 8 в Казани",
+  seoText: "Samsung Galaxy Z Fold 8 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Z Fold 8 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const SAMSUNG_GALAXY_Z_FOLD_7_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-z-fold-7",
+  category: "samsung",
+  colors: [
+    { id: "jetblack", name: "Jet Black", hex: "#0E0E10", image: "samsung-fold" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "samsung-fold" },
+    { id: "silver", name: "Серебристый", hex: "#C9CCD1", image: "samsung-fold" },
+  ],
+  storage: [
+    { id: "12-256", label: "12 ГБ / 256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "12-256", colorId: "jetblack", simId: "none", price: 106000 },
+    { storageId: "12-256", colorId: "blue", simId: "none", price: 106000 },
+    { storageId: "12-256", colorId: "silver", simId: "none", price: 106000 },
+  ],
+  defaultStorage: "12-256",
+  defaultColor: "jetblack",
+  defaultSim: "none",
+  priceFrom: 106000,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "12 ГБ / 256 ГБ" },
+    { label: "Варианты", value: "Jet Black, Синий, Серебристый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Z Fold 7 в Казани",
+  seoText: "Samsung Galaxy Z Fold 7 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Z Fold 7 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const SAMSUNG_GALAXY_S26_FE_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-s26-fe",
+  category: "samsung",
+  colors: [
+    { id: "graphite", name: "Графит", hex: "#3A3B3D", image: "samsung-galaxy-s26" },
+  ],
+  storage: [
+    { id: "8-256", label: "8 ГБ / 256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "8-256", colorId: "graphite", simId: "none", price: 59000 },
+  ],
+  defaultStorage: "8-256",
+  defaultColor: "graphite",
+  defaultSim: "none",
+  priceFrom: 59000,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "8 ГБ / 256 ГБ" },
+    { label: "Варианты", value: "Графит" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy S26 FE в Казани",
+  seoText: "Samsung Galaxy S26 FE в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy S26 FE стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const SAMSUNG_GALAXY_A57_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-a57",
+  category: "samsung",
+  colors: [
+    { id: "lilac", name: "Сиреневый", hex: "#C8A2C8", image: "samsung-galaxy-a56" },
+    { id: "gray", name: "Серый", hex: "#8A8D91", image: "samsung-galaxy-a56" },
+    { id: "navy", name: "Тёмно-синий", hex: "#1F2A44", image: "samsung-galaxy-a56" },
+    { id: "iceblue", name: "Ледяной голубой", hex: "#BFD8E6", image: "samsung-galaxy-a56" },
+  ],
+  storage: [
+    { id: "8-128", label: "8 ГБ / 128 ГБ", available: true },
+    { id: "8-256", label: "8 ГБ / 256 ГБ", available: true },
+    { id: "12-256", label: "12 ГБ / 256 ГБ", available: true },
+    { id: "12-512", label: "12 ГБ / 512 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "8-128", colorId: "lilac", simId: "none", price: 36500 },
+    { storageId: "8-256", colorId: "gray", simId: "none", price: 39500 },
+    { storageId: "8-256", colorId: "lilac", simId: "none", price: 39500 },
+    { storageId: "8-256", colorId: "navy", simId: "none", price: 39500 },
+    { storageId: "8-256", colorId: "iceblue", simId: "none", price: 39500 },
+    { storageId: "12-256", colorId: "iceblue", simId: "none", price: 44000 },
+    { storageId: "12-256", colorId: "lilac", simId: "none", price: 44000 },
+    { storageId: "12-512", colorId: "navy", simId: "none", price: 46000 },
+  ],
+  defaultStorage: "8-128",
+  defaultColor: "lilac",
+  defaultSim: "none",
+  priceFrom: 36500,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "8 ГБ / 128 ГБ, 8 ГБ / 256 ГБ, 12 ГБ / 256 ГБ, 12 ГБ / 512 ГБ" },
+    { label: "Варианты", value: "Сиреневый, Серый, Тёмно-синий, Ледяной голубой" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy A57 в Казани",
+  seoText: "Samsung Galaxy A57 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy A57 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const SAMSUNG_GALAXY_A37_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-a37",
+  category: "samsung",
+  colors: [
+    { id: "charcoal", name: "Угольный", hex: "#36454F", image: "samsung-galaxy-a36" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-a36" },
+  ],
+  storage: [
+    { id: "8-256", label: "8 ГБ / 256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "8-256", colorId: "charcoal", simId: "none", price: 34500 },
+    { storageId: "8-256", colorId: "white", simId: "none", price: 34500 },
+  ],
+  defaultStorage: "8-256",
+  defaultColor: "charcoal",
+  defaultSim: "none",
+  priceFrom: 34500,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "8 ГБ / 256 ГБ" },
+    { label: "Варианты", value: "Угольный, Белый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy A37 в Казани",
+  seoText: "Samsung Galaxy A37 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy A37 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const SAMSUNG_GALAXY_A27_CONFIG: ProductConfig = {
+  slug: "samsung-galaxy-a27",
+  category: "samsung",
+  colors: [
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "samsung-galaxy-a26" },
+  ],
+  storage: [
+    { id: "8-256", label: "8 ГБ / 256 ГБ", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "8-256", colorId: "blue", simId: "none", price: 31000 },
+  ],
+  defaultStorage: "8-256",
+  defaultColor: "blue",
+  defaultSim: "none",
+  priceFrom: 31000,
+  storageLabel: "Память",
+  showSim: false,
+  specs: [
+    { label: "Память", value: "8 ГБ / 256 ГБ" },
+    { label: "Варианты", value: "Синий" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy A27 в Казани",
+  seoText: "Samsung Galaxy A27 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy A27 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
 const configs: Record<string, ProductConfig> = {
+  "samsung-galaxy-a27": SAMSUNG_GALAXY_A27_CONFIG,
+  "samsung-galaxy-a37": SAMSUNG_GALAXY_A37_CONFIG,
+  "samsung-galaxy-a57": SAMSUNG_GALAXY_A57_CONFIG,
+  "samsung-galaxy-s26-fe": SAMSUNG_GALAXY_S26_FE_CONFIG,
+  "samsung-galaxy-z-fold-7": SAMSUNG_GALAXY_Z_FOLD_7_CONFIG,
+  "samsung-galaxy-z-fold-8": SAMSUNG_GALAXY_Z_FOLD_8_CONFIG,
+  "samsung-galaxy-z-fold-8-ultra": SAMSUNG_GALAXY_Z_FOLD_8_ULTRA_CONFIG,
   "samsung-galaxy-s26-ultra": SAMSUNG_GALAXY_S26_ULTRA_CONFIG,
   "samsung-galaxy-s26-plus": SAMSUNG_GALAXY_S26_PLUS_CONFIG,
   "samsung-galaxy-s26": SAMSUNG_GALAXY_S26_CONFIG,

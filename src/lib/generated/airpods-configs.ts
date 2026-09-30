@@ -200,57 +200,14 @@ const AIRPODS_4_CONFIG: ProductConfig = {
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый AirPods 4 проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
-const GALAXY_BUDS_CONFIG: ProductConfig = {
-  slug: "galaxy-buds",
-  category: "airpods",
-  colors: [
-    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "galaxy-buds" },
-    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "galaxy-buds" },
-  ],
-  storage: [
-    { id: "std", label: "Стандарт", available: true },
-  ],
-  sim: [
-    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
-  ],
-  prices: [
-    { storageId: "std", colorId: "gray", simId: "none", price: 11000 },
-    { storageId: "std", colorId: "silver", simId: "none", price: 11500 },
-  ],
-  defaultStorage: "std",
-  defaultColor: "silver",
-  defaultSim: "none",
-  priceFrom: 11000,
-  storageLabel: "Вариант",
-  showSim: false,
-  specs: [
-    { label: "Модели", value: "Buds 3 / Buds 3 Pro / Buds 3 FE" },
-    { label: "Активное шумоподавление", value: "Да (Pro — улучшенное)" },
-    { label: "Galaxy AI", value: "Live Translate, Interpreter" },
-    { label: "Водозащита", value: "IP57" },
-    { label: "Батарея", value: "до 6 ч с ANC" },
-  ],
-  compareTitle: "Galaxy Buds 2 Pro",
-  compare: [
-    { label: "Galaxy AI", current: "Да (Live Translate)", previous: "Нет", better: true },
-    { label: "Дизайн", current: "Stem-форма", previous: "Bean-форма", better: false },
-    { label: "ANC", current: "Улучшенный", previous: "Стандарт", better: true },
-  ],
-  upsell: UPSELL,
-  seoH2: "Купить Samsung Galaxy Buds в Казани",
-  seoText: "Samsung Galaxy Buds — популярный наушники в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Цена от 11 000 ₽. Оригинал с гарантией 1 год, рассрочка 0% на 10 месяцев, бесплатная доставка в день заказа.",
-  seoH2Why: "Почему Samsung Galaxy Buds стоит купить у нас?",
-  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый Samsung Galaxy Buds проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
-};
-
 const MARSHALL_HEADPHONES_CONFIG: ProductConfig = {
   slug: "marshall-headphones",
   category: "airpods",
   colors: [
-    { id: "cream", name: "Кремовый", hex: "#EFE5D2", image: "marshall-headphones" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "marshall-headphones" },
-    { id: "brown", name: "Коричневый", hex: "#5C3B29", image: "marshall-headphones" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "marshall-headphones" },
+    { id: "cream", name: "Кремовый", hex: "#EFE5D2", image: "headphones-generic" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "headphones-generic" },
+    { id: "brown", name: "Коричневый", hex: "#5C3B29", image: "headphones-generic" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "headphones-generic" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -291,12 +248,227 @@ const MARSHALL_HEADPHONES_CONFIG: ProductConfig = {
   seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый Наушники Marshall проходит проверку перед продажей: тестируем все функции, проверяем серийный номер, активируем и настраиваем устройство прямо в магазине.",
 };
 
+const AIRPODS_5_CONFIG: ProductConfig = {
+  slug: "airpods-5",
+  category: "airpods",
+  colors: [
+    { id: "standard", name: "Стандарт", hex: "#D0D0D0", image: "airpods-4" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "standard", simId: "none", price: 16000 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "standard",
+  defaultSim: "none",
+  priceFrom: 16000,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Стандарт" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить AirPods 5 в Казани",
+  seoText: "AirPods 5 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему AirPods 5 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const GALAXY_BUDS_4_PRO_CONFIG: ProductConfig = {
+  slug: "galaxy-buds-4-pro",
+  category: "airpods",
+  colors: [
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "earbuds-generic" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "earbuds-generic" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "black", simId: "none", price: 18500 },
+    { storageId: "std", colorId: "white", simId: "none", price: 18500 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "black",
+  defaultSim: "none",
+  priceFrom: 18500,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Чёрный, Белый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Buds 4 Pro в Казани",
+  seoText: "Samsung Galaxy Buds 4 Pro в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Buds 4 Pro стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const GALAXY_BUDS_4_CONFIG: ProductConfig = {
+  slug: "galaxy-buds-4",
+  category: "airpods",
+  colors: [
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "earbuds-generic" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "earbuds-generic" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "black", simId: "none", price: 15000 },
+    { storageId: "std", colorId: "white", simId: "none", price: 14500 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "white",
+  defaultSim: "none",
+  priceFrom: 14500,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Чёрный, Белый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Buds 4 в Казани",
+  seoText: "Samsung Galaxy Buds 4 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Buds 4 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const GALAXY_BUDS_3_PRO_CONFIG: ProductConfig = {
+  slug: "galaxy-buds-3-pro",
+  category: "airpods",
+  colors: [
+    { id: "silver", name: "Серебристый", hex: "#C9CCD1", image: "earbuds-generic" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "earbuds-generic" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "silver", simId: "none", price: 15000 },
+    { storageId: "std", colorId: "white", simId: "none", price: 15000 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "silver",
+  defaultSim: "none",
+  priceFrom: 15000,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Серебристый, Белый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Buds 3 Pro в Казани",
+  seoText: "Samsung Galaxy Buds 3 Pro в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Buds 3 Pro стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const GALAXY_BUDS_3_CONFIG: ProductConfig = {
+  slug: "galaxy-buds-3",
+  category: "airpods",
+  colors: [
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "earbuds-generic" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "white", simId: "none", price: 12500 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "white",
+  defaultSim: "none",
+  priceFrom: 12500,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Белый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Buds 3 в Казани",
+  seoText: "Samsung Galaxy Buds 3 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Buds 3 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const GALAXY_BUDS_3_FE_CONFIG: ProductConfig = {
+  slug: "galaxy-buds-3-fe",
+  category: "airpods",
+  colors: [
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "earbuds-generic" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "black", simId: "none", price: 10500 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "black",
+  defaultSim: "none",
+  priceFrom: 10500,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Чёрный" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Samsung Galaxy Buds 3 FE в Казани",
+  seoText: "Samsung Galaxy Buds 3 FE в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Samsung Galaxy Buds 3 FE стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
 const configs: Record<string, ProductConfig> = {
+  "galaxy-buds-3-fe": GALAXY_BUDS_3_FE_CONFIG,
+  "galaxy-buds-3": GALAXY_BUDS_3_CONFIG,
+  "galaxy-buds-3-pro": GALAXY_BUDS_3_PRO_CONFIG,
+  "galaxy-buds-4": GALAXY_BUDS_4_CONFIG,
+  "galaxy-buds-4-pro": GALAXY_BUDS_4_PRO_CONFIG,
+  "airpods-5": AIRPODS_5_CONFIG,
   "airpods-max": AIRPODS_MAX_CONFIG,
   "airpods-pro-3": AIRPODS_PRO_3_CONFIG,
   "airpods-pro-2": AIRPODS_PRO_2_CONFIG,
   "airpods-4": AIRPODS_4_CONFIG,
-  "galaxy-buds": GALAXY_BUDS_CONFIG,
   "marshall-headphones": MARSHALL_HEADPHONES_CONFIG,
 };
 

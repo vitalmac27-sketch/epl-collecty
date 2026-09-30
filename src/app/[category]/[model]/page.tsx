@@ -32,11 +32,11 @@ export async function generateMetadata({
   const canonicalUrl = `${city.siteUrl}/${category}/${modelSlug}`;
 
   const title = cfg
-    ? `${model.name} купить в ${city.nameGen} — от ${formatPrice(model.priceFrom)} | ЭПЛ-КОЛЛЕКЦИЯ`
+    ? `${model.name} купить в ${city.nameGen} — ${model.priceFrom ? "от " + formatPrice(model.priceFrom) : "цена по запросу"} | ЭПЛ-КОЛЛЕКЦИЯ`
     : model.seoTitle;
 
   const description = cfg
-    ? `Купить ${model.name} в ${city.nameGen} ✅ Выбор цвета и конфигурации. Цена от ${formatPrice(model.priceFrom)} 💳 Рассрочка 0% 🛡️ Гарантия 1 год 🚚 Доставка в день заказа`
+    ? `Купить ${model.name} в ${city.nameGen} ✅ Выбор цвета и конфигурации. ${model.priceFrom ? "Цена от " + formatPrice(model.priceFrom) : "Цена по запросу"} 💳 Рассрочка 0% 🛡️ Гарантия 1 год 🚚 Доставка в день заказа`
     : model.seoDescription;
 
   return {
@@ -208,7 +208,7 @@ export default async function ModelPage({
                     <Image src={`/assets/${rel.image}.avif`} alt={rel.name} fill sizes="25vw" className="object-contain p-2 group-hover:scale-105 transition-transform mix-blend-multiply dark:mix-blend-normal" />
                   </div>
                   <p className="text-sm font-semibold group-hover:text-primary transition-colors line-clamp-2">{rel.name}</p>
-                  <p className="text-sm font-bold text-primary mt-1">от {formatPrice(rel.priceFrom)}</p>
+                  <p className="text-sm font-bold text-primary mt-1">{rel.priceFrom ? "от " + formatPrice(rel.priceFrom) : "Уточняйте"}</p>
                 </Link>
               ))}
             </div>

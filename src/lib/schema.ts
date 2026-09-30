@@ -67,7 +67,7 @@ export function buildProductSchema({ model, city, reviews = [] }: ProductSchemaO
       "@type": "AggregateOffer",
       lowPrice: model.priceFrom.toString(),
       priceCurrency: "RUB",
-      availability: "https://schema.org/InStock",
+      availability: model.priceFrom ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       seller: { "@type": "Organization", name: "ЭПЛ-КОЛЛЕКЦИЯ" },
     },
     ...(reviews.length > 0 && {
@@ -130,7 +130,7 @@ export function buildItemListSchema(models: ProductModel[], city: CityConfig) {
           "@type": "AggregateOffer",
           lowPrice: model.priceFrom.toString(),
           priceCurrency: "RUB",
-          availability: "https://schema.org/InStock",
+          availability: model.priceFrom ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
         },
       },
     })),

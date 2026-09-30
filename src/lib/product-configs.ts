@@ -55,7 +55,7 @@ export interface UpsellItem {
 
 export interface ProductConfig {
   slug: string;
-  category: "iphone" | "ipad" | "macbook" | "watch" | "airpods" | "android" | "samsung" | "dyson" | "audio" | "playstation" | "glasses" | "cameras" | "cables";
+  category: "iphone" | "ipad" | "macbook" | "watch" | "airpods" | "android" | "samsung" | "dyson" | "audio" | "playstation" | "glasses" | "cameras" | "cables" | "laptops";
 
   colors: ColorOption[];
   storage: StorageOption[];

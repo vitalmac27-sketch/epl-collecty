@@ -82,7 +82,114 @@ const PLAYSTATION_5_SLIM_DIGITAL_CONFIG: ProductConfig = {
   seoH2Why: "Подойдёт ли Digital Edition?", seoTextWhy: "Digital Edition подходит если вы покупаете игры только в PSN Store. Дешевле на 6 000 ₽ чем версия с дисководом.",
 };
 
+const DUALSENSE_CONFIG: ProductConfig = {
+  slug: "dualsense",
+  category: "playstation",
+  colors: [
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "gamepad" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "gamepad" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "white", simId: "none", price: 10000 },
+    { storageId: "std", colorId: "black", simId: "none", price: 10000 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "white",
+  defaultSim: "none",
+  priceFrom: 10000,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Белый, Чёрный" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Геймпад DualSense в Казани",
+  seoText: "Геймпад DualSense в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Геймпад DualSense стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const PLAYSTATION_PORTAL_CONFIG: ProductConfig = {
+  slug: "playstation-portal",
+  category: "playstation",
+  colors: [
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "handheld" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "white", simId: "none", price: 25000 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "white",
+  defaultSim: "none",
+  priceFrom: 25000,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Белый" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить PlayStation Portal в Казани",
+  seoText: "PlayStation Portal в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему PlayStation Portal стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const PLAYSTATION_5_DISC_DRIVE_CONFIG: ProductConfig = {
+  slug: "playstation-5-disc-drive",
+  category: "playstation",
+  colors: [
+    { id: "standard", name: "Стандарт", hex: "#D0D0D0", image: "disc-drive" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "standard", simId: "none", price: 14000 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "standard",
+  defaultSim: "none",
+  priceFrom: 14000,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Стандарт" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить Дисковод для PS5 в Казани",
+  seoText: "Дисковод для PS5 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему Дисковод для PS5 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
 const configs: Record<string, ProductConfig> = {
+  "playstation-5-disc-drive": PLAYSTATION_5_DISC_DRIVE_CONFIG,
+  "playstation-portal": PLAYSTATION_PORTAL_CONFIG,
+  "dualsense": DUALSENSE_CONFIG,
   "playstation-5-pro": PLAYSTATION_5_PRO_CONFIG,
   "playstation-5-slim": PLAYSTATION_5_SLIM_CONFIG,
   "playstation-5-slim-digital": PLAYSTATION_5_SLIM_DIGITAL_CONFIG,

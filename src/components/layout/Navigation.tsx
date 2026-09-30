@@ -15,7 +15,7 @@ const city = DEFAULT_CITY;
 // Основные категории в навбаре (помещаются в строку)
 const MAIN_CATS = ["iphone", "ipad", "macbook", "watch", "samsung", "android"];
 // Остальные — в дропдаун «Ещё»
-const MORE_CATS = ["airpods", "dyson", "audio", "playstation", "glasses", "cameras", "cables"];
+const MORE_CATS = ["airpods", "dyson", "audio", "playstation", "glasses", "cameras", "cables", "laptops"];
 // Доп. страницы
 const EXTRA_PAGES = [
   { href: "/bu-iphone", label: "Б/У iPhone", emoji: "🔄" },

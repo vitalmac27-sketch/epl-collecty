@@ -72,7 +72,7 @@ export default function ModelStep({ value, onChange }: ModelStepProps) {
                       {model.name.replace("iPhone ", "")}
                     </span>
                     <span className="text-[10px] text-primary font-medium">
-                      от {(model.priceFrom / 1000).toFixed(0)} 000 ₽
+                      {model.priceFrom ? `от ${(model.priceFrom / 1000).toFixed(0)} 000 ₽` : "уточняйте"}
                     </span>
                   </button>
                 ))}

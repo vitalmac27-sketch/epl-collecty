@@ -56,7 +56,7 @@ export default function ModelCatalogSection({ title, models }: ModelCatalogSecti
 
                 <div>
                   <p className="text-base font-bold text-primary leading-none">
-                    от {fp(model.priceFrom)}
+                    {model.priceFrom ? "от " + fp(model.priceFrom) : "Уточняйте у менеджера"}
                   </p>
                   {minStorage && (
                     <p className="text-xs text-muted-foreground mt-0.5">

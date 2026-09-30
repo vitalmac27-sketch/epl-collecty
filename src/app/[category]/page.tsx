@@ -128,12 +128,12 @@ export default async function CategoryPage({
 
                   {/* Цена */}
                   <div className="mt-auto">
-                    <p className="text-xs text-muted-foreground">от</p>
+                    <p className="text-xs text-muted-foreground">{model.priceFrom ? "от" : "Цена"}</p>
                     <p className="text-lg font-bold text-primary">
-                      {formatPrice(model.priceFrom)}
+                      {model.priceFrom ? formatPrice(model.priceFrom) : "Уточняйте"}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      или {formatPrice(Math.ceil(model.priceFrom / 10))}/мес
+                      {model.priceFrom ? `или ${formatPrice(Math.ceil(model.priceFrom / 10))}/мес` : "у менеджера"}
                     </p>
                   </div>
                 </Link>

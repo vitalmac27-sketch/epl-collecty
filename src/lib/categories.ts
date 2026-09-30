@@ -169,6 +169,16 @@ export const categories = {
     h1: "Кабели и блоки питания в Казани",
     order: 22,
     inMainNav: false,
+  },
+  laptops: {
+    slug: "laptops",
+    name: "Ноутбуки",
+    emoji: "💻",
+    pageTitle: "Купить ноутбук в Казани — Acer, Asus, Honor, Huawei, MSI | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription: "Офисные и игровые ноутбуки в Казани: Acer, Asus, Honor, Huawei, MSI. Гарантия 1 год, доставка в день заказа.",
+    h1: "Купить ноутбук в Казани",
+    order: 23,
+    inMainNav: false,
   }
 } as const;
 

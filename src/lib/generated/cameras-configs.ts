@@ -7,7 +7,7 @@ const GOPRO_HERO_13_CONFIG: ProductConfig = {
   slug: "gopro-hero-13",
   category: "cameras",
   colors: [
-    { id: "black", name: "Black", hex: "#888888", image: "dji-mic-3" },
+    { id: "black", name: "Black", hex: "#888888", image: "action-cam" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -45,7 +45,7 @@ const GOPRO_HERO_12_CONFIG: ProductConfig = {
   slug: "gopro-hero-12",
   category: "cameras",
   colors: [
-    { id: "black", name: "Black", hex: "#888888", image: "dji-mic-3" },
+    { id: "black", name: "Black", hex: "#888888", image: "action-cam" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -198,7 +198,7 @@ const DJI_OSMO_POCKET_3_CONFIG: ProductConfig = {
   slug: "dji-osmo-pocket-3",
   category: "cameras",
   colors: [
-    { id: "creator-combo", name: "Creator Combo", hex: "#888888", image: "dji-mic-3" },
+    { id: "creator-combo", name: "Creator Combo", hex: "#888888", image: "gimbal-pocket" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -236,12 +236,9 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
   slug: "dji-osmo-pocket-4",
   category: "cameras",
   colors: [
-    { id: "p", name: "P", hex: "#888888", image: "dji-mic-3" },
-    { id: "p-vlog-combo", name: "P-vlog-combo", hex: "#888888", image: "dji-mic-3" },
-    { id: "bundle-standard-combo", name: "Bundle-standard-combo", hex: "#888888", image: "dji-mic-3" },
-    { id: "p-standard-combo", name: "P-standard-combo", hex: "#888888", image: "dji-mic-3" },
-    { id: "standard", name: "Стандарт", hex: "#888888", image: "dji-mic-3" },
-    { id: "creator-combo", name: "Creator Combo", hex: "#888888", image: "dji-mic-3" },
+    { id: "bundle-standard-combo", name: "Bundle-standard-combo", hex: "#888888", image: "gimbal-pocket" },
+    { id: "standard", name: "Стандарт", hex: "#888888", image: "gimbal-pocket" },
+    { id: "creator-combo", name: "Creator Combo", hex: "#888888", image: "gimbal-pocket" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -250,10 +247,7 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "p", simId: "none", price: 56500 },
-    { storageId: "std", colorId: "p-vlog-combo", simId: "none", price: 66500 },
     { storageId: "std", colorId: "bundle-standard-combo", simId: "none", price: 42000 },
-    { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 56500 },
     { storageId: "std", colorId: "standard", simId: "none", price: 45000 },
     { storageId: "std", colorId: "creator-combo", simId: "none", price: 51500 },
   ],
@@ -356,7 +350,79 @@ const KODAK_CHARMERA_CONFIG: ProductConfig = {
   seoTextSim: "Поможем подобрать вариант под ваши задачи — напишите нам в Telegram.",
 };
 
+const DJI_OSMO_POCKET_4P_CONFIG: ProductConfig = {
+  slug: "dji-osmo-pocket-4p",
+  category: "cameras",
+  colors: [
+    { id: "vlog-combo", name: "Vlog Combo", hex: "#2B2D31", image: "gimbal-pocket" },
+    { id: "standard-combo", name: "Standard Combo", hex: "#6B6E73", image: "gimbal-pocket" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 66500 },
+    { storageId: "std", colorId: "standard-combo", simId: "none", price: 56500 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "standard-combo",
+  defaultSim: "none",
+  priceFrom: 56500,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Vlog Combo, Standard Combo" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить DJI Osmo Pocket 4P в Казани",
+  seoText: "DJI Osmo Pocket 4P в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему DJI Osmo Pocket 4P стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
+const DJI_OSMO_ACTION_6_CONFIG: ProductConfig = {
+  slug: "dji-osmo-action-6",
+  category: "cameras",
+  colors: [
+    { id: "standard-combo-black", name: "Standard Combo", hex: "#1C1C1E", image: "action-cam" },
+  ],
+  storage: [
+    { id: "std", label: "Стандарт", available: true },
+  ],
+  sim: [
+    { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
+  ],
+  prices: [
+    { storageId: "std", colorId: "standard-combo-black", simId: "none", price: 39000 },
+  ],
+  defaultStorage: "std",
+  defaultColor: "standard-combo-black",
+  defaultSim: "none",
+  priceFrom: 39000,
+  storageLabel: "Вариант",
+  showSim: false,
+  specs: [
+    { label: "Варианты", value: "Standard Combo" },
+    { label: "Гарантия", value: "1 год" },
+  ],
+  compareTitle: "",
+  compare: [],
+  upsell: UPSELL,
+  seoH2: "Купить DJI Osmo Action 6 в Казани",
+  seoText: "DJI Osmo Action 6 в магазине ЭПЛ-КОЛЛЕКЦИЯ в Казани. Оригинал с гарантией 1 год, доставка в день заказа.",
+  seoH2Why: "Почему DJI Osmo Action 6 стоит купить у нас?",
+  seoTextWhy: "В ЭПЛ-КОЛЛЕКЦИЯ каждый товар проходит проверку перед продажей: тестируем все функции, проверяем комплектацию и оригинальность.",
+};
+
 const configs: Record<string, ProductConfig> = {
+  "dji-osmo-action-6": DJI_OSMO_ACTION_6_CONFIG,
+  "dji-osmo-pocket-4p": DJI_OSMO_POCKET_4P_CONFIG,
   "gopro-hero-13": GOPRO_HERO_13_CONFIG,
   "gopro-hero-12": GOPRO_HERO_12_CONFIG,
   "insta360-x5": INSTA360_X5_CONFIG,
