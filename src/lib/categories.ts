@@ -95,13 +95,24 @@ export const categories = {
     order: 4,
     inMainNav: true,
   },
+  samsung: {
+    slug: "samsung",
+    name: "Samsung",
+    emoji: "📲",
+    pageTitle: "Купить Samsung Galaxy в Казани — S26, S25, A-серия | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription:
+      "Купить Samsung Galaxy в Казани: S26 Ultra, S26+, S26, S25, A56, A36 и другие. Оригинал, гарантия 1 год, рассрочка 0%, доставка в день заказа.",
+    h1: "Купить Samsung Galaxy в Казани",
+    order: 5,
+    inMainNav: true,
+  },
   android: {
     slug: "android",
     name: "Android",
     emoji: "🤖",
-    pageTitle: "Купить Android смартфон в Казани — Samsung, Xiaomi | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageTitle: "Купить Android смартфон в Казани — Xiaomi, Redmi, Meizu | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить Android смартфон в Казани: Samsung Galaxy S26/S25, Xiaomi Redmi, Meizu. Гарантия 1 год, рассрочка 0%.",
+      "Купить Android смартфон в Казани: Xiaomi, Redmi Note, Meizu. Гарантия 1 год, рассрочка 0%.",
     h1: "Купить Android смартфон в Казани",
     order: 5,
     inMainNav: true,

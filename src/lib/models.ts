@@ -639,7 +639,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-s26-ultra",
     name: "Samsung Galaxy S26 Ultra",
-    category: "android",
+    category: "samsung",
     series: "Galaxy S",
     badge: "NEW",
     priceFrom: 88000,
@@ -652,7 +652,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-s26-plus",
     name: "Samsung Galaxy S26+",
-    category: "android",
+    category: "samsung",
     series: "Galaxy S",
     badge: "NEW",
     priceFrom: 73000,
@@ -665,7 +665,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-s26",
     name: "Samsung Galaxy S26",
-    category: "android",
+    category: "samsung",
     series: "Galaxy S",
     badge: "NEW",
     priceFrom: 59500,
@@ -678,7 +678,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-s25-ultra",
     name: "Samsung Galaxy S25 Ultra",
-    category: "android",
+    category: "samsung",
     series: "Galaxy S",
     priceFrom: 74500,
     image: "samsung-galaxy-s25-ultra",
@@ -690,7 +690,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-s25-fe",
     name: "Samsung Galaxy S25 FE",
-    category: "android",
+    category: "samsung",
     series: "Galaxy S",
     priceFrom: 46000,
     image: "samsung-galaxy-s25-fe",
@@ -701,7 +701,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-s25",
     name: "Samsung Galaxy S25",
-    category: "android",
+    category: "samsung",
     series: "Galaxy S",
     priceFrom: 52000,
     image: "samsung-galaxy-s25",
@@ -712,7 +712,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-a56",
     name: "Samsung Galaxy A56",
-    category: "android",
+    category: "samsung",
     series: "Galaxy A",
     priceFrom: 32500,
     image: "samsung-galaxy-a56",
@@ -723,7 +723,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-a36",
     name: "Samsung Galaxy A36",
-    category: "android",
+    category: "samsung",
     series: "Galaxy A",
     priceFrom: 25000,
     image: "samsung-galaxy-a36",
@@ -734,7 +734,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-a26",
     name: "Samsung Galaxy A26",
-    category: "android",
+    category: "samsung",
     series: "Galaxy A",
     priceFrom: 22500,
     image: "samsung-galaxy-a26",
@@ -745,7 +745,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-a17",
     name: "Samsung Galaxy A17",
-    category: "android",
+    category: "samsung",
     series: "Galaxy A",
     priceFrom: 18000,
     image: "samsung-galaxy-a17",
@@ -756,7 +756,7 @@ const androidModels: ProductModel[] = [
   {
     slug: "samsung-galaxy-a07",
     name: "Samsung Galaxy A07",
-    category: "android",
+    category: "samsung",
     series: "Galaxy A",
     priceFrom: 14000,
     image: "samsung-galaxy-a07",

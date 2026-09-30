@@ -92,7 +92,7 @@ export default function Footer() {
                   );
                 })}
                 {/* Android и PlayStation */}
-                {ALL_CATEGORIES.filter((c) => ["android", "playstation"].includes(c.slug)).map((cat) => (
+                {ALL_CATEGORIES.filter((c) => ["samsung", "android", "playstation"].includes(c.slug)).map((cat) => (
                   <li key={cat.slug}>
                     <Link
                       href={`/${cat.slug}`}
