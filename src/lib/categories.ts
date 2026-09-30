@@ -159,6 +159,16 @@ export const categories = {
     h1: "Купить PlayStation 5 в Казани",
     order: 9,
     inMainNav: false,
+  },
+  cables: {
+    slug: "cables",
+    name: "Кабели и Блоки",
+    emoji: "🔌",
+    pageTitle: "Купить кабели и блоки питания в Казани — USB-C, Lightning | ЭПЛ-КОЛЛЕКЦИЯ",
+    pageDescription: "Кабели USB-C и Lightning, блоки питания Apple 20W и Samsung 25W в Казани. Гарантия 1 год, доставка в день заказа.",
+    h1: "Кабели и блоки питания в Казани",
+    order: 22,
+    inMainNav: false,
   }
 } as const;
 
