@@ -123,7 +123,7 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "42mm", colorId: "black", simId: "none", price: 34000 },
-    { storageId: "42mm", colorId: "rose", simId: "none", price: 34000 },
+    { storageId: "42mm", colorId: "rose", simId: "none", price: 34500 },
     { storageId: "42mm", colorId: "silver", simId: "none", price: 34000 },
     { storageId: "42mm", colorId: "space", simId: "none", price: 33500 },
     { storageId: "46mm", colorId: "black", simId: "none", price: 36500 },
@@ -220,7 +220,7 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "40mm", colorId: "midnight", simId: "none", price: 26000 },
+    { storageId: "40mm", colorId: "midnight", simId: "none", price: 25500 },
     { storageId: "40mm", colorId: "starlight", simId: "none", price: 26000 },
     { storageId: "44mm", colorId: "midnight", simId: "none", price: 29000 },
     { storageId: "44mm", colorId: "starlight", simId: "none", price: 30000 },
@@ -228,7 +228,7 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
   defaultStorage: "44mm",
   defaultColor: "starlight",
   defaultSim: "none",
-  priceFrom: 26000,
+  priceFrom: 25500,
   storageLabel: "Размер корпуса",
   showSim: false,
   specs: [
