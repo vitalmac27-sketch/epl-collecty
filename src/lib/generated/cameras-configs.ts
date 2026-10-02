@@ -236,6 +236,7 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
   slug: "dji-osmo-pocket-4",
   category: "cameras",
   colors: [
+    { id: "bundle-essential-combo", name: "Bundle-essential-combo", hex: "#888888", image: "gimbal-pocket" },
     { id: "p-standard-combo", name: "P-standard-combo", hex: "#888888", image: "gimbal-pocket" },
     { id: "p-vlog-combo", name: "P-vlog-combo", hex: "#888888", image: "gimbal-pocket" },
     { id: "bundle-standard-combo", name: "Bundle-standard-combo", hex: "#888888", image: "gimbal-pocket" },
@@ -249,6 +250,7 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
+    { storageId: "std", colorId: "bundle-essential-combo", simId: "none", price: 42000 },
     { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 56500 },
     { storageId: "std", colorId: "p-vlog-combo", simId: "none", price: 66500 },
     { storageId: "std", colorId: "bundle-standard-combo", simId: "none", price: 42000 },
