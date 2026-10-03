@@ -78,7 +78,7 @@ const MACBOOK_NEO_CONFIG: ProductConfig = {
     { storageId: "8-256", colorId: "blush", simId: "none", price: 74000 },
     { storageId: "8-256", colorId: "citrus", simId: "none", price: 69500 },
     { storageId: "8-256", colorId: "indigo", simId: "none", price: 69000 },
-    { storageId: "8-256", colorId: "silver", simId: "none", price: 72000 },
+    { storageId: "8-256", colorId: "silver", simId: "none", price: 73000 },
   ],
   defaultStorage: "8-256",
   defaultColor: "silver",
@@ -271,8 +271,8 @@ const MACBOOK_AIR_15_M5_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "16-512", colorId: "midnight", simId: "none", price: 141000 },
-    { storageId: "16-512", colorId: "silver", simId: "none", price: 142000 },
+    { storageId: "16-512", colorId: "midnight", simId: "none", price: 142000 },
+    { storageId: "16-512", colorId: "silver", simId: "none", price: 143000 },
     { storageId: "16-512", colorId: "skyblue", simId: "none", price: 139000 },
     { storageId: "16-512", colorId: "starlight", simId: "none", price: 142000 },
   ],
@@ -314,7 +314,7 @@ const MACBOOK_PRO_14_M5_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "16-1tb", colorId: "black", simId: "none", price: 181000 },
+    { storageId: "16-1tb", colorId: "black", simId: "none", price: 183000 },
     { storageId: "16-512", colorId: "black", simId: "none", price: 127000 },
   ],
   defaultStorage: "16-512",
