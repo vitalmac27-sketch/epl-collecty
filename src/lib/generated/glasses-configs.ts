@@ -66,7 +66,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "matte-black-transitions-grey-m", simId: "none", price: 41500 },
+    { storageId: "std", colorId: "matte-black-transitions-grey-m", simId: "none", price: 41000 },
     { storageId: "std", colorId: "shiny-cosmic-blue-transitions-sapphire-l", simId: "none", price: 43000 },
     { storageId: "std", colorId: "transparent-grey|clear-sapphire-transitions-l", simId: "none", price: 43500 },
     { storageId: "std", colorId: "transparent-grey|clear-sapphire-transitions-m", simId: "none", price: 43500 },
@@ -78,7 +78,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
     { storageId: "std", colorId: "shiny-black-15-green-m", simId: "none", price: 38000 },
     { storageId: "std", colorId: "shiny-black-transitions-graph-green-m", simId: "none", price: 43000 },
     { storageId: "std", colorId: "shiny-cosmic-blue-transitions-sapphire-m", simId: "none", price: 43500 },
-    { storageId: "std", colorId: "matte-black-transitions-grey-l", simId: "none", price: 41500 },
+    { storageId: "std", colorId: "matte-black-transitions-grey-l", simId: "none", price: 41000 },
   ],
   defaultStorage: "std",
   defaultColor: "shiny-black-15-green-m",
