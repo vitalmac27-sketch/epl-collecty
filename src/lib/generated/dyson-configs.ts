@@ -250,9 +250,9 @@ const DYSON_AIRSTRAIT_HT01_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "amber-silk", simId: "none", price: 36000 },
-    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 39000 },
-    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 33500 },
-    { storageId: "std", colorId: "nickel-cooper", simId: "none", price: 34500 },
+    { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 38000 },
+    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 34000 },
+    { storageId: "std", colorId: "nickel-cooper", simId: "none", price: 33500 },
     { storageId: "std", colorId: "prussian-blue", simId: "none", price: 33500 },
     { storageId: "std", colorId: "strawberry-bronze", simId: "none", price: 39000 },
   ],
