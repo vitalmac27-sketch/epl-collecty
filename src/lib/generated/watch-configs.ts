@@ -220,15 +220,15 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "40mm", colorId: "midnight", simId: "none", price: 25000 },
-    { storageId: "40mm", colorId: "starlight", simId: "none", price: 26000 },
+    { storageId: "40mm", colorId: "midnight", simId: "none", price: 25500 },
+    { storageId: "40mm", colorId: "starlight", simId: "none", price: 27000 },
     { storageId: "44mm", colorId: "midnight", simId: "none", price: 29000 },
     { storageId: "44mm", colorId: "starlight", simId: "none", price: 30000 },
   ],
   defaultStorage: "44mm",
   defaultColor: "starlight",
   defaultSim: "none",
-  priceFrom: 25000,
+  priceFrom: 25500,
   storageLabel: "Размер корпуса",
   showSim: false,
   specs: [
