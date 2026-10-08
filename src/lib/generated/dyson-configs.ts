@@ -133,7 +133,7 @@ const DYSON_AIRWRAP_HS09_CONFIG: ProductConfig = {
     { storageId: "std", colorId: "ceramic-pink-re", simId: "none", price: 49000 },
     { storageId: "std", colorId: "amber-silk", simId: "none", price: 50000 },
     { storageId: "std", colorId: "apricot-topaz", simId: "none", price: 49000 },
-    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 50000 },
+    { storageId: "std", colorId: "ceramic-pink", simId: "none", price: 49500 },
     { storageId: "std", colorId: "jasper-plum", simId: "none", price: 47000 },
     { storageId: "std", colorId: "red-velvet", simId: "none", price: 47000 },
   ],
