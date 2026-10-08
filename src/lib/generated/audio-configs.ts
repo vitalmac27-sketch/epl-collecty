@@ -20,12 +20,12 @@ const JBL_BOOMBOX_4_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 42000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 0 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 42000,
+  priceFrom: 0,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -57,12 +57,12 @@ const YANDEX_STATION_LIGHT_2_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "default", simId: "none", price: 8000 },
+    { storageId: "std", colorId: "default", simId: "none", price: 0 },
   ],
   defaultStorage: "std",
   defaultColor: "default",
   defaultSim: "none",
-  priceFrom: 8000,
+  priceFrom: 0,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -90,12 +90,12 @@ const DJI_MIC_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 27500 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 0 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 27500,
+  priceFrom: 0,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
@@ -156,12 +156,12 @@ const DJI_MIC_MINI_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 9000 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 0 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 9000,
+  priceFrom: 0,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
