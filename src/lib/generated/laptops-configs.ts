@@ -18,7 +18,7 @@ const ACER_ASPIRE_LITE_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "r3-5400u-8-256", colorId: "gray", simId: "none", price: 46000 },
-    { storageId: "r7-7730u-16-512", colorId: "gray", simId: "none", price: 64500 },
+    { storageId: "r7-7730u-16-512", colorId: "gray", simId: "none", price: 0 },
   ],
   defaultStorage: "r3-5400u-8-256",
   defaultColor: "gray",
