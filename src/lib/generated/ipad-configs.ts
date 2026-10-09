@@ -194,8 +194,8 @@ const IPAD_PRO_11_CONFIG: ProductConfig = {
   prices: [
     { storageId: "256", colorId: "black", simId: "lte", price: 111000 },
     { storageId: "512", colorId: "black", simId: "wifi", price: 99000 },
-    { storageId: "256", colorId: "silver", simId: "wifi", price: 104500 },
-    { storageId: "256", colorId: "black", simId: "wifi", price: 101500 },
+    { storageId: "256", colorId: "silver", simId: "wifi", price: 0 },
+    { storageId: "256", colorId: "black", simId: "wifi", price: 101000 },
   ],
   defaultStorage: "512",
   defaultColor: "black",
