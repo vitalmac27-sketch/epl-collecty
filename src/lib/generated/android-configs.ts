@@ -298,7 +298,7 @@ const XIAOMI_MI_17T_CONFIG: ProductConfig = {
     { storageId: "12-256", colorId: "pro-black", simId: "none", price: 60000 },
     { storageId: "12-256", colorId: "black", simId: "none", price: 48500 },
     { storageId: "12-256", colorId: "violet", simId: "none", price: 0 },
-    { storageId: "12-512", colorId: "blue", simId: "none", price: 52500 },
+    { storageId: "12-512", colorId: "blue", simId: "none", price: 0 },
   ],
   defaultStorage: "12-256",
   defaultColor: "black",
@@ -407,7 +407,7 @@ const GOOGLE_PIXEL_10A_CONFIG: ProductConfig = {
   prices: [
     { storageId: "8-128", colorId: "obsidian", simId: "none", price: 45000 },
     { storageId: "8-256", colorId: "obsidian", simId: "none", price: 47500 },
-    { storageId: "8-256", colorId: "fog", simId: "none", price: 47500 },
+    { storageId: "8-256", colorId: "fog", simId: "none", price: 0 },
   ],
   defaultStorage: "8-128",
   defaultColor: "obsidian",
