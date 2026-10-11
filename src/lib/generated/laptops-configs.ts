@@ -94,15 +94,15 @@ const ASUS_VIVOBOOK_GO_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "r5-40-16-512", colorId: "black", simId: "none", price: 58500 },
-    { storageId: "r3-7320u-8-256", colorId: "gray", simId: "none", price: 47000 },
+    { storageId: "r3-7320u-8-256", colorId: "gray", simId: "none", price: 0 },
     { storageId: "r5-40-8-256", colorId: "gray", simId: "none", price: 49500 },
     { storageId: "r5-7520u-8-512", colorId: "gray", simId: "none", price: 51500 },
     { storageId: "r5-40-8-512", colorId: "black", simId: "none", price: 52500 },
   ],
-  defaultStorage: "r3-7320u-8-256",
+  defaultStorage: "r5-40-8-256",
   defaultColor: "gray",
   defaultSim: "none",
-  priceFrom: 47000,
+  priceFrom: 49500,
   storageLabel: "Конфигурация",
   showSim: false,
   specs: [
