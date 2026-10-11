@@ -138,7 +138,7 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   prices: [
     { storageId: "256", colorId: "purple", simId: "wifi", price: 79000 },
     { storageId: "128", colorId: "коробка", simId: "lte", price: 0 },
-    { storageId: "256", colorId: "blue", simId: "wifi", price: 0 },
+    { storageId: "256", colorId: "blue", simId: "wifi", price: 79000 },
     { storageId: "128", colorId: "blue", simId: "wifi", price: 68500 },
     { storageId: "128", colorId: "starlight", simId: "lte", price: 78000 },
     { storageId: "128", colorId: "gray", simId: "wifi", price: 68500 },
@@ -194,7 +194,7 @@ const IPAD_PRO_11_CONFIG: ProductConfig = {
   prices: [
     { storageId: "256", colorId: "black", simId: "lte", price: 111000 },
     { storageId: "512", colorId: "black", simId: "wifi", price: 105000 },
-    { storageId: "256", colorId: "silver", simId: "wifi", price: 0 },
+    { storageId: "256", colorId: "silver", simId: "wifi", price: 104500 },
     { storageId: "256", colorId: "black", simId: "wifi", price: 101000 },
   ],
   defaultStorage: "256",
