@@ -39,8 +39,8 @@ const PLAYSTATION_5_SLIM_CONFIG: ProductConfig = {
   colors: [{ id: "white", name: "Белый", hex: "#F0F0F0", image: "playstation-5-slim" }],
   storage: [{ id: "1tb", label: "1 ТБ SSD", available: true }],
   sim: [{ id: "none", label: "Стандарт", description: "Стандартная комплектация." }],
-  prices: [{ storageId: "1tb", colorId: "white", simId: "none", price: 76000 }],
-  defaultStorage: "1tb", defaultColor: "white", defaultSim: "none", priceFrom: 76000,
+  prices: [{ storageId: "1tb", colorId: "white", simId: "none", price: 0 }],
+  defaultStorage: "1tb", defaultColor: "white", defaultSim: "none", priceFrom: 0,
   storageLabel: "Версия", showSim: false,
   specs: [
     { label: "GPU", value: "10,28 ТФЛОПС" },
