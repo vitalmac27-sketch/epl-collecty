@@ -22,11 +22,11 @@ export default function HeroSection({ city }: HeroSectionProps) {
         </p>
         <div className="flex justify-center">
           <Image
-            src="/assets/hero-iphones-collection.jpg"
-            alt={`Купить iPhone в ${city.namePre} выгодно — iPhone 13, 14, 15, 16, 17 в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
-            width={320}
-            height={240}
-            className="rounded-2xl bg-white object-contain"
+            src="/assets/hero-apple-lineup-mobile.webp"
+            alt={`iPhone, iPad, Apple Watch и AirPods — купить в ${city.namePre} в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
+            width={800}
+            height={420}
+            className="w-full max-w-[480px] h-auto rounded-2xl"
             priority
           />
         </div>
@@ -78,11 +78,11 @@ export default function HeroSection({ city }: HeroSectionProps) {
           </div>
           <div className="flex-shrink-0">
             <Image
-              src="/assets/hero-iphones-collection.jpg"
-              alt={`Купить iPhone в ${city.namePre} выгодно — iPhone 13, 14, 15, 16, 17 в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
-              width={500}
-              height={375}
-              className="rounded-3xl bg-white object-contain"
+              src="/assets/hero-apple-lineup.webp"
+              alt={`iPhone, iPad, Apple Watch и AirPods — купить в ${city.namePre} в магазине ЭПЛ-КОЛЛЕКЦИЯ`}
+              width={1200}
+              height={630}
+              className="w-[420px] lg:w-[560px] h-auto rounded-3xl"
               priority
             />
           </div>
