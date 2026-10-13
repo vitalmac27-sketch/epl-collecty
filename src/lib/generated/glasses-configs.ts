@@ -78,7 +78,7 @@ const RAY_BAN_WAYFARER_CONFIG: ProductConfig = {
     { storageId: "std", colorId: "shiny-black-15-green-m", simId: "none", price: 0 },
     { storageId: "std", colorId: "shiny-black-transitions-graph-green-m", simId: "none", price: 43000 },
     { storageId: "std", colorId: "shiny-cosmic-blue-transitions-sapphire-m", simId: "none", price: 43500 },
-    { storageId: "std", colorId: "matte-black-transitions-grey-l", simId: "none", price: 0 },
+    { storageId: "std", colorId: "matte-black-transitions-grey-l", simId: "none", price: 40000 },
   ],
   defaultStorage: "std",
   defaultColor: "matte-black-clear-m",
