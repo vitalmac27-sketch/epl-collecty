@@ -83,7 +83,7 @@ const INSTA360_X5_CONFIG: ProductConfig = {
   slug: "insta360-x5",
   category: "cameras",
   colors: [
-    { id: "standard", name: "Стандарт", hex: "#888888", image: "dji-mic-3" },
+    { id: "standard", name: "Стандарт", hex: "#888888", image: "cam-360" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -121,7 +121,7 @@ const DJI_OSMO_MOBILE_8_CONFIG: ProductConfig = {
   slug: "dji-osmo-mobile-8",
   category: "cameras",
   colors: [
-    { id: "standard", name: "С лидаром", hex: "#888888", image: "dji-mic-3" },
+    { id: "standard", name: "С лидаром", hex: "#888888", image: "gimbal-phone" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -160,7 +160,7 @@ const DJI_OSMO_MOBILE_8P_CONFIG: ProductConfig = {
   slug: "dji-osmo-mobile-8p",
   category: "cameras",
   colors: [
-    { id: "standard", name: "Стандарт", hex: "#888888", image: "dji-mic-3" },
+    { id: "standard", name: "Стандарт", hex: "#888888", image: "gimbal-phone" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -280,7 +280,7 @@ const CANON_G7X_MARK_3_CONFIG: ProductConfig = {
   slug: "canon-g7x-mark-3",
   category: "cameras",
   colors: [
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "dji-mic-3" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "compact-camera" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -301,9 +301,8 @@ const CANON_G7X_MARK_3_CONFIG: ProductConfig = {
     { label: "Тип", value: "Компактная камера" },
     { label: "Гарантия", value: "1 год" },
   ],
-  compareTitle: "GoPro Hero 13",
+  compareTitle: "",
   compare: [
-    { label: "Матрица", current: "1 дюйм", previous: "меньше", better: true },
   ],
   upsell: UPSELL,
   seoH2: "Купить камера Canon PowerShot G7X Mark III в Казани",
@@ -318,7 +317,7 @@ const KODAK_CHARMERA_CONFIG: ProductConfig = {
   slug: "kodak-charmera",
   category: "cameras",
   colors: [
-    { id: "standard", name: "Стандарт", hex: "#888888", image: "dji-mic-3" },
+    { id: "standard", name: "Стандарт", hex: "#888888", image: "compact-camera" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -339,9 +338,8 @@ const KODAK_CHARMERA_CONFIG: ProductConfig = {
     { label: "Тип", value: "Мини-камера-брелок" },
     { label: "Гарантия", value: "1 год" },
   ],
-  compareTitle: "GoPro Hero 12",
+  compareTitle: "",
   compare: [
-    { label: "Цена", current: "от 5 500 ₽", previous: "выше", better: true },
   ],
   upsell: UPSELL,
   seoH2: "Купить мини-камера Kodak Charmera в Казани",
