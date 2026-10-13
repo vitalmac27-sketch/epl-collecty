@@ -11,7 +11,7 @@ const city = DEFAULT_CITY;
 export const metadata: Metadata = {
   title: "О магазине ЭПЛ-КОЛЛЕКЦИЯ — купить iPhone в Казани с гарантией",
   description:
-    "ЭПЛ-КОЛЛЕКЦИЯ — магазин Apple техники в Казани с 2019 года. Более 2000 довольных клиентов, гарантия 1 год, рассрочка до 36 мес, официальная проверка каждого iPhone.",
+    "ЭПЛ-КОЛЛЕКЦИЯ — магазин Apple техники в Казани с 2023 года. Более 2000 довольных клиентов, гарантия 1 год, рассрочка до 36 мес, официальная проверка каждого iPhone.",
   keywords: [
     "эпл коллекция казань",
     "магазин айфонов казань",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${city.siteUrl}/about` },
   openGraph: {
     title: "О магазине ЭПЛ-КОЛЛЕКЦИЯ — Apple техника в Казани",
-    description: "Магазин Apple техники в Казани с 2019 года. Гарантия, рассрочка, доставка.",
+    description: "Магазин Apple техники в Казани с 2023 года. Гарантия, рассрочка, доставка.",
     url: `${city.siteUrl}/about`,
   },
 };
@@ -56,7 +56,7 @@ const advantages = [
   {
     Icon: Users,
     title: "2000+ довольных клиентов",
-    desc: "С 2019 года помогли более 2000 жителей Казани и Татарстана выгодно купить Apple технику. Средняя оценка 5/5 на Авито и Яндекс Картах.",
+    desc: "С 2023 года помогли более 2000 жителей Казани и Татарстана выгодно купить Apple технику. Средняя оценка 5/5 на Авито и Яндекс Картах.",
   },
 ];
 
@@ -75,7 +75,7 @@ export default function AboutPage() {
         <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-              Магазин Apple техники · Казань · с 2019 года
+              Магазин Apple техники · Казань · с 2023 года
             </p>
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 leading-tight">
               О магазине{" "}
@@ -94,7 +94,7 @@ export default function AboutPage() {
         <section className="py-12 px-4 bg-primary text-primary-foreground">
           <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
             {[
-              { n: "2019", label: "год основания" },
+              { n: "2023", label: "год основания" },
               { n: "2000+", label: "довольных клиентов" },
               { n: "5/5", label: "рейтинг на Авито" },
               { n: "36 мес", label: "рассрочка «Халва»" },
@@ -117,7 +117,7 @@ export default function AboutPage() {
             <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
               <p>
                 <strong className="text-foreground">ЭПЛ-КОЛЛЕКЦИЯ</strong> — это специализированный
-                магазин Apple техники в Казани, который работает с 2019 года. Мы занимаемся
+                магазин Apple техники в Казани, который работает с 2023 года. Мы занимаемся
                 продажей новых и б/у iPhone, iPad, MacBook, Apple Watch и аксессуаров.
               </p>
               <p>

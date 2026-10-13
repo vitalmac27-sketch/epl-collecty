@@ -3,7 +3,7 @@
 // API/фото проксируются, чтобы каталог открывался в т.ч. из-под VPN
 // (прямой путь к российскому IP VPS рвётся DPI, а Cloudflare доступен отовсюду).
 
-const BOT_TOKEN = "8264534520:AAGO0VhrB51vWxf1329wmzeRw_kW2Ud29yw";
+// Токен бота — в секрете воркера BOT_TOKEN (Cloudflare → Worker → Settings → Variables and Secrets), не в коде
 const CHAT_ID   = "5549559991";
 
 // Источник API на VPS (punycode)
@@ -18,7 +18,7 @@ const ALLOWED_ORIGINS = [
 ];
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
     const url = new URL(request.url);
 
@@ -67,7 +67,7 @@ export default {
     const text = buildMessage(body);
 
     const tgRes = await fetch(
-      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      `https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
