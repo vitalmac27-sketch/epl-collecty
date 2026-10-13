@@ -36,7 +36,7 @@ const PLAYSTATION_5_PRO_CONFIG: ProductConfig = {
     { label: "Дисковод", current: "Отдельно", previous: "Встроен", better: false },
   ],
   upsell: UPSELL,
-  seoH2: "Купить PlayStation 5 Pro в Казани", seoText: "PS5 Pro — самая мощная консоль Sony. Цена от 89 000 ₽ в ЭПЛ-КОЛЛЕКЦИЯ. Гарантия 1 год, рассрочка 0%.",
+  seoH2: "Купить PlayStation 5 Pro в Казани", seoText: "PS5 Pro — самая мощная консоль Sony. Цена от 89 000 ₽ в ЭПЛ-КОЛЛЕКЦИЯ. Гарантия 1 год, рассрочка до 36 мес.",
   seoH2Why: "Чем PS5 Pro отличается от PS5 Slim?", seoTextWhy: "GPU на 45% мощнее, 2 ТБ SSD вместо 1 ТБ, трассировка лучей до 3× быстрее. Для максимального качества графики в играх.",
 };
 

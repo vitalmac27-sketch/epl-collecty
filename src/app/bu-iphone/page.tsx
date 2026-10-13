@@ -8,7 +8,7 @@ const URL = "https://xn----jtbjgbccazg9frdtb.xn--p1ai/bu-iphone";
 
 export const metadata: Metadata = {
   title: "Б/У iPhone в Казани с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
-  description: "Б/У iPhone 13–17 в Казани с гарантией 60 дней. Все устройства проверены, отвязаны от Apple ID. Рассрочка 0%. Доставка по Казани.",
+  description: "Б/У iPhone 13–17 в Казани с гарантией 60 дней. Все устройства проверены, отвязаны от Apple ID. Рассрочка до 36 мес. Доставка по Казани.",
   keywords: [
     "купить бу iphone казань", "бу айфон казань", "iphone бу казань",
     "айфон с пробегом казань", "поддержанный iphone", "iphone б/у Казань",
@@ -62,7 +62,7 @@ export default function BuIphonePage() {
           {[
             { icon: "🛡️", title: "Гарантия 60 дней", text: "На все б/у устройства" },
             { icon: "✅", title: "Проверены инженером", text: "АКБ, экран, камера, Face ID" },
-            { icon: "💳", title: "Рассрочка 0%", text: "На 12 месяцев без переплат" },
+            { icon: "💳", title: "Рассрочка до 36 мес", text: "До 36 месяцев по карте «Халва»" },
           ].map(({ icon, title, text }) => (
             <div key={title} className="flex items-start gap-3 p-3 rounded-xl border border-border bg-muted/30">
               <span className="text-2xl shrink-0">{icon}</span>

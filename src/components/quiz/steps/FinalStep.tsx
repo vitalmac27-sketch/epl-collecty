@@ -69,7 +69,7 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
     ...(data.condition === "used" ? [{ Icon: Battery,  label: "Батарея", value: `${data.battery}%` }] : []),
     { Icon: Signal,     label: "SIM",        value: data.simType },
     { Icon: Calendar,   label: "Когда",      value: timingMap[data.purchaseTiming] || data.purchaseTiming },
-    { Icon: CreditCard, label: "Оплата",     value: data.paymentMethod === "cash" ? "Наличными" : "Рассрочка 0%" },
+    { Icon: CreditCard, label: "Оплата",     value: data.paymentMethod === "cash" ? "Наличными" : "Рассрочка до 36 мес" },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -85,7 +85,7 @@ export default function FinalStep({ data, onBack }: FinalStepProps) {
     setSubmitting(true);
     try {
       const conditionLabel = data.condition === "new" ? "🆕 Новый" : "📦 Б/У";
-      const paymentLabel = data.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка 0%";
+      const paymentLabel = data.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка до 36 мес";
       const timingMap: Record<string, string> = {
         "today-tomorrow": "⚡ Сегодня-завтра",
         "this-week": "📅 На этой неделе",

@@ -81,7 +81,7 @@ export default function ModelCatalogSection({ title, models }: ModelCatalogSecti
                     className="flex items-center justify-center gap-1.5 w-full h-8 rounded-md border border-border text-xs font-medium hover:bg-muted transition-colors"
                   >
                     <CreditCard className="w-3 h-3" />
-                    Рассрочка 0%
+                    Рассрочка до 36 мес
                   </Link>
                 </div>
               </div>

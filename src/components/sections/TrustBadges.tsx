@@ -4,7 +4,7 @@ const badges = [
   { Icon: Shield,      text: "Официальная гарантия" },
   { Icon: CheckCircle, text: "Проверка при получении" },
   { Icon: Users,       text: "2 000+ довольных клиентов" },
-  { Icon: CreditCard,  text: "Оплата частями, без переплат" },
+  { Icon: CreditCard,  text: "Рассрочка «Халва» до 36 мес" },
 ];
 
 export default function TrustBadges() {

@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASE}/`,        lastModified: now, changeFrequency: "daily",   priority: 1.0 },
     { url: `${BASE}/about/`,   lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/offer/`,   lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${BASE}/privacy/`, lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
     { url: `${BASE}/contacts/`,lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/skupka-iphone/`, lastModified: now, changeFrequency: "weekly" as const,  priority: 0.9 },
     { url: `${BASE}/bu-iphone/`,    lastModified: now, changeFrequency: "daily" as const,   priority: 0.9 },

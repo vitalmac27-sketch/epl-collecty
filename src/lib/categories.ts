@@ -36,7 +36,7 @@ export const categories = {
     name: "Очки",
     emoji: "👓",
     pageTitle: "Купить очки Ray-Ban и Meta в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
-    pageDescription: "Очки Ray-Ban и умные очки Meta Glasses в Казани. Оригинал, гарантия 1 год, рассрочка 0%, доставка в день заказа.",
+    pageDescription: "Очки Ray-Ban и умные очки Meta Glasses в Казани. Оригинал, гарантия 1 год, рассрочка до 36 мес, доставка в день заказа.",
     h1: "Купить очки в Казани",
     order: 20,
     inMainNav: false,
@@ -46,7 +46,7 @@ export const categories = {
     name: "Камеры",
     emoji: "📷",
     pageTitle: "Купить камеры и стабилизаторы в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
-    pageDescription: "GoPro, Insta360, DJI Osmo, Canon в Казани. Гарантия 1 год, рассрочка 0%, доставка в день заказа.",
+    pageDescription: "GoPro, Insta360, DJI Osmo, Canon в Казани. Гарантия 1 год, рассрочка до 36 мес, доставка в день заказа.",
     h1: "Купить камеры в Казани",
     order: 21,
     inMainNav: false,
@@ -57,7 +57,7 @@ export const categories = {
     emoji: "📱",
     pageTitle: "Купить iPhone в Казани — все модели с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить iPhone в Казани выгодно. iPhone 13–17 новые и б/у, гарантия 1 год, рассрочка 0%, Trade-in, бесплатная доставка в день заказа.",
+      "Купить iPhone в Казани выгодно. iPhone 13–17 новые и б/у, гарантия 1 год, рассрочка до 36 мес, Trade-in, бесплатная доставка в день заказа.",
     h1: "Купить iPhone в Казани",
     order: 1,
     inMainNav: true,
@@ -68,7 +68,7 @@ export const categories = {
     emoji: "🖥️",
     pageTitle: "Купить iPad в Казани — все модели с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить iPad в Казани: iPad Air, iPad Pro, iPad mini с гарантией 1 год. Рассрочка 0%, Trade-in, доставка в день заказа.",
+      "Купить iPad в Казани: iPad Air, iPad Pro, iPad mini с гарантией 1 год. Рассрочка до 36 мес, Trade-in, доставка в день заказа.",
     h1: "Купить iPad в Казани",
     order: 2,
     inMainNav: true,
@@ -79,7 +79,7 @@ export const categories = {
     emoji: "💻",
     pageTitle: "Купить MacBook в Казани — Air и Pro с гарантией | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить MacBook Air и MacBook Pro в Казани. Новые и б/у, гарантия 1 год, рассрочка 0%, Trade-in.",
+      "Купить MacBook Air и MacBook Pro в Казани. Новые и б/у, гарантия 1 год, рассрочка до 36 мес, Trade-in.",
     h1: "Купить MacBook в Казани",
     order: 3,
     inMainNav: true,
@@ -90,7 +90,7 @@ export const categories = {
     emoji: "⌚",
     pageTitle: "Купить Apple Watch в Казани — все серии | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить Apple Watch в Казани: Series 9, Ultra 2, SE. Гарантия, рассрочка 0%, доставка в день заказа.",
+      "Купить Apple Watch в Казани: Series 9, Ultra 2, SE. Гарантия, рассрочка до 36 мес, доставка в день заказа.",
     h1: "Купить Apple Watch в Казани",
     order: 4,
     inMainNav: true,
@@ -101,7 +101,7 @@ export const categories = {
     emoji: "📲",
     pageTitle: "Купить Samsung Galaxy в Казани — S26, S25, A-серия | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить Samsung Galaxy в Казани: S26 Ultra, S26+, S26, S25, A56, A36 и другие. Оригинал, гарантия 1 год, рассрочка 0%, доставка в день заказа.",
+      "Купить Samsung Galaxy в Казани: S26 Ultra, S26+, S26, S25, A56, A36 и другие. Оригинал, гарантия 1 год, рассрочка до 36 мес, доставка в день заказа.",
     h1: "Купить Samsung Galaxy в Казани",
     order: 5,
     inMainNav: true,
@@ -112,7 +112,7 @@ export const categories = {
     emoji: "🤖",
     pageTitle: "Купить Android смартфон в Казани — Xiaomi, Redmi, Meizu | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить Android смартфон в Казани: Xiaomi, Redmi Note, Meizu. Гарантия 1 год, рассрочка 0%.",
+      "Купить Android смартфон в Казани: Xiaomi, Redmi Note, Meizu. Гарантия 1 год, рассрочка до 36 мес.",
     h1: "Купить Android смартфон в Казани",
     order: 5,
     inMainNav: true,
@@ -123,7 +123,7 @@ export const categories = {
     emoji: "🎧",
     pageTitle: "Купить AirPods и наушники в Казани — Apple, Samsung, Marshall | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить AirPods Pro 3, AirPods Max, Galaxy Buds, Marshall в Казани. Оригинал, гарантия 1 год, рассрочка 0%.",
+      "Купить AirPods Pro 3, AirPods Max, Galaxy Buds, Marshall в Казани. Оригинал, гарантия 1 год, рассрочка до 36 мес.",
     h1: "Купить наушники в Казани",
     order: 6,
     inMainNav: false,
@@ -145,7 +145,7 @@ export const categories = {
     emoji: "🔊",
     pageTitle: "Купить колонки и микрофоны в Казани — JBL, Яндекс, DJI | ЭПЛ-КОЛЛЕКЦИЯ",
     pageDescription:
-      "Купить JBL Boombox, Яндекс Станцию, DJI Mic в Казани. Оригинал, гарантия 1 год, рассрочка 0%.",
+      "Купить JBL Boombox, Яндекс Станцию, DJI Mic в Казани. Оригинал, гарантия 1 год, рассрочка до 36 мес.",
     h1: "Аудио техника и гаджеты",
     order: 8,
     inMainNav: false,
@@ -155,7 +155,7 @@ export const categories = {
     name: "PlayStation",
     emoji: "🎮",
     pageTitle: "Купить PlayStation 5 в Казани — PS5 Pro, Slim | ЭПЛ-КОЛЛЕКЦИЯ",
-    pageDescription: "Купить PlayStation 5 Pro, PS5 Slim, PS5 Digital в Казани. Оригинал, гарантия 1 год, рассрочка 0%.",
+    pageDescription: "Купить PlayStation 5 Pro, PS5 Slim, PS5 Digital в Казани. Оригинал, гарантия 1 год, рассрочка до 36 мес.",
     h1: "Купить PlayStation 5 в Казани",
     order: 9,
     inMainNav: false,

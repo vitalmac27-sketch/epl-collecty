@@ -28,7 +28,7 @@ export default function OrderSummary() {
     { Icon: Battery,    label: "Батарея",   value: data.condition === "used" ? `${data.battery}%` : "—", stepN: 4, color: "text-orange-500", hide: data.condition === "new" },
     { Icon: Signal,     label: "SIM",       value: data.simType,    stepN: 5, color: "text-cyan-500" },
     { Icon: Calendar,   label: "Сроки",     value: { "today-tomorrow": "Сегодня-завтра", "this-week": "На неделе", "this-month": "В месяц" }[data.purchaseTiming] || "", stepN: 6, color: "text-indigo-500" },
-    { Icon: CreditCard, label: "Оплата",    value: data.paymentMethod === "cash" ? "Наличными" : data.paymentMethod === "installment" ? "Рассрочка 0%" : "", stepN: 7, color: "text-pink-500" },
+    { Icon: CreditCard, label: "Оплата",    value: data.paymentMethod === "cash" ? "Наличными" : data.paymentMethod === "installment" ? "Рассрочка до 36 мес" : "", stepN: 7, color: "text-pink-500" },
   ].filter(item => !item.hide);
 
   return (

@@ -19,7 +19,7 @@ export default function HeroSection({ city }: HeroSectionProps) {
             </span>
           </h1>
           <p className="text-base md:text-xl font-light text-foreground/60 mb-6 md:mb-8">
-            Рассрочка 0% на 12 мес · Гарантия 1 год · Доставка в день заказа
+            Рассрочка до 36 мес* · Гарантия 1 год · Доставка в день заказа
           </p>
           <div className="md:hidden flex justify-center">
             <Image src="/assets/hero-apple-lineup-mobile.webp" alt={alt} width={800} height={420}

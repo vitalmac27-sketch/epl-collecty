@@ -6,7 +6,7 @@ interface PaymentStepProps { value: string; onChange: (v: string) => void; }
 
 const methods = [
   { id: "cash",        label: "Наличными",      desc: null,                   Icon: Banknote },
-  { id: "installment", label: "Рассрочка 0%",   desc: "Оформление онлайн",    Icon: CreditCard },
+  { id: "installment", label: "Рассрочка до 36 мес",   desc: "Оформление онлайн",    Icon: CreditCard },
 ];
 
 export default function PaymentStep({ value, onChange }: PaymentStepProps) {

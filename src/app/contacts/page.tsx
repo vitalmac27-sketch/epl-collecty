@@ -218,6 +218,14 @@ export default function ContactsPage() {
             </div>
           </section>
 
+          {/* Реквизиты */}
+          <section className="mb-12 rounded-2xl border border-border p-6 text-sm text-muted-foreground">
+            <h2 className="text-lg font-bold text-foreground mb-3">Реквизиты</h2>
+            <p>ИП Фамилия Имя Отчество</p>
+            <p>ИНН 164609500872 · ОГРНИП 323169000221971</p>
+            <p>Зарегистрирован 13 октября 2023 г., Межрайонная ИФНС России № 18 по Республике Татарстан</p>
+          </section>
+
           {/* CTA */}
           <section className="text-center">
             <h2 className="text-2xl font-bold text-foreground mb-4">

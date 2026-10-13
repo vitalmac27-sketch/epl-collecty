@@ -159,7 +159,7 @@ function BuItemContent() {
               {listing.price.toLocaleString("ru-RU")} ₽
             </div>
             <p className="text-sm text-muted-foreground">
-              или в рассрочку 0% — от {Math.round(listing.price / 12).toLocaleString("ru-RU")} ₽/мес
+              или в рассрочку до 36 мес* — от {Math.round(listing.price / 36).toLocaleString("ru-RU")} ₽/мес
             </p>
           </div>
 
@@ -217,7 +217,7 @@ function BuItemContent() {
         {[
           { icon: "🛡️", title: "Гарантия 60 дней", text: "Меняем или ремонтируем при поломке" },
           { icon: "📦", title: "Доставка", text: "По Казани в день заказа · Avito Доставка по РФ" },
-          { icon: "💳", title: "Оплата", text: "Наличные · По QR · Рассрочка 0%" },
+          { icon: "💳", title: "Оплата", text: "Наличные · По QR · Рассрочка до 36 мес" },
         ].map(({ icon, title, text }) => (
           <div key={title} className="flex items-start gap-3 p-4 rounded-2xl border border-border bg-muted/30">
             <span className="text-2xl shrink-0">{icon}</span>

@@ -15,7 +15,7 @@ export function formatPrice(price: number): string {
   }).format(price);
 }
 
-/** Ежемесячный платёж при рассрочке 0% на N месяцев */
-export function monthlyPayment(price: number, months: number = 10): string {
+/** Ежемесячный платёж в рассрочку на N месяцев */
+export function monthlyPayment(price: number, months: number = 36): string {
   return formatPrice(Math.ceil(price / months));
 }

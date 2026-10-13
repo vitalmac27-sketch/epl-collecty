@@ -36,7 +36,7 @@ export async function generateMetadata({
     : model.seoTitle;
 
   const description = cfg
-    ? `Купить ${model.name} в ${city.nameGen} ✅ Выбор цвета и конфигурации. ${model.priceFrom ? "Цена от " + formatPrice(model.priceFrom) : "Цена по запросу"} 💳 Рассрочка 0% 🛡️ Гарантия 1 год 🚚 Доставка в день заказа`
+    ? `Купить ${model.name} в ${city.nameGen} ✅ Выбор цвета и конфигурации. ${model.priceFrom ? "Цена от " + formatPrice(model.priceFrom) : "Цена по запросу"} 💳 Рассрочка до 36 мес 🛡️ Гарантия 1 год 🚚 Доставка в день заказа`
     : model.seoDescription;
 
   return {
@@ -131,7 +131,7 @@ export default async function ModelPage({
               <div className="bg-card border border-border rounded-2xl p-5 mb-6">
                 <p className="text-sm text-muted-foreground mb-1">Цена от</p>
                 <p className="text-4xl font-bold text-primary mb-1">{formatPrice(model.priceFrom)}</p>
-                <p className="text-sm text-muted-foreground">или {monthlyPayment(model.priceFrom)} / мес при рассрочке 0% × 10 мес</p>
+                <p className="text-sm text-muted-foreground">или {monthlyPayment(model.priceFrom)} / мес в рассрочку до 36 мес*</p>
               </div>
               <ul className="grid grid-cols-2 gap-3 mb-7">
                 {[{ icon: "🛡️", text: "Гарантия 1 год" }, { icon: "🚚", text: "Доставка в день заказа" }, { icon: "✅", text: "Проверка при получении" }, { icon: "🔄", text: "Trade-in до 70%" }].map(({ icon, text }) => (
@@ -190,7 +190,7 @@ export default async function ModelPage({
               <h2 className="text-2xl font-bold mb-4">Купить {model.name} {city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ</h2>
               <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
                 <p><strong className="text-foreground">Купить {model.name} {city.namePre}</strong> можно в магазине ЭПЛ-КОЛЛЕКЦИЯ по лучшей цене — от <strong className="text-foreground">{formatPrice(model.priceFrom)}</strong>.</p>
-                <p><strong className="text-foreground">Рассрочка 0% на 10 месяцев</strong> — платите всего {monthlyPayment(model.priceFrom)} в месяц без переплат.</p>
+                <p><strong className="text-foreground">Рассрочка до 36 месяцев</strong> по карте «Халва» — от {monthlyPayment(model.priceFrom)} в месяц*.</p>
                 <p><strong className="text-foreground">Гарантия 1 год</strong>, бесплатная доставка по всей {city.nameGen} в день заказа.</p>
               </div>
             </>

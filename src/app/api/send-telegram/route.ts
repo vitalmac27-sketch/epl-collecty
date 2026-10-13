@@ -15,7 +15,7 @@ interface LeadPayload {
 function formatMessage(data: LeadPayload): string {
   const conditionLabel = data.condition === "new" ? "🆕 Новый" : "📦 Б/У";
   const paymentLabel =
-    data.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка 0%";
+    data.paymentMethod === "cash" ? "💵 Наличными" : "💳 Рассрочка до 36 мес";
   const timingMap: Record<string, string> = {
     "today-tomorrow": "⚡ Сегодня-завтра",
     "this-week": "📅 На этой неделе",

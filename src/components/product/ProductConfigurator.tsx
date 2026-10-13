@@ -74,7 +74,7 @@ export default function ProductConfigurator({
             <span className="text-muted-foreground"> в {cityName}</span>
           </h1>
           <p className="text-sm text-muted-foreground mb-4">
-            Оригинал · Гарантия 1 год · Рассрочка 0%
+            Оригинал · Гарантия 1 год · Рассрочка до 36 мес
           </p>
 
           {/* Цена */}
@@ -84,7 +84,7 @@ export default function ProductConfigurator({
                 <p className="text-sm text-muted-foreground mb-1">Цена</p>
                 <p className="text-4xl font-bold text-primary mb-1">{formatPrice(price)}</p>
                 <p className="text-sm text-muted-foreground">
-                  или {monthlyPayment(price)} / мес при рассрочке 0% × 10 мес
+                  или {monthlyPayment(price)} / мес в рассрочку до 36 мес*
                 </p>
               </>
             ) : (

@@ -121,6 +121,8 @@ export default function Footer() {
                   { href: "/bu-iphone/", label: "Б/у iPhone с гарантией" },
                   { href: "/skupka-iphone/", label: "Скупка iPhone" },
                   { href: "/blog/", label: "Блог" },
+                  { href: "/offer/", label: "Условия покупки и возврата" },
+                  { href: "/privacy/", label: "Политика конфиденциальности" },
                 ].map((item) => (
                   <li key={item.href}>
                     <Link
@@ -190,6 +192,13 @@ export default function Footer() {
 
         {/* ── Юридические оговорки ── */}
         <div className="mt-6 pt-4 border-t border-border/50 space-y-2 text-[11px] text-muted-foreground/60 leading-relaxed">
+          <p>
+            * Рассрочка — покупка по карте «Халва» ПАО «Совкомбанк» у партнёров банка на срок до 36 месяцев.
+            Срок, ежемесячный платёж и условия определяет банк. Расчёт платежа на сайте приблизительный.
+          </p>
+          <p>
+            ИП Фамилия Имя Отчество · ИНН 164609500872 · ОГРНИП 323169000221971
+          </p>
           <p>
             Сайт носит сугубо информационный характер и не является публичной офертой,
             определяемой Статьёй 437 (2) ГК РФ.
