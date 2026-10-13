@@ -407,7 +407,7 @@ const GOOGLE_PIXEL_10A_CONFIG: ProductConfig = {
   prices: [
     { storageId: "8-128", colorId: "obsidian", simId: "none", price: 45000 },
     { storageId: "8-256", colorId: "obsidian", simId: "none", price: 47500 },
-    { storageId: "8-256", colorId: "fog", simId: "none", price: 0 },
+    { storageId: "8-256", colorId: "fog", simId: "none", price: 47500 },
   ],
   defaultStorage: "8-128",
   defaultColor: "obsidian",
