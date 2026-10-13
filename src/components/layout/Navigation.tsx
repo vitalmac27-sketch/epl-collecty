@@ -20,6 +20,9 @@ const MORE_CATS = ["airpods", "dyson", "audio", "playstation", "glasses", "camer
 const EXTRA_PAGES = [
   { href: "/bu-iphone", label: "Б/У iPhone", emoji: "🔄" },
   { href: "/skupka-iphone", label: "Выкуп iPhone", emoji: "💰" },
+  { href: "/rassrochka-iphone", label: "iPhone в рассрочку", emoji: "💳" },
+  { href: "/kredit-iphone", label: "iPhone в кредит", emoji: "🧾" },
+  { href: "/trade-in-iphone", label: "Trade-in iPhone", emoji: "♻️" },
   { href: "/blog", label: "Блог", emoji: "📝" },
 ];
 
@@ -174,6 +177,9 @@ export default function Navigation() {
               {[
                 { href: "/bu-iphone", label: "Б/У iPhone", emoji: "🔄" },
                 { href: "/skupka-iphone", label: "Выкуп iPhone", emoji: "💰" },
+                { href: "/rassrochka-iphone", label: "iPhone в рассрочку", emoji: "💳" },
+                { href: "/kredit-iphone", label: "iPhone в кредит", emoji: "🧾" },
+                { href: "/trade-in-iphone", label: "Trade-in iPhone", emoji: "♻️" },
                 { href: "/blog",   label: "Блог",         emoji: "📝" },
                 { href: "/about",  label: "О магазине",   emoji: "ℹ️" },
                 { href: "/contacts", label: "Контакты",   emoji: "📞" },
