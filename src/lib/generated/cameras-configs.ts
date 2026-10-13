@@ -370,7 +370,7 @@ const DJI_OSMO_POCKET_4P_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 62000 },
+    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 61000 },
     { storageId: "std", colorId: "standard-combo", simId: "none", price: 53000 },
   ],
   defaultStorage: "std",
@@ -407,12 +407,12 @@ const DJI_OSMO_ACTION_6_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "adventure-combo-black", simId: "none", price: 43000 },
-    { storageId: "std", colorId: "standard-combo-black", simId: "none", price: 36500 },
+    { storageId: "std", colorId: "standard-combo-black", simId: "none", price: 36000 },
   ],
   defaultStorage: "std",
   defaultColor: "standard-combo-black",
   defaultSim: "none",
-  priceFrom: 36500,
+  priceFrom: 36000,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
