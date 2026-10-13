@@ -21,7 +21,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-base mb-4">ЭПЛ-КОЛЛЕКЦИЯ</h3>
             <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-              Официальный магазин iPhone в Казани. Продаём оригинальные устройства
+              Магазин iPhone в Казани. Продаём оригинальные устройства
               Apple с гарантией 1 год по выгодным ценам.
             </p>
             {/* Социальные сети */}
@@ -115,9 +115,12 @@ export default function Footer() {
                   { href: "/#calculator-section", label: "Подобрать iPhone" },
                   { href: "/about", label: "О магазине" },
                   { href: "/contacts", label: "Контакты" },
-                  { href: "/offer", label: "Публичная оферта" },
-                  { href: "/privacy", label: "Политика конфиденциальности" },
-                  { href: "/legal", label: "Правовая информация" },
+                  { href: "/rassrochka-iphone/", label: "Айфон в рассрочку" },
+                  { href: "/kredit-iphone/", label: "Айфон в кредит" },
+                  { href: "/trade-in-iphone/", label: "Trade-in iPhone" },
+                  { href: "/bu-iphone/", label: "Б/у iPhone с гарантией" },
+                  { href: "/skupka-iphone/", label: "Скупка iPhone" },
+                  { href: "/blog/", label: "Блог" },
                 ].map((item) => (
                   <li key={item.href}>
                     <Link

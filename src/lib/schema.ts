@@ -17,7 +17,7 @@ export function buildLocalBusinessSchema(city: CityConfig) {
     url: city.siteUrl,
     image: `${city.siteUrl}/assets/og-apple-collection.jpg`,
     logo: `${city.siteUrl}/assets/logo.jpg`,
-    description: `Официальный магазин iPhone, iPad, MacBook, Apple Watch, Android и PlayStation в ${city.namePre}. Гарантия 1 год, рассрочка 0%, доставка в день заказа.`,
+    description: `Магазин iPhone, iPad, MacBook, Apple Watch, Android и PlayStation в ${city.namePre}. Гарантия 1 год, рассрочка 0%, доставка в день заказа.`,
     address: {
       "@type": "PostalAddress",
       streetAddress: city.address,
@@ -54,7 +54,7 @@ interface ProductSchemaOptions {
 }
 
 export function buildProductSchema({ model, city, reviews = [] }: ProductSchemaOptions) {
-  const url = `${city.siteUrl}/${model.category}/${model.slug}`;
+  const url = `${city.siteUrl}/${model.category}/${model.slug}/`;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -62,7 +62,7 @@ export function buildProductSchema({ model, city, reviews = [] }: ProductSchemaO
     description: `Купить ${model.name} в ${city.namePre}. ${model.subtitle}. Гарантия 1 год, рассрочка 0%, Trade-in, бесплатная доставка.`,
     image: `${city.siteUrl}/assets/${model.image}.avif`,
     url,
-    brand: { "@type": "Brand", name: "Apple" },
+    brand: { "@type": "Brand", name: detectBrand(model.name) },
     offers: {
       "@type": "AggregateOffer",
       lowPrice: model.priceFrom.toString(),
@@ -125,7 +125,7 @@ export function buildItemListSchema(models: ProductModel[], city: CityConfig) {
       item: {
         "@type": "Product",
         name: model.name,
-        url: `${city.siteUrl}/${model.category}/${model.slug}`,
+        url: `${city.siteUrl}/${model.category}/${model.slug}/`,
         offers: {
           "@type": "AggregateOffer",
           lowPrice: model.priceFrom.toString(),
@@ -135,4 +135,17 @@ export function buildItemListSchema(models: ProductModel[], city: CityConfig) {
       },
     })),
   };
+}
+
+// ─── Бренд по названию модели ────────────────────────────────────────────────
+const BRANDS: Array<[RegExp, string]> = [
+  [/samsung|galaxy/i, "Samsung"], [/dyson/i, "Dyson"], [/xiaomi|redmi|poco/i, "Xiaomi"], [/pixel|google/i, "Google"],
+  [/nothing/i, "Nothing"], [/honor/i, "Honor"], [/huawei/i, "Huawei"], [/meizu/i, "Meizu"], [/jbl/i, "JBL"],
+  [/яндекс|yandex/i, "Яндекс"], [/dji|osmo/i, "DJI"], [/gopro/i, "GoPro"], [/insta360/i, "Insta360"], [/canon/i, "Canon"],
+  [/kodak/i, "Kodak"], [/ray-ban/i, "Ray-Ban"], [/meta/i, "Meta"], [/playstation|dualsense|\bps5\b/i, "Sony"],
+  [/acer/i, "Acer"], [/asus/i, "ASUS"], [/msi/i, "MSI"], [/marshall/i, "Marshall"],
+];
+export function detectBrand(name: string): string {
+  for (const [re, brand] of BRANDS) if (re.test(name)) return brand;
+  return "Apple";
 }
