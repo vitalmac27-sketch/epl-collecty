@@ -112,7 +112,7 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
     { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "apple-watch-series-11" },
     { id: "rose", name: "Розовый (Rose)", hex: "#E6BFC2", image: "apple-watch-series-11" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-series-11" },
-    { id: "space", name: "Space", hex: "#888888", image: "apple-watch-series-11" },
+    { id: "space", name: "Космический чёрный", hex: "#2B2B2E", image: "apple-watch-series-11" },
   ],
   storage: [
     { id: "46mm", label: "46 мм", available: true },

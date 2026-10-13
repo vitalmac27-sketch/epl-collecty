@@ -12,7 +12,7 @@ const XIAOMI_MI_15T_CONFIG: ProductConfig = {
   slug: "xiaomi-mi-15t",
   category: "android",
   colors: [
-    { id: "pro-black", name: "Pro-black", hex: "#888888", image: "xiaomi-mi-15t" },
+    { id: "pro-black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-mi-15t" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-mi-15t" },
     { id: "gray", name: "Серый", hex: "#4E4E4F", image: "xiaomi-mi-15t" },
   ],
@@ -60,7 +60,7 @@ const XIAOMI_REDMI_NOTE_15_PRO_CONFIG: ProductConfig = {
   slug: "xiaomi-redmi-note-15-pro",
   category: "android",
   colors: [
-    { id: "xiaomi-black", name: "Xiaomi-black", hex: "#888888", image: "xiaomi-redmi-note-15-pro" },
+    { id: "xiaomi-black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-redmi-note-15-pro" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-redmi-note-15-pro" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-redmi-note-15-pro" },
   ],
@@ -109,9 +109,9 @@ const XIAOMI_REDMI_NOTE_15_CONFIG: ProductConfig = {
   slug: "xiaomi-redmi-note-15",
   category: "android",
   colors: [
-    { id: "xiaomi-purple", name: "Xiaomi-purple", hex: "#888888", image: "xiaomi-redmi-note-15" },
-    { id: "xiaomi-blue", name: "Xiaomi-blue", hex: "#888888", image: "xiaomi-redmi-note-15" },
-    { id: "xiaomi-black", name: "Xiaomi-black", hex: "#888888", image: "xiaomi-redmi-note-15" },
+    { id: "xiaomi-purple", name: "Фиолетовый", hex: "#8B7AAF", image: "xiaomi-redmi-note-15" },
+    { id: "xiaomi-blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-redmi-note-15" },
+    { id: "xiaomi-black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-redmi-note-15" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-redmi-note-15" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-redmi-note-15" },
     { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "xiaomi-redmi-note-15" },
@@ -278,9 +278,9 @@ const XIAOMI_MI_17T_CONFIG: ProductConfig = {
   slug: "xiaomi-mi-17t",
   category: "android",
   colors: [
-    { id: "pro-violet", name: "Pro-violet", hex: "#888888", image: "xiaomi-mi-15t" },
-    { id: "pro-blue", name: "Pro-blue", hex: "#888888", image: "xiaomi-mi-15t" },
-    { id: "pro-black", name: "Pro-black", hex: "#888888", image: "xiaomi-mi-15t" },
+    { id: "pro-violet", name: "Фиолетовый", hex: "#8B7AAF", image: "xiaomi-mi-15t" },
+    { id: "pro-blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-mi-15t" },
+    { id: "pro-black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-mi-15t" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "xiaomi-mi-15t" },
     { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "xiaomi-mi-15t" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "xiaomi-mi-15t" },

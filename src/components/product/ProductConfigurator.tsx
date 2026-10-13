@@ -25,6 +25,9 @@ export default function ProductConfigurator({
   const [formMode, setFormMode] = useState<"buy" | "tradein" | null>(null);
 
   const currentColor   = config.colors.find((c) => c.id === selectedColor) ?? config.colors[0];
+  // серый #888888 = вариант без настоящего цвета (комплектация, линзы, «Стандарт») → кнопки с текстом
+  const isVariantPicker = config.colors.some((c) => c.hex === "#888888");
+  const variantLabel = (name: string) => (/^[A-Za-z0-9|-]+$/.test(name) && name.includes("-") ? name.replace(/-/g, " ") : name);
   const currentStorage = config.storage.find((s) => s.id === selectedStorage);
   const currentSim     = config.sim.find((s) => s.id === selectedSim);
 
@@ -67,7 +70,7 @@ export default function ProductConfigurator({
           <h1 className="text-2xl md:text-3xl font-bold mb-1 leading-tight">
             Купить <span className="text-primary">{modelName}</span>
             {currentStorage && <span className="text-foreground"> {currentStorage.label}</span>}
-            {currentColor && <span className="text-foreground"> {currentColor.name}</span>}
+            {currentColor && <span className="text-foreground"> {variantLabel(currentColor.name)}</span>}
             <span className="text-muted-foreground"> в {cityName}</span>
           </h1>
           <p className="text-sm text-muted-foreground mb-4">
@@ -125,12 +128,30 @@ export default function ProductConfigurator({
             </div>
           )}
 
-          {/* Цвет */}
+          {/* Цвет (или вариант/комплектация — кнопками с текстом, если это не цвет) */}
           {config.colors.length > 1 && (
             <div className="mb-5">
               <p className="text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wide">
-                Цвет — <span className="text-foreground normal-case font-normal">{currentColor.name}</span>
+                {isVariantPicker ? "Вариант" : "Цвет"} — <span className="text-foreground normal-case font-normal">{variantLabel(currentColor.name)}</span>
               </p>
+              {isVariantPicker ? (
+              <div className="flex flex-wrap gap-2">
+                {config.colors.map((color) => (
+                  <button
+                    key={color.id}
+                    onClick={() => setSelectedColor(color.id)}
+                    className={cn(
+                      "py-2.5 px-4 rounded-xl text-sm font-medium border-2 transition-all text-left",
+                      selectedColor === color.id
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/40"
+                    )}
+                  >
+                    {variantLabel(color.name)}
+                  </button>
+                ))}
+              </div>
+              ) : (
               <div className="flex gap-3 flex-wrap">
                 {config.colors.map((color) => (
                   <button
@@ -148,6 +169,7 @@ export default function ProductConfigurator({
                   />
                 ))}
               </div>
+              )}
             </div>
           )}
 

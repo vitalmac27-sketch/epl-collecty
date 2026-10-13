@@ -58,7 +58,7 @@ const MACBOOK_NEO_CONFIG: ProductConfig = {
   slug: "macbook-neo",
   category: "macbook",
   colors: [
-    { id: "blush", name: "Blush", hex: "#888888", image: "macbook-neo" },
+    { id: "blush", name: "Blush", hex: "#EBC9C3", image: "macbook-neo" },
     { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "macbook-neo" },
     { id: "indigo", name: "Индиго", hex: "#4B4D76", image: "macbook-neo" },
     { id: "citrus", name: "Цитрусовый", hex: "#DDD389", image: "macbook-neo" },
@@ -160,8 +160,8 @@ const MACBOOK_AIR_13_M5_CONFIG: ProductConfig = {
   slug: "macbook-air-13-m5",
   category: "macbook",
   colors: [
-    { id: "starlight-с-гравировкой", name: "Starlight-с-гравировкой", hex: "#888888", image: "macbook-air-13-m5" },
-    { id: "midnight", name: "Тёмная ночь", hex: "#888888", image: "macbook-air-13-m5" },
+    { id: "starlight-с-гравировкой", name: "Сияющая звезда (с гравировкой)", hex: "#E7DFD2", image: "macbook-air-13-m5" },
+    { id: "midnight", name: "Тёмная ночь", hex: "#232A31", image: "macbook-air-13-m5" },
     { id: "skyblue", name: "Небесно-голубой", hex: "#BDD3E0", image: "macbook-air-13-m5" },
     { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "macbook-air-13-m5" },
     { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "macbook-air-13-m5" },
@@ -304,7 +304,7 @@ const MACBOOK_PRO_14_M5_CONFIG: ProductConfig = {
   slug: "macbook-pro-14-m5",
   category: "macbook",
   colors: [
-    { id: "starlight", name: "Сияющая Звезда", hex: "#888888", image: "macbook-pro-14-m5" },
+    { id: "starlight", name: "Сияющая Звезда", hex: "#E7DFD2", image: "macbook-pro-14-m5" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "macbook-pro-14-m5" },
   ],
   storage: [

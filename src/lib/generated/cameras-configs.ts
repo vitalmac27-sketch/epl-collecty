@@ -7,7 +7,7 @@ const GOPRO_HERO_13_CONFIG: ProductConfig = {
   slug: "gopro-hero-13",
   category: "cameras",
   colors: [
-    { id: "black", name: "Black", hex: "#888888", image: "action-cam" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "action-cam" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -45,7 +45,7 @@ const GOPRO_HERO_12_CONFIG: ProductConfig = {
   slug: "gopro-hero-12",
   category: "cameras",
   colors: [
-    { id: "black", name: "Black", hex: "#888888", image: "action-cam" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "action-cam" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -237,8 +237,6 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
   category: "cameras",
   colors: [
     { id: "bundle-essential-combo", name: "Bundle-essential-combo", hex: "#888888", image: "gimbal-pocket" },
-    { id: "p-standard-combo", name: "P-standard-combo", hex: "#888888", image: "gimbal-pocket" },
-    { id: "p-vlog-combo", name: "P-vlog-combo", hex: "#888888", image: "gimbal-pocket" },
     { id: "bundle-standard-combo", name: "Bundle-standard-combo", hex: "#888888", image: "gimbal-pocket" },
     { id: "standard", name: "Стандарт", hex: "#888888", image: "gimbal-pocket" },
     { id: "creator-combo", name: "Creator Combo", hex: "#888888", image: "gimbal-pocket" },
@@ -251,8 +249,6 @@ const DJI_OSMO_POCKET_4_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "std", colorId: "bundle-essential-combo", simId: "none", price: 41000 },
-    { storageId: "std", colorId: "p-standard-combo", simId: "none", price: 0 },
-    { storageId: "std", colorId: "p-vlog-combo", simId: "none", price: 0 },
     { storageId: "std", colorId: "bundle-standard-combo", simId: "none", price: 41000 },
     { storageId: "std", colorId: "standard", simId: "none", price: 0 },
     { storageId: "std", colorId: "creator-combo", simId: "none", price: 51000 },
@@ -284,7 +280,7 @@ const CANON_G7X_MARK_3_CONFIG: ProductConfig = {
   slug: "canon-g7x-mark-3",
   category: "cameras",
   colors: [
-    { id: "black", name: "Black", hex: "#888888", image: "dji-mic-3" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "dji-mic-3" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },

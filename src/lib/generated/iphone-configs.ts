@@ -185,7 +185,7 @@ const IPHONE_17_CONFIG: ProductConfig = {
   slug: "iphone-17",
   category: "iphone",
   colors: [
-    { id: "pink", name: "Розовый", hex: "#888888", image: "iphone-17" },
+    { id: "pink", name: "Розовый", hex: "#F2C6CF", image: "iphone-17" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17" },
     { id: "sage", name: "Шалфей", hex: "#A8B19E", image: "iphone-17" },
     { id: "lavender", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17" },
@@ -673,9 +673,9 @@ const IPHONE_17E_CONFIG: ProductConfig = {
 const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
   slug: "iphone-18-pro-max", category: "iphone",
   colors: [
-    { id: "glacier", name: "Glacier", hex: "#888888", image: "iphone-18-pro-max" },
-    { id: "silver", name: "Серебристый", hex: "#888888", image: "iphone-18-pro-max" },
-    { id: "black", name: "Чёрный", hex: "#888888", image: "iphone-18-pro-max" },
+    { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro-max" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro-max" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro-max" },
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
   ],
   storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
@@ -753,9 +753,9 @@ const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
 const IPHONE_18_PRO_CONFIG: ProductConfig = {
   slug: "iphone-18-pro", category: "iphone",
   colors: [
-    { id: "glacier", name: "Glacier", hex: "#888888", image: "iphone-18-pro" },
-    { id: "black", name: "Чёрный", hex: "#888888", image: "iphone-18-pro" },
-    { id: "silver", name: "Серебристый", hex: "#888888", image: "iphone-18-pro" },
+    { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro" },
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro" },
   ],
   storage: [

@@ -123,7 +123,7 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   category: "ipad",
   colors: [
     { id: "коробка", name: "Коробка", hex: "#888888", image: "ipad-air-11-m4" },
-    { id: "blue", name: "Синий", hex: "#888888", image: "ipad-air-11-m4" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-air-11-m4" },
     { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-m4" },
     { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "ipad-air-11-m4" },
     { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "ipad-air-11-m4" },
@@ -181,7 +181,7 @@ const IPAD_PRO_11_CONFIG: ProductConfig = {
   slug: "ipad-pro-11",
   category: "ipad",
   colors: [
-    { id: "silver", name: "Серебристый", hex: "#888888", image: "ipad-pro-11" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "ipad-pro-11" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "ipad-pro-11" },
   ],
   storage: [

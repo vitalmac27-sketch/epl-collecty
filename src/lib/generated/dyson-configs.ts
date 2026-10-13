@@ -44,7 +44,7 @@ const DYSON_HD17_CONFIG: ProductConfig = {
   slug: "dyson-hd17",
   category: "dyson",
   colors: [
-    { id: "jusper-plum", name: "Jusper plum", hex: "#888888", image: "dyson-hd17" },
+    { id: "jusper-plum", name: "Jasper Plum", hex: "#6E3B4E", image: "dyson-hd17" },
     { id: "ceramic-pink", name: "Керамический розовый", hex: "#E8B5A8", image: "dyson-hd17" },
   ],
   storage: [
@@ -79,7 +79,7 @@ const DYSON_HD16_CONFIG: ProductConfig = {
   slug: "dyson-hd16",
   category: "dyson",
   colors: [
-    { id: "ceramic-pink", name: "Ceramic-pink", hex: "#888888", image: "dyson-hd16" },
+    { id: "ceramic-pink", name: "Ceramic Pink", hex: "#E9C8C3", image: "dyson-hd16" },
     { id: "prussian-blue", name: "Прусский синий", hex: "#1F3354", image: "dyson-hd16" },
   ],
   storage: [
@@ -114,8 +114,8 @@ const DYSON_AIRWRAP_HS09_CONFIG: ProductConfig = {
   slug: "dyson-airwrap-hs09",
   category: "dyson",
   colors: [
-    { id: "jusper-plum-re", name: "Jusper-plum-re", hex: "#888888", image: "dyson-airwrap-hs09" },
-    { id: "ceramic-pink-re", name: "Ceramic-pink-re", hex: "#888888", image: "dyson-airwrap-hs09" },
+    { id: "jusper-plum-re", name: "Jasper Plum", hex: "#6E3B4E", image: "dyson-airwrap-hs09" },
+    { id: "ceramic-pink-re", name: "Ceramic Pink", hex: "#E9C8C3", image: "dyson-airwrap-hs09" },
     { id: "apricot-topaz", name: "Абрикосовый топаз", hex: "#D4A88A", image: "dyson-airwrap-hs09" },
     { id: "red-velvet", name: "Красный бархат", hex: "#86323A", image: "dyson-airwrap-hs09" },
     { id: "amber-silk", name: "Янтарный шёлк", hex: "#C49862", image: "dyson-airwrap-hs09" },
@@ -159,8 +159,8 @@ const DYSON_AIRWRAP_HS08_CONFIG: ProductConfig = {
   slug: "dyson-airwrap-hs08",
   category: "dyson",
   colors: [
-    { id: "apricot-topaz", name: "Apricot-topaz", hex: "#888888", image: "dyson-airwrap-hs08" },
-    { id: "ceramic-patina", name: "Ceramic-patina", hex: "#888888", image: "dyson-airwrap-hs08" },
+    { id: "apricot-topaz", name: "Apricot / Topaz", hex: "#E7A96B", image: "dyson-airwrap-hs08" },
+    { id: "ceramic-patina", name: "Ceramic Patina", hex: "#9DB8A8", image: "dyson-airwrap-hs08" },
     { id: "ceramic-pink", name: "Керамический розовый", hex: "#E8B5A8", image: "dyson-airwrap-hs08" },
     { id: "vinca-blue", name: "Тёмно-синий", hex: "#3D5A82", image: "dyson-airwrap-hs08" },
     { id: "amber-silk", name: "Янтарный шёлк", hex: "#C49862", image: "dyson-airwrap-hs08" },

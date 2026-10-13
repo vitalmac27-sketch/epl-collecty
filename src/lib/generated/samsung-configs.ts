@@ -12,7 +12,7 @@ const SAMSUNG_GALAXY_S26_ULTRA_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-s26-ultra",
   category: "samsung",
   colors: [
-    { id: "silver", name: "Серебристый", hex: "#888888", image: "samsung-galaxy-s26-ultra" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "samsung-galaxy-s26-ultra" },
     { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "samsung-galaxy-s26-ultra" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-s26-ultra" },
     { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-s26-ultra" },
@@ -81,9 +81,9 @@ const SAMSUNG_GALAXY_S26_PLUS_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-s26-plus",
   category: "samsung",
   colors: [
-    { id: "violet", name: "Violet", hex: "#888888", image: "samsung-galaxy-s26-plus" },
-    { id: "white", name: "Белый", hex: "#888888", image: "samsung-galaxy-s26-plus" },
-    { id: "black", name: "Чёрный", hex: "#888888", image: "samsung-galaxy-s26-plus" },
+    { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "samsung-galaxy-s26-plus" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-s26-plus" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-s26-plus" },
     { id: "skyblue", name: "Небесно-голубой", hex: "#BDD3E0", image: "samsung-galaxy-s26-plus" },
   ],
   storage: [
@@ -135,8 +135,8 @@ const SAMSUNG_GALAXY_S26_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-s26",
   category: "samsung",
   colors: [
-    { id: "silver", name: "Серебристый", hex: "#888888", image: "samsung-galaxy-s26" },
-    { id: "white", name: "Белый", hex: "#888888", image: "samsung-galaxy-s26" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "samsung-galaxy-s26" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-s26" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-s26" },
     { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "samsung-galaxy-s26" },
     { id: "skyblue", name: "Небесно-голубой", hex: "#BDD3E0", image: "samsung-galaxy-s26" },
@@ -505,9 +505,9 @@ const SAMSUNG_GALAXY_A17_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-a17",
   category: "samsung",
   colors: [
-    { id: "black-рст", name: "Black-рст", hex: "#888888", image: "samsung-galaxy-a17" },
-    { id: "gray-рст", name: "Gray-рст", hex: "#888888", image: "samsung-galaxy-a17" },
-    { id: "blue-рст", name: "Blue-рст", hex: "#888888", image: "samsung-galaxy-a17" },
+    { id: "black-рст", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-a17" },
+    { id: "gray-рст", name: "Серый", hex: "#8A8D91", image: "samsung-galaxy-a17" },
+    { id: "blue-рст", name: "Синий", hex: "#3B5D78", image: "samsung-galaxy-a17" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-a17" },
     { id: "gray", name: "Серый", hex: "#4E4E4F", image: "samsung-galaxy-a17" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "samsung-galaxy-a17" },
@@ -567,9 +567,9 @@ const SAMSUNG_GALAXY_A07_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-a07",
   category: "samsung",
   colors: [
-    { id: "green", name: "Зелёный", hex: "#888888", image: "samsung-galaxy-a07" },
-    { id: "black", name: "Чёрный", hex: "#888888", image: "samsung-galaxy-a07" },
-    { id: "black-рст", name: "Black-рст", hex: "#888888", image: "samsung-galaxy-a07" },
+    { id: "green", name: "Зелёный", hex: "#5E7D5A", image: "samsung-galaxy-a07" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-a07" },
+    { id: "black-рст", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-a07" },
     { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "samsung-galaxy-a07" },
   ],
   storage: [
@@ -611,7 +611,7 @@ const SAMSUNG_GALAXY_Z_FOLD_8_ULTRA_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-z-fold-8-ultra",
   category: "samsung",
   colors: [
-    { id: "violet", name: "Violet", hex: "#888888", image: "samsung-fold" },
+    { id: "violet", name: "Фиолетовый", hex: "#8B7AAF", image: "samsung-fold" },
     { id: "graphite", name: "Графит", hex: "#3A3B3D", image: "samsung-fold" },
     { id: "cream", name: "Кремовый", hex: "#EFE5D2", image: "samsung-fold" },
   ],
@@ -652,8 +652,8 @@ const SAMSUNG_GALAXY_Z_FOLD_8_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-z-fold-8",
   category: "samsung",
   colors: [
-    { id: "graphite", name: "Graphite", hex: "#888888", image: "samsung-fold" },
-    { id: "lavender", name: "Лавандовый", hex: "#888888", image: "samsung-fold" },
+    { id: "graphite", name: "Графит", hex: "#3A3B3D", image: "samsung-fold" },
+    { id: "lavender", name: "Лавандовый", hex: "#C9B8E0", image: "samsung-fold" },
     { id: "cream", name: "Кремовый", hex: "#EFE5D2", image: "samsung-fold" },
   ],
   storage: [
@@ -732,8 +732,8 @@ const SAMSUNG_GALAXY_S26_FE_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-s26-fe",
   category: "samsung",
   colors: [
-    { id: "pistachio", name: "Pistachio", hex: "#888888", image: "samsung-galaxy-s26" },
-    { id: "blueberry", name: "Blueberry", hex: "#888888", image: "samsung-galaxy-s26" },
+    { id: "pistachio", name: "Фисташковый", hex: "#C5D7A6", image: "samsung-galaxy-s26" },
+    { id: "blueberry", name: "Blueberry", hex: "#4A4E8C", image: "samsung-galaxy-s26" },
     { id: "graphite", name: "Графит", hex: "#3A3B3D", image: "samsung-galaxy-s26" },
   ],
   storage: [
@@ -822,8 +822,8 @@ const SAMSUNG_GALAXY_A37_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-a37",
   category: "samsung",
   colors: [
-    { id: "lavender", name: "Лавандовый", hex: "#888888", image: "samsung-galaxy-a36" },
-    { id: "graygreen", name: "Graygreen", hex: "#888888", image: "samsung-galaxy-a36" },
+    { id: "lavender", name: "Лавандовый", hex: "#C9B8E0", image: "samsung-galaxy-a36" },
+    { id: "graygreen", name: "Серо-зелёный", hex: "#8F9E8B", image: "samsung-galaxy-a36" },
     { id: "charcoal", name: "Угольный", hex: "#36454F", image: "samsung-galaxy-a36" },
     { id: "white", name: "Белый", hex: "#F2F1ED", image: "samsung-galaxy-a36" },
   ],
@@ -868,8 +868,8 @@ const SAMSUNG_GALAXY_A27_CONFIG: ProductConfig = {
   slug: "samsung-galaxy-a27",
   category: "samsung",
   colors: [
-    { id: "pink", name: "Розовый", hex: "#888888", image: "samsung-galaxy-a26" },
-    { id: "black", name: "Чёрный", hex: "#888888", image: "samsung-galaxy-a26" },
+    { id: "pink", name: "Розовый", hex: "#F2C6CF", image: "samsung-galaxy-a26" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "samsung-galaxy-a26" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "samsung-galaxy-a26" },
   ],
   storage: [
