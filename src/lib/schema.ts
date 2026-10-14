@@ -14,7 +14,7 @@ export function buildLocalBusinessSchema(city: CityConfig) {
     "@id": `${city.siteUrl}/#business`,
     name: "ЭПЛ-КОЛЛЕКЦИЯ",
     alternateName: "EPL Collection",
-    legalName: "ИП Фамилия Имя Отчество",
+    legalName: "ИП Дарьин Максим Павлович",
     taxID: "164609500872",
     url: city.siteUrl,
     image: `${city.siteUrl}/assets/og-apple-collection.jpg`,

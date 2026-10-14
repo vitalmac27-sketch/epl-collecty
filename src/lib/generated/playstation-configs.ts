@@ -37,7 +37,7 @@ const PLAYSTATION_5_PRO_CONFIG: ProductConfig = {
   ],
   upsell: UPSELL,
   seoH2: "Купить PlayStation 5 Pro в Казани", seoText: "PS5 Pro — самая мощная консоль Sony. Цена от 89 000 ₽ в ЭПЛ-КОЛЛЕКЦИЯ. Гарантия 1 год, рассрочка до 36 мес.",
-  seoH2Why: "Чем PS5 Pro отличается от PS5 Slim?", seoTextWhy: "GPU на 45% мощнее, 2 ТБ SSD вместо 1 ТБ, трассировка лучей до 3× быстрее. Для максимального качества графики в играх.",
+  seoH2Why: "PS5 Pro или PS5 Slim?", seoTextWhy: "GPU на 45% мощнее, 2 ТБ SSD вместо 1 ТБ, трассировка лучей до 3× быстрее. Для максимального качества графики в играх.",
 };
 
 const PLAYSTATION_5_SLIM_CONFIG: ProductConfig = {
