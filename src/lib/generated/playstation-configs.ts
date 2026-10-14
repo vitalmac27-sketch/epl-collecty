@@ -13,8 +13,8 @@ const PLAYSTATION_5_PRO_CONFIG: ProductConfig = {
   colors: [{ id: "white", name: "Белый", hex: "#F0F0F0", image: "playstation-5-pro" }],
   storage: [{ id: "2tb", label: "2 ТБ SSD", available: true }],
   sim: [{ id: "none", label: "Стандарт", description: "Стандартная комплектация." }],
-  prices: [{ storageId: "2tb", colorId: "white", simId: "none", price: 124000 }],
-  defaultStorage: "2tb", defaultColor: "white", defaultSim: "none", priceFrom: 124000,
+  prices: [{ storageId: "2tb", colorId: "white", simId: "none", price: 0 }],
+  defaultStorage: "2tb", defaultColor: "white", defaultSim: "none", priceFrom: 0,
   storageLabel: "Версия", showSim: false,
   specs: [
     { label: "GPU", value: "На 67% больше вычислительных блоков, рендеринг до 45% быстрее" },
@@ -45,8 +45,8 @@ const PLAYSTATION_5_SLIM_CONFIG: ProductConfig = {
   colors: [{ id: "white", name: "Белый", hex: "#F0F0F0", image: "playstation-5-slim" }],
   storage: [{ id: "1tb", label: "1 ТБ SSD", available: true }],
   sim: [{ id: "none", label: "Стандарт", description: "Стандартная комплектация." }],
-  prices: [{ storageId: "1tb", colorId: "white", simId: "none", price: 0 }],
-  defaultStorage: "1tb", defaultColor: "white", defaultSim: "none", priceFrom: 0,
+  prices: [{ storageId: "1tb", colorId: "white", simId: "none", price: 76000 }],
+  defaultStorage: "1tb", defaultColor: "white", defaultSim: "none", priceFrom: 76000,
   storageLabel: "Версия", showSim: false,
   specs: [
     { label: "GPU", value: "10,28 ТФЛОПС" },
