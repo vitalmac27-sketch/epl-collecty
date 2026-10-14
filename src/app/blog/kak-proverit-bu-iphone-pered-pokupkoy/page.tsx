@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ProductPicks from "@/components/blog/ProductPicks";
 
 const ARTICLE = {
   title: "Как проверить б/у iPhone перед покупкой: чек-лист из 9 шагов",
@@ -352,6 +353,12 @@ export default function ArticlePage() {
           <p className="text-muted-foreground italic mb-8">
             Если все 9 пунктов — ОК, перед вами нормальное устройство. Можно обсуждать цену.
           </p>
+
+          <ProductPicks
+            title="Не хотите рисковать с б/у?"
+            note="Новый iPhone с гарантией 1 год можно взять в рассрочку до 36 месяцев — ежемесячный платёж часто сопоставим с покупкой б/у с рук."
+            models={["iphone/iphone-17e","iphone/iphone-16","iphone/iphone-15","iphone/iphone-17","iphone/iphone-16e","iphone/iphone-14"]}
+          />
 
           {/* FAQ */}
           <h2 className="text-2xl font-bold mt-12 mb-6">Частые вопросы</h2>

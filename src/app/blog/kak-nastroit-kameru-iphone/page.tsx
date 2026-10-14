@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ProductPicks from "@/components/blog/ProductPicks";
 
 export const dynamic = "force-static";
 
@@ -438,6 +439,12 @@ export default function ArticlePage() {
               </div>
             </div>
           ))}
+
+          <ProductPicks
+            title="iPhone с лучшей камерой — актуальные цены"
+            note="Телевик 48 МП с 8× зумом, ProRes и Apple Log 2 есть у Pro-моделей 17 и 18 серии."
+            models={["iphone/iphone-18-pro","iphone/iphone-18-pro-max","iphone/iphone-17-pro","iphone/iphone-17-pro-max","iphone/iphone-17","iphone/iphone-17-air"]}
+          />
 
           {/* FAQ */}
           <h2 id="faq" className="text-2xl font-bold mt-12 mb-6">Частые вопросы</h2>

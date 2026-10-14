@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ProductPicks from "@/components/blog/ProductPicks";
 
 export const dynamic = "force-static";
 
@@ -427,6 +428,12 @@ export default function ArticlePage() {
           <div className="bg-muted/40 border border-border rounded-xl p-4 mb-8">
             <p className="text-sm text-muted-foreground">Когда iOS 27 выйдет (ожидается сентябрь 2026), мы обновим эту статью с новыми настройками.</p>
           </div>
+
+          <ProductPicks
+            title="iPhone с самой долгой батареей"
+            note="Если аккумулятор старого iPhone уже не держит день — посмотрите модели-рекордсмены по автономности. Старый телефон можно сдать в Trade-in."
+            models={["iphone/iphone-17-pro-max","iphone/iphone-18-pro-max","iphone/iphone-16-pro-max","iphone/iphone-17","iphone/iphone-17-pro","iphone/iphone-16"]}
+          />
 
           {/* FAQ */}
           <h2 id="faq" className="text-2xl font-bold mt-12 mb-6">Частые вопросы</h2>
