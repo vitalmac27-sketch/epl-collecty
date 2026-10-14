@@ -129,7 +129,7 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
     { storageId: "46mm", colorId: "black", simId: "none", price: 36500 },
     { storageId: "46mm", colorId: "rose", simId: "none", price: 36500 },
     { storageId: "46mm", colorId: "silver", simId: "none", price: 37000 },
-    { storageId: "46mm", colorId: "space", simId: "none", price: 0 },
+    { storageId: "46mm", colorId: "space", simId: "none", price: 36000 },
   ],
   defaultStorage: "42mm",
   defaultColor: "space",
