@@ -355,12 +355,12 @@ const CANON_G7X_MARK_3_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "black", simId: "none", price: 106500 },
+    { storageId: "std", colorId: "black", simId: "none", price: 103500 },
   ],
   defaultStorage: "std",
   defaultColor: "black",
   defaultSim: "none",
-  priceFrom: 106500,
+  priceFrom: 103500,
   storageLabel: "Комплектация",
   showSim: false,
   specs: [
@@ -442,7 +442,7 @@ const DJI_OSMO_POCKET_4P_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 61000 },
+    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 0 },
     { storageId: "std", colorId: "standard-combo", simId: "none", price: 53000 },
   ],
   defaultStorage: "std",
