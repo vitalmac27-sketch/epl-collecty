@@ -375,12 +375,12 @@ const NOTHING_PHONE_3A_LITE_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "8-256", colorId: "white", simId: "none", price: 25000 },
+    { storageId: "8-256", colorId: "white", simId: "none", price: 0 },
   ],
   defaultStorage: "8-256",
   defaultColor: "white",
   defaultSim: "none",
-  priceFrom: 25000,
+  priceFrom: 0,
   storageLabel: "Память",
   showSim: false,
   specs: [
@@ -526,13 +526,13 @@ const HONOR_600_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "8-256", colorId: "orange", simId: "none", price: 43000 },
+    { storageId: "8-256", colorId: "orange", simId: "none", price: 0 },
     { storageId: "8-256", colorId: "black", simId: "none", price: 0 },
   ],
   defaultStorage: "8-256",
   defaultColor: "orange",
   defaultSim: "none",
-  priceFrom: 43000,
+  priceFrom: 0,
   storageLabel: "Память",
   showSim: false,
   specs: [
