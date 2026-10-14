@@ -153,3 +153,41 @@ export default function ArticleLayout({
     </>
   );
 }
+
+/** Цветная врезка в статье: совет, важно, предупреждение, вывод */
+export function Callout({ tone = "info", title, children }: { tone?: "info" | "tip" | "warn" | "verdict"; title?: string; children: React.ReactNode }) {
+  const cls = {
+    info: "border-blue-400 bg-blue-50 dark:bg-blue-950/20",
+    tip: "border-green-500 bg-green-50 dark:bg-green-950/20",
+    warn: "border-amber-400 bg-amber-50 dark:bg-amber-950/20",
+    verdict: "border-primary bg-primary/5",
+  }[tone];
+  return (
+    <div className={`border-l-4 ${cls} pl-4 pr-5 py-4 rounded-r-xl my-6`}>
+      {title && <p className="font-semibold text-sm text-foreground mb-1">{title}</p>}
+      <div className="text-sm text-muted-foreground leading-relaxed space-y-2">{children}</div>
+    </div>
+  );
+}
+
+/** Простая таблица для статей */
+export function ArticleTable({ head, rows }: { head: string[]; rows: Array<Array<React.ReactNode>> }) {
+  return (
+    <div className="overflow-x-auto -mx-1 my-6">
+      <table className="w-full text-sm border-collapse">
+        <thead>
+          <tr className="border-b border-border text-left text-foreground">
+            {head.map((h, i) => <th key={i} className="py-2 pr-3 font-semibold">{h}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={i} className="border-b border-border/60 align-top">
+              {r.map((c, j) => <td key={j} className={`py-2 pr-3 ${j === 0 ? "font-medium text-foreground" : ""}`}>{c}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
