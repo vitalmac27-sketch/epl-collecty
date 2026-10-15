@@ -688,12 +688,20 @@ const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro-max" },
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
   ],
-  storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
+  storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true }, { id: "2048", label: "2 ТБ", available: true } ],
   sim: [
     { id: "esim", label: "eSIM", description: "Только eSIM. Нужна поддержка eSIM у оператора." },
     { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Одна физическая SIM + одна eSIM." },
   ],
   prices: [
+    { storageId: "2048", colorId: "glacier", simId: "esim", price: 0 },
+    { storageId: "2048", colorId: "glacier", simId: "sim-esim", price: 0 },
+    { storageId: "2048", colorId: "silver", simId: "esim", price: 0 },
+    { storageId: "2048", colorId: "silver", simId: "sim-esim", price: 0 },
+    { storageId: "2048", colorId: "black", simId: "esim", price: 0 },
+    { storageId: "2048", colorId: "black", simId: "sim-esim", price: 0 },
+    { storageId: "2048", colorId: "burgundy", simId: "esim", price: 0 },
+    { storageId: "2048", colorId: "burgundy", simId: "sim-esim", price: 0 },
     { storageId: "512", colorId: "glacier", simId: "esim", price: 158000 },
     { storageId: "1024", colorId: "burgundy", simId: "sim-esim", price: 225000 },
     { storageId: "512", colorId: "glacier", simId: "sim-esim", price: 161000 },
@@ -770,7 +778,7 @@ const IPHONE_18_PRO_CONFIG: ProductConfig = {
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro" },
   ],
   storage: [
-    { id: "2048", label: "2 ТБ", available: true }, { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true } ],
+    { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true }, { id: "2048", label: "2 ТБ", available: true } ],
   sim: [
     { id: "esim", label: "eSIM", description: "Только eSIM. Нужна поддержка eSIM у оператора." },
     { id: "sim-esim", label: "Nano-SIM + eSIM", description: "Одна физическая SIM + одна eSIM." },

@@ -12,6 +12,8 @@ import ProductConfigurator from "@/components/product/ProductConfigurator";
 import SpecsTable from "@/components/product/SpecsTable";
 import CompareTable from "@/components/product/CompareTable";
 import UpsellBlock from "@/components/product/UpsellBlock";
+import VariantLinks from "@/components/product/VariantLinks";
+import { getVariants } from "@/lib/variants";
 
 const city = DEFAULT_CITY;
 
@@ -126,7 +128,7 @@ export default async function ModelPage({
               </div>
             </div>
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">{model.name} {city.namePre}</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">{model.name} в {city.namePre}</h1>
               <p className="text-lg text-muted-foreground mb-6">{model.subtitle}</p>
               <div className="bg-card border border-border rounded-2xl p-5 mb-6">
                 <p className="text-sm text-muted-foreground mb-1">Цена от</p>
@@ -145,6 +147,9 @@ export default async function ModelPage({
             </div>
           </section>
         )}
+
+        {/* Страницы конфигураций */}
+        <VariantLinks base={`/${category}/${modelSlug}`} modelName={model.name} variants={getVariants(category, modelSlug)} />
 
         {/* Характеристики */}
         {productCfg && <SpecsTable specs={productCfg.specs} modelName={model.name} />}
@@ -187,9 +192,9 @@ export default async function ModelPage({
             </>
           ) : (
             <>
-              <h2 className="text-2xl font-bold mb-4">Купить {model.name} {city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ</h2>
+              <h2 className="text-2xl font-bold mb-4">Купить {model.name} в {city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ</h2>
               <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
-                <p><strong className="text-foreground">Купить {model.name} {city.namePre}</strong> можно в магазине ЭПЛ-КОЛЛЕКЦИЯ по лучшей цене — от <strong className="text-foreground">{formatPrice(model.priceFrom)}</strong>.</p>
+                <p><strong className="text-foreground">Купить {model.name} в {city.namePre}</strong> можно в магазине ЭПЛ-КОЛЛЕКЦИЯ по лучшей цене — от <strong className="text-foreground">{formatPrice(model.priceFrom)}</strong>.</p>
                 <p><strong className="text-foreground">Рассрочка до 36 месяцев</strong> по карте «Халва» — от {monthlyPayment(model.priceFrom)} в месяц*.</p>
                 <p><strong className="text-foreground">Гарантия 1 год</strong>, бесплатная доставка по всей {city.nameGen} в день заказа.</p>
               </div>

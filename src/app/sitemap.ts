@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ALL_CATEGORY_SLUGS } from "@/lib/categories";
 import { allModels } from "@/lib/models";
+import { ALL_VARIANT_PARAMS } from "@/lib/variants";
 
 export const dynamic = "force-static";
 
@@ -38,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.7,
+    })),
+    ...ALL_VARIANT_PARAMS.map((v) => ({
+      url: `${BASE}/${v.category}/${v.model}/${v.variant}/`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
     })),
   ];
 }

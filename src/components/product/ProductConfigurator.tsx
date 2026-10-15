@@ -11,6 +11,8 @@ interface Props {
   modelName: string;
   cityName: string;    // "Казани"
   telegramLink: string;
+  /** Предвыбор конфигурации (страницы вариантов) */
+  initial?: { storage: string; color: string; sim: string };
 }
 
 export default function ProductConfigurator({
@@ -18,10 +20,11 @@ export default function ProductConfigurator({
   modelName,
   cityName,
   telegramLink,
+  initial,
 }: Props) {
-  const [selectedColor,   setSelectedColor]   = useState(config.defaultColor);
-  const [selectedStorage, setSelectedStorage] = useState(config.defaultStorage);
-  const [selectedSim,     setSelectedSim]     = useState(config.defaultSim);
+  const [selectedColor,   setSelectedColor]   = useState(initial?.color ?? config.defaultColor);
+  const [selectedStorage, setSelectedStorage] = useState(initial?.storage ?? config.defaultStorage);
+  const [selectedSim,     setSelectedSim]     = useState(initial?.sim ?? config.defaultSim);
   const [formMode, setFormMode] = useState<"buy" | "tradein" | null>(null);
 
   const currentColor   = config.colors.find((c) => c.id === selectedColor) ?? config.colors[0];
