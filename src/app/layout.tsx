@@ -4,6 +4,7 @@ import { DEFAULT_CITY } from "@/lib/cities";
 import { buildLocalBusinessSchema } from "@/lib/schema";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import CookieNotice from "@/components/layout/CookieNotice";
 
 // ─── Viewport ────────────────────────────────────────────────────────────────
 export const viewport: Viewport = {
@@ -139,6 +140,9 @@ export default function RootLayout({
 
         {/* ── Footer (Server Component) ── */}
         <Footer />
+
+        {/* ── Уведомление о cookie ── */}
+        <CookieNotice />
       </body>
     </html>
   );

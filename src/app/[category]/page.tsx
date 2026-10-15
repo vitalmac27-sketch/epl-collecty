@@ -101,6 +101,23 @@ export default async function CategoryPage({
           <p className="text-lg text-muted-foreground max-w-2xl">{cat.pageDescription}</p>
         </header>
 
+        {/* ── Быстрые ссылки на модели ── */}
+        {models.length >= 4 && (
+          <nav aria-label={`Модели ${cat.name}`} className="flex gap-2 mb-8 -mt-4 overflow-x-auto sm:flex-wrap sm:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 pb-1 [scrollbar-width:none]">
+            {models
+              .filter((m, i, arr) => arr.findIndex((x) => x.slug === m.slug) === i)
+              .map((m) => (
+                <Link
+                  key={m.slug}
+                  href={getModelUrl(m)}
+                  className="shrink-0 whitespace-nowrap text-sm px-3.5 py-1.5 rounded-full bg-muted/50 border border-border hover:border-primary/50 hover:text-primary transition-colors"
+                >
+                  {m.name}
+                </Link>
+              ))}
+          </nav>
+        )}
+
         {/* ── Сетка моделей ── */}
         {models.length > 0 ? (
           <section aria-label={`Каталог ${cat.name}`}>
