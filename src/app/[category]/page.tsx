@@ -5,7 +5,8 @@ import Image from "next/image";
 import { getCategoryConfig, ALL_CATEGORY_SLUGS } from "@/lib/categories";
 import { getModelsByCategory, getModelUrl } from "@/lib/models";
 import { DEFAULT_CITY } from "@/lib/cities";
-import { buildItemListSchema, buildBreadcrumbSchema } from "@/lib/schema";
+import { buildItemListSchema, buildBreadcrumbSchema, buildFAQSchema } from "@/lib/schema";
+import IphoneCategorySeo, { getIphoneFaq, iphonePriceStats } from "@/components/category/IphoneCategorySeo";
 import { formatPrice } from "@/lib/utils";
 
 const city = DEFAULT_CITY;
@@ -25,13 +26,24 @@ export async function generateMetadata({
   const cat = getCategoryConfig(category);
   if (!cat) return { title: "Страница не найдена" };
 
+  let title = cat.pageTitle;
+  let description = cat.pageDescription;
+  if (cat.slug === "iphone") {
+    const { cheapest } = iphonePriceStats(getModelsByCategory("iphone"));
+    if (cheapest) {
+      const from = formatPrice(cheapest.priceFrom).replace(/\u00a0/g, " ");
+      title = `Купить iPhone в Казани — цены от ${from}, новые и б/у | ЭПЛ-КОЛЛЕКЦИЯ`;
+      description = `Купить iPhone в Казани по цене от ${from}: iPhone 13–18, новые и б/у. Гарантия до 1 года, рассрочка «Халва» до 36 мес, Trade-in, доставка в день заказа.`;
+    }
+  }
+
   return {
-    title: cat.pageTitle,
-    description: cat.pageDescription,
+    title,
+    description,
     alternates: { canonical: `${city.siteUrl}/${cat.slug}` },
     openGraph: {
-      title: cat.pageTitle,
-      description: cat.pageDescription,
+      title,
+      description,
       url: `${city.siteUrl}/${cat.slug}`,
     },
   };
@@ -65,6 +77,12 @@ export default async function CategoryPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {category === "iphone" && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFAQSchema(getIphoneFaq(models, city))) }}
+        />
+      )}
 
       <div className="max-w-7xl mx-auto px-4 py-8">
 
@@ -158,13 +176,16 @@ export default async function CategoryPage({
         )}
 
         {/* ── SEO-текст для категории ── */}
+        {category === "iphone" ? (
+          <IphoneCategorySeo models={models} city={city} />
+        ) : (
         <section className="mt-16 max-w-3xl">
           <h2 className="text-2xl font-bold mb-4">
-            {cat.name} {city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ
+            {cat.name} в {city.namePre} — ЭПЛ-КОЛЛЕКЦИЯ
           </h2>
           <div className="prose prose-gray max-w-none text-muted-foreground space-y-3">
             <p>
-              <strong className="text-foreground">Купить {cat.name} {city.namePre}</strong> выгодно можно в магазине ЭПЛ-КОЛЛЕКЦИЯ.
+              <strong className="text-foreground">Купить {cat.name} в {city.namePre}</strong> выгодно можно в магазине ЭПЛ-КОЛЛЕКЦИЯ.
               Все устройства — оригинальные, с полным комплектом документов и гарантией 1 год.
             </p>
             <p>
@@ -178,6 +199,7 @@ export default async function CategoryPage({
             </p>
           </div>
         </section>
+        )}
 
       </div>
     </>

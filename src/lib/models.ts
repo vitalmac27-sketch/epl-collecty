@@ -218,13 +218,6 @@ const iPhoneModels: ProductModel[] = [
     subtitle: "Dynamic Island, большой экран",
   },
   {
-    slug: "iphone-14", name: "iPhone 14", category: "iphone", series: "14",
-    priceFrom: 42500, image: "iphone-15",
-    seoTitle: "Купить iPhone 14 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
-    seoDescription: "iPhone 14 в Казани ✅ Гарантия 1 год, рассрочка до 36 мес, доставка бесплатно.",
-    subtitle: "Классика по доступной цене", inNav: true,
-  },
-  {
     slug: "iphone-15",
     name: "iPhone 15",
     category: "iphone",
@@ -271,6 +264,7 @@ const iPhoneModels: ProductModel[] = [
     seoDescription:
       "iPhone 14 в Казани ✅ A15 Bionic. Выгодно купить б/у с гарантией, рассрочка до 36 мес.",
     subtitle: "Надёжный A15 Bionic",
+    inNav: true,
   },
   {
     slug: "iphone-13-pro-max",
@@ -1815,8 +1809,9 @@ export function getModelUrl(model: ProductModel): string {
 /** Минимальная память модели (storage с самой низкой ценой) — для подписи "от" */
 export function getModelMinStorage(model: ProductModel): string | null {
   const cfg = getProductConfig(model.category, model.slug);
-  if (!cfg?.prices?.length || !cfg?.storage?.length) return null;
-  const cheapest = cfg.prices.reduce((a, b) => (b.price < a.price ? b : a));
+  const prices = cfg?.prices?.filter((p) => p.price > 0) ?? [];
+  if (!prices.length || !cfg?.storage?.length) return null;
+  const cheapest = prices.reduce((a, b) => (b.price < a.price ? b : a));
   const st = cfg.storage.find((s) => s.id === cheapest.storageId);
   return st?.label ?? null;
 }
