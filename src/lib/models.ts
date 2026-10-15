@@ -485,8 +485,8 @@ const macBookModels: ProductModel[] = [
     priceFrom: 59500,
     image: "macbook-neo",
     seoTitle: "Купить MacBook Neo в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
-    seoDescription: "MacBook Neo в Казани ✅ Доступный ноутбук, 18ч батареи. Гарантия, рассрочка до 36 мес.",
-    subtitle: "Доступный ноутбук 13\"",
+    seoDescription: "MacBook Neo в Казани ✅ Apple A18 Pro, macOS, до 16 ч работы. Гарантия, рассрочка до 36 мес.",
+    subtitle: "Доступный MacBook на A18 Pro",
   },
   {
     slug: "mac-mini-m4",
