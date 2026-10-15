@@ -7,6 +7,8 @@ import { getModelsByCategory, getModelUrl } from "@/lib/models";
 import { DEFAULT_CITY } from "@/lib/cities";
 import { buildItemListSchema, buildBreadcrumbSchema, buildFAQSchema } from "@/lib/schema";
 import IphoneCategorySeo, { getIphoneFaq, iphonePriceStats } from "@/components/category/IphoneCategorySeo";
+import CategorySeo, { categoryCheapest, categoryFaq } from "@/components/category/CategorySeo";
+import { CATEGORY_SEO } from "@/components/category/category-seo-data";
 import { formatPrice } from "@/lib/utils";
 
 const city = DEFAULT_CITY;
@@ -34,6 +36,15 @@ export async function generateMetadata({
       const from = formatPrice(cheapest.priceFrom).replace(/\u00a0/g, " ");
       title = `Купить iPhone в Казани — цены от ${from}, новые и б/у | ЭПЛ-КОЛЛЕКЦИЯ`;
       description = `Купить iPhone в Казани по цене от ${from}: iPhone 13–18, новые и б/у. Гарантия до 1 года, рассрочка «Халва» до 36 мес, Trade-in, доставка в день заказа.`;
+    }
+  }
+  const seoCfg = CATEGORY_SEO[cat.slug];
+  if (seoCfg) {
+    const cheapest = categoryCheapest(getModelsByCategory(cat.slug), seoCfg);
+    if (cheapest) {
+      const from = formatPrice(cheapest.priceFrom).replace(/\u00a0/g, " ");
+      title = seoCfg.title(from);
+      description = seoCfg.description(from);
     }
   }
 
@@ -81,6 +92,14 @@ export default async function CategoryPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFAQSchema(getIphoneFaq(models, city))) }}
+        />
+      )}
+      {CATEGORY_SEO[category] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildFAQSchema(categoryFaq(models, CATEGORY_SEO[category], city))),
+          }}
         />
       )}
 
@@ -195,6 +214,8 @@ export default async function CategoryPage({
         {/* ── SEO-текст для категории ── */}
         {category === "iphone" ? (
           <IphoneCategorySeo models={models} city={city} />
+        ) : CATEGORY_SEO[category] ? (
+          <CategorySeo models={models} city={city} cfg={CATEGORY_SEO[category]} label={cat.h1} />
         ) : (
         <section className="mt-16 max-w-3xl">
           <h2 className="text-2xl font-bold mb-4">

@@ -856,7 +856,7 @@ const airpodsModels: ProductModel[] = [
     image: "airpods-pro-3",
     seoTitle: "Купить AirPods Pro 3 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription: "AirPods Pro 3 в Казани ✅ H3, новый ANC, IP54. Гарантия 1 год, рассрочка до 36 мес, доставка.",
-    subtitle: "H3, новый ANC, IP54",
+    subtitle: "H2, ANC, пульсометр, IP57",
     inNav: true,
   },
   {

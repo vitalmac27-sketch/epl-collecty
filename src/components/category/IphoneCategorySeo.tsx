@@ -179,7 +179,7 @@ export default function IphoneCategorySeo({
         каждый день по прайсу поставщиков, поэтому на сайте вы видите актуальную стоимость, а не цифры месячной давности.
         Цена «от» указана за минимальный объём памяти; стоимость других конфигураций и цветов — на странице модели.
       </p>
-      <p className="text-sm text-muted-foreground mb-4">Цены актуальны на {date}.</p>
+      <p className="text-sm text-muted-foreground mb-4">Цены актуальны на {date}</p>
 
       <div className="overflow-x-auto rounded-xl border border-border">
         <table className="w-full text-sm">
