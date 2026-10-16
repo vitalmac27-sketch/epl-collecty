@@ -313,7 +313,7 @@ const MSI_CYBORG_17_CONFIG: ProductConfig = {
   ],
   prices: [
     { storageId: "i5-13420h-16-1tb", colorId: "black", simId: "none", price: 128000 },
-    { storageId: "c5-210h-16-1tb", colorId: "black", simId: "none", price: 130500 },
+    { storageId: "c5-210h-16-1tb", colorId: "black", simId: "none", price: 0 },
   ],
   defaultStorage: "i5-13420h-16-1tb",
   defaultColor: "black",
