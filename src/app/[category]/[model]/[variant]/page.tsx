@@ -41,12 +41,14 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `${name} купить в ${city.namePre} — ${price} | ЭПЛ-КОЛЛЕКЦИЯ`;
   const description = `Купить ${name} в ${city.namePre}${v.price ? ` по цене от ${formatPrice(v.price)}` : ""}. Оригинал, гарантия 1 год, рассрочка «Халва» до 36 мес, доставка по Казани в день заказа.`;
   const url = `${city.siteUrl}/${category}/${slug}/${variant}`;
+  const cfg = getProductConfig(category, slug);
+  const img = cfg?.colors.find((c) => c.id === v.pick.color)?.image ?? model.image;
 
   return {
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, images: [{ url: `/assets/${model.image}.avif`, alt: name }] },
+    openGraph: { title, description, url, images: [{ url: `/assets/${img}.avif`, alt: name }] },
   };
 }
 
@@ -97,7 +99,7 @@ export default async function VariantPage({ params }: { params: Params }) {
     "@context": "https://schema.org",
     "@type": "Product",
     name,
-    image: `${city.siteUrl}/assets/${model.image}.avif`,
+    image: `${city.siteUrl}/assets/${cfg.colors.find((c) => c.id === v.pick.color)?.image ?? model.image}.avif`,
     url: `${url}/`,
     brand: { "@type": "Brand", name: "Apple" },
     offers: {

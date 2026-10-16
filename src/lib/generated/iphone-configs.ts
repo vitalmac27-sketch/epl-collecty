@@ -12,9 +12,9 @@ const IPHONE_17_PRO_MAX_CONFIG: ProductConfig = {
   slug: "iphone-17-pro-max",
   category: "iphone",
   colors: [
-    { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "iphone-17-pro-max" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-max" },
-    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "iphone-17-pro-max" },
+    { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "iphone-17-pro-max-orange" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-max-blue" },
+    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "iphone-17-pro-max-silver" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true },
@@ -105,9 +105,9 @@ const IPHONE_17_PRO_CONFIG: ProductConfig = {
   slug: "iphone-17-pro",
   category: "iphone",
   colors: [
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro" },
-    { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "iphone-17-pro" },
-    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "iphone-17-pro" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-pro-blue" },
+    { id: "orange", name: "Оранжевый (Cosmic Orange)", hex: "#D55A2B", image: "iphone-17-pro-max-orange" },
+    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "iphone-17-pro-silver" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true },
@@ -184,12 +184,12 @@ const IPHONE_17_CONFIG: ProductConfig = {
   category: "iphone",
   colors: [
     { id: "pink", name: "Розовый", hex: "#F2C6CF", image: "iphone-17" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-blue" },
     { id: "sage", name: "Шалфей", hex: "#A8B19E", image: "iphone-17" },
-    { id: "lavender", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17" },
-    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17" },
-    { id: "lavander", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17" },
+    { id: "lavender", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17-lavender" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17-black" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17-white" },
+    { id: "lavander", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17-lavender" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true },
@@ -321,8 +321,8 @@ const IPHONE_16_PLUS_CONFIG: ProductConfig = {
   slug: "iphone-16-plus",
   category: "iphone",
   colors: [
-    { id: "pink", name: "Розовый", hex: "#F6D6D4", image: "iphone-16-plus" },
-    { id: "teal", name: "Бирюзовый", hex: "#A5C8C6", image: "iphone-16-plus" },
+    { id: "pink", name: "Розовый", hex: "#F6D6D4", image: "iphone-16-plus-pink" },
+    { id: "teal", name: "Бирюзовый", hex: "#A5C8C6", image: "iphone-16-plus-teal" },
   ],
   storage: [
     { id: "128", label: "128 ГБ", available: true },
@@ -375,11 +375,11 @@ const IPHONE_16_CONFIG: ProductConfig = {
   slug: "iphone-16",
   category: "iphone",
   colors: [
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-16" },
-    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-16" },
-    { id: "ultramarine", name: "Ультрамариновый", hex: "#5B6FB3", image: "iphone-16" },
-    { id: "pink", name: "Розовый", hex: "#F6D6D4", image: "iphone-16" },
-    { id: "teal", name: "Бирюзовый", hex: "#A5C8C6", image: "iphone-16" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-16-black" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-16-white" },
+    { id: "ultramarine", name: "Ультрамариновый", hex: "#5B6FB3", image: "iphone-16-ultramarine" },
+    { id: "pink", name: "Розовый", hex: "#F6D6D4", image: "iphone-16-pink" },
+    { id: "teal", name: "Бирюзовый", hex: "#A5C8C6", image: "iphone-16-teal" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true },
@@ -553,10 +553,10 @@ const IPHONE_17_AIR_CONFIG: ProductConfig = {
   slug: "iphone-17-air",
   category: "iphone",
   colors: [
-    { id: "skyblue", name: "Небесно-голубой", hex: "#A7C6E8", image: "iphone-17-air" },
-    { id: "gold", name: "Золотой", hex: "#EFE0C6", image: "iphone-17-air" },
+    { id: "skyblue", name: "Небесно-голубой", hex: "#A7C6E8", image: "iphone-17-air-skyblue" },
+    { id: "gold", name: "Золотой", hex: "#EFE0C6", image: "iphone-17-air-gold" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17-air" },
-    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17-air" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17-air-white" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true },
@@ -683,7 +683,7 @@ const IPHONE_17E_CONFIG: ProductConfig = {
 const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
   slug: "iphone-18-pro-max", category: "iphone",
   colors: [
-    { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro-max" },
+    { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro" },
     { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro-max" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro-max" },
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
@@ -775,7 +775,7 @@ const IPHONE_18_PRO_CONFIG: ProductConfig = {
     { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro" },
     { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro" },
-    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro" },
+    { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true }, { id: "2048", label: "2 ТБ", available: true } ],
