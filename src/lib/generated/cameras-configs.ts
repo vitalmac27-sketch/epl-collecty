@@ -442,7 +442,7 @@ const DJI_OSMO_POCKET_4P_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 0 },
+    { storageId: "std", colorId: "vlog-combo", simId: "none", price: 61000 },
     { storageId: "std", colorId: "standard-combo", simId: "none", price: 53000 },
   ],
   defaultStorage: "std",
