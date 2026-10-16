@@ -170,7 +170,7 @@ const AIRPODS_4_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "anc", colorId: "standard", simId: "none", price: 14500 },
+    { storageId: "anc", colorId: "standard", simId: "none", price: 0 },
     { storageId: "std", colorId: "standard", simId: "none", price: 13000 },
   ],
   defaultStorage: "std",
