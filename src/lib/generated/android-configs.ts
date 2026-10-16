@@ -135,7 +135,7 @@ const XIAOMI_REDMI_NOTE_15_CONFIG: ProductConfig = {
     { storageId: "6-128", colorId: "blue", simId: "none", price: 0 },
     { storageId: "6-128", colorId: "purple", simId: "none", price: 21000 },
     { storageId: "8-256", colorId: "black", simId: "none", price: 23000 },
-    { storageId: "8-256", colorId: "blue", simId: "none", price: 23000 },
+    { storageId: "8-256", colorId: "blue", simId: "none", price: 0 },
     { storageId: "8-256", colorId: "purple", simId: "none", price: 0 },
   ],
   defaultStorage: "6-128",
