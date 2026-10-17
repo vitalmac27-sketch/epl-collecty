@@ -198,12 +198,12 @@ const DJI_MIC_MINI_CONFIG: ProductConfig = {
     { id: "none", label: "Стандарт", description: "Стандартная комплектация." },
   ],
   prices: [
-    { storageId: "std", colorId: "standard", simId: "none", price: 0 },
+    { storageId: "std", colorId: "standard", simId: "none", price: 11500 },
   ],
   defaultStorage: "std",
   defaultColor: "standard",
   defaultSim: "none",
-  priceFrom: 0,
+  priceFrom: 11500,
   storageLabel: "Вариант",
   showSim: false,
   specs: [
