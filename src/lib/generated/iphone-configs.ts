@@ -684,8 +684,8 @@ const IPHONE_18_PRO_MAX_CONFIG: ProductConfig = {
   slug: "iphone-18-pro-max", category: "iphone",
   colors: [
     { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro" },
-    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro-max" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro-max" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro-silver" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro-black" },
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
   ],
   storage: [ { id: "256", label: "256 ГБ", available: true }, { id: "512", label: "512 ГБ", available: true }, { id: "1024", label: "1 ТБ", available: true }, { id: "2048", label: "2 ТБ", available: true } ],
@@ -773,8 +773,8 @@ const IPHONE_18_PRO_CONFIG: ProductConfig = {
   slug: "iphone-18-pro", category: "iphone",
   colors: [
     { id: "glacier", name: "Glacier", hex: "#DCE7EC", image: "iphone-18-pro" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro" },
-    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-18-pro-black" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "iphone-18-pro-silver" },
     { id: "burgundy", name: "Бордовый (Burgundy)", hex: "#6D1F2C", image: "iphone-18-pro-max" },
   ],
   storage: [

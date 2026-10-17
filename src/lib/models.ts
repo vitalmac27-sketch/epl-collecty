@@ -377,7 +377,7 @@ const iPadModels: ProductModel[] = [
     category: "ipad",
     series: "mini",
     priceFrom: 51500,
-    image: "ipad-11-2025",
+    image: "ipad-mini-7-purple",
     seoTitle: "Купить iPad mini 7 в Казани | ЭПЛ-КОЛЛЕКЦИЯ",
     seoDescription: "iPad mini 7 в Казани ✅ Компактный 8,3\" с чипом A17 Pro. Гарантия, рассрочка до 36 мес, доставка.",
     subtitle: "Компактный с A17 Pro",

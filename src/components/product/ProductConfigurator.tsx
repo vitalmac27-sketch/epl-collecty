@@ -59,7 +59,8 @@ export default function ProductConfigurator({
           <div className="rounded-3xl p-6 flex items-center justify-center aspect-square max-w-md mx-auto sticky top-24 overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
             <Image
               src={`/assets/${currentColor.image}.avif`}
-              alt={`Купить ${configLabel} в ${cityName}`}
+              alt={`${modelName}${currentStorage && config.storage.length > 1 ? " " + currentStorage.label : ""}${currentColor && config.colors.length > 1 ? ", цвет " + variantLabel(currentColor.name).toLowerCase() : ""} — купить в ${cityName}, фото`}
+              title={`${modelName}${currentColor && config.colors.length > 1 ? " — " + variantLabel(currentColor.name) : ""}`}
               width={500}
               height={500}
               className="object-contain w-full h-full mix-blend-multiply dark:mix-blend-normal transition-all duration-300"

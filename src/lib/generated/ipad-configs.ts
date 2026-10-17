@@ -12,9 +12,9 @@ const IPAD_11_2025_CONFIG: ProductConfig = {
   slug: "ipad-11-2025",
   category: "ipad",
   colors: [
-    { id: "pink", name: "Розовый", hex: "#F6D6D4", image: "ipad-11-2025" },
-    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "ipad-11-2025" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-11-2025" },
+    { id: "pink", name: "Розовый", hex: "#F6D6D4", image: "ipad-11-2025-pink" },
+    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "ipad-11-2025-silver" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-11-2025-blue" },
   ],
   storage: [
     { id: "128", label: "128 ГБ", available: true },
@@ -69,8 +69,8 @@ const IPAD_AIR_11_M3_CONFIG: ProductConfig = {
   slug: "ipad-air-11-m3",
   category: "ipad",
   colors: [
-    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-m3" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-air-11-m3" },
+    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-gray" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-air-11-blue" },
   ],
   storage: [
     { id: "128", label: "128 ГБ", available: true },
@@ -123,10 +123,10 @@ const IPAD_AIR_11_M4_CONFIG: ProductConfig = {
   category: "ipad",
   colors: [
     { id: "коробка", name: "Коробка", hex: "#888888", image: "ipad-air-11-m4" },
-    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-air-11-m4" },
-    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-m4" },
-    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "ipad-air-11-m4" },
-    { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "ipad-air-11-m4" },
+    { id: "blue", name: "Синий", hex: "#3B5D78", image: "ipad-air-11-blue" },
+    { id: "gray", name: "Серый", hex: "#4E4E4F", image: "ipad-air-11-gray" },
+    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "ipad-air-11-starlight" },
+    { id: "purple", name: "Фиолетовый", hex: "#B8A8CF", image: "ipad-air-11-purple" },
   ],
   storage: [
     { id: "128", label: "128 ГБ", available: true },
@@ -181,7 +181,7 @@ const IPAD_PRO_11_CONFIG: ProductConfig = {
   slug: "ipad-pro-11",
   category: "ipad",
   colors: [
-    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "ipad-pro-11" },
+    { id: "silver", name: "Серебристый", hex: "#D7D9DB", image: "ipad-pro-11-silver" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "ipad-pro-11" },
   ],
   storage: [
@@ -286,9 +286,9 @@ const IPAD_MINI_7_CONFIG: ProductConfig = {
   slug: "ipad-mini-7",
   category: "ipad",
   colors: [
-    { id: "gray", name: "Серый космос", hex: "#7D7E80", image: "ipad-11-2025" },
-    { id: "purple", name: "Фиолетовый", hex: "#B9AFE0", image: "ipad-11-2025" },
-    { id: "blue", name: "Синий", hex: "#8FB6D9", image: "ipad-11-2025" },
+    { id: "gray", name: "Серый космос", hex: "#7D7E80", image: "ipad-mini-7-gray" },
+    { id: "purple", name: "Фиолетовый", hex: "#B9AFE0", image: "ipad-mini-7-purple" },
+    { id: "blue", name: "Синий", hex: "#8FB6D9", image: "ipad-mini-7-blue" },
   ],
   storage: [
     { id: "128", label: "128 ГБ", available: true },
