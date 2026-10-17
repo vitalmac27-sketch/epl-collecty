@@ -149,7 +149,7 @@ const HONOR_MAGICBOOK_X16_CONFIG: ProductConfig = {
   prices: [
     { storageId: "i5-13420h-8-512", colorId: "gray", simId: "none", price: 61500 },
     { storageId: "i5-13420h-16-512", colorId: "gray", simId: "none", price: 0 },
-    { storageId: "r5-6600h-16-512", colorId: "gray", simId: "none", price: 0 },
+    { storageId: "r5-6600h-16-512", colorId: "gray", simId: "none", price: 67500 },
   ],
   defaultStorage: "i5-13420h-8-512",
   defaultColor: "gray",
