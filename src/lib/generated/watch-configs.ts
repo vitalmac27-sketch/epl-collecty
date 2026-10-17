@@ -12,8 +12,8 @@ const APPLE_WATCH_ULTRA_3_CONFIG: ProductConfig = {
   slug: "apple-watch-ultra-3",
   category: "watch",
   colors: [
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-ultra-3" },
-    { id: "natural", name: "Натуральный Титан", hex: "#B5A99A", image: "apple-watch-ultra-3" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-ultra-black" },
+    { id: "natural", name: "Натуральный Титан", hex: "#B5A99A", image: "apple-watch-ultra-natural" },
   ],
   storage: [
     { id: "std", label: "Стандарт", available: true },
@@ -62,7 +62,7 @@ const APPLE_WATCH_ULTRA_2_CONFIG: ProductConfig = {
   slug: "apple-watch-ultra-2",
   category: "watch",
   colors: [
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-ultra-2" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-ultra-2-black" },
     { id: "025", name: "Стандартный", hex: "#888888", image: "apple-watch-ultra-2" },
   ],
   storage: [
@@ -109,10 +109,10 @@ const APPLE_WATCH_SERIES_11_CONFIG: ProductConfig = {
   slug: "apple-watch-series-11",
   category: "watch",
   colors: [
-    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "apple-watch-series-11" },
-    { id: "rose", name: "Розовый (Rose)", hex: "#E6BFC2", image: "apple-watch-series-11" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-series-11" },
-    { id: "space", name: "Космический чёрный", hex: "#2B2B2E", image: "apple-watch-series-11" },
+    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "apple-watch-series-11-silver" },
+    { id: "rose", name: "Розовый (Rose)", hex: "#E6BFC2", image: "apple-watch-series-11-rose" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "apple-watch-series-11-black" },
+    { id: "space", name: "Космический чёрный", hex: "#2B2B2E", image: "apple-watch-series-11-space" },
   ],
   storage: [
     { id: "46mm", label: "46 мм", available: true },
@@ -166,7 +166,7 @@ const APPLE_WATCH_SERIES_10_CONFIG: ProductConfig = {
   slug: "apple-watch-series-10",
   category: "watch",
   colors: [
-    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "apple-watch-series-10" },
+    { id: "silver", name: "Серебристый", hex: "#D8D8D8", image: "apple-watch-series-11-silver" },
   ],
   storage: [
     { id: "46mm", label: "46 мм", available: true },
@@ -209,8 +209,8 @@ const APPLE_WATCH_SE_3_CONFIG: ProductConfig = {
   slug: "apple-watch-se-3",
   category: "watch",
   colors: [
-    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "apple-watch-se-3" },
-    { id: "midnight", name: "Тёмная Ночь", hex: "#2C2D30", image: "apple-watch-se-3" },
+    { id: "starlight", name: "Сияющая Звезда", hex: "#F5EFE3", image: "apple-watch-se-starlight" },
+    { id: "midnight", name: "Тёмная Ночь", hex: "#2C2D30", image: "apple-watch-se-midnight" },
   ],
   storage: [
     { id: "44mm", label: "44 мм", available: true },
@@ -257,7 +257,7 @@ const APPLE_WATCH_SE_2_CONFIG: ProductConfig = {
   slug: "apple-watch-se-2",
   category: "watch",
   colors: [
-    { id: "midnight", name: "Тёмная Ночь", hex: "#2C2D30", image: "apple-watch-se-2" },
+    { id: "midnight", name: "Тёмная Ночь", hex: "#2C2D30", image: "apple-watch-se-midnight" },
   ],
   storage: [
     { id: "44mm", label: "44 мм", available: true },
