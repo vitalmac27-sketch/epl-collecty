@@ -185,7 +185,7 @@ const IPHONE_17_CONFIG: ProductConfig = {
   colors: [
     { id: "pink", name: "Розовый", hex: "#F2C6CF", image: "iphone-17" },
     { id: "blue", name: "Синий", hex: "#3B5D78", image: "iphone-17-blue" },
-    { id: "sage", name: "Шалфей", hex: "#A8B19E", image: "iphone-17" },
+    { id: "sage", name: "Шалфей", hex: "#A8B19E", image: "iphone-17-sage" },
     { id: "lavender", name: "Лавандовый", hex: "#C9B8D4", image: "iphone-17-lavender" },
     { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17-black" },
     { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17-white" },
@@ -555,7 +555,7 @@ const IPHONE_17_AIR_CONFIG: ProductConfig = {
   colors: [
     { id: "skyblue", name: "Небесно-голубой", hex: "#A7C6E8", image: "iphone-17-air-skyblue" },
     { id: "gold", name: "Золотой", hex: "#EFE0C6", image: "iphone-17-air-gold" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17-air" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17-air-black" },
     { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17-air-white" },
   ],
   storage: [
@@ -619,9 +619,9 @@ const IPHONE_17E_CONFIG: ProductConfig = {
   slug: "iphone-17e",
   category: "iphone",
   colors: [
-    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17" },
-    { id: "pink", name: "Розовый", hex: "#F4C9D4", image: "iphone-17" },
-    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17" },
+    { id: "white", name: "Белый", hex: "#F2F1ED", image: "iphone-17e-white" },
+    { id: "pink", name: "Розовый", hex: "#F4C9D4", image: "iphone-17e-pink" },
+    { id: "black", name: "Чёрный", hex: "#1C1C1E", image: "iphone-17e-black" },
   ],
   storage: [
     { id: "256", label: "256 ГБ", available: true },

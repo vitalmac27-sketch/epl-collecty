@@ -112,9 +112,9 @@ export default function Navigation() {
 
             {/* Контакты desktop */}
             <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
-              <a href={`tel:${city.phone}`} className="flex items-center gap-1.5 text-sm font-medium hover:text-primary whitespace-nowrap">
+              <a href={`tel:${city.phone}`} title={city.phoneFormatted} aria-label={`Позвонить: ${city.phoneFormatted}`}
+                className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-border hover:text-primary hover:border-primary/50 transition-colors">
                 <Phone className="h-4 w-4" />
-                <span className="hidden xl:inline">{city.phoneFormatted}</span>
               </a>
               <a href={city.telegramChannel} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0088cc] text-white text-sm font-medium whitespace-nowrap">
